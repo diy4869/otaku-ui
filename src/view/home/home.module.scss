@@ -1,0 +1,13 @@
+@import '~/css/var.scss';
+@import '~/css/mixin.scss';
+@import '~/css/global.scss';
+
+.home {
+  display: flex;
+  justify-content: center;
+  padding-right: 20px;
+  .swiperContainer {
+    position: relative;
+    height: 570px;
+  }
+}

@@ -1,0 +1,253 @@
+@import '~/css/var.scss';
+@import '~/css/mixin.scss';
+ 
+.userInfo {
+  display: flex;
+  margin-top: 30px;
+  .main {
+    display: flex;
+    justify-content: center;
+    .left {
+      .user {
+        height: 185px;
+        border-radius: 20px;
+        position: relative;
+        margin-bottom: 38px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+        .userDetail {
+          position: absolute;
+          top: 0px;
+          // left: 64px;
+          display: flex;
+          width: 100%;
+          padding: 45px 41px 0 64px;
+          .icon {
+            flex-direction: column;
+            align-items: center;
+          }
+          div {
+            display: flex;
+           
+          }
+          img {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            margin-bottom: 11px;
+          }
+          span {
+            color: white;
+          }
+
+          .spaceBetween {
+            width: 100%;
+            height: 96px;
+            justify-content: space-between;
+            margin-left: 26px;
+            .username {
+              flex-direction: column;
+              justify-content: center;
+              span {
+                &:nth-of-type(1) {
+                  font-size: 30px;
+                  font-family: OPPOSans;
+                  font-weight: bold;
+                  line-height: 40px;
+                  color: white;
+                  margin-bottom: 13px;
+                }
+              }
+            }
+            div {
+              &:nth-of-type(2) {
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: flex-end;
+                button {
+                  padding: 5px 10px;
+                  border: 1px solid rgba(255, 255, 255, 1);
+                  border-radius: 21px;
+                  margin-left: 29px;
+                  background: transparent;
+                  color: white;
+                  font-size: 10px;
+                  outline: none;
+                }
+              }
+            }
+          }
+          .button {
+            flex-direction: row;
+            justify-content: space-between;
+          }
+        }
+      }
+      .myCollection {
+        .spaceBetween {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 19px;
+          div {
+            display: flex;
+            &:nth-of-type(1) {
+              span {
+                &:nth-child(1) {
+                  font-size: 30px;
+                  font-family: OPPOSans;
+                  font-weight: bold;
+                  line-height: 40px;
+                  color: black;
+                }
+                &:nth-child(2) {
+                  // width: 62px;
+                  height: 20px;
+                  padding: 5px 10px;
+                  background: $primaryColor;
+                  border-radius: 18px;
+                  color: white;
+                  font-size:13px;
+                  line-height: 17px;
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+                  margin-right: 10px;
+                }
+              }
+            }
+            &:nth-of-type(2) {
+              align-items: center;
+              span {
+                display: inline-block;
+                height: 100%;
+                font-size: 12px;
+                color: #8f8f8f;
+                &:nth-of-type(2) {
+                  font-size: 30px;
+                  font-weight: bold;
+                  color: $primaryColor;
+                }
+              }
+            }
+          }
+        }
+      }
+      .list {
+        display: flex;
+        flex-wrap: wrap;
+        .listItem {
+          display: flex;
+          flex-direction: column;
+          img {
+            width: 100%;
+          }
+          span {
+            font-weight: 400;
+            &:nth-of-type(1) {
+              font-size: 16px;
+              line-height: 21px;
+              margin-top: 8px;
+              @include ellipse(2)
+            }
+            &:nth-of-type(2) {
+              font-size: 12px;
+              margin-top: 5px;
+              
+            }
+          }
+          .new {
+            color: #48B1F5;
+          }
+        }
+      }
+    }
+    .right {
+      .spaceBetween {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        li {
+          &:nth-of-type(1) {
+            font-size: 30px;
+            color: black;
+            font-weight: bold;
+          }
+          &:nth-of-type(2) {
+            font-size: 12px;
+            span {
+              &:nth-child(2) {
+                margin-left: 20px;
+                // margin-right: 34px;
+              }
+              &:nth-child(3) {
+                font-size: 12px;
+                color: rgba(0, 0, 0, 0.6);
+              }
+            }
+          }
+        }
+      }
+      .filter {
+        margin-top: 36px;
+        .filterItem {
+          margin-bottom: 30px;
+          span {
+            font-size: 20px;
+            font-family: OPPOSans;
+            font-weight: 400;
+            line-height: 26px;
+            color: rgba(0, 0, 0, 0.5);
+            margin-bottom: 29px;
+          }
+          .collapse {
+            
+            .tabActiveRotate {
+              transform: rotate(-90deg) !important;
+            }
+            span {
+              display: inline-block;
+              &:nth-of-type(1) {
+                transform: rotate(90deg);
+                margin-right: 5px;
+                transition: 0.3s transform;
+              }
+              font-size: 16px;
+            }
+          }
+          ul {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 10px;
+            transform-origin: top;
+            transition: 0.2s transform;
+            overflow: hidden;
+            li {
+              margin-right: 35px;
+              margin-bottom: 26px;
+              font-size: 15px;
+              font-family: OPPOSans;
+              font-weight: 400;
+              line-height: 20px;
+              color: black;
+              cursor: pointer;
+            }
+            .active {
+              color: $primaryColor;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:global {
+  .userInfo {
+    .b-icon-edit {
+      font-size: 20px;
+    }
+  }
+}

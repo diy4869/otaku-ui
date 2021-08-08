@@ -1,0 +1,97 @@
+
+@import '~/css/var.scss';
+@import '~/css/mixin.scss';
+
+
+.timeline {
+  // border: 2px solid red;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  .main {
+    .header {
+      display: flex;
+      height: 45px;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 45px;
+        height: 45px;
+      }
+      img + span {
+        font-size: 30px;
+        font-family: OPPOSans;
+        font-weight: bold;
+        line-height: 45px;
+        color: $primaryColor;
+        margin: 0 65px 0 17px;
+      }
+      .arrow {
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 20px;
+          color: $primaryColor;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  .calendar {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    .date {
+      margin-right: 40px;
+      &:nth-of-type(7n) {
+        margin-right: 0;
+      }
+      img {
+        width: 90px;
+        box-shadow: 0 0 6px rgba(0, 0, 0, 0.16);
+        margin-right: 10px;
+      }
+      div {
+        width:120px;
+        height:39px;
+        margin: 0 auto 26px;
+        
+        font-size: 16px;
+        font-family: OPPOSans;
+        line-height: 26px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .active {
+        background: #FF9C9C;
+        color: white;
+        border-radius: 20px;
+        font-weight: bold;
+      }
+      .dateItem {
+        width: 210px;
+        margin-bottom: 20px;
+        display: flex;
+        ul {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          li {
+            // width: 120px;
+            @include ellipse(2);
+            font-size: 15px;
+            &:nth-of-type(1) {
+              font-weight: 400;
+            }
+            &:nth-of-type(2) {
+              color: $primaryColor;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  } 
+}
