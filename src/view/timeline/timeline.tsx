@@ -1,11 +1,12 @@
 import React, { useState, useEffect, ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
+import { Timeline, TimelineItem } from '@lib/timeLine/timeLine'
 import calendar from '~/img/calendar.png'
 import Bangumi from '~/img/miao.png'
 import dayjs from 'dayjs'
-import timelineStyle from './timeline.scss'
+import timelineStyle from './timeline.module.scss'
 
-export default function Timeline () {
+export default () => {
   const [week] = useState(['一', '二', '三', '四', '五', '六', '日'])
   const [currentDate, setCurrentDate] = useState(dayjs())
   const computedDate = useState(dayjs())
@@ -16,17 +17,17 @@ export default function Timeline () {
   const history = useHistory()
 
   useEffect(() => {
-    console.log(currentDate.day())
+    console.log(currentDate.day(), random(8, 1, 13))
   }, [currentDate])
 
-  const random = (max: number, min: number, len: number): number[] => {
-    let arr: number[] = []
+
+  const random = (max: number, min: number, len: number): number => {
+    let num = 0
     for (let i = 0; i < len; i++) {
-      let num = Math.floor(Math.random() * (max - min)) + min
-      arr.push(num)
+      num = Math.floor(Math.random() * (max - min)) + min
     }
 
-    return arr
+    return num
   }
 
   const toPlayer = (id: number): void => {
@@ -52,31 +53,34 @@ export default function Timeline () {
     // setCurrentDate(start ?? currentDate)
 
     console.log(start)
-    return week.map((item, index) => {
+    
+    return new Array(5).fill('').map((item, index) => {
       console.log(item, index)
       const date = dayjs(start).add(index, 'day').date()
   
       return (
-        <div key={index} className={timelineStyle.date}>
-          <div className={item === week[day] ? timelineStyle.active : ''}>{`${date}日 周${item}`}</div>
-          <ul>
-            {
-              random(8, 1, 1).map(len => {
-                return Array(len).fill('').map((j, Jindex) => {
-                  return (
-                    <li className={timelineStyle.dateItem} key={Jindex} onClick={() => toPlayer(Jindex)}>
-                      <img src={Bangumi} alt=""/>
-                      <ul>
-                        <li>如果历史是一群喵第四季</li>
-                        <li>20集</li>
-                      </ul>
-                    </li>
-                  )
-                })
+        <>
+        <Timeline>
+          <TimelineItem 
+            className={timelineStyle.bangumiList}
+            title="asdfasdf"
+            key={index}>
+          {
+            new Array(random(10, 3, 1)).fill('').map((j, Jindex) => {
+              return (
+                  <div className={timelineStyle.dateItem} key={index} onClick={() => toPlayer(Jindex)}>
+                    <img className={timelineStyle.cover} src={Bangumi} alt=""/>
+                    <ul className={timelineStyle.title}>
+                      <li>如果历史是一群喵第四季</li>
+                      <li>20集</li>
+                    </ul>
+                  </div>
+                )
               })
             }
-          </ul>
-        </div>
+            </TimelineItem>
+          </Timeline>
+        </>
       )
     })
   }
@@ -96,6 +100,7 @@ export default function Timeline () {
           {
             getDay()
           }
+          
         </div>
       </div>
     </div>

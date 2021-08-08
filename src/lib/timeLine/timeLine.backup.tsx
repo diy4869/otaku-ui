@@ -1,13 +1,7 @@
 import React from 'react'
 import './style.scss'
 
-interface TimelineProps {
-  children?: React.ReactNode
-  className?: string
-}
-
 interface TimelineItemProps {
-  className?: string
   title?: React.ReactNode
   children?: React.ReactNode
 }
@@ -15,29 +9,33 @@ interface TimelineItemProps {
 export const TimelineItem = (props: TimelineItemProps) => {
   const {
     title,
-    className,
     children
   } = props
 
   return (
-    <li className={`b-timeline-item`}>
+    <li className="b-timeline-item">
       <div className="b-timeline-separator"></div>
       <div className="b-timeline-container">
         <div className="b-timeline-title">{title}</div>
-        <div className={`b-timeline-content ${className ?? ''}`}>{children}</div>
+        <div className="b-timeline-content">{children}</div>
       </div>
     </li>
   )
 }
 
+interface TimelineProps {
+  title?: React.ReactNode
+  children?: React.ReactNode
+}
+
 export const Timeline = (props: TimelineProps) => {
   const {
-    children,
-    className
+    children
   } = props
 
+  console.log(children)
   return (
-    <ul className={`b-timeline ${className ?? ''}`}>
+    <ul className="b-timeline">
       {children}
     </ul>
   )

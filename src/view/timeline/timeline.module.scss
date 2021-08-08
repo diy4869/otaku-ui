@@ -1,0 +1,53 @@
+
+@import '~/css/var.scss';
+@import '~/css/mixin.scss';
+
+
+.timeline {
+  // border: 2px solid red;
+  display: flex;
+  margin-top: 30px;
+    .header {
+      display: flex;
+      height: 45px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+      img {
+        width: 45px;
+        height: 45px;
+      }
+      img + span {
+        font-size: 30px;
+        font-family: OPPOSans;
+        font-weight: bold;
+        line-height: 45px;
+        color: $primaryColor;
+        margin: 0 65px 0 17px;
+      }
+      .arrow {
+        line-height: 40px;
+        display: flex;
+        align-items: center;
+        span {
+          font-size: 20px;
+          color: $primaryColor;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  .bangumiList {
+    display: flex;
+    flex-wrap: wrap;
+    // flex: 1;
+    .dateItem {
+      width: 120px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      .cover {
+        width: 100%;
+      }
+    }
+  }

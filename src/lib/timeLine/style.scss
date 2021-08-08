@@ -1,0 +1,25 @@
+.b-timeline {
+  width: 100%;
+  .b-timeline-item {
+    width: 100%;
+    border-left: 2px solid #e4e7ed;
+    padding: 7px;
+    position: relative;
+    .b-timeline-separator {
+      width: 15px;
+      height: 15px;
+      background: #e4e7ed;
+      border-radius: 50%;
+      position: absolute;
+      top: -7.5px;
+      left: -7.5px;
+    }
+    .b-timeline-container {
+      padding: 0 10px;
+      transform: translateY(-26px)
+    }
+    .b-timeline-title {
+      margin: 6px 0;
+    }
+  }
+}
