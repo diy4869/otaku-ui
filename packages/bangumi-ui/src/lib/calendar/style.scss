@@ -1,0 +1,46 @@
+@import '../../style/var.scss';
+
+$size: 35px;
+
+.b-calendar-container {
+  width: 300px;
+  cursor: pointer;
+  .b-calendar-week {
+    display: grid;
+    grid-template-columns: repeat(7, $size);
+    grid-template-rows: repeat(1, $size);
+    grid-gap: 10px 5px;
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(0,0,0,1);
+    opacity: 0.5;
+    line-height: 60px;
+    margin-bottom: 30px;
+    li {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+    }
+  }
+  .b-calendar-month {
+    display: grid;
+    grid-template-columns: repeat(7, $size);
+    grid-template-rows: repeat(6, $size);
+    grid-gap: 10px 5px;
+    li {
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      color: #888888;
+    }
+    .b-calendar-current {
+      color: black;
+    }
+    .b-calendar-active {
+      background: $primaryColor;
+      border-radius: 50%;
+      color: white;
+      // font-weight: bold;
+    }
+  }
+}

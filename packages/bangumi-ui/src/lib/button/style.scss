@@ -1,0 +1,41 @@
+@import '../../style/var.scss';
+
+.b-button {
+  border: none;
+  background: white;
+  
+  .b-button-icon {
+    display: inline-block;
+    margin-right: 5px;
+  }
+}
+.b-button:disabled {
+  cursor: not-allowed;
+}
+.b-button-size-mini {
+  padding: 5px 10px;
+}
+.b-button-size-small {
+  padding: 7px 15px;
+}
+.b-button-size-middle {
+  padding: 10px 20px;
+}
+.b-button-size-large {
+  padding: 10px 30px;
+}
+
+.b-button-text {
+  color: black;
+}
+.b-button-default {
+  border: 1px solid #f1f1f1;
+  background: white;
+}
+
+.b-button-primary {
+  border: none;
+  background: #262626;
+  color: white;
+  border-radius: $radius;
+}
