@@ -19,11 +19,11 @@ $menuWidth: 150px;
     .title {
       font-size: 36px;
       color: 262626;
-      position: absolute;
-      left: 50px;
+      // position: absolute;
+      // left: 50px;
     }
     .main {
-      width: 1400px;
+      min-width: 1400px;
       height: 100%;
       display: flex;
       justify-content: space-between;

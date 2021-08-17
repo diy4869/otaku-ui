@@ -1,17 +1,13 @@
 import React, { useState, useEffect, ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Timeline, TimelineItem, Switch, Pagination, CheckBox, Calendar } from 'bangumi-ui'
+import { CheckBox, CheckBoxGroup, Timeline, TimelineItem, Switch, Pagination, Calendar } from 'bangumi-ui'
 import calendar from '~/img/calendar.png'
 import Bangumi from '~/img/miao.png'
 import dayjs from 'dayjs'
 import timelineStyle from './timeline.module.scss'
 
 export default () => {
-  const [week] = useState(['一', '二', '三', '四', '五', '六', '日'])
   const [currentDate, setCurrentDate] = useState(dayjs())
-  const computedDate = useState(dayjs())
-  const [month] = useState(currentDate.month() + 1)
-  const [date] = useState(currentDate.date())
   const [day] = useState(currentDate.day() === 0 ? 6 : currentDate.day() - 1)
   
   const history = useHistory()
@@ -55,9 +51,6 @@ export default () => {
     console.log(start)
     
     return new Array(5).fill('').map((item, index) => {
-      console.log(item, index)
-      const date = dayjs(start).add(index, 'day').date()
-  
       return (
         <>
         <Timeline>
@@ -87,19 +80,15 @@ export default () => {
 
   return (
     <div className={timelineStyle.timeline}>
-       
-        {/* <div className={timelineStyle.header}>
-          <img src={calendar} alt=""/>
-          <span>{month}月{date}日 星期{week[day]}</span>
-          <div className={timelineStyle.arrow}>
-            <span className="icon iconfont b-icon-left1" onClick={() => getDay('left')}></span>
-            <span className="icon iconfont b-icon-right1" onClick={() => getDay('right')}></span>
-          </div>
-          <Switch></Switch>
-        </div> */}
-
-        <Pagination></Pagination>
+      <div>=====group======</div>
+      <CheckBoxGroup>
         <CheckBox></CheckBox>
+        <CheckBox></CheckBox>
+      </CheckBoxGroup>
+      <div>================</div>
+       <CheckBox></CheckBox>
+      <CheckBox></CheckBox>
+        <Pagination></Pagination>
         <Calendar></Calendar>
         <div className={timelineStyle.calendar}>          
           <div className={timelineStyle.right}>

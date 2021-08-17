@@ -11,7 +11,7 @@ export function SpaceBetween (props: SpaceBetweenProps) {
     left,
     right
   } = props
-  
+
   return (
     <div className="b-space-between">
       { left }

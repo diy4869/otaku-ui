@@ -1,0 +1,48 @@
+@import '../../style/var.scss';
+
+$arrowSize: 12px;
+
+.b-popover-container {
+  z-index: 2000;
+  cursor: pointer;
+  .b-popover-tooltip {
+    background: white;
+    padding: 10px;
+    border-radius: $radius;
+    box-shadow: 0 2px 20px 0 rgba(0, 35, 144, 10%);
+  }
+}
+
+.b-popover-arrow,
+.b-popover-arrow::before {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: white;
+}
+
+.b-popover-arrow {
+  visibility: hidden;
+}
+
+.b-popover-arrow::before {
+  visibility: visible;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.b-popover-tooltip[data-popper-placement^="top"] > .b-popover-arrow {
+  bottom: -$arrowSize / 2;
+}
+
+.b-popover-tooltip[data-popper-placement^="bottom"] > .b-popover-arrow {
+  top: -$arrowSize / 2;
+}
+
+.b-popover-tooltip[data-popper-placement^="left"] > .b-popover-arrow {
+  right: -$arrowSize / 2;
+}
+
+.b-popover-tooltip[data-popper-placement^="right"] > .b-popover-arrow {
+  left: -$arrowSize / 2;
+}

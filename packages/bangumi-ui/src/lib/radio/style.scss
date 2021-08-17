@@ -18,7 +18,7 @@
       align-items: center;
       
       &:checked {
-        &:before {
+        &::before {
           display: inline-block;
           content: '';
           width: 8px;

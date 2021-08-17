@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from 'react'
-// import { fromEvent, interval } from 'rxjs'
-// import { throttleTime } from 'rxjs/operators'
+import React, { useEffect, useState } from 'react'
+
+/*
+ * Import { fromEvent, interval } from 'rxjs'
+ * Import { throttleTime } from 'rxjs/operators'
+ */
 import throttle from 'lodash/throttle'
 
 import './style.scss'
@@ -28,25 +31,38 @@ export function Rate (props: RateProps) {
     textRender
   } = props
 
-  const [star, setStar] = useState(new Array(count).fill(undefined).map(() => {
-    return {
+  const [
+    star,
+    setStar
+  ] = useState(new Array(count).fill(undefined)
+    .map(() => ({
       checked: false,
       half: false,
       click: false
-    }
-  }))
-  const [text, setText] = useState('')
+    })))
+  const [
+    text,
+    setText
+  ] = useState('')
 
-  useEffect(() => {
-    init()
-  }, [])
+  useEffect(
+    () => {
+      init()
+    },
+    []
+  )
 
   const render = (start: number, end: number, checked: boolean, half: boolean) => {
     for (let i = start; i < end; i++) {
       star[i].checked = checked
       star[i].half = half
 
-      if (textRender) setText(textRender(i, score))
+      if (textRender) {
+        setText(textRender(
+          i,
+          score
+        ))
+      }
     }
 
     setStar([...star])
@@ -58,7 +74,12 @@ export function Rate (props: RateProps) {
     if (score % average === 0) {
       const end = score / average
 
-      render(0, end, true, false)
+      render(
+        0,
+        end,
+        true,
+        false
+      )
     }
 
     if (score % 2 !== 0) {
@@ -66,39 +87,62 @@ export function Rate (props: RateProps) {
       const b = score - a
       const c = b / average
 
-      render(0, c, true, false)
-      render(c, c + 1, false, true)
+      render(
+        0,
+        c,
+        true,
+        false
+      )
+      render(
+        c,
+        c + 1,
+        false,
+        true
+      )
     }
   }
 
-  const paint = (e, type: 'click' | 'mousemove' | 'mouseout') => {
-    return () => {
-      const target = e.target
-      const index = +target.dataset.index
+  const paint = (e, type: 'click' | 'mousemove' | 'mouseout') => () => {
+    const { target } = e
+    const index = Number(target.dataset.index)
 
-      if (readonly) return
-      if (e.target.classList.contains('b-star')) {
-        if (type === 'mousemove') {
-          render(0, index + 1, true, false)
-        } else if (type === 'mouseout') {
-          for (let i = index; index > 0; i--) {
-            if (!star[i]?.click) {
-              star[i].checked = false
-            }
-
-            if (textRender) setText(textRender(i, score))
+    if (readonly) return
+    if (e.target.classList.contains('b-star')) {
+      if (type === 'mousemove') {
+        render(
+          0,
+          index + 1,
+          true,
+          false
+        )
+      } else if (type === 'mouseout') {
+        for (let i = index; index > 0; i--) {
+          if (!star[i]?.click) {
+            star[i].checked = false
           }
-        } else {
-          for (let i = 0; i < index; i++) {
-            star[i].checked = true
-            star[i].click = true
 
-            if (textRender) setText(textRender(i, score))
+          if (textRender) {
+            setText(textRender(
+              i,
+              score
+            ))
           }
         }
+      } else {
+        for (let i = 0; i < index; i++) {
+          star[i].checked = true
+          star[i].click = true
 
-        setStar([...star])
+          if (textRender) {
+            setText(textRender(
+              i,
+              score
+            ))
+          }
+        }
       }
+
+      setStar([...star])
     }
   }
 
@@ -106,12 +150,26 @@ export function Rate (props: RateProps) {
     <div className="b-rate">
       <ul
         className="b-star-container"
-        onClick={(e) => paint(e, 'click')()}
-        onMouseMove={(e) => throttle(paint(e, 'mousemove'), 20)()}
-        onMouseOut={(e) => throttle(paint(e, 'mouseout'), 20)()}>
+        onClick={(e) => paint(
+          e,
+          'click'
+        )()}
+        onMouseMove={(e) => throttle(
+          paint(
+            e,
+            'mousemove'
+          ),
+          20
+        )()}
+        onMouseOut={(e) => throttle(
+          paint(
+            e,
+            'mouseout'
+          ),
+          20
+        )()}>
         {
-          star?.map((item, index) => {
-            return (
+          star?.map((item, index) => (
               <li
                 className={`
                   b-star iconfont 
@@ -124,8 +182,7 @@ export function Rate (props: RateProps) {
                 key={index}
                 data-index={index}
               ></li>
-            )
-          })
+          ))
         }
         {
           text ? <li className="b-rate-text">{text}</li> : ''

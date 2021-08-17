@@ -15,7 +15,7 @@ import App from '@/view/app/app'
 
 import '@/utils/index'
 import '~/css/reset.scss'
-import '~/css/global.scss'
+// import '~/css/global.scss'
 
 
 ReactDOM.render(<App/>, document.getElementById('root'))

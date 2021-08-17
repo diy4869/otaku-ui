@@ -7,14 +7,14 @@ export interface ButtonProps {
   icon?: string
   style?: React.CSSProperties
   className?: string
-  type?: 'default' | 'text' | 'primary' | 'danger' 
-  
+  type?: 'default' | 'text' | 'primary' | 'danger'
+
   size?: 'mini' | 'small' | 'middle' |'large'
   onClick?:() => void
   children?: React.ReactNode
 }
 
-export const Button =  (props: ButtonProps) => {
+export const Button = (props: ButtonProps) => {
   const {
     disabled,
     color,
@@ -28,7 +28,7 @@ export const Button =  (props: ButtonProps) => {
   } = props
 
   return (
-    <button 
+    <button
       className={`
         ${disabled ? 'b-input-disabled' : ''}
         b-button

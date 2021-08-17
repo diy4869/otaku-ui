@@ -20,7 +20,7 @@ export const TimelineItem = (props: TimelineItemProps) => {
   } = props
 
   return (
-    <li className={`b-timeline-item`}>
+    <li className={'b-timeline-item'}>
       <div className="b-timeline-separator"></div>
       <div className="b-timeline-container">
         <div className="b-timeline-title">{title}</div>

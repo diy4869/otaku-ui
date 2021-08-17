@@ -56,8 +56,8 @@ function App () {
        <Suspense fallback={<div></div>}>
         <Router>
           <header>
-            <div className={appStyle.title}>bangumi</div> 
             <div className={appStyle.main}>
+              <div className={appStyle.title}>bangumi</div> 
               <ul className={appStyle.headerList}>
                 {
                   [

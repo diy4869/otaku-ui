@@ -4,9 +4,22 @@ import isLeapYear from 'dayjs/plugin/isLeapYear'
 
 dayjs.extend(isLeapYear)
 
-export function useCalendar(date?: dayjs.ConfigType) {
+export function useCalendar (date?: dayjs.ConfigType) {
   const d = dayjs(date)
-  const [month] = useState([31, d.isLeapYear() ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31])
+  const [month] = useState([
+    31,
+    d.isLeapYear() ? 29 : 28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31
+  ])
   const currentYear = d.year()
   const currentMonth = d.month()
   const prev = []

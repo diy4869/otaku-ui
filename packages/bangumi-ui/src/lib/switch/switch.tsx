@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.scss'
 
 interface SwitchProps {
   value?: boolean
   activeText?: string
-  
+
   inactiveText?: string
   activeColor?: string
   inactiveColor?: string
@@ -27,22 +27,28 @@ export function Switch (props: SwitchProps) {
     disabled,
     onChange
   } = props
-  const [checked, setChecked] = useState(value)
+  const [
+    checked,
+    setChecked
+  ] = useState(value)
 
-  useEffect(() => {
-    setChecked(value)
-  }, [value])
+  useEffect(
+    () => {
+      setChecked(value)
+    },
+    [value]
+  )
 
   const change = (e) => {
-    const checked = e.target.checked
+    const { checked } = e.target
     setChecked(checked)
     onChange?.(checked)
   }
 
   return (
     <div className="b-switch-container">
-      <label 
-        htmlFor="b-switch" 
+      <label
+        htmlFor="b-switch"
         className="b-switch-active b-switch-label"
         style={{
           color: !checked ? inactiveTextColor : 'black'
@@ -51,18 +57,18 @@ export function Switch (props: SwitchProps) {
       </label>
       <div className="b-switch-inner">
         <label htmlFor="b-switch">
-          <div 
+          <div
             className={`
               b-switch-circle 
               ${checked ? 'b-switch-checked' : ''} 
               ${disabled ? 'b-switch-disabled' : ''}`}>
           </div>
         </label>
-        <input 
-          type="checkbox" 
-          name="b-switch" 
-          id="b-switch" 
-          onChange={change} 
+        <input
+          type="checkbox"
+          name="b-switch"
+          id="b-switch"
+          onChange={change}
           className="b-switch"
           style={{
             backgroundColor: checked ? activeColor : inactiveColor
@@ -70,9 +76,9 @@ export function Switch (props: SwitchProps) {
           disabled={disabled}>
         </input>
       </div>
-      
-      <label 
-        htmlFor="b-switch" 
+
+      <label
+        htmlFor="b-switch"
         className="b-switch-active b-switch-label"
         style={{
           color: checked ? activeTextColor : 'black'

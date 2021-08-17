@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { usePagination, usePaginationProps } from '../../hooks/index'
 import './style.scss'
 
-
 interface PaginationProps extends usePaginationProps {
   circle?: boolean
   pageChange?:(page?: number) => void

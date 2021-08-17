@@ -7,10 +7,10 @@ $activeColor: #FF6B6B;
     flex: 1;
     margin-left: 10px;
     .b-comment-time {
-      color: #999999;
+      color: #999;
     }
     .b-comment-content {
-      color: #333333;
+      color: #333;
       // font-size: 13px;
       font-weight: 500;
       margin-top: 5px;
@@ -23,7 +23,7 @@ $activeColor: #FF6B6B;
         margin-right: 10px;
         span {
           margin-right: 5px;
-          color: #999999;
+          color: #999;
         }
         .b-comment-like-active,
         .b-comment-unlike-active,

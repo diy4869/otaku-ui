@@ -1,21 +1,16 @@
 @import '../../style/var.scss';
 
-$size: 35px;
+$size: 30px;
+$grid-column: repeat(7, $size);
 
 .b-calendar-container {
-  width: 300px;
   cursor: pointer;
   .b-calendar-week {
     display: grid;
-    grid-template-columns: repeat(7, $size);
+    grid-template-columns: $grid-column;
     grid-template-rows: repeat(1, $size);
     grid-gap: 10px 5px;
-    font-size: 20px;
-    font-weight: 400;
-    color: rgba(0,0,0,1);
-    opacity: 0.5;
-    line-height: 60px;
-    margin-bottom: 30px;
+    color: #262626;
     li {
       display: grid;
       justify-items: center;
@@ -24,17 +19,22 @@ $size: 35px;
   }
   .b-calendar-month {
     display: grid;
-    grid-template-columns: repeat(7, $size);
+    grid-template-columns: $grid-column;
     grid-template-rows: repeat(6, $size);
     grid-gap: 10px 5px;
     li {
       display: grid;
       justify-items: center;
       align-items: center;
-      color: #888888;
+      color: #BFBFBF;
     }
     .b-calendar-current {
-      color: black;
+      color: #262626;
+    }
+    .b-calendar-today {
+      border: 1.5px solid $primaryColor;
+      color: $primaryColor;
+      border-radius: 2px;
     }
     .b-calendar-active {
       background: $primaryColor;
@@ -42,5 +42,6 @@ $size: 35px;
       color: white;
       // font-weight: bold;
     }
+
   }
 }
