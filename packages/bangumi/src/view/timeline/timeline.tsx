@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
-import { CheckBox, CheckBoxGroup, Timeline, TimelineItem, Switch, Pagination, Calendar } from 'bangumi-ui'
+import { CheckBox, CheckBoxGroup, Timeline, TimelineItem, Switch, Pagination, DateTimePicker } from 'bangumi-ui'
 import calendar from '~/img/calendar.png'
 import Bangumi from '~/img/miao.png'
 import dayjs from 'dayjs'
@@ -53,7 +53,7 @@ export default () => {
     return new Array(5).fill('').map((item, index) => {
       return (
         <>
-        <Timeline>
+        <Timeline key={index}>
           <TimelineItem 
             className={timelineStyle.bangumiList}
             title="asdfasdf"
@@ -81,15 +81,12 @@ export default () => {
   return (
     <div className={timelineStyle.timeline}>
       <div>=====group======</div>
-      <CheckBoxGroup>
-        <CheckBox></CheckBox>
-        <CheckBox></CheckBox>
-      </CheckBoxGroup>
-      <div>================</div>
-       <CheckBox></CheckBox>
-      <CheckBox></CheckBox>
-        <Pagination></Pagination>
-        <Calendar></Calendar>
+
+      <Pagination></Pagination>
+      
+
+        <div style={{margin: '50px 0'}}></div>
+        <DateTimePicker></DateTimePicker>
         <div className={timelineStyle.calendar}>          
           <div className={timelineStyle.right}>
             {

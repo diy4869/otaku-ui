@@ -1,7 +1,8 @@
-@import '../../style/var.scss';
+@import '../../../style/var.scss';
 
-$size: 30px;
+$size: 25px;
 $grid-column: repeat(7, $size);
+$grid-gap: 5px 10px;
 
 .b-calendar-container {
   cursor: pointer;
@@ -9,8 +10,9 @@ $grid-column: repeat(7, $size);
     display: grid;
     grid-template-columns: $grid-column;
     grid-template-rows: repeat(1, $size);
-    grid-gap: 10px 5px;
+    grid-gap: $grid-gap;
     color: #262626;
+    margin-bottom: 10px;
     li {
       display: grid;
       justify-items: center;
@@ -21,26 +23,31 @@ $grid-column: repeat(7, $size);
     display: grid;
     grid-template-columns: $grid-column;
     grid-template-rows: repeat(6, $size);
-    grid-gap: 10px 5px;
+    grid-gap: $grid-gap;
     li {
       display: grid;
       justify-items: center;
       align-items: center;
+      border-radius: $radius;
       color: #BFBFBF;
     }
     .b-calendar-current {
       color: #262626;
     }
-    .b-calendar-today {
+    .b-calendar-active {
       border: 1.5px solid $primaryColor;
       color: $primaryColor;
-      border-radius: 2px;
     }
-    .b-calendar-active {
+     .b-calendar-today {
       background: $primaryColor;
-      border-radius: 50%;
       color: white;
-      // font-weight: bold;
+    }
+
+    .b-calendar-disabled {
+      background: #f2fcff;
+      color: #595959;
+      border: none;
+      cursor: not-allowed;
     }
 
   }

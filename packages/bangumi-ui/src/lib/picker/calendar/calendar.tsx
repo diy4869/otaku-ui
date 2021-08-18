@@ -1,19 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import dayjs from 'dayjs'
-import { useCalendar } from '../../hooks/index'
+import dayjs, { Dayjs } from 'dayjs'
+import { useCalendar } from '../../../hooks/index'
 import './style.scss'
+
+
+export interface ResultDate {
+  dayjs: Dayjs
+  dateFormat: string
+  date: Date
+  timestamp: number
+}
 
 interface CalendarProps {
   date?: dayjs.ConfigType
-  onclick?: (date: string) => void
+  disabled?: (date: ResultDate) => boolean | boolean
+  onClick?: (date: ResultDate) => void
+  format?: string
 }
+
+export const getDateResult = (date: dayjs.ConfigType = new Date(), format: string = 'YYYY-MM-DD') => {
+  const d = dayjs(date)
+
+  return {
+    dayjs: d,
+    dateFormat: d.format(format),
+    date: d.toDate(),
+    timestamp: d.toDate().getTime()
+  }
+}
+
 
 export function Calendar (props: CalendarProps) {
   const {
     date,
-    onclick
+    format = 'YYYY-MM-DD',
+    disabled,
+    onClick
   } = props
-  const d = dayjs(date)
+
   const [week] = useState([
     '一',
     '二',
@@ -26,8 +50,9 @@ export function Calendar (props: CalendarProps) {
   const [
     selectDate,
     setSelectDate
-  ] = useState(d.format('YYYY-M-D'))
+  ] = useState(dayjs(date).format('YYYY-M-D'))
   const calendar = useCalendar(selectDate)
+  const d = dayjs(selectDate)
   const currentYear = d.year()
   const currentMonth = d.month()
 
@@ -52,15 +77,15 @@ export function Calendar (props: CalendarProps) {
         month.month(),
         date
       )
-    ).format('YYYY-MM-DD')
+    ).format('YYYY-M-D')
   }
 
   const click = (e) => {
     const { type, date } = e.target.dataset
 
-    if (type === 'current') {
+    if (date && type === 'current') {
       setSelectDate(date)
-      onclick?.(date)
+      onClick?.(getDateResult(date, format))
     }
   }
 
@@ -81,7 +106,8 @@ export function Calendar (props: CalendarProps) {
               return item.map((children) => {
                 const date = `${currentYear}-${currentMonth + 1}-${children}`
                 const today = dayjs().format('YYYY-M-D')
-
+                const isDisabled = typeof disabled === 'function' ? disabled(getDateResult(date, format)) : disabled
+                
                 return (
                   <li
                     key={date}
@@ -90,6 +116,7 @@ export function Calendar (props: CalendarProps) {
                     className={`
                       b-calender-date
                       b-calendar-current
+                      ${isDisabled ? 'b-calendar-disabled' : ''}
                       ${today === date ? 'b-calendar-today' : ''}
                       ${selectDate === date ? 'b-calendar-active' : ''}
                     `}>
