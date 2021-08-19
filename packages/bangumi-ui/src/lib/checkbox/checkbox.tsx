@@ -20,11 +20,11 @@ export function CheckBoxGroup(props: CheckBoxProps) {
   console.log(children)
   return (
     <div>
-      {
+      {/* {
         children?.map(item => {
           return React.createElement(item.type)
         })
-      }
+      } */}
     </div>
   )
 }

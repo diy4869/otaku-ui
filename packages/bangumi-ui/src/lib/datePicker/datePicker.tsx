@@ -17,7 +17,7 @@ export function DateTimePicker (props: DateTimePickerProps) {
   } = props
   
   const [selectDate, setSelectDate] = useState(date)
-  const [showPicker, setShowPicker] = useState('year')
+  const [showPicker, setShowPicker] = useState('calendar')
   const d = dayjs(selectDate)
 
   const change = (type: 'year' | 'month', direction: 'left' | 'right') => {
@@ -27,6 +27,11 @@ export function DateTimePicker (props: DateTimePickerProps) {
     onChange?.(getDateResult(d, format))
   }
 
+  const changeDate = (type: 'year' | 'month') => {
+    if (type === 'year') {
+      setShowPicker('year')
+    } 
+  }
 
   return (
     <div className="b-datetime-picker">
@@ -39,8 +44,8 @@ export function DateTimePicker (props: DateTimePickerProps) {
                 <span className={`iconfont b-icon-left`} onClick={() => change('month', 'left')}></span>
               </li>
               <li>
-                <span>{d.year()}年</span>
-                <span>{d.month() + 1}月</span>
+                <span onClick={() => setShowPicker('year')}>{d.year()}年</span>
+                <span onClick={() => setShowPicker('month')}>{d.month() + 1}月</span>
               </li>
               <li>
                 <span className={`iconfont b-icon-right`} onClick={() => change('month', 'right')}></span>
@@ -57,11 +62,23 @@ export function DateTimePicker (props: DateTimePickerProps) {
           </>
         ) : showPicker === 'year' ? (
           <>
-            <Year date={selectDate}></Year>
+              <Year
+                date={selectDate}
+                onChange={(date) => {
+                  setSelectDate(dayjs(date))
+                  setShowPicker('month')
+                }
+              }></Year>
           </>
           ) : (
             <>
-            <Month date={selectDate}></Month>
+                <Month
+                  date={selectDate}
+                    onChange={(date) => {
+                      setSelectDate(dayjs(date))
+                      setShowPicker('calendar')
+                  }
+                }></Month>
           </>
         )
       }

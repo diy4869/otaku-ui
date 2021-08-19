@@ -8,10 +8,11 @@ export * from './lib/pagination/pagination'
 export * from './lib/picker/index'
 export * from './lib/datePicker/datePicker'
 export * from './lib/tooltip/tooltip'
-
+export * from './lib/inputNumber/inputNumber'
+export * from './lib/switch/switch'
 export * from './lib/input/input'
 export * from './lib/radio/radio'
-export * from './lib/switch/switch'
+
 
 export * from './lib/popover/popover'
 export * from './lib/checkbox/checkbox'

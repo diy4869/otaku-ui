@@ -1,10 +1,10 @@
 import dayjs from 'dayjs'
-import React, { useState } from 'react'
+import React, { useState, useEffect, MouseEventHandler } from 'react'
 import './style.scss'
 
 interface YearProps {
   date?: dayjs.ConfigType
-  onChange?: (date: dayjs.ConfigType) => void
+  onChange?: (date?: dayjs.ConfigType) => void
 }
 
 export const getYear = (year: number) => {
@@ -26,6 +26,10 @@ export function Year (props: YearProps) {
   const [selectDate, setSelectDate] = useState(dayjs(date))
   const year = getYear(selectDate.year())
 
+    useEffect(() => {
+      setSelectDate(selectDate)
+    }, [selectDate])
+  
   const switchYear = (type: 'year' | 'month', direction: 'left' | 'right') => {
     const result = direction === 'left' ? selectDate.subtract(10, type) : selectDate.add(10, type)
      
@@ -36,8 +40,10 @@ export function Year (props: YearProps) {
     const year = +e.target.dataset.year
     
     if (year) {
-      setSelectDate(selectDate.year(year))
-      onChange?.(selectDate)
+      const result = dayjs(selectDate.year(year))
+
+      setSelectDate(result)
+      onChange?.(result)
     }
   }
 

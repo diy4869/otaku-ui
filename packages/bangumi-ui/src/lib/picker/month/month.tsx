@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.scss'
 
 interface MonthProps {
@@ -14,30 +14,34 @@ export function Month(props: MonthProps) {
   } = props
   const [selectDate, setSelectDate] = useState(dayjs(date))
 
+  
+  useEffect(() => {
+    setSelectDate(selectDate)
+  }, [selectDate])
+
   const switchMonth = (type: 'year' | 'month', direction: 'left' | 'right') => {
     const result = direction === 'left' ? selectDate.subtract(1, type) : selectDate.add(1, type)
      
     setSelectDate(result)
   }
 
-  const onClick = (month: number) => {    
-    setSelectDate(selectDate.month(month))
-    onChange?.(selectDate)
-
-    console.log(selectDate)
+  const onClick = (month: number) => {
+    const result = selectDate.month(month)
+    setSelectDate(result)
+    onChange?.(result)
   }
 
   return (
     <>
       <ul className="b-datetime-picker-header">
         <li>
-          <span className={`iconfont b-icon-doubleleft`} onClick={() => switchMonth('month', 'left')}></span>
+          <span className={`iconfont b-icon-doubleleft`} onClick={() => switchMonth('year', 'left')}></span>
         </li>
         <li>
           <span>{`${selectDate.year()}年`}</span>
         </li>
         <li>
-          <span className={`iconfont b-icon-doubleright`} onClick={() => switchMonth('month', 'right')}></span>
+          <span className={`iconfont b-icon-doubleright`} onClick={() => switchMonth('year', 'right')}></span>
         </li>
       </ul>
       <ul className="b-month">

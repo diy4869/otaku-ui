@@ -4,7 +4,7 @@ import isLeapYear from 'dayjs/plugin/isLeapYear'
 
 dayjs.extend(isLeapYear)
 
-export function useCalendar(date?: dayjs.ConfigType) {
+export function useCalendar(date?: dayjs.ConfigType, firstWeek = '日') {
   return useMemo(() => {
     const d = dayjs(date)
     const month = [
@@ -30,7 +30,7 @@ export function useCalendar(date?: dayjs.ConfigType) {
     const firstDay = `${d.year()}-${currentMonth + 1}-1`
     const weekDay = dayjs(firstDay).day() === 0 ? 7 : dayjs(firstDay).day()
     const prevMonth = dayjs(firstDay).subtract(weekDay, 'day')
-    const prevMonthStart = prevMonth.date()
+    const prevMonthStart = firstWeek === '一' ? prevMonth.date() : prevMonth.date() - 1
     const prevMonthEnd = month[prevMonth.month()]
     const nextMonthEnd = 42 - month[currentMonth] - (prevMonthEnd - prevMonthStart)
     

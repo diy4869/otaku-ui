@@ -7,6 +7,7 @@ import './style.scss';
 interface InputProps {
   value?: string
   placeholder?: string
+  readonly?: boolean
   disabled?: boolean
   border?: boolean
   bgcolor?: string
@@ -36,6 +37,7 @@ export function Input (props: InputProps) {
   const {
     value,
     placeholder,
+    readonly,
     disabled,
     cols,
     rows,
@@ -117,6 +119,7 @@ export function Input (props: InputProps) {
                     type={type}
                     value={inputValue}
                     disabled={disabled}
+                    readOnly={readonly}
                     onChange={change}
                     onInput={change}
                     onBlur={onBlur}
@@ -182,6 +185,7 @@ export function Input (props: InputProps) {
               placeholder={placeholder}
               value={inputValue}
               disabled={disabled}
+              readOnly={readonly}
               onChange={change}
               onInput={change}
               onBlur={onBlur}

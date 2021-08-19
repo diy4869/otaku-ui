@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react'
 import { useHistory } from 'react-router-dom'
-import { CheckBox, CheckBoxGroup, Timeline, TimelineItem, Switch, Pagination, DateTimePicker } from 'bangumi-ui'
+import { InputNumber, Timeline, TimelineItem, Switch, Pagination, DateTimePicker } from 'bangumi-ui'
 import calendar from '~/img/calendar.png'
 import Bangumi from '~/img/miao.png'
 import dayjs from 'dayjs'
@@ -81,8 +81,8 @@ export default () => {
   return (
     <div className={timelineStyle.timeline}>
       <div>=====group======</div>
-
-      <Pagination></Pagination>
+      <InputNumber></InputNumber>
+      {/* <Pagination></Pagination> */}
       
 
         <div style={{margin: '50px 0'}}></div>

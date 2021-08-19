@@ -5,7 +5,7 @@ interface {{name}}Props {
 }
 
 
-export function {{name2}} (props: {{name}}Props) {
+export function {{name}} (props: {{name}}Props) {
   return (
     <div></div>
   )

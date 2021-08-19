@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import isBetween from 'dayjs/plugin/isBetween'
 import { useCalendar } from '../../../hooks/index'
 import './style.scss'
 
+dayjs.extend(isBetween)
 
 export interface ResultDate {
   dayjs: Dayjs
@@ -16,6 +18,7 @@ interface CalendarProps {
   disabled?: (date: ResultDate) => boolean | boolean
   onClick?: (date: ResultDate) => void
   format?: string
+  firstWeek?: '一' | '日'
 }
 
 export const getDateResult = (date: dayjs.ConfigType = new Date(), format: string = 'YYYY-MM-DD') => {
@@ -33,34 +36,37 @@ export const getDateResult = (date: dayjs.ConfigType = new Date(), format: strin
 export function Calendar (props: CalendarProps) {
   const {
     date,
+    firstWeek = '日',
     format = 'YYYY-MM-DD',
     disabled,
     onClick
   } = props
 
-  const [week] = useState([
+  const [
+    selectDate,
+    setSelectDate
+  ] = useState(dayjs(date).format('YYYY-M-D'))
+  const calendar = useCalendar(selectDate, firstWeek)
+  const d = dayjs(selectDate)
+  const currentYear = d.year()
+  const currentMonth = d.month()
+
+  const arr = [
     '一',
     '二',
     '三',
     '四',
     '五',
-    '六',
-    '日'
-  ])
-  const [
-    selectDate,
-    setSelectDate
-  ] = useState(dayjs(date).format('YYYY-M-D'))
-  const calendar = useCalendar(selectDate)
-  const d = dayjs(selectDate)
-  const currentYear = d.year()
-  const currentMonth = d.month()
+    '六'
+  ]
+  const week = firstWeek === '一' ? [...arr, '日'] : ['日', ...arr]
 
   useEffect(
     () => {
       setSelectDate(dayjs(date).format('YYYY-M-D'))
+      console.log(date, dayjs(selectDate).format('YYYY-M-D'))
     },
-    [date]
+    [date, selectDate]
   )
 
 
@@ -81,9 +87,9 @@ export function Calendar (props: CalendarProps) {
   }
 
   const click = (e) => {
-    const { type, date } = e.target.dataset
+    const { type, date, disabled } = e.target.dataset
 
-    if (date && type === 'current') {
+    if (disabled !== 'true' && date && type === 'current') {
       setSelectDate(date)
       onClick?.(getDateResult(date, format))
     }
@@ -104,6 +110,13 @@ export function Calendar (props: CalendarProps) {
           Object.values(calendar).map((item, index) => {
             if (index === 1) {
               return item.map((children) => {
+                /**
+                 * TODO 范围判断
+                 * const start = '2021-08-03'
+                 * const end = `2021-08-25`
+                 * const isBetween = dayjs(date).isBetween(start, end)
+                 */
+
                 const date = `${currentYear}-${currentMonth + 1}-${children}`
                 const today = dayjs().format('YYYY-M-D')
                 const isDisabled = typeof disabled === 'function' ? disabled(getDateResult(date, format)) : disabled
@@ -112,6 +125,7 @@ export function Calendar (props: CalendarProps) {
                   <li
                     key={date}
                     data-date={date}
+                    data-disabled={isDisabled}
                     data-type="current"
                     className={`
                       b-calender-date
