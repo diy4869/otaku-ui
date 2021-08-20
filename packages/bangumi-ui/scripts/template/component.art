@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import './style.scss'
 
 interface {{name}}Props {
+  children: React.ReactNode
 }
 
 
 export function {{name}} (props: {{name}}Props) {
+  const {
+    children
+  } = props
+
   return (
     <div></div>
   )

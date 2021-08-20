@@ -7,10 +7,16 @@
     "lint": "eslint .",
     "lint:style": "stylelint \"**/*.{css,scss}\" --fix",
     "lint:fix": "eslint . --ext \".ts,.tsx\" --fix",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "commit": "commit"
   },
   "bin": {
     "bangumi-cli": "./scripts/index.js"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "echo 'hello world'"
+    }
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +30,8 @@
     "tippy.js": "^6.3.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^13.1.0",
+    "@commitlint/config-conventional": "^13.1.0",
     "@types/chalk": "^2.2.0",
     "@types/commander": "^2.12.2",
     "@types/lodash": "^4.14.172",
@@ -43,6 +51,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
+    "husky": "^7.0.1",
     "inquirer": "^8.1.2",
     "install": "^0.13.0",
     "npm": "^7.20.6",

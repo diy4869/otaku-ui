@@ -4,11 +4,15 @@
   // border: 2px solid red;
   display: flex;
   align-items: center;
-  width: 350px;
-  min-width: 220px;
+  width: 220px;
+  height: 40px;
   border: 1px solid #e8e8e8;
   border-radius: $radius;
   padding: 8px;
+  box-sizing: border-box;
+  &:hover {
+    border-color: $primaryColor;
+  }
   .b-input-size-middle {
     height: 36px;
   }
@@ -47,18 +51,20 @@
 .b-input-box {
   display: flex;
 }
-
-.b-input-container {
+.b-input-after-border {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: none;
-  & + .b-input-after {
-    :first-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
+}
+
+
+.b-input-after {
+  :first-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
 }
+
 
 .b-textarea-container {
   display: flex;
@@ -67,6 +73,9 @@
   // min-width: 220px;
   border: 1px solid #e8e8e8;
   border-radius: $radius;
+  &:hover {
+    border-color: $primaryColor;
+  }
   .b-input-textarea {
     width: 100%;
     outline: none;

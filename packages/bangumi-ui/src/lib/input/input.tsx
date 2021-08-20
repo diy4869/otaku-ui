@@ -98,7 +98,9 @@ export function Input (props: InputProps) {
                 {
                   beforeNode ? <div className="b-input-container-before">{beforeNode}</div> : ''
                 }
-                <div className={`b-input-container ${className ?? ''}`} style={{
+              <div
+                className={`b-input-container ${className ?? ''} ${afterNode ? 'b-input-after-border' : ''}`}
+                style={{
                   borderWidth: border ? '1px' : '0px',
                   background: bgcolor,
                   ...style
