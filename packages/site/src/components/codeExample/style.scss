@@ -1,0 +1,16 @@
+.b-code-example-container {
+  box-sizing: border-box;
+  .b-example {
+    background-color: white;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .b-code {
+    background-color: white;
+    code {
+      font-size: 14px;
+      font-family: Consolas, Monaco, monospace;
+      white-space: initial;
+    }
+  }
+}

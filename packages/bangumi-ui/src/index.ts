@@ -1,3 +1,5 @@
+import './style/reset.scss'
+
 export * from './lib/avatar/avatar'
 export * from './lib/button/button'
 export * from './lib/comment/comment'

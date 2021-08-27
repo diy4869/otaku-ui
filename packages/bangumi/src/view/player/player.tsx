@@ -90,11 +90,11 @@ export default function Player () {
                 }
                 right={
                   <div className={playerStyle.detailButon}>
-                    <Button color="#f7f8f9" size="mini">
-                      <Rate score={9.5} size={17} showScore></Rate>
+                    <Button bgcolor="#f7f8f9">
+                      <Rate score={9.5} size={17} showScore readonly></Rate>
                     </Button>
                     <div style={{marginRight: '10px'}}></div>
-                    <Button type="primary" color="#ff6b6b" size="small" icon="heart">
+                    <Button type="primary" icon="b-icon-heart" bgcolor="#ff6b6b">
                       追番
                     </Button>
                   </div>
@@ -122,7 +122,7 @@ export default function Player () {
               </div>
             </div>
             <div className={playerStyle.end}>
-              <Button type="primary" color="#3064ff">发布</Button>
+              <Button type="primary">发布</Button>
             </div>
           </div>
           <div className={playerStyle.commentCotainer}>
@@ -134,7 +134,7 @@ export default function Player () {
 
                 </div>
                 <div className={playerStyle.end}>
-                  <Button type="primary" color="#3064ff">回复</Button>
+                  <Button type="primary">回复</Button>
                 </div>
               </Comment>
               <Comment reply replyUser="last"></Comment>

@@ -13,7 +13,7 @@ interface DateTimePickerProps {
   onChange?: (date: ResultDate) => void
 }
 
-export function DateTimePicker (props: DateTimePickerProps) {
+export function DatePicker (props: DateTimePickerProps) {
   const {
     date = new Date(),
     format = 'YYYY-MM-DD',
@@ -23,7 +23,7 @@ export function DateTimePicker (props: DateTimePickerProps) {
     onChange
   } = props
   
-  const [selectDate, setSelectDate] = useState(date)
+  const [selectDate, setSelectDate] = useState(dayjs(date))
   const [showPicker, setShowPicker] = useState('calendar')
   const [inputVal, setInputVal] = useState('')
   const d = dayjs(selectDate)
@@ -74,7 +74,7 @@ export function DateTimePicker (props: DateTimePickerProps) {
                 date={selectDate}
                 onClick={(date) => {
                   setSelectDate(date.dayjs)
-                  setInputVal(dayjs(selectDate).format(format))
+                  setInputVal(dayjs(date.dayjs).format(format))
                   onChange?.(date)
                 }
               }></Calendar>
@@ -101,7 +101,7 @@ export function DateTimePicker (props: DateTimePickerProps) {
               onClick={() => {
                 const d = dayjs()
                 setSelectDate(d)
-                setInputVal(dayjs(selectDate).format(format))
+                setInputVal(dayjs(d).format(format))
                 onChange?.(getDateResult(d, format))
               }}>今天</span>
             ): ''

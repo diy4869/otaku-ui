@@ -200,6 +200,7 @@ export function Input (props: InputProps) {
 }
 
 interface SearchButtonProps {
+  size: 'small' | 'middle' | 'large'
   inputProps?: InputProps,
   buttonProps?: ButtonProps,
   children: React.ReactNode
@@ -207,23 +208,29 @@ interface SearchButtonProps {
 
 export const SearchButton = (props: SearchButtonProps) => {
   const {
+    size = 'middle',
     inputProps,
     buttonProps,
     children
   } = props
 
   return (
-    <div className={'b-search-button'}>
+    <div className={`b-search-button b-search-button-${size}`}>
       {/* <div> */}
         <Input
           {
             ...inputProps
           }
+          size={size}
           type="search"
           afterNode={
-            <Button {
+            <Button
+              {
               ...buttonProps
-            }>{children}</Button>
+              }
+              size={size}>
+              {children}
+            </Button>
           }
         ></Input>
       {/* </div> */}

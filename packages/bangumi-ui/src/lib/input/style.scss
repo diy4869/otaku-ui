@@ -68,9 +68,8 @@
 
 .b-textarea-container {
   display: flex;
+  flex: 1;
   align-items: center;
-  // width: 350px;
-  // min-width: 220px;
   border: 1px solid #e8e8e8;
   border-radius: $radius;
   &:hover {
@@ -102,4 +101,14 @@
     padding: 10px;
     border-bottom: 1px solid red;
   }
+}
+
+.b-search-button-small {
+  height: 32px;
+}
+.b-search-button-middle {
+  height: 36px;
+}
+.b-search-button-large {
+  height: 40px;
 }

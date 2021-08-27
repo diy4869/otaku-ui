@@ -81,7 +81,8 @@ function App () {
                     return (
                       <li className={appStyle.listItem} key={index}>
                         <Button 
-                          type="text" 
+                          type="text"
+                          color="black"
                           onClick={() => {
                             location.href = item.router
                           }}>
@@ -93,24 +94,22 @@ function App () {
                 }
               </ul>
               <div className={appStyle.search}>
-                <SearchButton 
+                <SearchButton
+                    size="large"
                     inputProps={{
                       clear: true,
-                      placeholder: "鬼灭之刃",
-                      // border: false,
-                      size:"small",
-                      // bgcolor:"#f9f9f9",
-                      // type: 'password',
-                      // showPassword: true
-                    }}
-                    buttonProps={{
-                      type: 'primary'
-                    }}
+                      placeholder: "鬼灭之刃"
+                  }}
+
+                  buttonProps={{
+                    type: 'primary',
+                    bgcolor: 'black'
+                  }}
                 >搜索</SearchButton>
               </div>
               <div className={appStyle.userBtn}>
-                <Button type="text">登录</Button>
-                <Button size="mini">注册</Button>
+                <Button type="text" color="black">登录</Button>
+                <Button size="middle" >注册</Button>
               </div>
             </div>
           </header>
@@ -132,7 +131,6 @@ function App () {
               </Switch>
             </div>
           </div>
-          
         </Router>
         {/* <Footer className={appStyle.footer}>Footer</Footer> */}
       </Suspense>
