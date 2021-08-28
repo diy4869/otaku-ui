@@ -1,53 +1,107 @@
 const MarkdownIt = require('markdown-it')
-const { transformSync } = require('@babel/core')
-const hlsjs = require('highlight.js')
+const hljs = require('highlight.js')
+const React = require('react')
+const ReactDomServer = require('react-dom/server')
+const container = require('markdown-it-container')
+const matter = require('gray-matter')
+const anchor = require('markdown-it-anchor')
+const toc = require('markdown-it-toc-done-right')
+
+const reactMarkdownTemplate = (importSynx, content) => {
+  return `
+    import * as React from 'react'
+    import { CodeExample } from 'CodeExample'
+    ${importSynx}
+
+    function MdReact () {
+      return <div className='b-md-container'>${content}</div>
+    }
+
+    export default MdReact
+  `
+}
 
 module.exports = function mdLoader (source) {
   const md = new MarkdownIt({
+    html: true,
+    breaks: true,
+    quotes: true,
     highlight(str, lang) {
-      console.log('--------\n')
-      console.log(str, lang)
-      if (lang && hlsjs.getLanguage(lang)) {
-        try {
-          return (
-            '<pre class="hljs"><code>' +
-            hlsjs.highlight(str, {
-              language: lang,
-              ignoreIllegals: true
-            }).value +
-            '</code></pre>'
-          )
-        } catch (__) {}
-      }
 
-      return '<pre class="hljs"><code>' + md.utils.escapeHtml(str) + '</code></pre>'
-
-      const { code } = transformSync(str, {
-        sourceType: 'module',
-        presets: [
-          [
-            '@babel/preset-react'
-          ]
-        ]
-      })
-
-      console.log(code)
-
-      return `
-        function Example () {
-          return (
-            <div class="code-example">
-              ${str}
-            </div>
-          )
-        }
+      const template = `
+          <CodeExample
+            code={\`${str}\`} 
+          >
+          </CodeExample>
       `
+      // process.exit()
 
+      console.log(template)
+      return template
     }
-
   })
+    .use(anchor, {
+      level: 3,
+      permalink: anchor.permalink.linkInsideHeader({
+        symbol: `
+            <span class="b-anchor"></span>
+            <span aria-hidden="false">#</span>
+          `,
+        placement: 'before'
+      })
+    })
+    .use(toc, {
+      level: 2
+    })
+    .use(container, 'desc', {
+        render (tokens, index) {
+          var m = tokens[index].info.trim().match(/^demo\s+(.*)$/)
 
-  const render = md.render(source)
-  console.log(render)
-  return render
+          const code = `${tokens[index + 2]?.content}`
+
+          console.log('container', m, '======', code)
+          if (tokens[index].nesting === 1) {
+            // opening tag
+
+            return `<CodeExample>
+              {"${code}"}`
+          } else {
+            // closing tag
+            return '</CodeExample>\n'
+          }
+
+      }
+    })
+    .use(container, 'demo', {
+      render (tokens, index) {
+        var m = tokens[index].info.trim().match(/^demo\s+(.*)$/)
+
+        const code = `${tokens[index + 2]?.content}`
+
+        console.log('container', m, '======', code)
+        if (tokens[index].nesting === 1) {
+          // opening tag
+
+          return `<CodeExample>
+            {"${code}"}`
+        } else {
+          // closing tag
+          return '</CodeExample>\n'
+        }
+
+      }
+    })
+
+  const { content, data } = matter(source)
+
+  console.log(content)
+  console.log(md.render(content))
+  const mdToHtml = md
+    .render(content)
+    .replace(/<hr>/g, '<hr />')
+    .replace(/<br>/g, '<br />')
+    .replace(/class=/g, 'className=')
+
+
+  return reactMarkdownTemplate(data.import, mdToHtml)
 }

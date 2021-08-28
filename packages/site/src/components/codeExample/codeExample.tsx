@@ -1,34 +1,39 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useState, useLayoutEffect } from 'react'
 import { Button } from 'bangumi-ui'
 import './style.scss'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/vs.css'
 
 hljs.registerLanguage('typescript', require('highlight.js/lib/languages/typescript'))
-export function CodeExample(props) {
+
+export function CodeExample (props) {
   const {
-    children = `
-      <Button type="primary"></Button>
-    `
+    lang = 'typescript',
+    code,
+    example
   } = props
+  const [highlightCode, setHighLightCode] = useState('')
+
 
   useLayoutEffect(() => {
-    document.addEventListener('DOMContentLoaded', () => {
-      document.querySelectorAll('pre code').forEach((el) => {
-      hljs.highlightElement(el)
-    });
-  });
+      const res = hljs.highlight(code, {
+        language: lang,
+        ignoreIllegals: false
+      }).value
+
+      setHighLightCode(res)
   })
 
   return (
     <div className="b-code-example-container">
       <div className="b-example">
-        <Button type="primary">主要按钮</Button>
+        {example}
       </div>
       <div className="b-code">
         <pre>
-          <code>
-              {`${children}`}
+          <code dangerouslySetInnerHTML={{
+            __html: highlightCode
+          }}>
           </code>
         </pre>
       </div>

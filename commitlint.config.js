@@ -5,7 +5,7 @@ module.exports = {
       2,
       'always',
       [
-        'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert'
+        'feat', 'fix', 'docs', 'style', 'refactor', 'test', 'revert', 'chore'
       ]
     ]
   }

@@ -1,70 +1,85 @@
-import React, { useState } from 'react'
+import React, { Suspense } from 'react'
 import './App.scss'
 import { hot } from 'react-hot-loader/root'
 import MarkdownIt from 'markdown-it'
-import test from './test.md'
 import { CodeExample } from './components/codeExample/codeExample'
+import './components/mdReact/mdReact'
+import { MDXProvider } from '@mdx-js/react'
+import { BrowserRouter as Router, Route, Switch, useHistory } from 'react-router-dom'
+import routes from './router/index'
+import notFound from './components/notFound/notFound'
+import NotFound from './components/notFound/notFound'
 
-const list = [
-  {
-    name: '开发指南',
-    children: [
-      {
-        name: '介绍'
-      }
-    ]
-  },
-  {
-    name: '基础组件',
-    children: [
-      {
-        name: 'Button 按钮'
-      }
-    ]
-  },
-  {
-    name: '表单组件',
-    children: [
-      {
-        name: 'Input 输入框'
-      },
-      {
-        name: 'Form 表单'
-      }
-    ]
-  }
-]
 
 function App() {
+  // const history = useHistory()
+
+  // if (location.pathname === '/') {
+  //   location.pathname = '/button'
+  //   // history.push('/button')
+  // }
+
   return (
-    <div className="b-home">
+    <Suspense fallback={<div></div>}>
+      <Router>
+      <div className="b-home">
       <header className="b-header">
         {/* BANGUMI-UI | OTAKU-UI |  */}
-        <div className="b-title">Lo-ui</div>
+        <div className="b-title">Lo-ui  React UI库</div>
         <div></div>
       </header>
       <aside>{
-        list.map(item => {
+        routes.map(item => {
           return (
-            <div>
-              <h3 className="title">{item.name}</h3>
-              <ul>
+            <>
+              <h3 className="title">{item.title}</h3>
+              <div className="b-menu">
                 {
                   item.children.map(children => {
                     return (
-                      <li>{ children.name }</li>
+                      <div
+                        className={`b-menu-item ${location.pathname === children.path ? 'active' : ''}`}
+                        onClick={() => {
+                          // history.push(children.path)
+                          location.pathname = children.path
+                        }}
+                      >{children.title}</div>
                     )
                   })
                 }
-              </ul>
-            </div>
+              </div>
+            </>
           )
         })
       }</aside>
-      <main>
-        <CodeExample></CodeExample>
-      </main>
-    </div>
+          <main>
+         
+            <Switch>
+               
+              {
+                routes.map((router) => {
+                  return router.children.map(children => {
+                    return (
+                        <Route
+                          path={children.path}
+                          component={children.component}
+                          key={children.path}
+                        />
+                      )
+                  })  
+                })
+              }
+              <Route path="*">
+                <NotFound />
+              </Route>
+            </Switch>
+          {/* <CodeExample></CodeExample> */}
+        </main>
+      </div>
+    </Router>
+    </Suspense>
+    
+    
   )
 }
 

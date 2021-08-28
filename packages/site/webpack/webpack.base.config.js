@@ -74,10 +74,13 @@ const baseConfig = {
         test: /\.(mp4|mp3|webm|ogg|m3u8|mpd)$/,
         use: ['file-loader']
       },
-      
+      // {
+      //   test: /\.md$/,
+      //   use: ['babel-loader', '@mdx-js/loader']
+      // },
       {
         test: /\.md$/,
-        use: ['html-loader', path.resolve(__dirname, '../webpack/loader/index.js')]
+        use: ['babel-loader', path.resolve(__dirname, '../webpack/loader/index.js')]
       },
       {
         test: /\.(js|jsx)$/,
@@ -94,7 +97,9 @@ const baseConfig = {
 
   resolve: {
     alias: {
+      CodeExample: path.resolve(__dirname, '../src/components/codeExample/codeExample.tsx'),
       ReactDOM: '@hot-loader/dom',
+      '@docs': path.resolve(__dirname, '../docs'),
       '@': path.resolve(__dirname, '../src'),
       '~': path.resolve(__dirname, '../src/assets')
     },

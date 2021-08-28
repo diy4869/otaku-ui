@@ -12,6 +12,7 @@
     "moduleResolution": "node",
     "strict": true,
     "paths": {
+      "@docs/": ["./docs"],
       "@/*": ["./src/*"]
     }
   },
