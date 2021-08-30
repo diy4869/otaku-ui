@@ -101,7 +101,7 @@ export function Rate (props: RateProps) {
       )
     }
   }
-
+  // @ts-ignore
   const paint = (e, type: 'click' | 'mousemove' | 'mouseout') => () => {
     const { target } = e
     const index = Number(target.dataset.index)

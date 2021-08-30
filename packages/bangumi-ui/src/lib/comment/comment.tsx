@@ -79,7 +79,7 @@ export function Comment (props: CommonetProps) {
     iconClick
   } = props
 
-  const actionClick = (e, item: Actions, index: number) => {
+  const actionClick = (e: any, item: Actions, index: number) => {
     console.log(e)
     const icon = e.target.dataset?.icon
     actionsClick?.(

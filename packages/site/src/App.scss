@@ -18,9 +18,18 @@
     color: white;
     padding: 0 20px;
     .b-title {
-      width: 200px;
+      // width: 200px;
       font-size: 20px;
     }
+    a {
+      color: white;
+      &:hover {
+          color: white;
+      }
+      &:active {
+          color: white;
+      }
+  }
   }
   aside {
     grid-area: aside;
@@ -48,9 +57,58 @@
     grid-area: main;
     background: #f7f8fa;
     padding: 20px;
-    overflow: auto;
+    overflow-x: auto;
     position: relative;
-    table {
+    
+    
+  }
+}
+// body { scroll-behavior: smooth; }
+
+// ol { counter-reset: list-item; }
+// li { display: block; counter-increment: list-item; }
+// li:before { content: counters(list-item,'.') ' '; }
+
+// md 内的样式
+.markdown-body {
+  pre {
+    padding: 0;
+    font-size: 14px;
+	}
+  ol {
+    padding-left: 0;
+    li {
+      list-style: none;
+    }
+  }
+  li {
+    list-style: initial;
+  }
+}
+
+@media (max-width: 767px) {
+	.markdown-body {
+		padding: 15px;
+	}
+}
+
+.b-md-container {
+  .table-of-contents {
+    position: fixed;
+    right: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 10px 50px 0 rgb(0 35 114 / 10%);
+    li {
+      margin: 10px 0;
+    }
+    a {
+      color: #3064FF;
+      font-size: 14px;
+    }
+  }
+  table {
       border: 1px solid #f0f0f0;
       width: 100%;
       background: white;
@@ -67,25 +125,4 @@
         display: none;
       }
     }
-  }
-}
-// body { scroll-behavior: smooth; }
-
-// ol { counter-reset: list-item; }
-// li { display: block; counter-increment: list-item; }
-// li:before { content: counters(list-item,'.') ' '; }
-.table-of-contents {
-  position: fixed;
-  right: 20px;
-  padding: 15px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0px 10px 50px 0 rgb(0 35 114 / 10%);
-  li {
-    margin: 10px 0;
-  }
-  a {
-    color: #3064FF;
-    font-size: 14px;
-  }
 }

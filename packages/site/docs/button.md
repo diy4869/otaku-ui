@@ -5,50 +5,39 @@ import:
 
 [[toc]]
 
-
-<br/>
-
 ## Button 按钮
 
 <br/>
 
+
+::: demo
+
+这个是按钮的描述
+
 ```tsx
 <Button type="primary">主要按钮</Button>
 <Button type="warning">警告按钮</Button>
 <Button type="danger">危险按钮</Button>
 ```
-<br/>
-
+:::
 
 ## Disabled 禁用
 
-<br/>
 
-```tsx
-<Button type="primary">主要按钮</Button>
-<Button type="warning">警告按钮</Button>
-<Button type="danger">危险按钮</Button>
+## API
+
+```ts
+export interface ButtonProps {
+  disabled?: boolean // 禁用
+  loading?: boolean // 加载
+  ghost?: boolean // 幽灵按钮
+  icon?: string // icon
+  bgcolor?: string // 背景色
+  children?: React.ReactNode
+  type?: 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger' // 按钮类型
+  iconDirection?: 'left' | 'right'  // icon方向
+  size?: 'small' | 'middle' |'large' // 大小
+  onClick?:() => void
+}
+
 ```
-<br/>
-
-
-
-
-
-## Props 属性
-<br/>
-
-属性 | 说明 | 类型  | 默认值
----|---|---|---
-type | 按钮类型 | default \| primary \| warning \| danger | default | 
-
-<br/>
-
-## Event 事件
-
-<br/>
-
-
-事件名称 | 参数类型 | 返回值
----|---|---
-onClick | | void |

@@ -1,2 +1,6 @@
 node_modules
 packages/bangumi-docs
+
+package-lock.json
+*.log
+.CodeCounter

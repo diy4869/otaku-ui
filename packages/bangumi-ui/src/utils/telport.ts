@@ -30,7 +30,7 @@ export class Telport {
 
     this.id = Symbol(`${id++}`)
     this.map = new Map()
-    this.el = el as HTMLElement
+    this.el = el as any
     this.zIndex = 2000
     console.log(this.el)
     this.position = {}
@@ -41,6 +41,7 @@ export class Telport {
       this.position = this.el?.getBoundingClientRect()
       console.log(this.position)
       
+      // @ts-ignore
       if (!this.el.telportId) {
         this.init()
       }
@@ -55,7 +56,7 @@ export class Telport {
     const container = document.querySelector(this.selector)
 
     if (!container) return
-    const cloneNode = this.el.cloneNode(true)
+    const cloneNode: any = this.el.cloneNode(true)
     this.position = this.el?.getBoundingClientRect()
 
     cloneNode.style.cssText = `
@@ -67,7 +68,9 @@ export class Telport {
     cloneNode.NumberId = id
     cloneNode.telportId = this.id
 
+    // @ts-ignore
     this.el.numberId = id
+    // @ts-ignore
     this.el.telportId = this.id
 
     this.map.set(this.id, this.el)

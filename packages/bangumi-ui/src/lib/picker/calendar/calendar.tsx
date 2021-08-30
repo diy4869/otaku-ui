@@ -85,7 +85,7 @@ export function Calendar (props: CalendarProps) {
       )
     ).format('YYYY-M-D')
   }
-
+  // @ts-ignore
   const click = (e) => {
     const { type, date, disabled } = e.target.dataset
 

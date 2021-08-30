@@ -2,8 +2,6 @@
 
 ## useCalendar 获取日历
 
-<br/>
-
 ```ts
 interface Data {
   prev: number[] // 上个月
@@ -19,12 +17,7 @@ function useCalendar (date?: dayjs.ConfigType, firstWeek = '日' | '一'): Data
 
 ```
 
-
-<br/>
-
 ## usePagination 获取分页
-
-<br/>
 
 ```ts
 interface usePaginationProps {
@@ -35,7 +28,7 @@ interface usePaginationProps {
 }
 
 interface Data {
-  pagination: number[]
+  pagination: number[] // 分页数据不包括开始和结束页
   showPrevMore: boolean
   showNextMore: boolean
   maxPage: number

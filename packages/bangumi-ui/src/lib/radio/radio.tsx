@@ -32,7 +32,7 @@ export function Radio (props: RadioProps) {
     val,
     setVal
   ] = useState(name)
-
+  // @ts-ignore
   const change = (e) => {
     console.log(
       e.target.checked,

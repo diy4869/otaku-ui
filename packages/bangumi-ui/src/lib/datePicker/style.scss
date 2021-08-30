@@ -4,6 +4,7 @@
   width: 275px;
   height: 310px;
   box-sizing: border-box;
+  background: white;
   box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.15);
   border-radius: $radius;
   padding: 10px 20px 0;
@@ -16,6 +17,9 @@
     cursor: pointer;
     span {
       margin-right: 5px;
+    }
+    li {
+      list-style: none;
     }
     li:nth-of-type(2) {
       span {

@@ -2,16 +2,16 @@
   box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
-  .b-example {
+  
+  .b-desc, .b-example {
     padding: 20px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    // border-radius: 4px;
   }
-  .b-code {
-    padding: 20px;
-    code {
-      font-size: 14px;
-      font-family: Consolas, Monaco, monospace;
-      // white-space: initial;
+  .b-example {
+    & + .b-code {
+      border-top: none;
     }
   }
+  
 }

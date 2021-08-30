@@ -36,7 +36,7 @@ export function Year (props: YearProps) {
     setSelectDate(result)
   }
 
-  const onClick = (e) => {
+  const onClick = (e: any) => {
     const year = +e.target.dataset.year
     
     if (year) {

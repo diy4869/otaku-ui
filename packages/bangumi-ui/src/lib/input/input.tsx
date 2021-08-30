@@ -82,7 +82,7 @@ export function Input (props: InputProps) {
     [value]
   )
 
-  const change = (e) => {
+  const change = (e: any) => {
     setInputValue(e.target.value)
     onChange?.(inputValue)
     onInput?.(inputValue)

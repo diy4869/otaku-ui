@@ -1,0 +1,16 @@
+.b-code-container {
+  padding: 20px;
+  background: white;
+  // border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  pre {
+    background: white;
+    margin: 0;
+  }
+  code {
+    padding: 15px;
+    font-size: 14px;
+    font-family: Consolas, Monaco, monospace;
+    // white-space: initial;
+  }
+}

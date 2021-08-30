@@ -38,7 +38,7 @@ export function Switch (props: SwitchProps) {
     },
     [value]
   )
-
+  // @ts-ignore
   const change = (e) => {
     const { checked } = e.target
     setChecked(checked)

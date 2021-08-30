@@ -34,7 +34,7 @@ export function InputNumber(props: InputNumberProps) {
   } = props
 
   let [inputVal, setInputVal] = useState(value)
-
+  // @ts-ignore
   const change = (e) => {
     setInputVal(e.target.value)
   }

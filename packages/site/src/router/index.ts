@@ -7,8 +7,8 @@ export default [
     children: [
       {
         title: "介绍",
-        path: "/dev/guide",
-        component: lazy(() => import('@docs/dev/guide.md'))
+        path: "/dev/introduce",
+        component: lazy(() => import('@docs/dev/introduce.md'))
       },
       {
         title: "安装",
@@ -22,8 +22,13 @@ export default [
       },
       {
         title: "贡献源码？",
-        path: "/dev/sourceCode",
-        // component: lazy(() => import('@docs/install.md'))
+        path: "/dev/contributeCode",
+        component: lazy(() => import('@docs/dev/contributeCode.md'))
+      },
+      {
+        title: "挖坑ing",
+        path: "/dev/roadmap",
+        component: lazy(() => import('@docs/dev/roadmap.md'))
       },
       {
         title: "hooks",
@@ -72,8 +77,8 @@ export default [
       },
       {
         title: "date-picker 日期选择器",
-        path: "/form/data-picker",
-        // component: lazy(() => import('@docs/form/data-picker.md'))
+        path: "/form/date-picker",
+        component: lazy(() => import('@docs/form/date-picker.md'))
       },
       {
         title: "form 表单",
