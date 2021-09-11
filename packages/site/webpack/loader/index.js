@@ -96,9 +96,9 @@ module.exports = function mdLoader (source) {
         }
         if (tokens[index].nesting === 1) {
           const m = get()
-          
           const desc = tokens[index + 2].content.replace(/\n/g, '<br/>')
           const current = m.get(index)
+          
           return `
             <CodeExample
               desc={\`${desc}\`}
@@ -115,12 +115,8 @@ module.exports = function mdLoader (source) {
     })
 
   const { content, data } = matter(source)
-
-
-  const code = content
-    console.log(code)
   const mdToHtml = md
-    .render(code)
+    .render(content)
     .replace(/<hr>/g, '<hr />')
     .replace(/<br>/g, '<br />')
     .replace(/class=/g, 'className=')

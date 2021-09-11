@@ -63,12 +63,12 @@ const prodConfig = merge(webpackBaseConfig, {
     ]
   },
   // 长缓存
-  cache: {
-    type: 'filesystem',
-    buildDependencies: {
-      config: [__dirname]
-    }
-  },
+  // cache: {
+  //   type: 'filesystem',
+  //   buildDependencies: {
+  //     config: [__dirname]
+  //   }
+  // },
   stats: {
     modules: false,
     source: false

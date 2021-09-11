@@ -38,12 +38,17 @@ export default [
     ]
   },
   {
-    title: "基本",
+    title: "通用",
     children: [
+      {
+        title: "Grid 网格",
+        path: "/grid",
+        component: lazy(() => import('bangumi-ui/src/lib/grid/demo/README.md'))
+      },
       {
         title: "Button 按钮",
         path: "/button",
-        component: lazy(() => import('@docs/button.md'))
+        component: lazy(() => import('bangumi-ui/src/lib/button/demo/README.md'))
       }
     ]
   },
@@ -53,7 +58,7 @@ export default [
       {
         title: "input 输入框",
         path: "/form/input",
-        // component: lazy(() => import('@docs/form/input.md'))
+        component: lazy(() => import('bangumi-ui/src/lib/input/demo/README.md'))
       },
       {
         title: "select 选择框",
@@ -78,12 +83,32 @@ export default [
       {
         title: "date-picker 日期选择器",
         path: "/form/date-picker",
-        component: lazy(() => import('@docs/form/date-picker.md'))
+        component: lazy(() => import('bangumi-ui/src/lib/datePicker/demo/README.md'))
       },
       {
         title: "form 表单",
         path: "form/form",
-        // component: lazy(() => import('@docs/form/form.md'))
+        component: lazy(() => import('bangumi-ui/src/lib/form/demo/README.md'))
+      }
+    ]
+  },
+  {
+    title: '展示',
+    children: [
+      {
+        title: 'pagination 分页',
+        path: '/display/pagination',
+        component: lazy(() => import('bangumi-ui/src/lib/pagination/demo/README.md'))
+      },
+      {
+        title: 'rate 评分',
+        path: '/display/rate',
+        component: lazy(() => import('bangumi-ui/src/lib/rate/demo/README.md'))
+      },
+      {
+        title: 'tooltip 提示',
+        path: '/display/tooltip',
+        component: lazy(() => import('bangumi-ui/src/lib/tooltip/demo/README.md'))
       }
     ]
   }

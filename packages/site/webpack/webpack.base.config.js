@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 console.log(path.resolve(__dirname, '../webpack/loader/index.js'))
-
+console.log(path.resolve(__dirname, '../../bangumi-ui/src/index.ts'))
 // process.exit()
 
 const baseConfig = {
@@ -19,9 +19,9 @@ const baseConfig = {
   entry: './src/index.tsx',
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: 'js/[name].[chunkhash:8].js',
-    chunkFilename: 'js/[name].[chunkhash].js',
-    publicPath: '/'
+    filename: 'js/[name].[contenthash].js',
+    chunkFilename: 'js/[name].[contenthash].js',
+    publicPath: '/otaku-ui-docs/'
   },
   module: {
     rules: [
@@ -35,21 +35,39 @@ const baseConfig = {
       },
       {
         test: /\.(sass|scss)$/,
-        use: [
-          MiniCssExtractPlugin.loader,
+        oneOf: [
           {
-            loader: 'css-loader',
-            options: {
-              esModule: true,
-              // modules: {
-              //   localIdentName: '[local]--[hash:5]',
-              //   localIdentContext: path.resolve(__dirname, 'src')
-              // }
-            }
+            test: /\.(module.scss)/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
+                options: {
+                  esModule: true,
+                  modules: {
+                    localIdentName: '[local]--[hash:5]',
+                    localIdentContext: path.resolve(__dirname, 'src')
+                  }
+                }
+              },
+              'postcss-loader',
+              'sass-loader'
+            ]
           },
-          'postcss-loader',
-          'sass-loader'
-        ]
+          {
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
+                options: {
+                  esModule: true
+                }
+              },
+              'postcss-loader',
+              'sass-loader'
+            ]
+          }
+        ],
       },
       {
         test: /\.(png|jpg|gif|webp)$/i,

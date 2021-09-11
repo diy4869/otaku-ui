@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "dist",
+    "outDir": "../buildDocs/dist",
     "module": "esnext",
     "target": "es5",
     "lib": ["esnext", "dom"],
@@ -20,7 +20,7 @@
   "exclude": [
     "node_modules",
     "build",
-    "dist",
+    "../otaku-ui-docs/dist",
     "webpack"
   ]
 }

@@ -13,11 +13,11 @@ interface InputProps {
   bgcolor?: string
   rows?: number
   cols?: number
-  beforeIcon?: string,
-  beforeNode?: React.ReactNode,
-  afterIcon?: string,
+  beforeIcon?: string
+  beforeNode?: React.ReactNode
+  afterIcon?: string
   clear?: boolean
-  afterNode?: React.ReactNode,
+  afterNode?: React.ReactNode
   showPassword?: boolean
   resize?: '-moz-initial' | 'inherit' | 'initial' | 'revert' | 'unset' | 'none' | 'block' | 'both' | 'horizontal' | 'inline' | 'vertical'
   className?: string
@@ -48,7 +48,7 @@ export function Input (props: InputProps) {
     beforeNode,
     afterIcon,
     afterNode,
-    showPassword,
+    showPassword = false,
     clear,
     type = 'text',
     bgcolor = 'white',
@@ -94,15 +94,20 @@ export function Input (props: InputProps) {
         // text search password
         type !== 'textarea'
           ? (
-              <div className="b-input-box">
+              <div className={`b-input-box b-input-size-${size}`}>
                 {
                   beforeNode ? <div className="b-input-container-before">{beforeNode}</div> : ''
                 }
               <div
-                className={`b-input-container ${className ?? ''} ${afterNode ? 'b-input-after-border' : ''}`}
+                className={`
+                  b-input-container
+                  ${className ?? ''}
+                  ${afterNode ? 'b-input-after-border' : ''}
+                  ${disabled ? 'b-input-disabled' : ''}
+                `}
                 style={{
                   borderWidth: border ? '1px' : '0px',
-                  background: bgcolor,
+                  background: disabled ? '#f7f7f7' : bgcolor,
                   ...style
                 }}>
                   {
@@ -110,13 +115,8 @@ export function Input (props: InputProps) {
                   }
                   <input
                     className={`
-                      ${disabled ? 'b-input-disabled' : ''}
                       b-input
-                      b-input-size-${size}
                     `}
-                    style={{
-                      background: bgcolor
-                    }}
                     placeholder={placeholder}
                     type={type}
                     value={inputValue}

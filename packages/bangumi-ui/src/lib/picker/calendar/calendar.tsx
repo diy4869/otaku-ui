@@ -88,7 +88,7 @@ export function Calendar (props: CalendarProps) {
   // @ts-ignore
   const click = (e) => {
     const { type, date, disabled } = e.target.dataset
-
+    console.log(e)
     if (disabled !== 'true' && date && type === 'current') {
       setSelectDate(date)
       onClick?.(getDateResult(date, format))

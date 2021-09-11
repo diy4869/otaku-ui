@@ -1,6 +1,6 @@
 {
   "packages": [
-    "packages/*"
+    "packages/bangumi-ui"
   ],
   "npmClient": "yarn",
   "useWorkspaces": true,

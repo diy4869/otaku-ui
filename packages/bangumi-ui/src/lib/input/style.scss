@@ -5,19 +5,18 @@
   display: flex;
   align-items: center;
   width: 220px;
-  height: 40px;
   border: 1px solid #e8e8e8;
   border-radius: $radius;
   padding: 8px;
   box-sizing: border-box;
+  
+
   &:hover {
     border-color: $primaryColor;
   }
-  .b-input-size-middle {
-    height: 36px;
-  }
   .b-input {
     width: 100%;
+    font-size: 14px;
     outline: none;
     border: none;
   }
@@ -47,11 +46,31 @@
     border-left: none;
   }
 }
+.b-input-disabled {
+  cursor: not-allowed;
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+  &:hover {
+    border: 1px solid #e5e5e5;
+  }
+}
 
 .b-input-box {
   display: flex;
 }
-.b-input-after-border {
+.b-input-size-small {
+  height: 32px;
+}
+
+.b-input-size-middle {
+  height: 36px;
+}
+
+.b-input-size-large {
+  height: 40px;
+}
+
+nput-after-border {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
   border-right: none;

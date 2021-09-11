@@ -3,34 +3,35 @@ import React, {
   useRef,
   } from 'react';
 ;
-import { Telport as Tel } from '../../utils/index';
+import { Teleport as Tel } from '../../utils/index';
 
 interface TelportProps {
   className?: string
   children: React.ReactNode
+  visible?: boolean
+  onShow?:() => void
+  onHide?:() => void
 }
 
 export function Telport (props: TelportProps) {
   const container = useRef(null)
   const {
     children,
-    className
+    className,
+    visible = false,
+    onShow,
+    onHide
   } = props
 
   useLayoutEffect(() => {
-    // debugger
     const el = document.getElementsByClassName(`${className}`)
-    console.log(document.getElementsByClassName(`${className}`)[0].parentElement?.getBoundingClientRect())
-      // setTimeout(() =>{
-      //   new Tel({
-      //     el: container.current!
-      //   })
-      // }, 0)
-    // createPopper(document.querySelector(`body`) as Element, document.getElementsByClassName(`b-popup`)[0] as HTMLElement, {
-    //   placement: 'bottom'
-    // })
-
-  }, []);
+    console.log(document.getElementsByClassName(`b-popup`)[0].getBoundingClientRect())
+    new Tel({
+      el: container.current!,
+      show: visible
+    })
+    console.log(visible)
+  }, [visible]);
  
   return (
     <div className={`b-popup ${className ?? ''}`} ref={container} role="tooltip">

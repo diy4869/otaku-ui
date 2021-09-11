@@ -1,87 +1,134 @@
-import { throttle } from "lodash"
-
 type El = HTMLElement & {
   telportId: symbol
 }
 
 let id = 1
 
-interface TelportOptions {
+interface TeleportOptions {
   el: El
   selector?: string
   show?: boolean
 }
 
-export class Telport {
-  id: symbol
+export class Teleport {
+  numberId: number
+  telportId: symbol
   el: HTMLElement
-  position: {
-    top?: number,
-    left?: number
-  }
+  position: Pick<DOMRect, 'top' | 'left' | 'right'| 'bottom'>
   zIndex: number
   selector: string
   show: boolean
   map: Map<Symbol, HTMLElement>
 
 
-  constructor (options: TelportOptions) {
+  constructor (options: TeleportOptions) {
     const { el, selector = 'body', show = true } = options
-
-    this.id = Symbol(`${id++}`)
+    
+    this.telportId = Symbol(`${id}`)
+    this.numberId = id
     this.map = new Map()
     this.el = el as any
     this.zIndex = 2000
     console.log(this.el)
-    this.position = {}
+    this.position = {
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0
+    }
     this.selector = selector
     this.show = show
 
-    Promise.resolve(true).then(() => {
-      this.position = this.el?.getBoundingClientRect()
-      console.log(this.position)
-      
-      // @ts-ignore
-      if (!this.el.telportId) {
-        this.init()
-      }
-    })
+    id++
+    // this.position = this.el?.getBoundingClientRect()
+    console.log(this.position)
     
+    // @ts-ignore
+    if (!this.el.telportId) {
+      this.init()
+    }
+
+    if (this.show) {
+      this.showNode()
+    } else {
+      this.hideNode()
+    }
     // console.log(thi)
    
   }
+  findNode(node: Element) {
+    // @ts-ignore
+    const findNode = Array.of(...node?.children).find(item => {
+      // @ts-ignore
+      return item.numberId === this.el.numberId
+    })
+    return findNode
+  }
+
+  showNode () {
+    const container = document.querySelector(this.selector)
+    console.log(container)
+
+
+    if (container) {
+      const findNode = this.findNode(container)
+      console.log('find', findNode)
+      findNode.style.display = 'block'
+    }
+  }
+  hideNode() {
+    const container = document.querySelector(this.selector)
+    console.log(container)
+
+
+    if (container) {
+      const findNode = this.findNode(container)
+      console.log('find', findNode)
+      findNode.style.display = 'none'
+    }
+  }
+
 
 
   init () {
     const container = document.querySelector(this.selector)
-
+    console.log(container)
     if (!container) return
     const cloneNode: any = this.el.cloneNode(true)
     this.position = this.el?.getBoundingClientRect()
 
+    // const node = cloneNode.firstChild
+    // console.log(node)
     cloneNode.style.cssText = `
-      display: ${this.show ? 'block' : 'none'};
+      display: ${!this.show ? 'block' : 'none'};
       z-index: ${this.zIndex};
-      transform: translate(${this.position.top}px, ${this.position.left}px);
+      position: fixed;
+      top: ${this.position.top}px;
+      left: ${this.position.left}px;
     `
-    
-    cloneNode.NumberId = id
-    cloneNode.telportId = this.id
+    cloneNode.numberId = this.numberId
+    cloneNode.telportId = this.telportId
 
     // @ts-ignore
-    this.el.numberId = id
+    this.el.numberId = this.numberId
     // @ts-ignore
-    this.el.telportId = this.id
+    this.el.telportId = this.telportId
 
-    this.map.set(this.id, this.el)
+    this.map.set(this.telportId, this.el)
+
     container.appendChild(cloneNode)
 
-    // const parent = this.el.parentElement
-    // const children = [...parent?.children]
+    const parent = this.el.parentElement
 
-    // children.forEach((item, index) => {
+    // @ts-ignore
+    const findNode = this.findNode(parent)
+    if (findNode) {
+      this.el.parentElement?.removeChild(findNode)
+    }
+    // console.log(findNode.children, )
+    // children.forEach((item, index) => .{
     //   if (item.telportId) {
-    //     parent?.removeChild(item)
+        // parent?.removeChild(item)
     //   }
     // })
   }

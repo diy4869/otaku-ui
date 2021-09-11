@@ -15,6 +15,7 @@ export * from './lib/switch/switch'
 export * from './lib/input/input'
 export * from './lib/radio/radio'
 export * from './lib/highlightCode/highlightCode'
+export * from './lib/grid/grid'
 
 export * from './lib/popover/popover'
 export * from './lib/checkbox/checkbox'

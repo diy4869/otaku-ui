@@ -16,6 +16,7 @@ module.exports = async () => {
   const devConfig = merge(webpackBaseConfig, {
     devServer: {
       contentBase: path.join(__dirname, '/src'),
+      // publicPath: '//',
       host: 'localhost',
       hot: true,
       compress: true,

@@ -10,7 +10,7 @@ interface PaginationProps extends usePaginationProps {
 export function Pagination (props: PaginationProps) {
   const {
     current = 1,
-    total = 11050,
+    total = 1,
     pageSize = 10,
     slicePage = 5,
     circle = false,

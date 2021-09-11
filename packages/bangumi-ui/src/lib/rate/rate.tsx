@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-
+import NP from 'number-precision'
 /*
  * Import { fromEvent, interval } from 'rxjs'
  * Import { throttleTime } from 'rxjs/operators'
@@ -15,8 +15,8 @@ interface RateProps {
   maxScore?: number
   size?: number
   color?: string
-  textRender?: (index: number, score: number) => string
   readonly?: boolean
+  textRender?: (index: number, score: number) => React.ReactNode
 }
 
 export function Rate (props: RateProps) {
@@ -43,7 +43,7 @@ export function Rate (props: RateProps) {
   const [
     text,
     setText
-  ] = useState('')
+  ] = useState<React.ReactNode>()
 
   useEffect(
     () => {
@@ -53,6 +53,7 @@ export function Rate (props: RateProps) {
   )
 
   const render = (start: number, end: number, checked: boolean, half: boolean) => {
+    if (end >= count) end = count
     for (let i = start; i < end; i++) {
       star[i].checked = checked
       star[i].half = half
@@ -74,6 +75,7 @@ export function Rate (props: RateProps) {
     if (score % average === 0) {
       const end = score / average
 
+      
       render(
         0,
         end,
@@ -83,10 +85,12 @@ export function Rate (props: RateProps) {
     }
 
     if (score % 2 !== 0) {
+      
       const a = score % 2
-      const b = score - a
-      const c = b / average
 
+      const b = NP.minus(score, a) // score - a
+      const c = NP.round(NP.divide(b, average), 0) // b / average
+      
       render(
         0,
         c,
@@ -95,12 +99,13 @@ export function Rate (props: RateProps) {
       )
       render(
         c,
-        c + 1,
+        c + 1 >= count ? count : c + 1,
         false,
         true
       )
     }
   }
+
   // @ts-ignore
   const paint = (e, type: 'click' | 'mousemove' | 'mouseout') => () => {
     const { target } = e
@@ -115,6 +120,12 @@ export function Rate (props: RateProps) {
           true,
           false
         )
+        if (textRender) {
+          setText(textRender(
+            index + 1,
+            score
+          ))
+        }
       } else if (type === 'mouseout') {
         for (let i = index; index > 0; i--) {
           if (!star[i]?.click) {
@@ -123,7 +134,7 @@ export function Rate (props: RateProps) {
 
           if (textRender) {
             setText(textRender(
-              i,
+              i + 1,
               score
             ))
           }
@@ -135,13 +146,14 @@ export function Rate (props: RateProps) {
 
           if (textRender) {
             setText(textRender(
-              i,
+              i + 1,
               score
             ))
           }
         }
       }
 
+      console.log(star)
       setStar([...star])
     }
   }
@@ -185,10 +197,9 @@ export function Rate (props: RateProps) {
           ))
         }
         {
-          text ? <li className="b-rate-text">{text}</li> : ''
-        }
-        {
-          showScore ? <li className="b-rate-score">{score}</li> : ''
+          showScore ? (
+            <li className="b-rate-score">{score}</li>
+          ) : text ? <li className="b-rate-text ">{text}</li> : ''
         }
       </ul>
     </div>

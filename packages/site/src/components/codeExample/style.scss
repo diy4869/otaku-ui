@@ -9,6 +9,13 @@
     // border-radius: 4px;
   }
   .b-example {
+    ul {
+      margin: 0;
+      padding: 0;
+      li {
+        list-style: none;
+      }
+    }
     & + .b-code {
       border-top: none;
     }

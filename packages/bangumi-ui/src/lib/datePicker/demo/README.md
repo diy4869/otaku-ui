@@ -3,13 +3,15 @@ import:
   import { DatePicker } from 'bangumi-ui'
 ---
 
-## 日期选择器
+[[toc]]
+
+## DatePicker
 
 ::: demo
 
-禁用的按钮
+一个简单的日期选择器
 
-```html
+```tsx
 <DatePicker></DatePicker>
 ```
 :::

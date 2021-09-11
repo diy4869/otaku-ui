@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 import { ResultDate, getDateResult, Calendar, Month, Year } from '../picker'
 import { Input } from '../input/input'
+import { Telport } from '../telport/telport'
 import './style.scss'
 
 interface DateTimePickerProps {
@@ -26,11 +27,13 @@ export function DatePicker (props: DateTimePickerProps) {
   const [selectDate, setSelectDate] = useState(dayjs(date))
   const [showPicker, setShowPicker] = useState('calendar')
   const [inputVal, setInputVal] = useState('')
+  const [show, setShow] = useState(false)
   const d = dayjs(selectDate)
 
-  // useEffect(() => {
-  //   setInputVal(dayjs(selectDate).format(format))
-  // }, [selectDate])
+  useEffect(() => {
+    // setInputVal(dayjs(selectDate).format(format))
+    console.log(inputVal)
+  }, [selectDate, inputVal])
 
   const change = (type: 'year' | 'month', direction: 'left' | 'right') => {
     const result = direction === 'left' ? d.subtract(1, type) : d.add(1, type)
@@ -51,7 +54,14 @@ export function DatePicker (props: DateTimePickerProps) {
         readonly
         disabled={disabled}
         clear={clear}
-        placeholder={placeholder}></Input>
+        placeholder={placeholder}
+        onFocus={() => {
+          setShow(true)
+        }}
+        onBlur={() => {
+          setShow(false)
+        }}></Input>
+     <Telport visible={show}>
       <div className="b-datetime-picker">
         {
           showPicker === 'calendar' ? (
@@ -72,7 +82,7 @@ export function DatePicker (props: DateTimePickerProps) {
               </ul>
               <Calendar
                 date={selectDate}
-                onClick={(date) => {
+                  onClick={(date) => {
                   setSelectDate(date.dayjs)
                   setInputVal(dayjs(date.dayjs).format(format))
                   onChange?.(date)
@@ -108,6 +118,7 @@ export function DatePicker (props: DateTimePickerProps) {
           }
           </div>
       </div>
+       </Telport>
     </div>
   )
 }

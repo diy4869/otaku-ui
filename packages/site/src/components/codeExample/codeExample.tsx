@@ -15,7 +15,6 @@ export function CodeExample (props: Example) {
     example
   } = props
 
-  console.log(desc)
   return (
     <div className="b-code-example-container">
       <div className="b-desc" dangerouslySetInnerHTML={{
@@ -23,7 +22,6 @@ export function CodeExample (props: Example) {
       }}>
       </div>
       <div className="b-example">
-        
         {example}
       </div>
       <HighlightCode lang={lang} code={code}></HighlightCode>
