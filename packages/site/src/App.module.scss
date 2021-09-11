@@ -1,10 +1,10 @@
-.b-home {
+.otaku-home {
   display: grid;
   height: 100%;
   grid-template-areas: 'header header' 'aside main';
   grid-template-rows: 60px 1fr;
   grid-template-columns: 200px 1fr;
-  .b-header {
+  .otaku-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,7 +12,7 @@
     background: #001938;
     color: white;
     padding: 0 20px;
-    .b-title {
+    .otaku-title {
       // width: 200px;
       font-size: 20px;
     }
@@ -33,8 +33,8 @@
     h3 {
       margin: 10px 15px;
     }
-    .b-menu {
-      .b-menu-item {
+    .otaku-menu {
+      .otaku-menu-item {
         box-sizing: border-box;
         width: 100%;
         height: 40px;
@@ -113,7 +113,7 @@
   }
 }
 
-.b-md-container {
+.otaku-md-container {
   
   table {
       border: 1px solid #f0f0f0;
@@ -126,7 +126,7 @@
 
       }
     }
-    .b-anchor {
+    .otaku-anchor {
       & + span {
         color: #3064FF;
         display: none;

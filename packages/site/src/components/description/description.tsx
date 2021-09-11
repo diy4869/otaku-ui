@@ -13,7 +13,7 @@ export default (props: Props) => {
     children
   } = props
   return (
-    <div className="b-desc">
+    <div className="otaku-desc">
       <div className="title">{title}</div>
       <div className="content"></div>
     </div>

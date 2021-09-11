@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'bangumi-ui',
+  name: 'otaku-ui',
   output: '',
   head: [
     {

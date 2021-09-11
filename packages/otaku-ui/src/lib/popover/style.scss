@@ -1,0 +1,48 @@
+@import '../../style/var.scss';
+
+$arrowSize: 12px;
+
+.otaku-popover-container {
+  z-index: 2000;
+  cursor: pointer;
+  .otaku-popover-tooltip {
+    background: white;
+    padding: 10px;
+    border-radius: $radius;
+    box-shadow: 0 2px 20px 0 rgba(0, 35, 144, 10%);
+  }
+}
+
+.otaku-popover-arrow,
+.otaku-popover-arrow::before {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background: white;
+}
+
+.otaku-popover-arrow {
+  visibility: hidden;
+}
+
+.otaku-popover-arrow::before {
+  visibility: visible;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.otaku-popover-tooltip[data-popper-placement^="top"] > .otaku-popover-arrow {
+  bottom: -$arrowSize / 2;
+}
+
+.otaku-popover-tooltip[data-popper-placement^="bottom"] > .otaku-popover-arrow {
+  top: -$arrowSize / 2;
+}
+
+.otaku-popover-tooltip[data-popper-placement^="left"] > .otaku-popover-arrow {
+  right: -$arrowSize / 2;
+}
+
+.otaku-popover-tooltip[data-popper-placement^="right"] > .otaku-popover-arrow {
+  left: -$arrowSize / 2;
+}

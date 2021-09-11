@@ -9,7 +9,7 @@ const reactMarkdownTemplate = (importSynx, content) => {
     import * as React from 'react'
     import Block from 'Block'
     import { CodeExample } from 'CodeExample'
-    import { HighlightCode } from 'bangumi-ui'
+    import { HighlightCode } from 'otaku-ui'
     ${importSynx}
 
     function MdReact () {

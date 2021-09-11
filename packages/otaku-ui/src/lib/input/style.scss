@@ -1,0 +1,133 @@
+@import '../../style/var.scss';
+
+.otaku-input-container {
+  // border: 2px solid red;
+  display: flex;
+  align-items: center;
+  width: 220px;
+  border: 1px solid #e8e8e8;
+  border-radius: $radius;
+  padding: 8px;
+  box-sizing: border-box;
+  
+
+  &:hover {
+    border-color: $primaryColor;
+  }
+  .otaku-input {
+    width: 100%;
+    font-size: 14px;
+    outline: none;
+    border: none;
+  }
+  .otaku-input-icon-left {
+    padding-right: 10px;
+  }
+  .otaku-input-icon-right {
+    padding-left: 10px;
+  }
+  .otaku-input:disabled {
+    cursor: not-allowed;
+  }
+  .iconfont {
+    font-size: 14px;
+    color: #999;
+  }
+}
+
+.otaku-input-before {
+  :first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  & ~ .otaku-input-container {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: none;
+  }
+}
+.otaku-input-disabled {
+  cursor: not-allowed;
+  background: #f7f7f7;
+  border: 1px solid #e5e5e5;
+  &:hover {
+    border: 1px solid #e5e5e5;
+  }
+}
+
+.otaku-input-box {
+  display: flex;
+}
+.otaku-input-size-small {
+  height: 32px;
+}
+
+.otaku-input-size-middle {
+  height: 36px;
+}
+
+.otaku-input-size-large {
+  height: 40px;
+}
+
+nput-after-border {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: none;
+}
+
+
+.otaku-input-after {
+  :first-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+
+
+.otaku-textarea-container {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  border: 1px solid #e8e8e8;
+  border-radius: $radius;
+  &:hover {
+    border-color: $primaryColor;
+  }
+  .otaku-input-textarea {
+    width: 100%;
+    outline: none;
+    border: none;
+    padding: 8px;
+  }
+}
+
+.otaku-search-button {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.otaku-search-popup {
+  width: 220px;
+  border: 2px solid red;
+  position: absolute;
+  top: 50px;
+  .otaku-search-list {
+    background: white;
+  }
+  .otaku-search-item {
+    padding: 10px;
+    border-bottom: 1px solid red;
+  }
+}
+
+.otaku-search-button-small {
+  height: 32px;
+}
+.otaku-search-button-middle {
+  height: 36px;
+}
+.otaku-search-button-large {
+  height: 40px;
+}

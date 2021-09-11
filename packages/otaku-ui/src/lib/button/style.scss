@@ -1,0 +1,157 @@
+@import '../../style/var.scss';
+
+.otaku-button {
+  border: none;
+  background: white;
+  // font-size: 12px;
+  box-sizing: border-box;
+  padding: 0;
+  &:disabled {
+    cursor: not-allowed;
+  }
+  .otaku-button-icon {
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
+
+.otaku-button-loading {
+  &:disabled {
+    cursor: pointer;
+  }
+  .otaku-icon-loading {
+    font-size: 12px;
+    display: inline-block;
+    animation: loading 1.5s linear 0s infinite forwards;
+  }
+}
+
+@keyframes loading {
+  from {
+    transform: rotateZ(0deg);
+  }
+  to {
+    transform: rotateZ(360deg);
+  }
+}
+
+.otaku-button-size-small {
+  padding: 2px 4px;
+  height: 24px;
+}
+.otaku-button-size-middle {
+  padding: 4px 12px;
+  height: 32px;
+}
+.otaku-button-size-large {
+  padding: 8px 16px;
+  height: 40px;
+}
+
+
+.otaku-button-text {
+  color: $primaryColor;
+  &:hover {
+    color: mix(white, $primaryColor, 20%);
+  }
+  &:active {
+    color: mix(black, $primaryColor, 20%);
+  }
+  &:disabled {
+    color: mix(white, $primaryColor, 48%);
+  }
+}
+
+.otaku-button-default {
+  background: white;
+  border: 1px solid #D8D8D8;
+  color: #595959;
+  
+  &:hover {
+    color: mix(white, $primaryColor, 20%);
+    border-color: mix(white, $primaryColor, 20%);
+  }
+  &:active {
+    color: mix(black, $primaryColor, 10%);
+    border-color: mix(black, $primaryColor, 10%);
+  }
+  &:disabled {
+    color:#d9d9d9;
+    border-color: #c0c0c0;
+    background-color: #f5f5f5;
+  }
+}
+.otaku-button-default-ghost {
+  color: #595959;
+  border: 1px solid #D8D8D8;
+
+
+  &:hover {
+    color: mix(white, $primaryColor, 20%);
+    border-color: mix(white, $primaryColor, 20%);
+  }
+  &:active {
+    color: mix(black, $primaryColor, 10%);
+    border-color: mix(black, $primaryColor, 10%);
+  }
+
+  &:disabled {
+    color:#d8d8d8;
+    border-color: #c0c0c0;
+    background-color: white;
+  }
+}
+
+$Button: (
+  (type: primary, color: $primaryColor),
+  (type: success, color: #08dba8),
+  (type: warning, color: #ffb540),
+  (type: danger, color: #f52f3e)
+);
+
+
+@for $i from 1 through length($Button) {
+  $item: nth($Button, $i);
+  $color: map-get($item, color);
+  $type: map-get($item, type);
+
+  .otaku-button-#{$type} {
+    background: $color;
+    border: 1px solid $color;
+    color: white;
+    &:hover {
+      background: mix(white, $color, 20%);
+      border-color: mix(white, $color, 20%);
+    }
+    &:active {
+      color: white;
+      background: mix(black, $color, 10%);
+      border-color:  mix(black, $color, 10%);
+    }
+    &:disabled {
+      background: mix(white, $color, 48%);
+      border-color:  mix(white, $color, 48%);
+    }
+  }
+
+  .otaku-button-#{$type}-ghost {
+    border: 1px solid $color;
+    background: white;
+    color: $color;
+    &:hover {
+      color: mix(white, $color, 20%);
+      border-color: mix(white, $color, 20%);
+      background: white;
+    }
+    &:active {
+      color: mix(black, $color, 10%);
+      background: white;
+      border-color: mix(black, $color, 10%);
+    }
+    &:disabled {
+      background: white;
+      color: mix(white, $color, 48%);
+      border-color: mix(white, $color, 48%);
+    }
+  }
+}

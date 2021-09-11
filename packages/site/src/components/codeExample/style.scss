@@ -1,14 +1,14 @@
-.b-code-example-container {
+.otaku-code-example-container {
   box-sizing: border-box;
   background-color: white;
   border-radius: 10px;
   
-  .b-desc, .b-example {
+  .otaku-desc, .otaku-example {
     padding: 20px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     // border-radius: 4px;
   }
-  .b-example {
+  .otaku-example {
     ul {
       margin: 0;
       padding: 0;
@@ -16,7 +16,7 @@
         list-style: none;
       }
     }
-    & + .b-code {
+    & + .otaku-code {
       border-top: none;
     }
   }

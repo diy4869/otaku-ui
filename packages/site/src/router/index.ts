@@ -43,12 +43,12 @@ export default [
       {
         title: "Grid 网格",
         path: "/grid",
-        component: lazy(() => import('bangumi-ui/src/lib/grid/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/grid/demo/README.md'))
       },
       {
         title: "Button 按钮",
         path: "/button",
-        component: lazy(() => import('bangumi-ui/src/lib/button/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/button/demo/README.md'))
       }
     ]
   },
@@ -58,7 +58,7 @@ export default [
       {
         title: "input 输入框",
         path: "/form/input",
-        component: lazy(() => import('bangumi-ui/src/lib/input/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/input/demo/README.md'))
       },
       {
         title: "select 选择框",
@@ -83,12 +83,12 @@ export default [
       {
         title: "date-picker 日期选择器",
         path: "/form/date-picker",
-        component: lazy(() => import('bangumi-ui/src/lib/datePicker/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/datePicker/demo/README.md'))
       },
       {
         title: "form 表单",
         path: "form/form",
-        component: lazy(() => import('bangumi-ui/src/lib/form/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/form/demo/README.md'))
       }
     ]
   },
@@ -98,17 +98,17 @@ export default [
       {
         title: 'pagination 分页',
         path: '/display/pagination',
-        component: lazy(() => import('bangumi-ui/src/lib/pagination/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/pagination/demo/README.md'))
       },
       {
         title: 'rate 评分',
         path: '/display/rate',
-        component: lazy(() => import('bangumi-ui/src/lib/rate/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/rate/demo/README.md'))
       },
       {
         title: 'tooltip 提示',
         path: '/display/tooltip',
-        component: lazy(() => import('bangumi-ui/src/lib/tooltip/demo/README.md'))
+        component: lazy(() => import('otaku-ui/src/lib/tooltip/demo/README.md'))
       }
     ]
   }

@@ -1,0 +1,74 @@
+@import '../../style/var.scss';
+
+.otaku-pagination {
+  display: flex;
+  .otaku-pagination-prev-more,
+  .otaku-pagination-next-more,
+  .otaku-pagination-prev,
+  .otaku-pagination-next,
+  .otaku-pagination-item {
+    padding: 5px 10px;
+    margin-right: 10px;
+    background: white;
+    color: #262626;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $radius;
+    box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
+    cursor: pointer;
+    // position: relative;
+  }
+  .is-circle {
+    border-radius: 24px;
+  }
+
+  .otaku-pagination-item {
+    &:hover {
+      color: $primaryColor;
+    }
+  }
+  .otaku-pagination-prev-more,
+  .otaku-pagination-next-more {
+    box-shadow: none;
+    // line-height: 25px;
+    // position: absolute;
+  }
+
+  .otaku-icon-doubleleft,
+  .otaku-icon-doubleright {
+    display: none;
+  }
+
+  .otaku-pagination-prev,
+  .otaku-pagination-next {
+    .iconfont {
+      font-size: 13px;
+    }
+  }
+  // .otaku-pagination-prev-more {
+  //   &:hover .otaku-icon-doubleleft {
+  //     display: block;
+  //     line-height: 30px;
+      
+  //   }
+  //   &:hover .otaku-icon-more-line {
+  //     display: none;
+  //   }
+  // }
+  // .otaku-pagination-next-more {
+  //   &:hover .otaku-icon-doubleright {
+  //     display: block;
+  //     line-height: 30px;
+      
+  //   }
+  //   &:hover .otaku-icon-more-line {
+  //     display: none;
+  //   }
+  // }
+  .otaku-pagination-item-acitve {
+    color: $primaryColor;
+    // color: white;
+  }
+}

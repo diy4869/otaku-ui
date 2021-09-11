@@ -1,0 +1,27 @@
+@import '../../../style/var.scss';
+
+.otaku-datepicker-year {
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  grid-template-rows: repeat(4, 24px);
+  grid-gap: 43px;
+  li {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    color: #595959;
+    border-radius: $radius;
+    cursor: pointer;
+  }
+  .otaku-datepicker-currentYear {
+    border: 1.5px solid $primaryColor;
+    color: $primaryColor;
+  }
+  .active {
+    background: $primaryColor;
+    color: white;
+  }
+  .gray {
+    color: #BFBFBF;
+  }
+}

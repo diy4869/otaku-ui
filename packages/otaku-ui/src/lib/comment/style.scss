@@ -1,0 +1,39 @@
+$activeColor: #FF6B6B;
+
+.otaku-comment {
+  display: flex;
+
+  .otaku-comment-container {
+    flex: 1;
+    margin-left: 10px;
+    .otaku-comment-time {
+      color: #999;
+    }
+    .otaku-comment-content {
+      color: #333;
+      // font-size: 13px;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+    .otaku-comment-actions {
+      display: flex;
+      margin: 5px 0 10px;
+      cursor: pointer;
+      .otaku-comment-actions-item {
+        margin-right: 10px;
+        span {
+          margin-right: 5px;
+          color: #999;
+        }
+        .otaku-comment-like-active,
+        .otaku-comment-unlike-active,
+        .otaku-comment-reply-active {
+          color: $activeColor;
+        }
+      }
+    }
+  }
+  .otaku-comment-reply {
+    color: #3064FF;
+  }
+}

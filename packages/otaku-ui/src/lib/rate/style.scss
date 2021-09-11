@@ -1,0 +1,18 @@
+.otaku-rate {
+  .otaku-star-container {
+    display: flex;
+    align-items: center;
+  }
+  .otaku-star {
+    font-size: 18px;
+    margin-right: 5px;
+    color: #ffb800;
+  }
+  .otaku-rate-score, .otaku-rate-text {
+    margin-left: 5px;
+    color: black;
+  }
+  .otaku-rate-score {
+    color: rgb(255, 153, 0)
+  }
+}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, HighlightCode, HighlightCodeProps } from 'bangumi-ui'
+import { Button, HighlightCode, HighlightCodeProps } from 'otaku-ui'
 import './style.scss'
 
 interface Example extends HighlightCodeProps {
@@ -16,12 +16,12 @@ export function CodeExample (props: Example) {
   } = props
 
   return (
-    <div className="b-code-example-container">
-      <div className="b-desc" dangerouslySetInnerHTML={{
+    <div className="otaku-code-example-container">
+      <div className="otaku-desc" dangerouslySetInnerHTML={{
         __html: desc
       }}>
       </div>
-      <div className="b-example">
+      <div className="otaku-example">
         {example}
       </div>
       <HighlightCode lang={lang} code={code}></HighlightCode>

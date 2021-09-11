@@ -1,0 +1,31 @@
+@import '../../../style/var.scss';
+
+.otaku-month {
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+  grid-template-rows: repeat(4, 24px);
+  grid-gap: 43px 72px;
+  .otaku-month-item {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    color: #595959;
+    border-radius: $radius;
+    cursor: pointer;
+  }
+  .otaku-month-item-active {
+    background: $primaryColor;
+    color: white;
+  }
+  .otaku-datepicker-currentMonth {
+    border: 1.5px solid $primaryColor;
+    color: $primaryColor;
+  }
+  .active {
+    background: $primaryColor;
+    color: white;
+  }
+  .gray {
+    color: #BFBFBF;
+  }
+}

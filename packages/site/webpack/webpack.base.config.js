@@ -10,7 +10,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 console.log(path.resolve(__dirname, '../webpack/loader/index.js'))
-console.log(path.resolve(__dirname, '../../bangumi-ui/src/index.ts'))
+console.log(path.resolve(__dirname, '../../otaku-ui/src/index.ts'))
 // process.exit()
 
 const baseConfig = {

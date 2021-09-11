@@ -10,10 +10,10 @@ function App() {
   return (
     <Suspense fallback={<div></div>}>
       <Router basename="otaku-ui-docs">
-        <div className={style['b-home']}>
-          <header className={style['b-header']}>
-            {/* BANGUMI-UI | OTAKU-UI |  */}
-            <div className={style['b-title']}>
+        <div className={style['otaku-home']}>
+          <header className={style['otaku-header']}>
+            {/* otaku-ui | OTAKU-UI |  */}
+            <div className={style['otaku-title']}>
               <span>OTAKU-UI</span>
             </div>
             
@@ -27,13 +27,13 @@ function App() {
                 return (
                   <>
                     <h3 className={style['title']}>{item.title}</h3>
-                    <div className={style['b-menu']}>
+                    <div className={style['otaku-menu']}>
                       {
                         item.children.map(children => {
                           return (
                             <NavLink
                               activeClassName={style['active']}
-                              className={`${style['b-menu-item']}`}
+                              className={`${style['otaku-menu-item']}`}
                               to={children.path}
                             >{children.title}</NavLink>
                           )
