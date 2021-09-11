@@ -6,6 +6,7 @@
  * @LastEditTime: 2020-12-23 09:43:13
  */
 const create = require('./command/create')
+const publish = require('./command/publish')
 const chalk = require('chalk')
 const { Command } = require('commander')
 const { version } = require('../package.json')
@@ -20,6 +21,13 @@ program
   .description('创建组件')
   .helpOption('-h, --help', '查看帮助')
   .action(create)
+
+program
+  .command('publish')
+  // .option('--path', '创建路径', 'lib')
+  .description('更新文档网站')
+  .helpOption('-h, --help', '查看帮助')
+  .action(publish)
 
 // 未知命令处理
 program

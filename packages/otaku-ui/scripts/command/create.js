@@ -7,48 +7,47 @@ const camelCase = require('camelcase')
 
 const writeTemplate = (templateDir, writeDir, componentName, templateOptions = {}) => {
   const fileList = fs.readdirSync(templateDir)
+  
+  return new Promise(async (resolve) => {
+    if (!await checkDirectory(writeDir)) {
+      await mkdir(writeDir)
+    }
 
-  return new Promise(async (resolve, reject) => {
-    for (let file of fileList) {
+    fileList.map(async (file) => {
       const ext = getExt(file)
-      const filename = ext === 'art' ? `${componentName}.tsx` : file
-
-      console.log(filename)
+      const fileOrDirectory = ext === 'art' ? `${componentName}.tsx` : file
       const templatePath = path.resolve(templateDir, file)
-      const writePath = path.resolve(writeDir, filename)
-      const result = await render(templatePath, templateOptions)
+      const writePath = path.resolve(writeDir, fileOrDirectory)
+      const dir = path.resolve(templateDir, file)
 
-      if (await checkDirectory(writeDir)) {
-        if (!(await checkFile(writePath))) {
-          fs.writeFileSync(writePath, result)
-        } else {
-          reject()
-        }
+      if (await checkDirectory(dir)) {
+        writeTemplate(templatePath, writePath, componentName)
       } else {
-        await mkdir(writeDir)
+        const result = await render(templatePath, templateOptions)
+
         fs.writeFileSync(writePath, result)
       }
-    }
+    })
+    resolve()
   })
 }
 
 module.exports = async (name) => {
   const componentName = camelCase(name, { pascalCase: true })
-  // const dir = path.resolve(__dirname, '../../src/lib', name)
-  const writeDir = path.resolve(__dirname, name)
+  const writeDir = path.resolve(__dirname, '../../src/lib', name)
   const templateDir = path.resolve(__dirname, '../template')
   
   console.log('\n')
   const spinner = ora('正在努力创建模板中...').start()
 
-  writeTemplate(templateDir, writeDir, name, {
-    name: componentName
-  }).then(() => {
-    console.log('\n')
-    spinner.succeed('创建成功')
-  }).catch(() => {
+  if (checkDirectory(writeDir)) {
     spinner.fail('组件已存在')
-  }).finally(() => {
-    spinner.stop()
-  })
+  } else {
+    await writeTemplate(templateDir, writeDir, name, {
+      name: componentName
+    }).then(() => {
+      console.log('\n')
+      spinner.succeed('创建成功')
+    })
+  }
 }
