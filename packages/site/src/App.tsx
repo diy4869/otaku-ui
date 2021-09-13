@@ -18,7 +18,7 @@ function App() {
             </div>
             
                 <div>
-                  <a href="https://github.com/last4869/vite" target="_blank">GitHub</a>
+                  <a href="https://github.com/diy4869/otaku-ui" target="_blank">GitHub</a>
             </div>
           </header>
           <aside>

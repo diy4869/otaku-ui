@@ -88,8 +88,6 @@ export class Teleport {
     }
   }
 
-
-
   init () {
     const container = document.querySelector(this.selector)
     console.log(container)

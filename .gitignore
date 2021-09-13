@@ -1,5 +1,5 @@
 node_modules
-packages/bangumi-docs
+otaku-ui-docs
 
 package-lock.json
 *.log
