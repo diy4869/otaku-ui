@@ -23,7 +23,9 @@ module.exports = async () => {
   if (await checkDirectory(sitePath)) {
     await execPromise(`rm -rf ${buildPath}`)
     await copy(sitePath, buildPath)
-    const result = await execPromise(str)
+    const result = await execPromise(str, {
+      shell: 'bash'
+    })
 
     console.log(result)
     //   .then(({ stdout, stderr }) => {
