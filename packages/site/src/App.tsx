@@ -2,14 +2,14 @@ import React, { Suspense, useEffect } from 'react'
 import style from './App.module.scss'
 import { hot } from 'react-hot-loader/root'
 import './components/mdReact/mdReact'
-import { HashRouter as Router, Route, Switch, useHistory, NavLink, Redirect, useLocation } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
 
 function App() {
   return (
     <Suspense fallback={<div></div>}>
-      <Router basename="otaku-ui-docs">
+      <Router>
         <div className={style['otaku-home']}>
           <header className={style['otaku-header']}>
             {/* otaku-ui | OTAKU-UI |  */}
@@ -47,16 +47,11 @@ function App() {
           </aside>
           <main>
             <Switch>
-              <Redirect exact from="/" to={{
-                pathname: '/dev/introduce'
-              }}></Redirect>
-
               {
                 routes.map((router) => {
                   return router.children.map(children => {
                     return (
                       <Route
-                          exact
                           path={children.path}
                           component={children.component}
                           key={children.path}
@@ -65,6 +60,10 @@ function App() {
                   })  
                 })
               }
+              <Route path="*" component={NotFound}></Route>
+              <Redirect from="/" to={{
+                pathname: '/dev/introduce'
+              }}></Redirect>
             </Switch>
           {/* <CodeExample></CodeExample> */}
         </main>

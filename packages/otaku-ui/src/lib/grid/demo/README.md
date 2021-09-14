@@ -9,9 +9,7 @@ import:
 
 ::: demo
 
-asdf
-asdfasdf
-asdfasdf
+一个简单的网格
 
 ```tsx
 <Grid>

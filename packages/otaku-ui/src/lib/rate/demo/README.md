@@ -78,9 +78,10 @@ import:
 
 ```jsx
 <Rate 
-  score={42.5} 
+  score={59.5} 
   maxScore={100} 
   count={10}
+  readonly
   textRender={(current, score) => {
     let text = '不合格'
     

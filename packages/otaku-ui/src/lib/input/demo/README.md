@@ -75,12 +75,12 @@ import:
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="前面的icon" beforeIcon="b-icon-search-line"></Input>
+      <Input placeholder="前面的icon" beforeIcon="otaku-icon-search-line"></Input>
     </li>
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="后面的icon" afterIcon="b-icon-search-line"></Input>
+      <Input placeholder="后面的icon" afterIcon="otaku-icon-search-line"></Input>
     </li>
   </ul>
 ```

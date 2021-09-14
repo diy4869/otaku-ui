@@ -19,7 +19,7 @@ interface InputProps {
   clear?: boolean
   afterNode?: React.ReactNode
   showPassword?: boolean
-  resize?: '-moz-initial' | 'inherit' | 'initial' | 'revert' | 'unset' | 'none' | 'block' | 'both' | 'horizontal' | 'inline' | 'vertical'
+  resize?: boolean
   className?: string
   style?: React.CSSProperties
   type?: 'text' | 'search' | 'password' | 'textarea'
@@ -41,15 +41,15 @@ export function Input (props: InputProps) {
     disabled,
     cols,
     rows,
-    resize,
     className,
     style,
     beforeIcon,
     beforeNode,
     afterIcon,
     afterNode,
-    showPassword = false,
     clear,
+    resize = true,
+    showPassword = false,
     type = 'text',
     bgcolor = 'white',
     border = true,
@@ -96,7 +96,7 @@ export function Input (props: InputProps) {
           ? (
               <div className={`otaku-input-box otaku-input-size-${size}`}>
                 {
-                  beforeNode ? <div className="otaku-input-container-before">{beforeNode}</div> : ''
+                  beforeNode ? <div className="otaku-input-before">{beforeNode}</div> : ''
                 }
               <div
                 className={`
@@ -180,7 +180,7 @@ export function Input (props: InputProps) {
               `}
               style={{
                 background: bgcolor,
-                resize: resize || 'none'
+                resize: !resize ? 'none' : 'initial'
               }}
               cols={cols}
               rows={rows}

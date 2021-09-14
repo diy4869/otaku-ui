@@ -85,11 +85,9 @@ export function Rate (props: RateProps) {
     }
 
     if (score % 2 !== 0) {
-      
       const a = score % 2
-
       const b = NP.minus(score, a) // score - a
-      const c = NP.round(NP.divide(b, average), 0) // b / average
+      const c = Math.floor(NP.divide(b, average)) // b / average
       
       render(
         0,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { usePagination, usePaginationProps } from '../../hooks/index'
 import './style.scss'
 

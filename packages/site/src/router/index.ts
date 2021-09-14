@@ -87,7 +87,7 @@ export default [
       },
       {
         title: "form 表单",
-        path: "form/form",
+        path: "/form/form",
         component: lazy(() => import('otaku-ui/src/lib/form/demo/README.md'))
       }
     ]

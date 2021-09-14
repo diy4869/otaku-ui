@@ -1,4 +1,5 @@
 import './style/reset.scss'
+import './fonts/iconfont.css'
 
 export * from './lib/avatar/avatar'
 export * from './lib/button/button'

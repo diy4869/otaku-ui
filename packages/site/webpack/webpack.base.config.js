@@ -20,8 +20,7 @@ const baseConfig = {
   output: {
     path: path.join(__dirname, '../dist'),
     filename: 'js/[name].[contenthash].js',
-    chunkFilename: 'js/[name].[contenthash].js',
-    publicPath: '/otaku-ui-docs/'
+    chunkFilename: 'js/[name].[contenthash].js'
   },
   module: {
     rules: [
@@ -131,7 +130,7 @@ const baseConfig = {
   devtool: env === 'development' ? 'source-map' : 'cheap-module-source-map',
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'hello world',
+      title: 'otaku-ui',
       filename: 'index.html',
       template: path.resolve(__dirname, '../page/index.html'),
       inject: true,
