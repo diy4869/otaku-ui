@@ -31,7 +31,8 @@ export function Radio (props: RadioProps) {
   const [
     val,
     setVal
-  ] = useState(name)
+  ] = useState(value)
+
   // @ts-ignore
   const change = (e) => {
     console.log(

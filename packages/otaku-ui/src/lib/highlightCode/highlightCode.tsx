@@ -15,20 +15,13 @@ export function HighlightCode (props: HighlightCodeProps) {
   } = props
   const [highlightCode, setHighLightCode] = useState('')
 
-  // try {
-  //   hljs.registerLanguage(lang, require(`highlight.js/lib/languages/${lang}`))
-  // } catch (err) {
-
-  // }
-  
-
   useLayoutEffect(() => {
       const res = hljs.highlight(code, {
         language: lang,
         ignoreIllegals: true
       }).value
 
-      // console.log(lang, res)
+
       setHighLightCode(res)
   })
 

@@ -17,14 +17,12 @@ program.version(version, '-V --version', '查看当前版本')
 
 program
   .command('create <componentName>')
-  // .option('--path', '创建路径', 'lib')
   .description('创建组件')
   .helpOption('-h, --help', '查看帮助')
   .action(create)
 
 program
   .command('publish')
-  // .option('--path', '创建路径', 'lib')
   .description('更新文档网站')
   .helpOption('-h, --help', '查看帮助')
   .action(publish)

@@ -67,6 +67,7 @@ export function Input (props: InputProps) {
     inputValue,
     setInputValue
   ] = useState('')
+  
   let [
     show,
     setShow

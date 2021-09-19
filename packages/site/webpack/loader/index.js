@@ -82,6 +82,7 @@ module.exports = function mdLoader (source) {
 
               for (let i = startIndex; i < endIndex; i++) {
                 if (tokens[i].type === 'fence') {
+
                   map.set(startIndex, {
                     code: tokens[i].content,
                     lang: tokens[i].info,

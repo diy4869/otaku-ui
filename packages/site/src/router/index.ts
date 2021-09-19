@@ -68,17 +68,19 @@ export default [
       {
         title: "switch 开关",
         path: "/form/switch",
+        component: lazy(() => import('otaku-ui/src/lib/switch/demo/README.md'))
         // component: lazy(() => import('@docs/form/switch.md'))
       },
       {
         title: "radio 单选框",
         path: "/form/radio",
+        component: lazy(() => import('otaku-ui/src/lib/radio/demo/README.md'))
         // component: lazy(() => import('@docs/form/radio.md'))
       },
       {
         title: "checkbox 多选框",
         path: "/form/checkbox",
-        // component: lazy(() => import('@docs/form/checkbox.md'))
+        component: lazy(() => import('otaku-ui/src/lib/checkbox/demo/README.md'))
       },
       {
         title: "date-picker 日期选择器",
