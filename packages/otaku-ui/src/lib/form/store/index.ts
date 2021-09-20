@@ -1,16 +1,57 @@
-import { atom } from 'recoil'
-import { FormProps } from '../form'
+import { BaseForm } from '../form'
+// import rxjs from 'rxjs'
+import Schema, { ValidateError } from 'async-validator'
 
-type FormStore = Omit<FormProps, 'children'>
-
-export const formStore = atom<FormStore>({
-  key: 'formProps',
-  default: {
-    disabled: false
+export default class FormValidate {
+  options: BaseForm
+  status: 'pending' | 'success' | 'error'
+  validateErrors: ValidateError[]
+  
+  constructor (options = {}) {
+    this.options = options
+    this.status = 'pending'
+    this.validateErrors =  []
   }
-})
 
-export const formState = atom({
-  key: 'formState',
-  default: {}
-})
+  get validateError () {
+    return this.validateErrors
+  }
+
+  set validateError (val) {
+    this.validateErrors = val  
+  }
+
+  setOptions (options: BaseForm) {
+    this.options = options
+  }
+
+  getOptions () {
+    return this.options
+  }
+
+  validate () {
+    const {
+      model = {},
+      rules = {}
+    } = this.options
+    const validator = new Schema(rules)
+    console.log(rules)
+    return new Promise((resolve, reject) => {
+      validator.validate(model, {
+        firstFields: true
+      }, (errors, fields) => {
+        console.log(errors, fields)
+        if (errors) {
+          this.validateError = errors
+          this.status = 'error'
+          reject(errors) 
+        } else {
+          this.status = 'success'
+          resolve(fields)
+        }
+      })
+    })
+  }
+
+  resetValidate () {}
+}

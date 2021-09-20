@@ -7,6 +7,7 @@ import './style.scss'
 
 interface DateTimePickerProps {
   date?: dayjs.ConfigType
+  firstWeek?: '日' | '一'
   placeholder?: string
   format?: string
   disabled?: boolean
@@ -16,10 +17,11 @@ interface DateTimePickerProps {
 
 export function DatePicker (props: DateTimePickerProps) {
   const {
+    firstWeek,
+    disabled,
     date = new Date(),
     format = 'YYYY-MM-DD',
     placeholder = '请选择日期',
-    disabled,
     clear = true,
     onChange
   } = props
@@ -81,8 +83,9 @@ export function DatePicker (props: DateTimePickerProps) {
                 </li>
               </ul>
               <Calendar
+                firstWeek={firstWeek}
                 date={selectDate}
-                  onClick={(date) => {
+                onClick={(date) => {
                   setSelectDate(date.dayjs)
                   setInputVal(dayjs(date.dayjs).format(format))
                   onChange?.(date)

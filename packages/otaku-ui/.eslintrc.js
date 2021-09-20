@@ -20,9 +20,16 @@ module.exports = {
   },
   "plugins": [
     "react",
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "plugin:react-hooks/recommended"
   ],
   "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": [
+      "warn", {
+        "additionalHooks": "useRecoilCallback"
+      }
+    ],
     "accessor-pairs": "error",
     "array-bracket-newline": "error",
     "array-bracket-spacing": "error",

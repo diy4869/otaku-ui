@@ -1,10 +1,18 @@
 .otaku-form {
   .otaku-form-item {
-    display: flex;
-    margin-bottom: 10px;
+    display: grid;
+    grid-column-gap: 10px;
     align-items: center;
-    .otaku-form-item-label {
-      width: 80px;
+    margin-bottom: 10px;
+    &-label {
+      font-size: 14px;
+    }
+    &-error-message {
+      color: red;
+    }
+    .is-required {
+      color: red;
+      margin: 2px;
     }
   }
-} 
+}

@@ -1,6 +1,6 @@
 ---
 import: 
-  import { Form, FormItem, Button, Input, DatePicker } from 'otaku-ui'
+  import Example from './example'
 ---
 
 ## Form 表单
@@ -8,10 +8,6 @@ import:
 ::: demo
 
 ```tsx
-<Form>
-  <FormItem label="输入框">
-      sdafafd
-  </FormItem>
-</Form>
+<Example></Example>
 ```
 :::

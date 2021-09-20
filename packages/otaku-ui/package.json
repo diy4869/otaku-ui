@@ -53,6 +53,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^7.0.1",
     "inquirer": "^8.1.2",
     "install": "^0.13.0",

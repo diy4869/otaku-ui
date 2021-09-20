@@ -3397,6 +3397,11 @@ async-limiter@~1.0.0:
   resolved "https://registry.yarnpkg.com/async-limiter/-/async-limiter-1.0.1.tgz#dd379e94f0db8310b08291f9d64c3209766617fd"
   integrity sha512-csOlWGAcRFJaI6m+F2WKdnMKr4HhdhFVBk0H/QbJFMCr+uO2kwohwXQPxw/9OCxp05r5ghVBFSyioixx3gfkNQ==
 
+async-validator@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/async-validator/-/async-validator-4.0.3.tgz#c8ecd6b28fc8e18b14be4ec7c704641f999d377d"
+  integrity sha512-LVoIbJNHPKsO7FMLamo88uxdrvayGkF3vLTMTeiN3CqAbP3qSafLRc6yx3Sq9lHkiEOLNpoA2jwwnfGDdu1SMQ==
+
 async@^2.6.2:
   version "2.6.3"
   resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
@@ -6711,6 +6716,11 @@ gzip-size@^6.0.0:
   integrity sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==
   dependencies:
     duplexer "^0.1.2"
+
+hamt_plus@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/hamt_plus/-/hamt_plus-1.0.2.tgz#e21c252968c7e33b20f6a1b094cd85787a265601"
+  integrity sha1-4hwlKWjH4zsg9qGwlM2FeHomVgE=
 
 handle-thing@^2.0.0:
   version "2.0.1"
@@ -11292,6 +11302,13 @@ rechoir@^0.7.0:
   integrity sha512-/njmZ8s1wVeR6pjTZ+0nCnv8SpZNRMT2D1RLOJQESlYFDBvwpTA4KWJpZ+sBJ4+vhjILRcK7JIFdGCdxEAAitg==
   dependencies:
     resolve "^1.9.0"
+
+recoil@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/recoil/-/recoil-0.4.1.tgz#1cb2171bc98d41361507131a059d7c3525d8c4fe"
+  integrity sha512-vp6KPwlHOjJ4bJofmdDchmgI9ilMTCoUisK8/WYLl8dThH7e7KmtZttiLgvDb2Em99dUfTEsk8vT8L1nUMgqXQ==
+  dependencies:
+    hamt_plus "1.0.2"
 
 redent@^1.0.0:
   version "1.0.0"
