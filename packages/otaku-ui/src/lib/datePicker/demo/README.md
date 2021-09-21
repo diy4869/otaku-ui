@@ -16,8 +16,7 @@ import:
 ```
 :::
 
-
-## 设置周一为一周的第一天
+## 设置一周的第一天
 
 ::: demo
 
@@ -25,5 +24,17 @@ import:
 
 ```tsx
 <DatePicker firstWeek="一"></DatePicker>
+```
+:::
+
+
+## 农历显示
+
+::: demo
+
+一个简单的日期选择器
+
+```tsx
+<DatePicker lunarDate={true}></DatePicker>
 ```
 :::

@@ -1,5 +1,4 @@
 import { BaseForm } from '../form'
-// import rxjs from 'rxjs'
 import Schema, { ValidateError } from 'async-validator'
 
 export default class FormValidate {
@@ -11,14 +10,6 @@ export default class FormValidate {
     this.options = options
     this.status = 'pending'
     this.validateErrors =  []
-  }
-
-  get validateError () {
-    return this.validateErrors
-  }
-
-  set validateError (val) {
-    this.validateErrors = val  
   }
 
   setOptions (options: BaseForm) {
@@ -42,7 +33,7 @@ export default class FormValidate {
       }, (errors, fields) => {
         console.log(errors, fields)
         if (errors) {
-          this.validateError = errors
+          this.validateErrors = errors
           this.status = 'error'
           reject(errors) 
         } else {

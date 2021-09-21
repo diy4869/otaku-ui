@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import { Solar, Lunar, HolidayUtil } from 'lunar-typescript'
 import isBetween from 'dayjs/plugin/isBetween'
 import { useCalendar } from '../../../hooks/index'
 import './style.scss'
@@ -18,7 +19,8 @@ interface CalendarProps {
   disabled?: (date: ResultDate) => boolean | boolean
   onClick?: (date: ResultDate) => void
   format?: string
-  firstWeek?: '一' | '日'
+  firstWeek?: '一' | '日',
+  lunarDate?: boolean
 }
 
 export const getDateResult = (date: dayjs.ConfigType = new Date(), format: string = 'YYYY-MM-DD') => {
@@ -38,6 +40,7 @@ export function Calendar (props: CalendarProps) {
     date,
     firstWeek = '日',
     format = 'YYYY-MM-DD',
+    lunarDate = false,
     disabled,
     onClick
   } = props
@@ -47,9 +50,6 @@ export function Calendar (props: CalendarProps) {
     setSelectDate
   ] = useState(dayjs(date).format('YYYY-M-D'))
   const calendar = useCalendar(selectDate, firstWeek)
-  const d = dayjs(selectDate)
-  const currentYear = d.year()
-  const currentMonth = d.month()
 
   const arr = [
     '一',
@@ -69,22 +69,6 @@ export function Calendar (props: CalendarProps) {
     [date, selectDate]
   )
 
-
-  const getDate = (date: number, type: 'prev' | 'next') => {
-    const method = type === 'prev' ? 'subtract' : 'add'
-    const month = d[method](
-      1,
-      'month'
-    )
-
-    return dayjs(
-      new Date(
-        month.year(),
-        month.month(),
-        date
-      )
-    ).format('YYYY-M-D')
-  }
   // @ts-ignore
   const click = (e) => {
     const { type, date, disabled } = e.target.dataset
@@ -94,7 +78,6 @@ export function Calendar (props: CalendarProps) {
       onClick?.(getDateResult(date, format))
     }
   }
-
 
   return (
     <div className="otaku-calendar-container">
@@ -116,25 +99,25 @@ export function Calendar (props: CalendarProps) {
                  * const end = `2021-08-25`
                  * const isBetween = dayjs(date).isBetween(start, end)
                  */
-
-                const date = `${currentYear}-${currentMonth + 1}-${children}`
+                const lunar = Lunar.fromDate(dayjs(children).toDate()).getDayInChinese()
                 const today = dayjs().format('YYYY-M-D')
-                const isDisabled = typeof disabled === 'function' ? disabled(getDateResult(date, format)) : disabled
+                const isDisabled = typeof disabled === 'function' ? disabled(getDateResult(children, format)) : disabled
                 
                 return (
                   <li
-                    key={date}
-                    data-date={date}
+                    key={children}
+                    data-date={children}
                     data-disabled={isDisabled}
                     data-type="current"
                     className={`
                       otaku-calender-date
                       otaku-calendar-current
                       ${isDisabled ? 'otaku-calendar-disabled' : ''}
-                      ${today === date ? 'otaku-calendar-today' : ''}
-                      ${selectDate === date ? 'otaku-calendar-active' : ''}
+                      ${today === children ? 'otaku-calendar-today' : ''}
+                      ${selectDate === children ? 'otaku-calendar-active' : ''}
                     `}>
-                    {children}
+                    <span>{dayjs(children).date()}</span>
+                    {lunarDate && <span>{lunar}</span>}
                   </li>
                 )
               })
@@ -142,20 +125,18 @@ export function Calendar (props: CalendarProps) {
             
             return item.map((children) => {
               const type = index === 0 ? 'prev' : 'next'
-              const date = getDate(
-                children,
-                type
-              )
+              const lunar = Lunar.fromDate(dayjs(children).toDate()).getDayInChinese()
 
               return (
                 <li
-                  key={date}
-                  data-date={date}
+                  key={children}
+                  data-date={children}
                   className={`
                     otaku-calender-date
                     otaku-calendar-${type}
                   `}>
-                  {children}
+                  <span>{dayjs(children).date()}</span>
+                  {lunarDate && <span>{lunar}</span>}
                 </li>
               )
             })

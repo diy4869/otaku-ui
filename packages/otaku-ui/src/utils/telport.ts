@@ -1,3 +1,5 @@
+import react from 'react'
+
 type El = HTMLElement & {
   telportId: symbol
 }
@@ -29,7 +31,7 @@ export class Teleport {
     this.map = new Map()
     this.el = el as any
     this.zIndex = 2000
-    console.log(this.el)
+
     this.position = {
       top: 0,
       left: 0,
@@ -40,8 +42,6 @@ export class Teleport {
     this.show = show
 
     id++
-    // this.position = this.el?.getBoundingClientRect()
-    console.log(this.position)
     
     // @ts-ignore
     if (!this.el.telportId) {
@@ -53,7 +53,6 @@ export class Teleport {
     } else {
       this.hideNode()
     }
-    // console.log(thi)
    
   }
   findNode(node: Element) {
@@ -67,36 +66,31 @@ export class Teleport {
 
   showNode () {
     const container = document.querySelector(this.selector)
-    console.log(container)
-
 
     if (container) {
       const findNode = this.findNode(container)
-      console.log('find', findNode)
       findNode.style.display = 'block'
     }
   }
   hideNode() {
     const container = document.querySelector(this.selector)
-    console.log(container)
-
 
     if (container) {
       const findNode = this.findNode(container)
-      console.log('find', findNode)
       findNode.style.display = 'none'
     }
   }
 
   init () {
     const container = document.querySelector(this.selector)
-    console.log(container)
+
     if (!container) return
+
     const cloneNode: any = this.el.cloneNode(true)
     this.position = this.el?.getBoundingClientRect()
 
     // const node = cloneNode.firstChild
-    // console.log(node)
+    console.log(this.position)
     cloneNode.style.cssText = `
       display: ${!this.show ? 'block' : 'none'};
       z-index: ${this.zIndex};
@@ -123,24 +117,9 @@ export class Teleport {
     if (findNode) {
       this.el.parentElement?.removeChild(findNode)
     }
-    // console.log(findNode.children, )
-    // children.forEach((item, index) => .{
-    //   if (item.telportId) {
-        // parent?.removeChild(item)
-    //   }
-    // })
   }
 
   remove () {
 
   }
-  
-  // setState (el: HTMLElement, show: false) {
-  //   const container = this.map.get(this.id)
-
-  //   if (container) {
-  //     container.style.display = show ? 'block' : 'none'
-  //   }
-    
-  // }
 }

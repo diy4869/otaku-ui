@@ -8561,6 +8561,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+lunar-typescript@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/lunar-typescript/-/lunar-typescript-1.2.6.tgz#8e4c1aab8fcd55453bc840e50f496c9c0bba0294"
+  integrity sha512-v7uNMiH1KDohqDgbEg3SFDAITYUir5mFWzH0jYMCwi+5vs03qj40dPApaaucHsZ+McUx8MnCfaUYkNZ9DZmJ2Q==
+
 macos-release@^2.2.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/macos-release/-/macos-release-2.5.0.tgz#067c2c88b5f3fb3c56a375b2ec93826220fa1ff2"

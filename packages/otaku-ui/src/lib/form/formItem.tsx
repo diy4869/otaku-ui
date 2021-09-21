@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useMemo } from 'react'
 import { formValidate } from './form'
 import './style.scss'
@@ -19,10 +19,11 @@ export function FormItem (props: FormItemProps) {
   } = props
 
   const { labelWidth, model, labelAlign, requiredAlign } = formValidate.getOptions()
+  const [validateErrors] = useState(formValidate.validateErrors)
 
   useEffect(() => {
-    console.log(formValidate.validateError)
-  }, [formValidate.status])
+    console.log(formValidate.validateErrors, validateErrors)
+  }, [validateErrors])
 
   
   return (

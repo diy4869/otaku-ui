@@ -12,6 +12,7 @@ interface DateTimePickerProps {
   format?: string
   disabled?: boolean
   clear?: boolean
+  lunarDate?: boolean
   onChange?: (date: ResultDate) => void
 }
 
@@ -19,6 +20,7 @@ export function DatePicker (props: DateTimePickerProps) {
   const {
     firstWeek,
     disabled,
+    lunarDate,
     date = new Date(),
     format = 'YYYY-MM-DD',
     placeholder = '请选择日期',
@@ -63,64 +65,65 @@ export function DatePicker (props: DateTimePickerProps) {
         onBlur={() => {
           setShow(false)
         }}></Input>
-     <Telport visible={show}>
-      <div className="otaku-datetime-picker">
-        {
-          showPicker === 'calendar' ? (
-            <>
-              <ul className="otaku-datetime-picker-header">
-                <li>
-                  <span className={`iconfont otaku-icon-doubleleft`} onClick={() => change('year', 'left')}></span>
-                  <span className={`iconfont otaku-icon-left`} onClick={() => change('month', 'left')}></span>
-                </li>
-                <li>
-                  <span onClick={() => setShowPicker('year')}>{d.year()}年</span>
-                  <span onClick={() => setShowPicker('month')}>{d.month() + 1}月</span>
-                </li>
-                <li>
-                  <span className={`iconfont otaku-icon-right`} onClick={() => change('month', 'right')}></span>
-                  <span className={`iconfont otaku-icon-doubleright`} onClick={() => change('year', 'right')}></span>
-                </li>
-              </ul>
-              <Calendar
-                firstWeek={firstWeek}
-                date={selectDate}
-                onClick={(date) => {
-                  setSelectDate(date.dayjs)
-                  setInputVal(dayjs(date.dayjs).format(format))
-                  onChange?.(date)
-                }
-              }></Calendar>
-            </>
-          ) : showPicker === 'year' ? (
-            <>
-                <Year
-                  date={selectDate}
-                  onChange={(date) => changeDate('month', date)}></Year>
-            </>
-            ) : (
-              <>
-                <Month
-                  date={selectDate}
-                  onChange={(date) => changeDate('calendar', date)}></Month>
-            </>
-          )
-        }
-
-        <div className="today">
+      <Telport visible={show}>
+        <div className="otaku-datetime-picker">
           {
             showPicker === 'calendar' ? (
-              <span
-              onClick={() => {
-                const d = dayjs()
-                setSelectDate(d)
-                setInputVal(dayjs(d).format(format))
-                onChange?.(getDateResult(d, format))
-              }}>今天</span>
-            ): ''
+              <>
+                <ul className="otaku-datetime-picker-header">
+                  <li>
+                    <span className={`iconfont otaku-icon-doubleleft`} onClick={() => change('year', 'left')}></span>
+                    <span className={`iconfont otaku-icon-left`} onClick={() => change('month', 'left')}></span>
+                  </li>
+                  <li>
+                    <span onClick={() => setShowPicker('year')}>{d.year()}年</span>
+                    <span onClick={() => setShowPicker('month')}>{d.month() + 1}月</span>
+                  </li>
+                  <li>
+                    <span className={`iconfont otaku-icon-right`} onClick={() => change('month', 'right')}></span>
+                    <span className={`iconfont otaku-icon-doubleright`} onClick={() => change('year', 'right')}></span>
+                  </li>
+                </ul>
+                <Calendar
+                  firstWeek={firstWeek}
+                  date={selectDate}
+                  lunarDate={lunarDate}
+                  onClick={(date) => {
+                    setSelectDate(date.dayjs)
+                    setInputVal(dayjs(date.dayjs).format(format))
+                    onChange?.(date)
+                  }
+                }></Calendar>
+              </>
+            ) : showPicker === 'year' ? (
+              <>
+                  <Year
+                    date={selectDate}
+                    onChange={(date) => changeDate('month', date)}></Year>
+              </>
+              ) : (
+                <>
+                  <Month
+                    date={selectDate}
+                    onChange={(date) => changeDate('calendar', date)}></Month>
+              </>
+            )
           }
-          </div>
-      </div>
+
+          <div className="today">
+            {
+              showPicker === 'calendar' ? (
+                <span
+                onClick={() => {
+                  const d = dayjs()
+                  setSelectDate(d)
+                  setInputVal(dayjs(d).format(format))
+                  onChange?.(getDateResult(d, format))
+                }}>今天</span>
+              ): ''
+            }
+            </div>
+        </div>
        </Telport>
     </div>
   )

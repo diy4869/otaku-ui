@@ -24,13 +24,11 @@ export function Telport (props: TelportProps) {
   } = props
 
   useLayoutEffect(() => {
-    const el = document.getElementsByClassName(`${className}`)
-    console.log(document.getElementsByClassName(`otaku-popup`)[0].getBoundingClientRect())
+    // const el = document.getElementsByClassName(`${className}`)
     new Tel({
       el: container.current!,
       show: visible
     })
-    console.log(visible)
   }, [visible]);
  
   return (
