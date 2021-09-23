@@ -71,9 +71,11 @@ export function Calendar (props: CalendarProps) {
 
   // @ts-ignore
   const click = (e) => {
-    const { type, date, disabled } = e.target.dataset
-    console.log(e)
+    const dataset = e.target.tagName === 'SPAN' ? e.target.parentElement.dataset : e.target.dataset
+    const { type, date, disabled } = dataset
+    
     if (disabled !== 'true' && date && type === 'current') {
+      console.log(date)
       setSelectDate(date)
       onClick?.(getDateResult(date, format))
     }

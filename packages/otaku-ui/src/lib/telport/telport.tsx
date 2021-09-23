@@ -10,7 +10,8 @@ interface TelportProps {
   children: React.ReactNode
   visible?: boolean
   onShow?:() => void
-  onHide?:() => void
+  onHide?: () => void
+  clickOutSide?: () => void
 }
 
 export function Telport (props: TelportProps) {
@@ -20,14 +21,16 @@ export function Telport (props: TelportProps) {
     className,
     visible = false,
     onShow,
-    onHide
+    onHide,
+    clickOutSide
   } = props
 
   useLayoutEffect(() => {
     // const el = document.getElementsByClassName(`${className}`)
     new Tel({
       el: container.current!,
-      show: visible
+      show: visible,
+      clickOutSide
     })
   }, [visible]);
  

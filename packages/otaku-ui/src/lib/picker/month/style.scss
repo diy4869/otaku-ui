@@ -2,8 +2,7 @@
 
 .otaku-month {
   display: grid;
-  grid-template-columns: repeat(3, 30px);
-  grid-template-rows: repeat(4, 24px);
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 43px 72px;
   .otaku-month-item {
     display: grid;

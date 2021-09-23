@@ -3,6 +3,7 @@ import dayjs from 'dayjs'
 import { ResultDate, getDateResult, Calendar, Month, Year } from '../picker'
 import { Input } from '../input/input'
 import { Telport } from '../telport/telport'
+import { ClickOutSide } from '../clickOutside/clickOutside'
 import './style.scss'
 
 interface DateTimePickerProps {
@@ -35,9 +36,8 @@ export function DatePicker (props: DateTimePickerProps) {
   const d = dayjs(selectDate)
 
   useEffect(() => {
-    // setInputVal(dayjs(selectDate).format(format))
-    console.log(inputVal)
-  }, [selectDate, inputVal])
+    console.log(show)
+  }, [selectDate, inputVal, show])
 
   const change = (type: 'year' | 'month', direction: 'left' | 'right') => {
     const result = direction === 'left' ? d.subtract(1, type) : d.add(1, type)
@@ -52,79 +52,90 @@ export function DatePicker (props: DateTimePickerProps) {
   }
 
   return (
-    <div className="datetime-picker-container">
-      <Input
-        value={inputVal}
-        readonly
-        disabled={disabled}
-        clear={clear}
-        placeholder={placeholder}
-        onFocus={() => {
-          setShow(true)
-        }}
-        onBlur={() => {
-          setShow(false)
-        }}></Input>
-      <Telport visible={show}>
-        <div className="otaku-datetime-picker">
-          {
-            showPicker === 'calendar' ? (
-              <>
-                <ul className="otaku-datetime-picker-header">
-                  <li>
-                    <span className={`iconfont otaku-icon-doubleleft`} onClick={() => change('year', 'left')}></span>
-                    <span className={`iconfont otaku-icon-left`} onClick={() => change('month', 'left')}></span>
-                  </li>
-                  <li>
-                    <span onClick={() => setShowPicker('year')}>{d.year()}年</span>
-                    <span onClick={() => setShowPicker('month')}>{d.month() + 1}月</span>
-                  </li>
-                  <li>
-                    <span className={`iconfont otaku-icon-right`} onClick={() => change('month', 'right')}></span>
-                    <span className={`iconfont otaku-icon-doubleright`} onClick={() => change('year', 'right')}></span>
-                  </li>
-                </ul>
-                <Calendar
-                  firstWeek={firstWeek}
-                  date={selectDate}
-                  lunarDate={lunarDate}
-                  onClick={(date) => {
-                    setSelectDate(date.dayjs)
-                    setInputVal(dayjs(date.dayjs).format(format))
-                    onChange?.(date)
-                  }
-                }></Calendar>
-              </>
-            ) : showPicker === 'year' ? (
-              <>
-                  <Year
-                    date={selectDate}
-                    onChange={(date) => changeDate('month', date)}></Year>
-              </>
-              ) : (
-                <>
-                  <Month
-                    date={selectDate}
-                    onChange={(date) => changeDate('calendar', date)}></Month>
-              </>
-            )
-          }
-
-          <div className="today">
+    <ClickOutSide clickOutSide={() => {
+        setShow(false)
+    }}>
+      <div className="otaku-datetime-picker-container">
+        <Input
+          value={inputVal}
+          readonly
+          disabled={disabled}
+          clear={clear}
+          placeholder={placeholder}
+          onFocus={() => {
+            setShow(true)
+          }}></Input>     
+        { show && 
+          <div className="otaku-datetime-picker">
             {
               showPicker === 'calendar' ? (
-                <span
-                onClick={() => {
-                  const d = dayjs()
-                  setSelectDate(d)
-                  setInputVal(dayjs(d).format(format))
-                  onChange?.(getDateResult(d, format))
-                }}>今天</span>
-              ): ''
+                <>
+                  <ul className="otaku-datetime-picker-header">
+                    <li>
+                      <span className={`iconfont otaku-icon-doubleleft`} onClick={() => change('year', 'left')}></span>
+                      <span className={`iconfont otaku-icon-left`} onClick={() => change('month', 'left')}></span>
+                    </li>
+                    <li>
+                    <span
+                      onClick={() => {
+                        setShowPicker('year')
+                        setShow(true)
+                      }}>{d.year()}年</span>
+                    <span
+                      onClick={() => {
+                        setShowPicker('month')
+                        setShow(true)
+                      }}>{d.month() + 1}月</span>
+                    </li>
+                    <li>
+                      <span className={`iconfont otaku-icon-right`} onClick={() => change('month', 'right')}></span>
+                      <span className={`iconfont otaku-icon-doubleright`} onClick={() => change('year', 'right')}></span>
+                    </li>
+                  </ul>
+                  <Calendar
+                    firstWeek={firstWeek}
+                    date={selectDate}
+                    lunarDate={lunarDate}
+                    onClick={(date) => {
+                      setSelectDate(date.dayjs)
+                      setInputVal(dayjs(date.dayjs).format(format))
+                      onChange?.(date)
+                      setShow(false)
+                    }
+                  }></Calendar>
+                </>
+              ) : showPicker === 'year' ? (
+                <>
+                    <Year
+                      date={selectDate}
+                      onChange={(date) => {changeDate('month', date)}></Year>
+                </>
+                ) : (
+                  <>
+                    <Month
+                      date={selectDate}
+                      onChange={(date) => changeDate('calendar', date)}></Month>
+                </>
+              )
             }
-            </div>
-        </div>
-       </Telport>
-    </div>
+
+            <div className="today">
+              {
+                showPicker === 'calendar' ? (
+                  <span
+                  onClick={() => {
+                    const d = dayjs()
+                    setSelectDate(d)
+                    setInputVal(dayjs(d).format(format))
+                    onChange?.(getDateResult(d, format))
+                    setShow(false)
+                  }}>今天</span>
+                ): ''
+              }
+              </div>
+          </div>
+        }  
+      </div>
+    </ClickOutSide>
   )
 }
