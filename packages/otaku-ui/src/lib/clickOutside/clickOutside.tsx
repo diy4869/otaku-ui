@@ -14,7 +14,6 @@ export function ClickOutSide (props: ClickOutSideProps) {
 
   useEffect(() => {
     const fn = (doc: Document) => {
-      console.log(ele.current, ele.current?.contains(doc.target), doc.target)
       //@ts-ignore
         if (!ele.current?.contains(doc.target)) {
           clickOutSide()

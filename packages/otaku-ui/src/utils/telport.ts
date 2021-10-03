@@ -10,7 +10,6 @@ interface TeleportOptions {
   el: El
   selector?: string
   show?: boolean
-  clickOutSide: () => void
 }
 
 export class Teleport {
@@ -55,12 +54,6 @@ export class Teleport {
       this.hideNode()
     }
 
-    this.clickOutSide()
-  }
-  clickOutSide() {
-    document.addEventListener('click', (doc) => {
-      console.log(doc, this.el.contains(doc.target) )
-    }, true)
   }
 
   findNode(node: Element) {
@@ -77,6 +70,7 @@ export class Teleport {
 
     if (container) {
       const findNode = this.findNode(container)
+      //@ts-ignore
       findNode.style.display = 'block'
     }
   }
@@ -85,6 +79,7 @@ export class Teleport {
 
     if (container) {
       const findNode = this.findNode(container)
+      // @ts-ignore
       findNode.style.display = 'none'
     }
   }

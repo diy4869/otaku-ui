@@ -108,7 +108,7 @@ export function DatePicker (props: DateTimePickerProps) {
                 <>
                     <Year
                       date={selectDate}
-                      onChange={(date) => {changeDate('month', date)}></Year>
+                      onChange={(date) => changeDate('month', date)}></Year>
                 </>
                 ) : (
                   <>
@@ -118,7 +118,7 @@ export function DatePicker (props: DateTimePickerProps) {
                 </>
               )
             }
-
+            
             <div className="today">
               {
                 showPicker === 'calendar' ? (

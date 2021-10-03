@@ -29,8 +29,7 @@ export function Telport (props: TelportProps) {
     // const el = document.getElementsByClassName(`${className}`)
     new Tel({
       el: container.current!,
-      show: visible,
-      clickOutSide
+      show: visible
     })
   }, [visible]);
  

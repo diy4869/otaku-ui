@@ -127,7 +127,7 @@ const baseConfig = {
     extensions: ['.js', '.ts', '.tsx']
   },
   target: 'web',
-  devtool: env === 'development' ? 'source-map' : 'cheap-module-source-map',
+  devtool: env === 'development' ? 'source-map' : 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       title: 'otaku-ui',

@@ -5,7 +5,7 @@ const anchor = require('markdown-it-anchor')
 const toc = require('markdown-it-toc-done-right')
 
 const reactMarkdownTemplate = (importSynx, content) => {
-  return `
+  const data = `
     import * as React from 'react'
     import Block from 'Block'
     import { CodeExample } from 'CodeExample'
@@ -18,6 +18,9 @@ const reactMarkdownTemplate = (importSynx, content) => {
 
     export default MdReact
   `
+  
+  console.log(data)
+  return data
 }
 
 module.exports = function mdLoader (source) {
@@ -69,40 +72,53 @@ module.exports = function mdLoader (source) {
           let startIndex = undefined
 
           for (let i = 0; i < tokens.length; i++) {
-            const start = tokens[i].nesting === 1 && tokens[i].type === 'container_demo_open'
-            const end = tokens[i].nesting === -1 && tokens[i].type === 'container_demo_close'
+            const start =
+              tokens[i].nesting === 1 && tokens[i].type === 'container_demo_open'
+            const end =
+              tokens[i].nesting === -1 && tokens[i].type === 'container_demo_close'
 
             if (start) {
               startIndex = i
               map.set(i, undefined)
             }
 
-            if (startIndex && end) {
-              let endIndex = i
+            if (end) {
+              const endIndex = i
+              const data = {
+                code: '',
+                lang: '',
+                example: '',
+                end: endIndex
+              }
 
-              for (let i = startIndex; i < endIndex; i++) {
-                if (tokens[i].type === 'fence') {
+              for (let j = startIndex; j < endIndex; j++) {
+                if (tokens[j].type === 'fence') {
+                  if (tokens[j].info.includes('example')) {
+                    data.example = tokens[j].content
 
-                  map.set(startIndex, {
-                    code: tokens[i].content,
-                    lang: tokens[i].info,
-                    end: endIndex
-                  })
+                  } else {
+                    data.lang = tokens[j].info
+                    data.code = tokens[j].content
+                  }
                 }
               }
+
+              data.example = data.example ? data.example : data.code
+              map.set(startIndex, data)
             }
           }
 
           return map
         }
+
         if (tokens[index].nesting === 1) {
           const m = get()
-          const desc = tokens[index + 2].content.replace(/\n/g, '<br/>')
-          const current = m.get(index)
+          // const desc = tokens[index + 2].content.replace(/\n/g, '<br/>')
+          const current = m.get(index) // <>${current?.code}</>
           
           return `
             <CodeExample
-              desc={\`${desc}\`}
+              desc={\`hello world\`}
               lang={\`${current?.lang}\`}
               example={<>${current?.code}</>}
               code={\`${current?.code}\`}

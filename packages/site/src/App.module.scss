@@ -60,8 +60,9 @@
     padding: 20px;
     overflow-x: auto;
     position: relative;
-    
-    
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 // body { scroll-behavior: smooth; }

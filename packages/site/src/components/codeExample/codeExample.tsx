@@ -1,5 +1,7 @@
-import React from 'react'
-import { Button, HighlightCode, HighlightCodeProps } from 'otaku-ui'
+import React, { useState } from 'react'
+import { HighlightCode, HighlightCodeProps } from 'otaku-ui'
+import * as copy from 'copy-to-clipboard'
+import { Tooltip } from 'otaku-ui'
 import './style.scss'
 
 interface Example extends HighlightCodeProps {
@@ -14,6 +16,7 @@ export function CodeExample (props: Example) {
     desc,
     example
   } = props
+  let [collapse, setCollapse] = useState(false)
 
   return (
     <div className="otaku-code-example-container">
@@ -22,9 +25,38 @@ export function CodeExample (props: Example) {
       }}>
       </div> */}
       <div className="otaku-example">
-        {example}
+        { example }
       </div>
-      <HighlightCode lang={lang  === 'undefined' ? 'tsx' : lang} code={code}></HighlightCode>
+      <ul className="otaku-operation">
+        <li onClick={() => {
+          copy(code, {
+            debug: true
+          })
+          alert('复制成功')
+        }}>
+          <Tooltip content="复制">
+            <span className='iconfont otaku-icon-copy'></span>
+          </Tooltip>
+        </li>
+        <li
+          onClick={() => {
+            collapse = !collapse
+            setCollapse(collapse)
+          }}
+        >
+          <Tooltip content={collapse ? '折叠' : '展开'}>
+            <span className={`iconfont otaku-icon-${collapse ? 'code' : 'code'}`}></span>
+          </Tooltip>
+        </li>
+
+      </ul>
+      {
+        collapse && <HighlightCode
+          lang={lang === 'undefined' ? 'tsx' : lang}
+          code={code}
+        ></HighlightCode>
+      }
+      
     </div>
   )
 }

@@ -74,6 +74,7 @@ export function Calendar (props: CalendarProps) {
     const dataset = e.target.tagName === 'SPAN' ? e.target.parentElement.dataset : e.target.dataset
     const { type, date, disabled } = dataset
     
+    console.log(e)
     if (disabled !== 'true' && date && type === 'current') {
       console.log(date)
       setSelectDate(date)
