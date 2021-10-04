@@ -12,9 +12,9 @@ interface InputNumberProps {
   disabled?: boolean
   readonly?: boolean
   onChange?: (val?: number) => void
-  onBlur?: () => void
-  onFocus?: () => void
-  onInput?: () => void
+  onBlur?: React.FocusEventHandler<HTMLInputElement>
+  onFocus?: React.FocusEventHandler<HTMLInputElement>
+  onInput?: React.FormEventHandler<HTMLInputElement> 
 }
 
 
@@ -22,8 +22,8 @@ export function InputNumber(props: InputNumberProps) {
   const {
     value = 1,
     step = 1,
-    min = 1,
-    max = 10,
+    min = -Infinity,
+    max = Infinity,
     size,
     readonly,
     disabled,

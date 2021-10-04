@@ -61,10 +61,17 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/input/demo/README.md'))
       },
       {
-        title: "select 选择框",
-        path: "/form/select",
+        title: "input-number 计数器",
+        path: "/form/input-number",
+        component: lazy(() => import('otaku-ui/src/lib/inputNumber/demo/README.md'))
         // component: lazy(() => import('@docs/form/select.md'))
       },
+      {
+        title: "select 选择框",
+        path: "/form/select",
+        component: lazy(() => import('otaku-ui/src/lib/select/demo/README.md'))
+      },
+
       {
         title: "switch 开关",
         path: "/form/switch",
@@ -97,6 +104,21 @@ export default [
   {
     title: '展示',
     children: [
+      {
+        title: "progress 进度条",
+        path: "/display/progress",
+        component: lazy(() => import('otaku-ui/src/lib/progress/demo/README.md'))
+      },
+      {
+        title: "search 搜索框",
+        path: "/display/search",
+        component: lazy(() => import('otaku-ui/src/lib/search/demo/README.md'))
+      },
+      {
+        title: "timeline 时间线",
+        path: "/display/timeline",
+        component: lazy(() => import('otaku-ui/src/lib/timeline/demo/README.md'))
+      },
       {
         title: 'pagination 分页',
         path: '/display/pagination',

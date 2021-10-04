@@ -40,7 +40,7 @@ module.exports = async (name) => {
   console.log('\n')
   const spinner = ora('正在努力创建模板中...').start()
 
-  if (checkDirectory(writeDir)) {
+  if (await checkDirectory(writeDir)) {
     spinner.fail('组件已存在')
   } else {
     await writeTemplate(templateDir, writeDir, name, {

@@ -4,22 +4,27 @@
     width: 100%;
     border-left: 2px solid #e4e7ed;
     padding: 7px;
-    position: relative;
+    // position: relative;
     .otaku-timeline-separator {
       width: 15px;
       height: 15px;
       background: #e4e7ed;
       border-radius: 50%;
-      position: absolute;
-      top: -7.5px;
-      left: -7.5px;
+      margin-left: -15px;
+      margin-top: -10px;
+      // position: absolute;
+      // top: -7.5px;
+      // left: -7.5px;
     }
     .otaku-timeline-container {
       padding: 0 10px;
-      transform: translateY(-26px)
+      // transform: translateY(-26px)
     }
     .otaku-timeline-title {
-      margin: 6px 0;
+      margin: -15px 0 6px;
+    }
+    .otaku-timeline-content {
+      padding: 5px 0;
     }
   }
 }

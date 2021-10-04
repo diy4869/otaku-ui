@@ -23,4 +23,4 @@ export * from './lib/checkbox/checkbox'
 export * from './lib/select/select'
 export * from './lib/form/form'
 export * from './lib/form/formItem'
-
+export * from './lib/progress/progress'

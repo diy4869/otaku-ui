@@ -9,16 +9,20 @@ export interface ButtonProps {
   bgcolor?: string
   color?: string
   className?: string
-  type?: 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger'
+  href?: string
+  target?: '_blank' | '_self'
+  shape?: 'round' | 'circle'
+  type?: 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger' | 'link'
   iconDirection?: 'left' | 'right' 
 
   size?: 'small' | 'middle' |'large'
-  onClick?:() => void
   children?: React.ReactNode
+  onClick?:() => void
 }
 
 export const Button = (props: ButtonProps) => {
   const {
+    shape,
     ghost,
     disabled,
     loading,
@@ -28,6 +32,8 @@ export const Button = (props: ButtonProps) => {
     color,
     className,
     iconDirection = 'left',
+    href = '',
+    target = '_blank',
     type = 'default',
     size = 'middle',
     onClick
@@ -52,7 +58,9 @@ export const Button = (props: ButtonProps) => {
   )
 
   return (
-    <button
+    type === 'link' ?
+      <a href={href} target={target} className="otaku-button-link">{children}</a>
+    : <button
       className={`
         otaku-button
         otaku-button-size-${size}
@@ -61,6 +69,7 @@ export const Button = (props: ButtonProps) => {
         ${loading ? 'otaku-button-loading' : ''}
         ${ghost ? `otaku-button-${type}-ghost` : ''}
         ${className ?? ''}
+        ${shape ? `otaku-button-shape-${shape}` : ''}
       `}
       style={{
         backgroundColor: bgcolor,

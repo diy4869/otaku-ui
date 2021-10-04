@@ -4,9 +4,9 @@
 
 ```ts
 interface Data {
-  prev: number[] // 上个月
-  current: number[] // 当前月
-  next: number[] // 下个月
+  prev: string[] // 上个月
+  current: string[] // 当前月
+  next: string[] // 下个月
 }
 
 /**

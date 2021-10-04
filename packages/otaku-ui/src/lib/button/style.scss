@@ -37,17 +37,24 @@
 
 .otaku-button-size-small {
   padding: 2px 4px;
-  height: 24px;
 }
 .otaku-button-size-middle {
   padding: 4px 12px;
-  height: 32px;
 }
 .otaku-button-size-large {
   padding: 8px 16px;
-  height: 40px;
 }
 
+.otaku-button-shape-round {
+  border-radius: 16px;
+}
+
+.otaku-button-shape-circle {
+  border-radius: 50%;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+}
 
 .otaku-button-text {
   color: $primaryColor;
@@ -60,6 +67,9 @@
   &:disabled {
     color: mix(white, $primaryColor, 48%);
   }
+}
+.otaku-button-link {
+  color: $primaryColor;
 }
 
 .otaku-button-default {
