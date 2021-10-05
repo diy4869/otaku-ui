@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Telport } from '../telport/telport'
+import { Telport } from '../portal/portal'
 import { Button, ButtonProps } from '../button/button'
 import './style.scss';
 
@@ -23,7 +23,7 @@ interface InputProps {
   className?: string
   style?: React.CSSProperties
   type?: 'text' | 'search' | 'password' | 'textarea'
-  size?: 'mini' | 'small' | 'middle' | 'large'
+  size?: 'small' | 'middle' | 'large'
   onChange?:(val: string) => void
   onInput?:(val: string) => void
   onFocus?:() => void

@@ -77,16 +77,28 @@
 .otaku-input-box {
   display: flex;
 }
+
 .otaku-input-size-small {
-  height: 32px;
+  height: 24px;
+  
+  .otaku-input {
+    font-size: 12px;
+  }
 }
 
 .otaku-input-size-middle {
-  height: 36px;
+  height: 32px;
+  .otaku-input {
+    font-size: 14px;
+  }
 }
 
 .otaku-input-size-large {
   height: 40px;
+  .otaku-input {
+    font-size: 16px;
+  }
+
 }
 
 

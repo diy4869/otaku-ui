@@ -52,4 +52,34 @@
 .otaku-input-number-disabled {
   cursor: not-allowed;
   border-color: #E5E5E5;
+  &:hover {
+    border-color: #e5e5e5;
+  }
+}
+
+.otaku-input-number-size-small {
+  grid-template-rows: 24px;
+  .otaku-input-number-direction {
+    li {
+      height: 12px;
+    }
+  }
+}
+
+.otaku-input-number-size-middle {
+  grid-template-rows: 32px;
+  .otaku-input-number-direction {
+    li {
+      height: 16px;
+    }
+  }
+}
+
+.otaku-input-number-size-large {
+  grid-template-rows: 40px;
+  .otaku-input-number-direction {
+    li {
+      height: 20px;
+    }
+  }
 }

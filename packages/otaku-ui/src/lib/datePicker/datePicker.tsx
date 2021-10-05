@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import dayjs from 'dayjs'
 import { ResultDate, getDateResult, Calendar, Month, Year } from '../picker'
 import { Input } from '../input/input'
-import { Telport } from '../telport/telport'
+import { Telport } from '../portal/portal'
 import { ClickOutSide } from '../clickOutside/clickOutside'
 import './style.scss'
 

@@ -59,12 +59,37 @@ import:
 ```
 :::
 
-## 原型进度条
+## 圆形进度条
 
 ::: demo
 
 ```tsx
-  <Progress percentage={50}  type="circle">50%</Progress>
+<Grid>
+  <GridItem>
+    <Progress percentage={50}  type="circle">50%</Progress>
+  </GridItem>
+  <GridItem>
+    <Progress percentage={20}  type="circle">20%</Progress>
+  </GridItem>
+  <GridItem>
+    <Progress percentage={90}  type="circle" >90%</Progress>
+  </GridItem>
+</Grid>
 
 ```
 :::
+
+## API
+
+```ts
+interface ProgressProps {
+  inner?: boolean
+  percentage?: number
+  max?: number
+  color?: string
+  type?: 'circle'
+  direction?: 'vertical' | 'horizontal'
+  lineWidth?: number
+  children?: string
+}
+```

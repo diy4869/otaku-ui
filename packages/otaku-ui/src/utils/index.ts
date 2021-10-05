@@ -1,1 +1,1 @@
-export * from './telport'
+export * from './teleport'

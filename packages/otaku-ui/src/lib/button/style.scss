@@ -36,17 +36,23 @@
 }
 
 .otaku-button-size-small {
-  padding: 2px 4px;
+  padding: 4px 8px;
+  height: 24px;
+  font-size: 12px;
 }
 .otaku-button-size-middle {
   padding: 4px 12px;
+  height: 32px;
+  font-size: 14px;
 }
 .otaku-button-size-large {
   padding: 8px 16px;
+  font-size: 16px;
+  height: 40px;
 }
 
 .otaku-button-shape-round {
-  border-radius: 16px;
+  border-radius: 20px;
 }
 
 .otaku-button-shape-circle {

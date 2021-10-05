@@ -54,7 +54,11 @@ export function InputNumber(props: InputNumberProps) {
 
   
   return (
-    <div className={`otaku-input-number-box ${disabled ? 'otaku-input-number-disabled' : ''}`}>
+    <div className={`
+      otaku-input-number-box
+      otaku-input-number-size-${size}
+      ${disabled ? 'otaku-input-number-disabled' : ''
+    }`}>
       <div className={`otaku-input-number-container`}>
         <input
           type="number"

@@ -109,15 +109,15 @@ import:
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="前面的元素" size="large" beforeNode={
-        <Button size="large" type="primary">前面的按钮</Button>
+      <Input placeholder="前面的元素" size="middle" beforeNode={
+        <Button size="middle" type="primary">前面的按钮</Button>
       }></Input>
     </li>
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="前面的元素" size="large" afterNode={
-        <Button size="large" type="primary">后面的按钮</Button>
+      <Input placeholder="前面的元素" size="middle" afterNode={
+        <Button size="middle" type="primary">后面的按钮</Button>
       }></Input>
     </li>
   </ul>

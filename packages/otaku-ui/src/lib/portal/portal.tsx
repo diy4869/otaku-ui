@@ -3,7 +3,7 @@ import React, {
   useRef,
   } from 'react';
 ;
-import { Teleport as Tel } from '../../utils/index';
+import { Teleport } from '../../utils/index';
 
 interface TelportProps {
   className?: string
@@ -14,7 +14,7 @@ interface TelportProps {
   clickOutSide?: () => void
 }
 
-export function Telport (props: TelportProps) {
+export function Portal (props: TelportProps) {
   const container = useRef(null)
   const {
     children,
@@ -27,7 +27,7 @@ export function Telport (props: TelportProps) {
 
   useLayoutEffect(() => {
     // const el = document.getElementsByClassName(`${className}`)
-    new Tel({
+    new Teleport({
       el: container.current!,
       show: visible
     })

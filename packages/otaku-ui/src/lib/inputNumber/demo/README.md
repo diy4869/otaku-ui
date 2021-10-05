@@ -1,6 +1,6 @@
 ---
 import:
-  import { InputNumber } from 'otaku-ui'
+  import { InputNumber, Grid, GridItem } from 'otaku-ui'
 ---
 
 [[toc]]
@@ -39,6 +39,25 @@ import:
 
 ```tsx
 <InputNumber value={0.1} step={0.1}></InputNumber>
+```
+:::
+
+## 不同大小的计数器
+
+::: demo
+
+```tsx
+<Grid count={3}>
+  <GridItem>
+    <InputNumber size="small"></InputNumber>
+  </GridItem>
+  <GridItem>
+    <InputNumber size="middle"></InputNumber>
+  </GridItem>
+  <GridItem>
+    <InputNumber size="large"></InputNumber>
+  </GridItem>
+</Grid>
 ```
 :::
 

@@ -74,6 +74,7 @@ export class Teleport {
       findNode.style.display = 'block'
     }
   }
+  
   hideNode() {
     const container = document.querySelector(this.selector)
 
