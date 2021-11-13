@@ -8,7 +8,7 @@ export default [
       {
         title: "介绍",
         path: "/dev/introduce",
-        component: lazy(() => import('@docs/dev/introduce.md'))
+        component: lazy(() => import('../docs/dev/introduce.md'))
       },
       {
         title: "安装",
@@ -23,17 +23,17 @@ export default [
       {
         title: "贡献源码？",
         path: "/dev/contributeCode",
-        component: lazy(() => import('@docs/dev/contributeCode.md'))
+        component: lazy(() => import('../docs/dev/contributeCode.md'))
       },
       {
         title: "挖坑ing",
         path: "/dev/roadmap",
-        component: lazy(() => import('@docs/dev/roadmap.md'))
+        component: lazy(() => import('../docs/dev/roadmap.md'))
       },
       {
         title: "hooks",
         path: "/dev/hooks",
-        component: lazy(() => import('@docs/dev/hooks.md'))
+        component: lazy(() => import('../docs/dev/hooks.md'))
       }
     ]
   },
@@ -49,6 +49,11 @@ export default [
         title: "Button 按钮",
         path: "/button",
         component: lazy(() => import('otaku-ui/src/lib/button/demo/README.md'))
+      },
+      {
+        title: "Cropper 图片裁剪",
+        path: "/cropper",
+        component: lazy(() => import('otaku-ui/src/lib/cropper/demo/README.md'))
       }
     ]
   },
@@ -78,12 +83,12 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/switch/demo/README.md'))
         // component: lazy(() => import('@docs/form/switch.md'))
       },
-      // {
-      //   title: "radio 单选框",
-      //   path: "/form/radio",
-      //   component: lazy(() => import('otaku-ui/src/lib/radio/demo/README.md'))
-      //   // component: lazy(() => import('@docs/form/radio.md'))
-      // },
+      {
+        title: "radio 单选框",
+        path: "/form/radio",
+        component: lazy(() => import('otaku-ui/src/lib/radio/demo/README.md'))
+        // component: lazy(() => import('@docs/form/radio.md'))
+      },
       {
         title: "checkbox 多选框",
         path: "/form/checkbox",
@@ -94,11 +99,11 @@ export default [
         path: "/form/date-picker",
         component: lazy(() => import('otaku-ui/src/lib/datePicker/demo/README.md'))
       },
-      // {
-      //   title: "form 表单",
-      //   path: "/form/form",
-      //   component: lazy(() => import('otaku-ui/src/lib/form/demo/README.md'))
-      // }
+      {
+        title: "form 表单",
+        path: "/form/form",
+        component: lazy(() => import('otaku-ui/src/lib/form/demo/README.md'))
+      }
     ]
   },
   {
@@ -108,11 +113,6 @@ export default [
         title: "progress 进度条",
         path: "/display/progress",
         component: lazy(() => import('otaku-ui/src/lib/progress/demo/README.md'))
-      },
-      {
-        title: "cropper 图片裁剪",
-        path: "/display/cropper",
-        component: lazy(() => import('otaku-ui/src/lib/cropper/demo/README.md'))
       },
       {
         title: "search 搜索框",
