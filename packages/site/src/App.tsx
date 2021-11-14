@@ -6,6 +6,7 @@ import { HashRouter as Router, Route, Switch, NavLink, Redirect } from 'react-ro
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
 
+
 function App() {
   return (
     <Suspense fallback={<div></div>}>

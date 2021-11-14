@@ -11,7 +11,7 @@ import:
 
 一个普通的输入框
 
-```html
+```tsx
   <Input placeholder="输入点什么吧..."></Input>
 ```
 :::
@@ -23,7 +23,7 @@ import:
 
 一个普通的输入框
 
-```html
+```tsx
   <ul>
     <li style={{
       marginBottom: '10px'
@@ -48,7 +48,7 @@ import:
 
 一个普通的输入框
 
-```html
+```tsx
   <Input placeholder="输入点什么吧..." type="password"></Input>
 ```
 :::
@@ -59,7 +59,7 @@ import:
 
 一个普通的输入框
 
-```html
+```tsx
   <Input placeholder="输入点什么吧..." disabled></Input>
 ```
 :::
@@ -70,7 +70,7 @@ import:
 
 一个普通的输入框
 
-```html
+```tsx
   <ul>
     <li style={{
       marginBottom: '10px'
@@ -92,7 +92,7 @@ import:
 
 一个普通的输入框
 
-```html
+```tsx
   <Input placeholder="输入点什么吧..." clear></Input>
 ```
 :::
@@ -104,7 +104,7 @@ import:
 
 一个普通的输入框
 
-```html
+```tsx
   <ul>
     <li style={{
       marginBottom: '10px'

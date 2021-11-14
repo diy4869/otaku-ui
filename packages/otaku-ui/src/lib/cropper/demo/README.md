@@ -8,6 +8,6 @@ import:
 ::: demo
 
 ```tsx
-
+<ImageCropper></ImageCropper>
 ```
 :::

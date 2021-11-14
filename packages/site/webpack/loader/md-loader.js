@@ -3,7 +3,10 @@ const container = require('markdown-it-container')
 const matter = require('gray-matter')
 const anchor = require('markdown-it-anchor')
 const toc = require('markdown-it-toc-done-right')
-const parser = require('./compiler/parser')
+const parser = require('./compiler')
+const traverse = require('@babel/traverse').default
+const types = require('@babel/types')
+const generate = require('@babel/generator').default
 const { get } = require('./utils')
 
 
@@ -32,6 +35,10 @@ const reactMarkdownTemplate = (importSynx, content) => {
 
 module.exports = function mdLoader(source) {
   const { content, data } = matter(source)
+
+  // demo 数量
+  let demoIndex = 0
+  let demoName
 
   const md = new MarkdownIt({
     html: true,
@@ -76,22 +83,46 @@ module.exports = function mdLoader(source) {
     .use(container, 'demo', {
       render(tokens, index) {
         if (tokens[index].nesting === 1) {
-          const map = get(tokens)
+          const map = get(tokens, index)
          
           const current = map.get(index) // <>${current?.code}</>
           const ast = parser(current.code)
-          console.log(ast)
-          const code = `
-            ${data.import}
 
-            ${current.code}
+
+          traverse(ast, {
+            FunctionDeclaration (path) {
+              const node = path.node
+              const name = node.id.name
+              demoName = name
+              path.node.id.name = `${name}${index}`
+
+            },
+            JSXIdentifier(path) {
+              if (path.node.name === demoName) {
+
+                path.node.name = `${demoName}${index++}`
+              }
+            }
+          })
+
+          // const  = generate(ast)
+
+          current.code = `${data.import}
+
+${current.code}
           `
+
+          console.log(current)
           return `
             <CodeExample
-              desc={\`hello world\`}
+              desc={\`${current.desc}\`}
               lang={\`${current?.lang}\`}
-              example={<>${current?.code}</>}
-              code={\`${code}\`}
+              example={\`hello world \`}
+              code={\`${current.code}\`}
+              style={{
+                lang: \`${current.style.lang}\`,
+                code: \`${current.style.code}\`
+              }}
             >
           `
         } else {
@@ -107,7 +138,7 @@ module.exports = function mdLoader(source) {
     .replace(/<br>/g, '<br />')
     .replace(/class=/g, 'className=')
 
-  console.log(str)
+
 
   return reactMarkdownTemplate(data.import, mdToHtml)
 }

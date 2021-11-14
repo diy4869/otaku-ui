@@ -6,30 +6,45 @@ import './style.scss'
 
 interface Example extends HighlightCodeProps {
   desc: string
+  style: {
+    lang: string
+    code: string
+  }
   example: React.ReactChildren
 }
 
 export function CodeExample (props: Example) {
   const {
     code,
-    lang = 'typescript',
+    style,
     desc,
-    example
+    example,
+    lang = 'typescript'
   } = props
-  let [collapse, setCollapse] = useState(false)
+  let [collapse, setCollapse] = useState(true)
+  let [currentIndex, setCurrentIndex] = useState(0)
+  const [data] = useState([
+    {
+      code,
+      lang
+    },
+    style
+  ])
+
+  console.log(props)
 
   return (
     <div className="otaku-code-example-container">
-      {/* <div className="otaku-desc" dangerouslySetInnerHTML={{
+      <div className="otaku-desc" dangerouslySetInnerHTML={{
         __html: desc
       }}>
-      </div> */}
+      </div>
       <div className="otaku-example">
         { example }
       </div>
       <ul className="otaku-operation">
         <li onClick={() => {
-          copy(code, {
+          copy(data[currentIndex].code, {
             debug: true
           })
           alert('复制成功')
@@ -50,10 +65,25 @@ export function CodeExample (props: Example) {
         </li>
 
       </ul>
+      <ul>
+        {
+          data.map((item, index) => {
+            return (
+              <li
+                key={index}
+                onClick={() => {
+                  setCurrentIndex(index)
+                }}>
+                lang: {item?.lang}
+              </li>
+            )
+          })
+        }
+      </ul>
       {
         collapse && <HighlightCode
-          lang={lang === 'undefined' ? 'tsx' : lang}
-          code={code}
+          lang={data[currentIndex].lang}
+          code={data[currentIndex].code}
         ></HighlightCode>
       }
       

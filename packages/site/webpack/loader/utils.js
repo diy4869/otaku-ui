@@ -1,5 +1,5 @@
 
-const get = (tokens) => {
+const get = (tokens, index) => {
   const map = new Map()
   let startIndex = undefined
 
@@ -8,7 +8,7 @@ const get = (tokens) => {
       tokens[i].nesting === 1 && tokens[i].type === 'container_demo_open'
     const end =
       tokens[i].nesting === -1 && tokens[i].type === 'container_demo_close'
-    // const desc = tokens[index + 2].content.replace(/\n/g, '<br/>')
+    const desc = tokens[index + 2].content.replace(/\n/g, '<br/>')
 
     if (start) {
       startIndex = i
@@ -20,8 +20,12 @@ const get = (tokens) => {
       const data = {
         code: '',
         lang: '',
+        desc: desc,
         example: '',
-        style: '',
+        style: {
+          lang: 'css',
+          code: ''
+        },
         end: endIndex
       }
 
@@ -32,12 +36,13 @@ const get = (tokens) => {
           } else {
             // data.example = data.example ? data.example : data.code
           }
-          if (tokens[j].info === 'tsx') {
+          if (['tsx', 'jsx'].includes(tokens[j].info)) {
             data.lang = tokens[j].info
             data.code = tokens[j].content
           }
-          if (tokens[j].info === 'css') {
-            data.style = tokens[j].content
+          if (['css', 'scss'].includes(tokens[j].info)) {
+            data.style.lang = tokens[j].info
+            data.style.code = tokens[j].content
           }
         }
       }

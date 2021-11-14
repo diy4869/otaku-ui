@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "demo-test": "node ./webpack/loader/index.js",
     "dev": "cross-env NODE_ENV=development webpack serve --hot --open --progress --config webpack/webpack.dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.config.js",
     "build:server": "cross-env NODE_ENV=development webpack --config webpack/webpack.server.config.js",
