@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { useMemo } from 'react'
 import { formValidate } from './form'
 import './style.scss'
 

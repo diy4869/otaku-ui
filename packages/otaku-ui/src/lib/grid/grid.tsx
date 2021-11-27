@@ -11,7 +11,7 @@ interface GridProps {
 }
 
 interface GridItemProps {
-  children: React.ReactNode[]
+  children?: React.ReactNode[]
 }
 
 export function Grid (props: GridProps) {

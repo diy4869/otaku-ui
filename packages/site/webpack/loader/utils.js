@@ -32,7 +32,7 @@ const get = (tokens, index) => {
       for (let j = startIndex; j < endIndex; j++) {
         if (tokens[j].type === 'fence') {
           if (tokens[j].info.includes('example')) {
-            data.example = tokens[j].content
+            // data.example = tokens[j].content
           } else {
             // data.example = data.example ? data.example : data.code
           }

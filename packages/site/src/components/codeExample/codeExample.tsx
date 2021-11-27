@@ -14,14 +14,8 @@ interface Example extends HighlightCodeProps {
 }
 
 export function CodeExample (props: Example) {
-  const {
-    code,
-    style,
-    desc,
-    example,
-    lang = 'typescript'
-  } = props
-  let [collapse, setCollapse] = useState(true)
+  const { code, style, desc, example, lang = 'typescript' } = props
+  let [collapse, setCollapse] = useState(false)
   let [currentIndex, setCurrentIndex] = useState(0)
   const [data] = useState([
     {
@@ -31,25 +25,25 @@ export function CodeExample (props: Example) {
     style
   ])
 
-  console.log(props)
-
   return (
-    <div className="otaku-code-example-container">
-      <div className="otaku-desc" dangerouslySetInnerHTML={{
-        __html: desc
-      }}>
-      </div>
-      <div className="otaku-example">
-        { example }
-      </div>
-      <ul className="otaku-operation">
-        <li onClick={() => {
-          copy(data[currentIndex].code, {
-            debug: true
-          })
-          alert('复制成功')
-        }}>
-          <Tooltip content="复制">
+    <div className='otaku-code-example-container'>
+      <div
+        className='otaku-desc'
+        dangerouslySetInnerHTML={{
+          __html: desc
+        }}
+      ></div>
+      <div className='otaku-example'>{example}</div>
+      <ul className='otaku-operation'>
+        <li
+          onClick={() => {
+            copy(data[currentIndex].code, {
+              debug: true
+            })
+            alert('复制成功')
+          }}
+        >
+          <Tooltip content='复制'>
             <span className='iconfont otaku-icon-copy'></span>
           </Tooltip>
         </li>
@@ -60,33 +54,32 @@ export function CodeExample (props: Example) {
           }}
         >
           <Tooltip content={collapse ? '折叠' : '展开'}>
-            <span className={`iconfont otaku-icon-${collapse ? 'code' : 'code'}`}></span>
+            <span
+              className={`iconfont otaku-icon-${collapse ? 'code' : 'code'}`}
+            ></span>
           </Tooltip>
         </li>
-
       </ul>
       <ul>
-        {
-          data.map((item, index) => {
-            return (
-              <li
-                key={index}
-                onClick={() => {
-                  setCurrentIndex(index)
-                }}>
-                lang: {item?.lang}
-              </li>
-            )
-          })
-        }
+        {data.map((item, index) => {
+          return (
+            <li
+              key={index}
+              onClick={() => {
+                setCurrentIndex(index)
+              }}
+            >
+              lang: {item?.lang}
+            </li>
+          )
+        })}
       </ul>
-      {
-        collapse && <HighlightCode
+      {collapse && (
+        <HighlightCode
           lang={data[currentIndex].lang}
           code={data[currentIndex].code}
         ></HighlightCode>
-      }
-      
+      )}
     </div>
   )
 }

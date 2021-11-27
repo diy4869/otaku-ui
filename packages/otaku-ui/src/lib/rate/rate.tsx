@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NP from 'number-precision'
-/*
- * Import { fromEvent, interval } from 'rxjs'
- * Import { throttleTime } from 'rxjs/operators'
- */
 import throttle from 'lodash/throttle'
-
 import './style.scss'
 
 interface RateProps {
@@ -45,12 +40,9 @@ export function Rate (props: RateProps) {
     setText
   ] = useState<React.ReactNode>()
 
-  useEffect(
-    () => {
+  useEffect(() => {
       init()
-    },
-    []
-  )
+    }, [])
 
   const render = (start: number, end: number, checked: boolean, half: boolean) => {
     if (end >= count) end = count

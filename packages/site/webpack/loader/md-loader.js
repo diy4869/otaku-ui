@@ -5,22 +5,21 @@ const anchor = require('markdown-it-anchor')
 const toc = require('markdown-it-toc-done-right')
 const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
-const types = require('@babel/types')
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
 
-
-let str = `
+let importSynx = `
   import * as React from 'react'
   import Block from 'Block'
   import { CodeExample } from 'CodeExample'
   import { HighlightCode } from 'otaku-ui'
-
 `
-const reactMarkdownTemplate = (importSynx, content) => {
+let str = importSynx
+
+const reactMarkdownTemplate = (str, importSynx, content) => {
   const data = `
-    ${str}
     ${importSynx}
+    ${str}
 
     function MdReact () {
       return <div className='b-md-container markdown-body'>${content}</div>
@@ -32,10 +31,14 @@ const reactMarkdownTemplate = (importSynx, content) => {
   return data
 }
 
-
-module.exports = function mdLoader(source) {
+module.exports = function mdLoader (source) {
   const { content, data } = matter(source)
 
+  if (this.hot) {
+    str = importSynx
+    //   // console.log(this.resourcePath)
+    // this.addDependency(this.resourcePath)
+  }
   // demo 数量
   let demoIndex = 0
   let demoName
@@ -81,43 +84,54 @@ module.exports = function mdLoader(source) {
       }
     })
     .use(container, 'demo', {
-      render(tokens, index) {
+      render (tokens, index) {
         if (tokens[index].nesting === 1) {
           const map = get(tokens, index)
-         
+
           const current = map.get(index) // <>${current?.code}</>
           const ast = parser(current.code)
-
 
           traverse(ast, {
             FunctionDeclaration (path) {
               const node = path.node
               const name = node.id.name
               demoName = name
-              path.node.id.name = `${name}${index}`
-
+              path.node.id.name = `${name}${demoIndex}`
             },
-            JSXIdentifier(path) {
+            JSXIdentifier (path) {
               if (path.node.name === demoName) {
-
-                path.node.name = `${demoName}${index++}`
+                path.node.name = `${demoName}${demoIndex++}`
               }
             }
           })
 
-          // const  = generate(ast)
+          const { code } = generate(ast, {
+            retainLines: true
+          })
+          const search = code.indexOf('ReactDOM')
+          const injectCode = code.substr(0, search)
+          const exampleCode = code
+            .substr(search)
+            .split(',')[0]
+            .split('(')[1]
 
+          str += `
+${injectCode}
+`
           current.code = `${data.import}
 
 ${current.code}
           `
+          current.example = `<>
+            <style>{\`${current.style.code}\`}</style>
+            ${exampleCode}
+          </>`
 
-          console.log(current)
           return `
             <CodeExample
               desc={\`${current.desc}\`}
               lang={\`${current?.lang}\`}
-              example={\`hello world \`}
+              example={${current.example}}
               code={\`${current.code}\`}
               style={{
                 lang: \`${current.style.lang}\`,
@@ -131,14 +145,11 @@ ${current.code}
       }
     })
 
-  
   const mdToHtml = md
     .render(content)
     .replace(/<hr>/g, '<hr />')
     .replace(/<br>/g, '<br />')
     .replace(/class=/g, 'className=')
 
-
-
-  return reactMarkdownTemplate(data.import, mdToHtml)
+  return reactMarkdownTemplate(str, data.import, mdToHtml)
 }

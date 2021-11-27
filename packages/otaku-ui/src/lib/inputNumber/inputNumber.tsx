@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import NP from 'number-precision'
 import './style.scss'
 
-
 interface InputNumberProps {
   value?: number
   min?: number
@@ -14,11 +13,10 @@ interface InputNumberProps {
   onChange?: (val?: number) => void
   onBlur?: React.FocusEventHandler<HTMLInputElement>
   onFocus?: React.FocusEventHandler<HTMLInputElement>
-  onInput?: React.FormEventHandler<HTMLInputElement> 
+  onInput?: React.FormEventHandler<HTMLInputElement>
 }
 
-
-export function InputNumber(props: InputNumberProps) {
+export function InputNumber (props: InputNumberProps) {
   const {
     value = 1,
     step = 1,
@@ -33,8 +31,8 @@ export function InputNumber(props: InputNumberProps) {
     onInput
   } = props
 
-  let [inputVal, setInputVal] = useState(value)
-  // @ts-ignore
+  const [inputVal, setInputVal] = useState(value)
+
   const change = (e) => {
     setInputVal(e.target.value)
   }
@@ -52,35 +50,41 @@ export function InputNumber(props: InputNumberProps) {
     onChange?.(inputVal)
   }
 
-  
   return (
-    <div className={`
+    <div
+      className={`
       otaku-input-number-box
       otaku-input-number-size-${size}
-      ${disabled ? 'otaku-input-number-disabled' : ''
-    }`}>
+      ${disabled ? 'otaku-input-number-disabled' : ''}`}>
       <div className={`otaku-input-number-container`}>
         <input
-          type="number"
+          type='number'
           value={inputVal}
           step={step}
           min={min}
           max={max}
-          className="otaku-input-number"
+          className='otaku-input-number'
           disabled={disabled}
           readOnly={readonly}
           onChange={change}
           onBlur={onBlur}
           onFocus={onFocus}
-          onInput={onInput}/>
+          onInput={onInput}
+        />
       </div>
 
-      <ul className="otaku-input-number-direction">
+      <ul className='otaku-input-number-direction'>
         <li onClick={() => calc('up')}>
-          <span className={`iconfont otaku-icon-up ${inputVal >= max || disabled ? 'input-number-icon-disabled' : ''}`}></span>
+          <span
+            className={`iconfont otaku-icon-up ${
+              inputVal >= max || disabled ? 'input-number-icon-disabled' : ''
+            }`}></span>
         </li>
         <li onClick={() => calc('down')}>
-          <span className={`iconfont otaku-icon-down ${inputVal <= min || disabled ? 'input-number-icon-disabled' : ''}`}></span>
+          <span
+            className={`iconfont otaku-icon-down ${
+              inputVal <= min || disabled ? 'input-number-icon-disabled' : ''
+            }`}></span>
         </li>
       </ul>
     </div>

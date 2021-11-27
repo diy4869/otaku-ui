@@ -1,9 +1,9 @@
 const path = require('path')
 const ora = require('ora')
 const fs = require('fs')
+const camelCase = require('camelcase')
 const { render, getExt } = require('../utils/index')
 const { mkdir, checkDirectory, checkFile } = require('../utils/fs')
-const camelCase = require('camelcase')
 
 const writeTemplate = (templateDir, writeDir, componentName, templateOptions = {}) => {
   const fileList = fs.readdirSync(templateDir)

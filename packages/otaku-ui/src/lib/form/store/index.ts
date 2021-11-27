@@ -5,22 +5,22 @@ export default class FormValidate {
   options: BaseForm
   status: 'pending' | 'success' | 'error'
   validateErrors: ValidateError[]
-  
-  constructor (options = {}) {
+
+  constructor(options = {}) {
     this.options = options
     this.status = 'pending'
-    this.validateErrors =  []
+    this.validateErrors = []
   }
 
-  setOptions (options: BaseForm) {
+  setOptions(options: BaseForm) {
     this.options = options
   }
 
-  getOptions () {
+  getOptions() {
     return this.options
   }
 
-  validate () {
+  validate() {
     const {
       model = {},
       rules = {}
@@ -35,7 +35,7 @@ export default class FormValidate {
         if (errors) {
           this.validateErrors = errors
           this.status = 'error'
-          reject(errors) 
+          reject(errors)
         } else {
           this.status = 'success'
           resolve(fields)
@@ -44,5 +44,7 @@ export default class FormValidate {
     })
   }
 
-  resetValidate () {}
+  resetValidate() {
+    console.log('reset')
+  }
 }

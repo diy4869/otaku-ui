@@ -18,6 +18,12 @@ interface Props {
 }
 
 function App() {
+
+  useEffect(() => {
+    
+
+  }, [])
+
   const components = {
     code(props: Props) {
       const {

@@ -1,5 +1,4 @@
 .otaku-home {
-  display: grid;
   height: 100%;
 
   .otaku-header {
@@ -28,13 +27,13 @@
     display: grid;
     grid-template-areas: 'aside main';
     grid-template-columns: 200px 1fr;
-    grid-template-rows: calc(100% - 60px);
-    // overflow: hidden;
+    height: calc(100% - 60px);
   }
   .sidebar {
     grid-area: aside;
     padding: 10px 0 0 0px;
     box-sizing: border-box;
+    overflow-x: auto;
     h3 {
       margin: 10px 15px;
     }
@@ -59,13 +58,15 @@
       }
     }
   }
-  main {
+  .main {
     grid-area: main;
     background: #f7f8fa;
     padding: 20px;
     overflow-x: auto;
     position: relative;
-    border: 2px solid red;
+    // border: 2px solid red;
+    box-sizing: border-box;
+    height: 100%;
     // &::-webkit-scrollbar {
     //   display: none;
     // }

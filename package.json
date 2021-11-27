@@ -9,6 +9,14 @@
     "commit": "cz",
     "release": "standard-version"
   },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "echo 'hello world'"
+    }
+  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
@@ -20,6 +28,7 @@
     "@commitlint/prompt-cli": "^13.1.0",
     "lerna": "^3.22.0",
     "lint-staged": "^11.1.2",
+    "prettier": "2.5.0",
     "standard-version": "^9.3.1"
   },
   "dependencies": {

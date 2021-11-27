@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState, useEffect, useMemo } from 'react'
+import React, { ChangeEvent, useState, useEffect } from 'react'
 import './style.scss'
 
 interface CheckBoxProps {
@@ -9,7 +9,6 @@ interface CheckBoxProps {
   children?: React.ReactNode[]
   onChange?: (checked?: boolean) => void
 }
-
 
 export function CheckboxGroup (props: CheckBoxProps) {
   const {
@@ -32,14 +31,8 @@ export function CheckboxGroup (props: CheckBoxProps) {
 }
 
 export function Checkbox (props: CheckBoxProps) {
-  const {
-    disabled,
-    checked = false,
-    indeterminate,
-    children,
-    onChange
-  } = props
-  
+  const { disabled, checked = false, indeterminate, children, onChange } = props
+
   const [inputChecked, setInputChecked] = useState(checked)
   const [half, setHalf] = useState(indeterminate)
 
@@ -54,19 +47,31 @@ export function Checkbox (props: CheckBoxProps) {
   }
 
   return (
-    <label className="otaku-checkbox-label">
+    <label className='otaku-checkbox-label'>
       <input
-        type="checkbox"
+        type='checkbox'
         disabled={disabled}
         checked={inputChecked}
         className={`
           otaku-checkbox
           iconfont
           ${inputChecked ? 'is-checked' : half ? 'is-half' : ''}
-          ${inputChecked ? 'otaku-icon-checkbox-fill' : half ?  'otaku-icon-checkbox-indeterminate-fill' : ''}
+          ${
+            inputChecked
+              ? 'otaku-icon-checkbox-fill'
+              : half
+              ? 'otaku-icon-checkbox-indeterminate-fill'
+              : ''
+          }
         `}
-        onChange={change} />
-      <span className={`otaku-checkbox-label ${inputChecked ? 'is-checked' : half ? 'is-half' : ''}`}>{children}</span>
+        onChange={change}
+      />
+      <span
+        className={`otaku-checkbox-label ${
+          inputChecked ? 'is-checked' : half ? 'is-half' : ''
+        }`}>
+        {children}
+      </span>
     </label>
   )
 }

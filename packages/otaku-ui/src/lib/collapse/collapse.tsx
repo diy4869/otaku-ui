@@ -1,5 +1,4 @@
-import React, { useState, useRef, useLayoutEffect } from 'react'
-import { useMemo } from 'react'
+import React, { useState, useMemo, useRef, useLayoutEffect } from 'react'
 import './style.scss'
 
 interface CollapseProps {
@@ -13,7 +12,6 @@ export function Collapse (props: CollapseProps) {
   const container = useRef<HTMLElement>(null)
 
   /**
-   * 
    * @param init 初始化默认不执行动画
    */
   const run = (init = false) => {
@@ -23,8 +21,8 @@ export function Collapse (props: CollapseProps) {
         height: ${collapse ? height : 0}px;
         transition: all linear ${init ? '0s' : '0.2s'};
       `
-      }
-  }                                                                                                                                                            
+    }
+  }
   useLayoutEffect(() => {
     Promise.resolve().then(() => {
       const h = container.current?.offsetHeight as number
@@ -35,11 +33,12 @@ export function Collapse (props: CollapseProps) {
   }, [])
 
   useMemo(() => {
-      run()
-    }, [collapse])
-
+    run()
+  }, [collapse])
 
   return (
-    <section className="otaku-collapse" ref={container}>{children}</section>
+    <section className='otaku-collapse' ref={container}>
+      {children}
+    </section>
   )
 }

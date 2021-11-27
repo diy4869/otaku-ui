@@ -1,7 +1,7 @@
 import React, { useState, useLayoutEffect } from 'react'
-import './style.scss'
 import hljs from 'highlight.js/lib/common'
 import 'highlight.js/styles/vs.css'
+import './style.scss'
 
 export interface HighlightCodeProps {
   lang: string
@@ -9,30 +9,26 @@ export interface HighlightCodeProps {
 }
 
 export function HighlightCode (props: HighlightCodeProps) {
-  const {
-    lang = 'typescript',
-    code
-  } = props
+  const { lang = 'typescript', code } = props
   const [highlightCode, setHighLightCode] = useState('')
 
   useLayoutEffect(() => {
-      const res = hljs.highlight(code, {
-        language: lang,
-        ignoreIllegals: true
-      }).value
+    const res = hljs.highlight(code, {
+      language: lang,
+      ignoreIllegals: true
+    }).value
 
-
-      setHighLightCode(res)
+    setHighLightCode(res)
   })
 
   return (
-    <div className="otaku-code-container">
+    <div className='otaku-code-container'>
       <pre>
-        <code className="otaku-code"
+        <code
+          className='otaku-code'
           dangerouslySetInnerHTML={{
             __html: highlightCode
-          }}>
-        </code>
+          }}></code>
       </pre>
     </div>
   )

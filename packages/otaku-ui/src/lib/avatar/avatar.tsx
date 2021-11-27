@@ -1,25 +1,24 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './style.scss'
 
 interface AvatarProps {
-  size?: number | string
-  src?: string,
+  size?: number
+  src?: string
+  alt?: string
   className?: string
 }
 
-export const Avatar = (props: AvatarProps) => {
-  const {
-    src = 'https://thirdqq.qlogo.cn/g?b=sdk&k=WmBE50SQ3IsOYeneWWciaQg&s=100&t=16272983134523424',
-    size = 40,
-    className
-  } = props
+export const Avatar = (props: AvatarProps): JSX.Element => {
+  const { src, className, alt, size = 40 } = props
 
   return (
-    <div className={`otaku-avatar ${className ?? ''}`} style={{
-      width: size,
-      height: size
-    }}>
-      <img src={src} alt=""/>
+    <div
+      className={`otaku-avatar ${className ?? ''}`}
+      style={{
+        width: `${size}px`,
+        height: `${size}px`
+      }}>
+      <img src={src} alt={alt} />
     </div>
   )
 }

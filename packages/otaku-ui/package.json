@@ -13,16 +13,12 @@
   "bin": {
     "otaku-cli": "./scripts/index.js"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "echo 'hello world'"
-    }
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@popperjs/core": "^2.9.3",
     "async-validator": "^4.0.3",
+    "cropperjs": "^1.5.12",
     "dayjs": "^1.10.6",
     "lodash": "^4.17.21",
     "lunar-typescript": "^1.2.6",
@@ -47,6 +43,7 @@
     "chalk": "^4.1.2",
     "commander": "^8.1.0",
     "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-config-standard-jsx": "^10.0.0",
     "eslint-config-standard-react": "^11.0.1",

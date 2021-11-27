@@ -1,7 +1,6 @@
 import React, { Suspense, useEffect } from 'react'
 import style from './App.module.scss'
 import { hot } from 'react-hot-loader/root'
-
 import { HashRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
@@ -47,7 +46,7 @@ function App() {
                 })
               }
             </aside>
-            <main>
+            <aside className={style['main']}>
               <Switch>
                 {
                   routes.map((router) => {
@@ -68,7 +67,7 @@ function App() {
                 }}></Redirect>
               </Switch>
             {/* <CodeExample></CodeExample> */}
-          </main>
+          </aside>
         </aside>  
       </div>
     </Router>

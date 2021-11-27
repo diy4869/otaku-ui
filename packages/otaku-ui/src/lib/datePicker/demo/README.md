@@ -12,7 +12,8 @@ import:
 一个简单的日期选择器
 
 ```tsx
-<DatePicker></DatePicker>
+ReactDOM.render(<DatePicker></DatePicker>, container)
+
 ```
 :::
 
@@ -23,7 +24,7 @@ import:
 一个简单的日期选择器
 
 ```tsx
-<DatePicker firstWeek="一"></DatePicker>
+ReactDOM.render(<DatePicker firstWeek="一"></DatePicker>, container)
 ```
 :::
 
@@ -35,6 +36,6 @@ import:
 一个简单的日期选择器
 
 ```tsx
-<DatePicker lunarDate={true}></DatePicker>
+ReactDOM.render(<DatePicker lunarDate={true}></DatePicker>, container)
 ```
 :::

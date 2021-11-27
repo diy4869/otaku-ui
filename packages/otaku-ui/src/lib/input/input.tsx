@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Telport } from '../portal/portal'
 import { Button, ButtonProps } from '../button/button'
 import './style.scss';
 
