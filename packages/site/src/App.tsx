@@ -1,12 +1,40 @@
 import React, { Suspense, useEffect } from 'react'
-import style from './App.module.scss'
 import { hot } from 'react-hot-loader/root'
-import { HashRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom'
+import style from './App.module.scss'
+
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  NavLink,
+  Redirect
+} from 'react-router-dom'
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
+import http from './api'
+import { useState } from 'react'
 
+function App () {
+  const [data, setData] = useState<{
+    stargazers_count?: number
+  }>({})
+  const getData = () => {
+    http
+      .get('https://api.github.com/repos/diy4869/otaku-ui', {
+        headers: {
+          Authorization: 'token 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'
+        }
+      })
+      .then(res => {
+        console.log(res)
+        setData(res.data)
+      })
+  }
 
-function App() {
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <Suspense fallback={<div></div>}>
       <Router>
@@ -16,64 +44,70 @@ function App() {
             <div className={style['otaku-title']}>
               <span>OTAKU-UI</span>
             </div>
-            
-                <div>
-                  <a href="https://github.com/diy4869/otaku-ui" target="_blank">GitHub</a>
+
+            <div>
+              <a href='https://github.com/diy4869/otaku-ui' target='_blank'>
+                GitHub
+              </a>
+              <span
+                className={`iconfont otaku-icon-star-fill ${style['github-star']}`}
+              ></span>
+              <span className={`${style['github-star']}`}>
+                {data.stargazers_count}
+              </span>
             </div>
           </header>
           <aside className={style['content']}>
             <aside className={style['sidebar']}>
-              {
-                routes.map(item => {
-                  return (
-                    <>
-                      <h3 className={style['title']}>{item.title}</h3>
-                      <div className={style['otaku-menu']}>
-                        {
-                          item.children.map(children => {
-                            return (
-                              <NavLink
-                                activeClassName={style['active']}
-                                className={`${style['otaku-menu-item']}`}
-                                to={children.path}
-                              >{children.title}</NavLink>
-                            )
-                          })
-                        }
-                      </div>
-                    </>
-                  )
-                })
-              }
+              {routes.map(item => {
+                return (
+                  <>
+                    <h3 className={style['title']}>{item.title}</h3>
+                    <div className={style['otaku-menu']}>
+                      {item.children.map(children => {
+                        return (
+                          <NavLink
+                            activeClassName={style['active']}
+                            className={`${style['otaku-menu-item']}`}
+                            to={children.path}
+                          >
+                            {children.title}
+                          </NavLink>
+                        )
+                      })}
+                    </div>
+                  </>
+                )
+              })}
             </aside>
             <aside className={style['main']}>
               <Switch>
-                {
-                  routes.map((router) => {
-                    return router.children.map(children => {
-                      return (
-                        <Route
-                            path={children.path}
-                            component={children.component}
-                            key={children.path}
-                          />
-                        )
-                    })  
+                {routes.map(router => {
+                  return router.children.map(children => {
+                    return (
+                      <Route
+                        path={children.path}
+                        component={children.component}
+                        key={children.path}
+                      />
+                    )
                   })
-                }
-                <Route path="*" component={NotFound}></Route>
-                <Redirect from="/" to={{
-                  pathname: '/dev/introduce'
-                }}></Redirect>
+                })}
+                <Route path='*' component={NotFound}></Route>
+                <Redirect
+                  from='/'
+                  to={{
+                    pathname: '/dev/introduce'
+                  }}
+                ></Redirect>
               </Switch>
-            {/* <CodeExample></CodeExample> */}
+              {/* <CodeExample></CodeExample> */}
+            </aside>
           </aside>
-        </aside>  
-      </div>
-    </Router>
+        </div>
+      </Router>
     </Suspense>
   )
 }
 
 export default hot(App)
-

@@ -8,7 +8,7 @@ import:
 ::: demo
 
 ```tsx
-<Switch></Switch>
+ReactDOM.render(<Switch></Switch>, container)
 ```
 :::
 
@@ -17,6 +17,6 @@ import:
 ::: demo
 
 ```tsx
-<Switch disabled></Switch>
+ReactDOM.render(<Switch disabled></Switch>, container)
 ```
 :::

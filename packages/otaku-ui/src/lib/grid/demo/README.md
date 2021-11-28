@@ -13,14 +13,15 @@ import:
 
 ```tsx
 function Demo () {
-  console.log('hello world 123')
   return (
-    <div className="demo-container">
-      <Grid>
+    <div>
+      <Grid gap={10}>
         {
-          new Array(24).fill().map((_, index) => {
+          Array.from({
+            length: 24
+          }).map((_, index) => {
             return (
-              <GridItem key={index}>{index + 1}</GridItem>
+              <GridItem key={index} className="demo-container">{index + 1}</GridItem>
             )
           })
         }
@@ -34,7 +35,9 @@ ReactDOM.render(<Demo/>, container)
 
 ```css
 .demo-container {
-  color: blue;
+  background: black;
+  color: white;
+  padding-left: 5px;
 }
 ```
 :::

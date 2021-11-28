@@ -8,6 +8,6 @@ import:
 ::: demo
 
 ```tsx
-<ImageCropper></ImageCropper>
+ReactDOM.render(<ImageCropper></ImageCropper>, container)
 ```
 :::

@@ -1,4 +1,4 @@
-import react from 'react'
+import ReactDOM from 'react-dom'
 
 type El = HTMLElement & {
   telportId: symbol
@@ -16,16 +16,16 @@ export class Teleport {
   numberId: number
   telportId: symbol
   el: HTMLElement
-  position: Pick<DOMRect, 'top' | 'left' | 'right'| 'bottom'>
+  position: Pick<DOMRect, 'top' | 'left' | 'right' | 'bottom'>
   zIndex: number
   selector: string
   show: boolean
   map: Map<Symbol, HTMLElement>
 
 
-  constructor (options: TeleportOptions) {
+  constructor(options: TeleportOptions) {
     const { el, selector = 'body', show = true } = options
-    
+
     this.telportId = Symbol(`${id}`)
     this.numberId = id
     this.map = new Map()
@@ -42,7 +42,7 @@ export class Teleport {
     this.show = show
 
     id++
-    
+
     // @ts-ignore
     if (!this.el.telportId) {
       this.init()
@@ -65,7 +65,7 @@ export class Teleport {
     return findNode
   }
 
-  showNode () {
+  showNode() {
     const container = document.querySelector(this.selector)
 
     if (container) {
@@ -74,56 +74,63 @@ export class Teleport {
       findNode.style.display = 'block'
     }
   }
-  
+
   hideNode() {
     const container = document.querySelector(this.selector)
 
     if (container) {
       const findNode = this.findNode(container)
+
+      console.log(findNode)
       // @ts-ignore
-      findNode.style.display = 'none'
+      if (findNode) findNode.style.display = 'none'
     }
   }
 
-  init () {
+  init() {
     const container = document.querySelector(this.selector)
 
     if (!container) return
 
-    const cloneNode: any = this.el.cloneNode(true)
+    // const cloneNode: any = this.el.cloneNode(true)
     this.position = this.el?.getBoundingClientRect()
 
     // const node = cloneNode.firstChild
-    console.log(this.position)
-    cloneNode.style.cssText = `
+    console.log(this.el)
+
+    this.el.style.cssText = `
       display: ${!this.show ? 'block' : 'none'};
       z-index: ${this.zIndex};
       position: fixed;
       top: ${this.position.top}px;
       left: ${this.position.left}px;
     `
-    cloneNode.numberId = this.numberId
-    cloneNode.telportId = this.telportId
+    this.el.numberId = this.numberId
+    this.el.telportId = this.telportId
 
     // @ts-ignore
     this.el.numberId = this.numberId
     // @ts-ignore
     this.el.telportId = this.telportId
 
+    const portal = ReactDOM.createPortal(this.el, container)
     this.map.set(this.telportId, this.el)
 
-    container.appendChild(cloneNode)
+    console.log(portal)
+    // container.appendChild(cloneNode)
 
     const parent = this.el.parentElement
 
     // @ts-ignore
     const findNode = this.findNode(parent)
+
+    console.log(findNode)
     if (findNode) {
       this.el.parentElement?.removeChild(findNode)
     }
   }
 
-  remove () {
+  remove() {
 
   }
 }

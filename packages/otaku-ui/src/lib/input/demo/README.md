@@ -12,7 +12,7 @@ import:
 一个普通的输入框
 
 ```tsx
-  <Input placeholder="输入点什么吧..."></Input>
+ReactDOM.render(<Input placeholder="输入点什么吧..."></Input>, container)
 ```
 :::
 
@@ -24,6 +24,7 @@ import:
 一个普通的输入框
 
 ```tsx
+ReactDOM.render(
   <ul>
     <li style={{
       marginBottom: '10px'
@@ -38,7 +39,10 @@ import:
       <li>
       <Input size="large" placeholder="大型输入框"></Input>
     </li>
-  </ul>
+  </ul>,
+  container
+)
+
 ```
 :::
 
@@ -49,7 +53,7 @@ import:
 一个普通的输入框
 
 ```tsx
-  <Input placeholder="输入点什么吧..." type="password"></Input>
+ReactDOM.render(<Input placeholder="输入点什么吧..." type="password"></Input>, container)
 ```
 :::
 
@@ -60,7 +64,7 @@ import:
 一个普通的输入框
 
 ```tsx
-  <Input placeholder="输入点什么吧..." disabled></Input>
+ReactDOM.render(<Input placeholder="输入点什么吧..." disabled></Input>, container)
 ```
 :::
 
@@ -71,6 +75,7 @@ import:
 一个普通的输入框
 
 ```tsx
+ReactDOM.render(
   <ul>
     <li style={{
       marginBottom: '10px'
@@ -82,7 +87,10 @@ import:
     }}>
       <Input placeholder="后面的icon" afterIcon="otaku-icon-search-line"></Input>
     </li>
-  </ul>
+  </ul>,
+  container
+)
+
 ```
 :::
 
@@ -93,7 +101,7 @@ import:
 一个普通的输入框
 
 ```tsx
-  <Input placeholder="输入点什么吧..." clear></Input>
+ReactDOM.render(<Input placeholder="输入点什么吧..." clear></Input>, container)
 ```
 :::
 
@@ -105,6 +113,7 @@ import:
 一个普通的输入框
 
 ```tsx
+ReactDOM.render(
   <ul>
     <li style={{
       marginBottom: '10px'
@@ -120,6 +129,9 @@ import:
         <Button size="middle" type="primary">后面的按钮</Button>
       }></Input>
     </li>
-  </ul>
+  </ul>,
+  container
+)
+
 ```
 :::

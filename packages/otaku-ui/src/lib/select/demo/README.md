@@ -12,12 +12,19 @@ import:
 简单的评分
 
 ```tsx
-<Select>
-{
-  new Array(20).fill().map((_, index) => {
-    return <SelectOptions key={index}>第{index + 1}个选项</SelectOptions>
-  })
+function Demo () {
+  return (
+    <Select>
+      {
+        new Array(20).fill().map((_, index) => {
+          return <SelectOptions key={index}>第{index + 1}个选项</SelectOptions>
+        })
+      }
+    </Select>
+  )
 }
-</Select>
+
+ReactDOM.render(<Demo/>, container)
+
 ```
 :::

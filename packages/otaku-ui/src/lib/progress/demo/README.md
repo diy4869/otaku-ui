@@ -1,6 +1,7 @@
 ---
 import:
-  import { Progress, Grid, GridItem } from 'otaku-ui'
+  import { Progress, Grid, GridItem, Button, InputNumber } from 'otaku-ui';
+  import { useState } from 'react';
 ---
 
 [[toc]]
@@ -10,7 +11,7 @@ import:
 ::: demo
 
 ```tsx
-<Progress></Progress>
+ReactDOM.render(<Progress></Progress>, container)
 ```
 :::
 
@@ -19,7 +20,7 @@ import:
 ::: demo
 
 ```tsx
-<Progress>10%</Progress>
+ReactDOM.render(<Progress>10%</Progress>, container)
 ```
 :::
 
@@ -29,7 +30,7 @@ import:
 ::: demo
 
 ```tsx
-<Progress inner percentage={50}>50%</Progress>
+ReactDOM.render(<Progress inner percentage={50}>50%</Progress>, container)
 ```
 :::
 
@@ -38,7 +39,7 @@ import:
 ::: demo
 
 ```tsx
-<Progress inner percentage={50} color="red">50%</Progress>
+ReactDOM.render(<Progress inner percentage={50} color="red">50%</Progress>, container)
 ```
 :::
 
@@ -47,15 +48,17 @@ import:
 ::: demo
 
 ```tsx
-<Grid>
-  <GridItem>
-    <Progress inner percentage={50} color="red" direction="vertical">50%</Progress>
-  </GridItem>
-  <GridItem>
-    <Progress percentage={50}  direction="vertical">50%</Progress>
-  </GridItem>
-</Grid>
-
+ReactDOM.render(
+  <Grid>
+    <GridItem>
+      <Progress inner percentage={50} color="red" direction="vertical">50%</Progress>
+    </GridItem>
+    <GridItem>
+      <Progress percentage={50}  direction="vertical">50%</Progress>
+    </GridItem>
+  </Grid>,
+  container
+)
 ```
 :::
 
@@ -64,18 +67,65 @@ import:
 ::: demo
 
 ```tsx
-<Grid>
-  <GridItem>
-    <Progress percentage={50}  type="circle">50%</Progress>
-  </GridItem>
-  <GridItem>
-    <Progress percentage={20}  type="circle">20%</Progress>
-  </GridItem>
-  <GridItem>
-    <Progress percentage={90}  type="circle" >90%</Progress>
-  </GridItem>
-</Grid>
 
+ReactDOM.render(
+  <Grid>
+    <GridItem>
+      <Progress percentage={50}  type="circle">50%</Progress>
+    </GridItem>
+    <GridItem>
+      <Progress percentage={20}  type="circle">20%</Progress>
+    </GridItem>
+    <GridItem>
+      <Progress percentage={90}  type="circle" >90%</Progress>
+    </GridItem>
+  </Grid>,
+  container
+)
+```
+:::
+
+
+## 变化的进度条
+
+::: demo
+
+sdaf
+
+```tsx
+
+function Demo () {
+  let [progress, setProgress] = useState(0)
+
+  return (
+    <>
+      <InputNumber value={progress} step={10} onChange={val => {
+        setProgress(val)
+      }}></InputNumber>
+      <Grid class="demo-progress">
+        <GridItem>
+          <Progress percentage={progress}  type="circle"></Progress>
+        </GridItem>
+        <GridItem>
+          <Progress percentage={progress}></Progress>
+        </GridItem>
+        <GridItem>
+          <Progress percentage={progress}  direction="vertical"></Progress>
+        </GridItem>
+      </Grid>
+
+    </>
+  )
+}
+
+ReactDOM.render(<Demo/>, container)
+```
+
+```css
+.otaku-grid {
+  align-items: center;
+  justify-items: center;
+}
 ```
 :::
 
@@ -90,6 +140,5 @@ interface ProgressProps {
   type?: 'circle'
   direction?: 'vertical' | 'horizontal'
   lineWidth?: number
-  children?: string
 }
 ```

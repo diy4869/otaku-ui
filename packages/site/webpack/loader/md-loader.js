@@ -87,8 +87,7 @@ module.exports = function mdLoader (source) {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
           const map = get(tokens, index)
-
-          const current = map.get(index) // <>${current?.code}</>
+          const current = map.get(index)
           const ast = parser(current.code)
 
           traverse(ast, {
@@ -108,24 +107,40 @@ module.exports = function mdLoader (source) {
           const { code } = generate(ast, {
             retainLines: true
           })
-          const search = code.indexOf('ReactDOM')
-          const injectCode = code.substr(0, search)
-          const exampleCode = code
-            .substr(search)
-            .split(',')[0]
-            .split('(')[1]
 
-          str += `
+          const generatorAST = parser(code)
+
+          traverse(generatorAST, {
+            FunctionDeclaration (path) {
+              const node = path.node
+              const injectCode = code.substring(node.start, node.end)
+              
+              str += `
 ${injectCode}
 `
-          current.code = `${data.import}
+              current.code = `${data.import}
 
 ${current.code}
-          `
-          current.example = `<>
-            <style>{\`${current.style.code}\`}</style>
-            ${exampleCode}
-          </>`
+`
+            },
+            CallExpression (path) {
+              const callee = path.node.callee
+              const objectName = callee?.object?.name
+              const propertyName = callee?.property?.name
+
+              if (objectName === 'ReactDOM' && propertyName === 'render') {
+                const args = path.node.arguments
+                const [example, container] = args
+                const exampleCode = code.substring(example.start, example.end)
+
+                current.example = `<>
+                  <style>{\`${current.style.code}\`}</style>
+                  ${exampleCode}
+                </>`
+
+              }
+            }
+          })
 
           return `
             <CodeExample

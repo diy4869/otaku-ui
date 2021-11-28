@@ -3,6 +3,8 @@ import:
   import { Checkbox, CheckboxGroup } from 'otaku-ui'
 ---
 
+[[toc]]
+
 ## Checkbox
 
 ::: demo
@@ -10,7 +12,7 @@ import:
 简单的 Checkbox
 
 ```tsx
-<Checkbox>多选框</Checkbox>
+ReactDOM.render(<Checkbox>多选框</Checkbox>, container)
 
 ```
 :::
@@ -22,7 +24,7 @@ import:
 简单的 Checkbox
 
 ```tsx
-<Checkbox checked={true}>多选框</Checkbox>
+ReactDOM.render(<Checkbox checked={true}>多选框</Checkbox>, container)
 
 ```
 :::
@@ -34,7 +36,7 @@ import:
 禁用的 Checkbox
 
 ```tsx
-<Checkbox disabled>多选框</Checkbox>
+ReactDOM.render(<Checkbox disabled>多选框</Checkbox>, container)
 ```
 :::
 

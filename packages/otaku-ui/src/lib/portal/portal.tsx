@@ -2,8 +2,8 @@ import React, {
   useLayoutEffect,
   useRef,
   } from 'react';
-;
 import { Teleport } from '../../utils/index';
+
 
 interface TelportProps {
   className?: string
@@ -26,7 +26,7 @@ export function Portal (props: TelportProps) {
   } = props
 
   useLayoutEffect(() => {
-    // const el = document.getElementsByClassName(`${className}`)
+    // eslint-disable-next-line no-new
     new Teleport({
       el: container.current!,
       show: visible

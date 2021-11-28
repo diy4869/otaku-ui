@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect, useState } from 'react'
+import React, { useRef, useLayoutEffect, useMemo } from 'react'
 import './style.scss'
 
 interface ProgressProps {
@@ -9,9 +9,7 @@ interface ProgressProps {
   type?: 'circle'
   direction?: 'vertical' | 'horizontal'
   lineWidth?: number
-  children?: string
 }
-
 
 export function Progress (props: ProgressProps) {
   const {
@@ -21,10 +19,15 @@ export function Progress (props: ProgressProps) {
     type,
     inner,
     lineWidth = 15,
-    color = '#3064FF',
-    children
+    color = '#3064FF'
   } = props
   const canvas = useRef<HTMLCanvasElement>(null)
+
+  const value = useMemo(() => {
+    const result = percentage >= max ? max : percentage
+
+    return result + '%'
+  }, [percentage, max])
 
   useLayoutEffect(() => {
     const ctx = canvas.current?.getContext('2d')
@@ -50,43 +53,60 @@ export function Progress (props: ProgressProps) {
       ctx.beginPath()
       ctx.lineWidth = 5
       ctx.strokeStyle = color
-      
+
       // (Math.PI / 180) * 360
-      ctx.arc(w / 2, h / 2, 50, 0, (percentage >= max ? max : percentage / 100) * Math.PI * 2, false)
+      ctx.arc(
+        w / 2,
+        h / 2,
+        50,
+        0,
+        (percentage >= max ? max : percentage / 100) * Math.PI * 2,
+        false
+      )
       ctx.stroke()
 
       // const measureText = ctx?.measureText(`${percentage}%`)
       ctx?.beginPath()
       ctx.font = '20px sans-serif'
       ctx.textAlign = 'center'
-      ctx?.fillText(children as string, w / 2, (h / 2) + 10)
+      ctx?.fillText(value, w / 2, h / 2 + 10)
     }
+  }, [percentage])
 
-  }, [])
-
-  return (
-    type === 'circle' ?
-      <canvas ref={canvas}></canvas>
-    : direction === 'horizontal' ? 
-      <div className="otaku-progress-box">
-          <div className="otaku-progress-container" style={{
-            height: `${lineWidth}px`
-          }}>
-          <div className="otaku-progress" style={{
-            width: `${percentage >= max ? max : percentage}%`,
+  return type === 'circle' ? (
+    <canvas ref={canvas}></canvas>
+  ) : direction === 'horizontal' ? (
+    <div className='otaku-progress-box'>
+      <div
+        className='otaku-progress-container'
+        style={{
+          height: `${lineWidth}px`
+        }}>
+        <div
+          className='otaku-progress'
+          style={{
+            width: value,
             backgroundColor: color
-          }}>{inner && children }</div>
+          }}>
+          {inner && value}
         </div>
-        <span className="otaku-progress-text">{ !inner && children }</span>
       </div>
-      :
-      <div className="otaku-progress-vertical" style={{
-            width: `${lineWidth}px`
-          }}>
-          <div className="otaku-progress" style={{
-            height: `${percentage >= max ? max : percentage}%`,
-            backgroundColor: color
-        }}>{children}</div>
+      <span className='otaku-progress-text'>{!inner && value}</span>
+    </div>
+  ) : (
+    <div
+      className='otaku-progress-vertical'
+      style={{
+        width: `${lineWidth}px`
+      }}>
+      <div
+        className='otaku-progress'
+        style={{
+          height: value,
+          backgroundColor: color
+        }}>
+        {!inner && value}
       </div>
+    </div>
   )
 }

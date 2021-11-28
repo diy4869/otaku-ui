@@ -9,7 +9,7 @@ import:
 
 ::: demo
 ```tsx
-  <Pagination total={200} current={2}></Pagination>
+ReactDOM.render(<Pagination total={200} current={2}></Pagination>, container)
 ```
 :::
 
@@ -19,7 +19,7 @@ import:
 
 ::: demo
 ```tsx
-  <Pagination current={5} slicePage={3} total={200}></Pagination>
+ReactDOM.render(<Pagination current={5} slicePage={3} total={200}></Pagination>, container)
 ```
 :::
 
@@ -28,7 +28,7 @@ import:
 
 ::: demo
 ```tsx
-  <Pagination slicePage={3} total={200} pageSize={15}></Pagination>
+ReactDOM.render(<Pagination slicePage={3} total={200} pageSize={15}></Pagination>, container)
 ```
 :::
 
@@ -38,7 +38,7 @@ import:
 ::: demo
 
 ```tsx
-  <Pagination circle={true}></Pagination>
+ReactDOM.render(<Pagination circle={true}></Pagination>, container)
 ```
 :::
 
@@ -47,7 +47,7 @@ import:
 ::: demo
 
 ```tsx
-  <Pagination></Pagination>
+ReactDOM.render(<Pagination></Pagination>, container)
 ```
 :::
 

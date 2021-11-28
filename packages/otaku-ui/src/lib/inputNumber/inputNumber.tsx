@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import NP from 'number-precision'
 import './style.scss'
 
@@ -30,11 +30,15 @@ export function InputNumber (props: InputNumberProps) {
     onFocus,
     onInput
   } = props
-
   const [inputVal, setInputVal] = useState(value)
 
-  const change = (e) => {
+  useEffect(() => {
+    setInputVal(value)
+  }, [value])
+
+  const change = e => {
     setInputVal(e.target.value)
+    onChange?.(e.target.value)
   }
 
   const calc = (type: 'up' | 'down') => {
@@ -42,12 +46,14 @@ export function InputNumber (props: InputNumberProps) {
       if (inputVal >= max || disabled || readonly) return
       const result = NP.plus(inputVal, step)
       setInputVal(result)
+      onChange?.(result)
     } else {
       if (inputVal <= min || disabled || readonly) return
       const result = NP.minus(inputVal, step)
       setInputVal(result)
+      onChange?.(result)
     }
-    onChange?.(inputVal)
+    // onChange?.(inputVal)
   }
 
   return (

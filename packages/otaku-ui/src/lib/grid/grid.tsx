@@ -7,36 +7,38 @@ interface GridProps {
   count?: number
   gap?: number | [number, number]
   center?: boolean
+  className?: string
   children: React.ReactNode[]
 }
 
 interface GridItemProps {
+  className?: string
   children?: React.ReactNode[]
 }
 
 export function Grid (props: GridProps) {
-  const {
-    width,
-    count = 3,
-    gap = 0,
-    center,
-    children
-  } = props
+  const { width, className, center, children, count = 3, gap = 0 } = props
 
   return (
-    <ul className={`otaku-grid ${center ? 'otaku-grid-center' : ''}`} style={{
-      gridTemplateColumns: `repeat(${count}, ${width ? `${width}px` : `1fr`})`,
-      gridGap: typeof gap === 'number' ? `${gap}px` : gap.reduce((total, current) => total + `${current}px `, '')
-    }}>{children}</ul>
+    <ul
+      className={`otaku-grid ${center ? 'otaku-grid-center' : ''} ${className ??
+        ''}`}
+      style={{
+        gridTemplateColumns: `repeat(${count}, ${
+          width ? `${width}px` : `1fr`
+        })`,
+        gridGap:
+          typeof gap === 'number'
+            ? `${gap}px`
+            : gap.reduce((total, current) => total + `${current}px `, '')
+      }}>
+      {children}
+    </ul>
   )
 }
 
 export function GridItem (props: GridItemProps) {
-  const {
-    children
-  } = props
+  const { children, className } = props
 
-  return (
-    <li className="otaku-grid-item">{children}</li>
-  )
+  return <li className={`otaku-grid-item ${className ?? ''}`}>{children}</li>
 }
