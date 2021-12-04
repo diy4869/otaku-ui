@@ -1,6 +1,7 @@
 const path = require('path')
 const ora = require('ora')
 const fs = require('fs')
+const { promisify } = require('util')
 const camelCase = require('camelcase')
 const { render, getExt } = require('../utils/index')
 const { mkdir, checkDirectory, checkFile } = require('../utils/fs')
@@ -34,9 +35,15 @@ const writeTemplate = (templateDir, writeDir, componentName, templateOptions = {
 
 module.exports = async (name) => {
   const componentName = camelCase(name, { pascalCase: true })
+  
   const writeDir = path.resolve(__dirname, '../../src/lib', name)
   const templateDir = path.resolve(__dirname, '../template')
   
+  const entryPath = path.resolve(__dirname, '../../src', 'index.ts')
+  let content = fs.readFileSync(entryPath, {
+    encoding: 'utf-8'
+  })
+
   console.log('\n')
   const spinner = ora('正在努力创建模板中...').start()
 
@@ -46,6 +53,12 @@ module.exports = async (name) => {
     await writeTemplate(templateDir, writeDir, name, {
       name: componentName
     }).then(() => {
+      content += `
+export * from './lib/${name}/${name}'`
+
+      fs.writeFileSync(entryPath, content, {
+        encoding: 'utf-8'
+      })
       console.log('\n')
       spinner.succeed('创建成功')
     })

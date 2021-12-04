@@ -13,17 +13,22 @@ export default [
       {
         title: "安装",
         path: "/dev/install",
-        // component: lazy(() => import('@docs/install.md'))
+        component: lazy(() => import('@docs/dev/install.md'))
       },
       {
         title: "更新日志",
         path: "/dev/logs",
-        // component: lazy(() => import('@docs/install.md'))
+        component: lazy(() => import('@docs/dev/install.md'))
       },
       {
         title: "贡献源码？",
         path: "/dev/contributeCode",
         component: lazy(() => import('@docs/dev/contributeCode.md'))
+      },
+      {
+        title: "Code Review",
+        path: "/dev/CodeReivew",
+        component: lazy(() => import('@docs/dev/CodeReview.md'))
       },
       {
         title: "挖坑ing",

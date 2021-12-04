@@ -9,7 +9,7 @@ export interface HighlightCodeProps {
 }
 
 export function HighlightCode (props: HighlightCodeProps) {
-  const { lang = 'typescript', code } = props
+  const { lang, code } = props
   const [highlightCode, setHighLightCode] = useState('')
 
   useLayoutEffect(() => {
@@ -19,10 +19,11 @@ export function HighlightCode (props: HighlightCodeProps) {
     }).value
 
     setHighLightCode(res)
-  })
+  }, [lang, code])
 
   return (
     <div className='otaku-code-container'>
+      <div className='otaku-code-lang'>{lang}</div>
       <pre>
         <code
           className='otaku-code'

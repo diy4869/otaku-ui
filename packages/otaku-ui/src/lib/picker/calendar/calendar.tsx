@@ -23,7 +23,7 @@ interface CalendarProps {
   lunarDate?: boolean
 }
 
-export const getDateResult = (date: dayjs.ConfigType = new Date(), format: string = 'YYYY-MM-DD') => {
+export const getDateResult = (date: dayjs.ConfigType = new Date(), format = 'YYYY-MM-DD') => {
   const d = dayjs(date)
 
   return {

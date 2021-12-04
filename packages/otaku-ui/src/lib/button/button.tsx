@@ -39,7 +39,7 @@ export const Button = (props: ButtonProps) => {
     onClick
   } = props
 
-  const Icon = loading ? 'otaku-icon-loading' : icon ? icon : ''
+  const Icon = loading ? 'otaku-icon-loading' : icon || ''
 
   const direction = iconDirection === 'left' ? (
     <>

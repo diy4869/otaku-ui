@@ -14,17 +14,17 @@ export function ClickOutSide (props: ClickOutSideProps) {
 
   useEffect(() => {
     const fn = (doc: Document) => {
-      //@ts-ignore
+      // @ts-ignore
         if (!ele.current?.contains(doc.target)) {
           clickOutSide()
         }
     }
 
-    //@ts-ignore
+    // @ts-ignore
     document.addEventListener('click', fn)
 
     return (() => {
-      //@ts-ignore
+      // @ts-ignore
       document.removeEventListener('click', fn)
     })
   }, [])

@@ -63,7 +63,7 @@ module.exports = async () => {
   //         `
   //       ]
   //     }
-    // })
+  // })
   // )
 
   return devConfig

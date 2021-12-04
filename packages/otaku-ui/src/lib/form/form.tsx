@@ -8,12 +8,15 @@ export {
 
 }
 
+
 export const formValidate = new FormValidate()
 
 export interface BaseForm {
   labelAlign?: 'left' | 'right'
   requiredAlign?: 'left' | 'right'
-  model?: object
+  model?: {
+    [key: string]: any
+  }
   labelWidth?: string
   disabled?: boolean
   rules?: Rules

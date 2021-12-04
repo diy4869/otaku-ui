@@ -42,7 +42,6 @@ export function useCalendar(date?: dayjs.ConfigType, firstWeek = '日') {
       current.push(`${d.year()}-${currentMonth + 1}-${i}`)
     }
 
-    
     for (let i = 1; i <= nextMonthEnd; i++) {
       const nextMonth = dayjs().add(1, 'month')
 
@@ -54,5 +53,5 @@ export function useCalendar(date?: dayjs.ConfigType, firstWeek = '日') {
       current,
       next
     }
-  }, [date])
+  }, [date, firstWeek])
 }

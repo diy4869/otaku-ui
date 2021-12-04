@@ -39,6 +39,7 @@ export function Tooltip(props: TooltipProps) {
   } = props
 
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     tippy(ref.current!, {
       content,
       placement,

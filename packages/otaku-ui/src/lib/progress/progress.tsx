@@ -21,8 +21,8 @@ export function Progress (props: ProgressProps) {
     lineWidth = 15,
     color = '#3064FF'
   } = props
+  
   const canvas = useRef<HTMLCanvasElement>(null)
-
   const value = useMemo(() => {
     const result = percentage >= max ? max : percentage
 

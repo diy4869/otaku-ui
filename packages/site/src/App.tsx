@@ -53,7 +53,7 @@ function App () {
                 className={`iconfont otaku-icon-star-fill ${style['github-star']}`}
               ></span>
               <span className={`${style['github-star']}`}>
-                {data.stargazers_count}
+                {data.stargazers_count ?? 0}
               </span>
             </div>
           </header>

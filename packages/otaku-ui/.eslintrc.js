@@ -1,5 +1,9 @@
+/**
+ * @description ts rules https://typescript-eslint.io/rules/adjacent-overload-signatures
+ */
 module.exports = {
   env: {
+    node: true,
     browser: true,
     es2021: true
   },
@@ -42,6 +46,7 @@ module.exports = {
         max: 200
       }
     ],
+    'typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'off'

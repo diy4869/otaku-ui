@@ -1,5 +1,5 @@
 .otaku-home {
-  min-width: 1300px;
+  min-width: 1000px;
   height: 100%;
 
   .otaku-header {
@@ -70,7 +70,7 @@
     grid-area: main;
     background: #f7f8fa;
     padding: 20px;
-    overflow-x: auto;
+    // overflow-x: auto;
     position: relative;
     // border: 2px solid red;
     box-sizing: border-box;
