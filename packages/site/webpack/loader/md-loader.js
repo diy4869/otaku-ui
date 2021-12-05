@@ -7,6 +7,7 @@ const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
+const { transformSync, transform } = require('@babel/core')
 
 let importSynx = `
   import * as React from 'react'
@@ -91,30 +92,45 @@ module.exports = function mdLoader (source) {
           const ast = parser(current.code)
 
           traverse(ast, {
-            FunctionDeclaration (path) {
+            FunctionDeclaration(path) {
               const node = path.node
               const name = node.id.name
               demoName = name
               path.node.id.name = `${name}${demoIndex}`
             },
-            JSXIdentifier (path) {
+            JSXIdentifier(path) {
               if (path.node.name === demoName) {
                 path.node.name = `${demoName}${demoIndex++}`
               }
             }
           })
 
+          // console.log(ast)
           const { code } = generate(ast, {
             retainLines: true
           })
 
+          const result = transformSync(code, {
+            // sourceType: 'module',
+            filename: 'test.js',
+            parserOpts: {
+              presets: [
+                '@babel/preset-env',
+                
+                // '@babel/preset-react',
+                '@babel/preset-typescript',           // '@babel/preset-react'
+              ]
+            }
+   
+          })
+          console.log(result)
           const generatorAST = parser(code)
 
           traverse(generatorAST, {
             FunctionDeclaration (path) {
               const node = path.node
               const injectCode = code.substring(node.start, node.end)
-              
+
               str += `
 ${injectCode}
 `
@@ -137,7 +153,6 @@ ${current.code}
                   <style>{\`${current.style.code}\`}</style>
                   ${exampleCode}
                 </>`
-
               }
             }
           })

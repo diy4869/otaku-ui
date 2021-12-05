@@ -1,120 +1,36 @@
 ---
 import:
-  import { Progress, Grid, GridItem, Button, InputNumber } from 'otaku-ui';
-  import { useState } from 'react';
+  import { Grid, GridItem } from 'otaku-ui'
 ---
 
 [[toc]]
 
-## Progress 进度条
+## Grid 网格
 
 ::: demo
 
-```tsx
-ReactDOM.render(<Progress></Progress>, container)
-```
-:::
-
-## 自定义文字
-
-::: demo
+一个简单的网格
 
 ```tsx
-ReactDOM.render(<Progress>10%</Progress>, container)
-```
-:::
-
-
-## 进度条内显示文字
-
-::: demo
-
-```tsx
-ReactDOM.render(<Progress inner percentage={50}>50%</Progress>, container)
-```
-:::
-
-## 自定义颜色
-
-::: demo
-
-```tsx
-ReactDOM.render(<Progress inner percentage={50} color="red">50%</Progress>, container)
-```
-:::
-
-## 垂直的进度条
-
-::: demo
-
-```tsx
-ReactDOM.render(
-  <Grid>
-    <GridItem>
-      <Progress inner percentage={50} color="red" direction="vertical">50%</Progress>
-    </GridItem>
-    <GridItem>
-      <Progress percentage={50}  direction="vertical">50%</Progress>
-    </GridItem>
-  </Grid>,
-  container
-)
-```
-:::
-
-## 圆形进度条
-
-::: demo
-
-```tsx
-
-ReactDOM.render(
-  <Grid>
-    <GridItem>
-      <Progress percentage={50}  type="circle">50%</Progress>
-    </GridItem>
-    <GridItem>
-      <Progress percentage={20}  type="circle">20%</Progress>
-    </GridItem>
-    <GridItem>
-      <Progress percentage={90}  type="circle" >90%</Progress>
-    </GridItem>
-  </Grid>,
-  container
-)
-```
-:::
-
-
-## 变化的进度条
-
-::: demo
-
-sdaf
-
-```tsx
-
 function Demo () {
-  let [progress, setProgress] = useState(0)
+  const a: number = 1
 
+  console.log(a)
+  
   return (
-    <>
-      <InputNumber value={progress} step={10} onChange={val => {
-        setProgress(val)
-      }}></InputNumber>
-      <Grid class="demo-progress">
-        <GridItem>
-          <Progress percentage={progress}  type="circle"></Progress>
-        </GridItem>
-        <GridItem>
-          <Progress percentage={progress}></Progress>
-        </GridItem>
-        <GridItem>
-          <Progress percentage={progress}  direction="vertical"></Progress>
-        </GridItem>
+    <div>
+      <Grid gap={10}>
+        {
+          Array.from({
+            length: 24
+          }).map((_, index) => {
+            return (
+              <GridItem key={index} className={`demo-container ${index % 2 === 0 ? 'red' : 'blue'}`}>{index + 1}</GridItem>
+            )
+          })
+        }
       </Grid>
-
-    </>
+    </div>
   )
 }
 
@@ -122,23 +38,18 @@ ReactDOM.render(<Demo/>, container)
 ```
 
 ```css
-.otaku-grid {
-  align-items: center;
-  justify-items: center;
+.demo-container {
+  background: black;
+  color: white;
+  padding-left: 5px;
+}
+
+.red {
+  color: red;
+}
+
+.blue {
+  color: blue;
 }
 ```
 :::
-
-## API
-
-```ts
-interface ProgressProps {
-  inner?: boolean
-  percentage?: number
-  max?: number
-  color?: string
-  type?: 'circle'
-  direction?: 'vertical' | 'horizontal'
-  lineWidth?: number
-}
-```

@@ -13,8 +13,11 @@ import:
 
 ```tsx
 function Demo () {
+  const a = 1
+
+  console.log(a)
+
   return (
-    <div>
       <Grid gap={10}>
         {
           Array.from({
@@ -26,7 +29,6 @@ function Demo () {
           })
         }
       </Grid>
-    </div>
   )
 }
 
@@ -38,6 +40,12 @@ ReactDOM.render(<Demo/>, container)
   background: black;
   color: white;
   padding-left: 5px;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
 }
 ```
 :::
