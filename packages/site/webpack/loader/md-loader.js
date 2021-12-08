@@ -7,7 +7,7 @@ const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
-const { transformSync, transform } = require('@babel/core')
+// const { transformSync, transform } = require('@babel/core')
 
 let importSynx = `
   import * as React from 'react'
@@ -92,13 +92,13 @@ module.exports = function mdLoader (source) {
           const ast = parser(current.code)
 
           traverse(ast, {
-            FunctionDeclaration(path) {
+            FunctionDeclaration (path) {
               const node = path.node
               const name = node.id.name
               demoName = name
               path.node.id.name = `${name}${demoIndex}`
             },
-            JSXIdentifier(path) {
+            JSXIdentifier (path) {
               if (path.node.name === demoName) {
                 path.node.name = `${demoName}${demoIndex++}`
               }
@@ -110,27 +110,34 @@ module.exports = function mdLoader (source) {
             retainLines: true
           })
 
-          const result = transformSync(code, {
-            // sourceType: 'module',
-            filename: 'test.js',
-            parserOpts: {
-              presets: [
-                '@babel/preset-env',
-                
-                // '@babel/preset-react',
-                '@babel/preset-typescript',           // '@babel/preset-react'
-              ]
-            }
-   
-          })
-          console.log(result)
+          // const result = transformSync(code, {
+          //   // sourceType: 'module',
+          //   filename: 'test.js',
+          //   presets: [
+          //     // '@babel/preset-env',
+          //     // '@babel/preset-react',
+          //     [
+          //       '@babel/preset-typescript',
+          //       {
+          //         isTsx: true,
+          //         allExtensions: true
+          //       }
+          //     ]
+          //   ],
+          //   // plugins: [
+          //   //   // '@babel/plugin-syntax-typescript',
+          //   //   '@babel/plugin-transform-typescript',
+          //   //   '@babel/plugin-syntax-jsx'
+          //   // ]
+          // })
+          // console.log(result)
           const generatorAST = parser(code)
 
           traverse(generatorAST, {
             FunctionDeclaration (path) {
               const node = path.node
               const injectCode = code.substring(node.start, node.end)
-
+              // console.log(injectCode)
               str += `
 ${injectCode}
 `

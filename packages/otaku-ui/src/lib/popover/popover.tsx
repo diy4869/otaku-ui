@@ -1,5 +1,7 @@
 import React, { useRef, useEffect } from 'react'
-import { createPopper } from '@popperjs/core'
+// import { createPopper } from '@popperjs/core'
+import tippy from 'tippy.js'
+import 'tippy.js/themes/light.css'
 import './style.scss'
 
 type A = 'top' | 'left' | 'right' | 'bottom'
@@ -8,7 +10,7 @@ type C = `${A}-${B}` | A
 
 interface PopoverProps {
   children?: React.ReactNode
-  content: React.ReactNode
+  content: string
   placement?: C
   arrow?: boolean
   theme?: "light" | "light-border" | "material" | "translucent"
@@ -26,7 +28,7 @@ export function Popover (props: PopoverProps) {
     children,
     content,
     arrow,
-    placement = 'bottom',
+    placement,
     theme,
     trigger,
     interactive = true,
@@ -36,35 +38,35 @@ export function Popover (props: PopoverProps) {
   } = props
 
   useEffect(() => {
-    createPopper(container.current!, popover.current!, {
-      placement,
-      modifiers: [
-        {
-          name: 'flip',
-          enabled: true,
-          options: {
-            fallbackPlacements: ['top', 'bottom'],
-          }
-        },
-        {
-          name: 'offset',
-          options: {
-            offset: [0, 8],
-          },
-        },
-      ],
-    })
-    // tippy(ref.current!, {
-    //   content,
+    // createPopper(container.current!, popover.current!, {
     //   placement,
-    //   arrow,
-    //   theme,
-    //   trigger,
-    //   interactive,
-    //   duration,
-    //   delay,
-    //   maxWidth
+    //   modifiers: [
+    //     {
+    //       name: 'flip',
+    //       enabled: true,
+    //       options: {
+    //         fallbackPlacements: ['top', 'bottom'],
+    //       }
+    //     },
+    //     {
+    //       name: 'offset',
+    //       options: {
+    //         offset: [0, 8],
+    //       },
+    //     },
+    //   ],
     // })
+    tippy(container.current!, {
+      content,
+      placement,
+      arrow,
+      theme,
+      trigger,
+      interactive,
+      duration,
+      delay,
+      maxWidth
+    })
   })
 
   return (

@@ -94,12 +94,12 @@
     .table-of-contents {
       position: fixed;
       right: 40px;
-      padding: 15px;
+      padding: 10px;
       background: white;
       border-radius: 10px;
       box-shadow: 0px 10px 50px 0 rgb(0 35 114 / 10%);
       li {
-        margin: 10px 0;
+        // margin: 10px 0;
       }
       a {
         color: #3064FF;
@@ -112,6 +112,7 @@
     }
     ol {
       padding-left: 0;
+      margin-bottom: 0;
       li {
         list-style: none;
       }

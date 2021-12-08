@@ -5,21 +5,13 @@
  */
 module.exports = {
   presets: [
-    '@babel/env',
-    '@babel/preset-react',
-    '@babel/preset-typescript'
-  ],
-  plugins: [
-    'react-hot-loader/babel',
-    '@babel/plugin-syntax-dynamic-import'
-  ],
-  parserOpts: {
-    // presets: [
-    //   '@'
-    // ]
-    plugins: [
-      'jsx',
-      'typescript'
-    ]
-  }
+    '@babel/preset-env',
+    [
+      '@babel/preset-typescript',
+      {
+        isTsx: true
+      }
+    ],
+    '@babel/preset-react'
+  ]
 }

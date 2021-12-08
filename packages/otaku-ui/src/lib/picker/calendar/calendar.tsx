@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
-import { Solar, Lunar, HolidayUtil } from 'lunar-typescript'
 import isBetween from 'dayjs/plugin/isBetween'
+import {  Lunar } from 'lunar-typescript'
 import { useCalendar } from '../../../hooks/index'
 import './style.scss'
 
@@ -69,7 +69,6 @@ export function Calendar (props: CalendarProps) {
     [date, selectDate]
   )
 
-  // @ts-ignore
   const click = (e) => {
     const dataset = e.target.tagName === 'SPAN' ? e.target.parentElement.dataset : e.target.dataset
     const { type, date, disabled } = dataset

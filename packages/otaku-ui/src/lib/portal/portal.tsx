@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { fromEvent } from 'rxjs'
+import { throttleTime } from 'rxjs/operators'
 // import throttle from 'lodash/throttle'
 
 interface TelportProps {
@@ -7,6 +9,7 @@ interface TelportProps {
   children: React.ReactNode
   visible?: boolean
   zIndex?: number
+  mountNode: HTMLElement
   visibleChange?: () => void
   onHide?: () => void
   clickOutSide?: () => void
@@ -28,19 +31,41 @@ export function Portal (props: TelportProps) {
   const {
     children,
     className,
+    mountNode = document.querySelector('body'),
     zIndex = 2000,
     visible = false,
     visibleChange,
     clickOutSide
   } = props
 
-  const selector = 'body'
-  const modalRoot = document.querySelector(selector)
+  const boundary = (modal: HTMLDivElement, node: HTMLDivElement) => {
+    if (node) {
+      const position = modal.children[1].getBoundingClientRect()
+
+      node.style.top = `${position.top}px`
+      node.style.left = `${position.left}px`
+
+      // 处理上边界
+      // 处理下边界
+      const h = node.offsetHeight
+      const minHeight = Math.floor(node.offsetHeight + position.top)
+      const maxHeight = mountNode!.offsetHeight
+      const parentElement = container.current?.parentElement
+      const parentHeight = parentElement!.offsetHeight
+      // console.log(minHeight, maxHeight)
+      if (minHeight > maxHeight) {
+        const top = position.top - h - parentHeight - 5
+        node.style.top = `${top}px`
+      } else {
+        node.style.top = `${position.top}px`
+      }
+    }
+  }
 
   const findNode = (node: Element) => {
-    const children = Array.of(...modalRoot?.children)
+    const children = Array.of(...mountNode?.children)
 
-    return children.find(ele => {
+    return children.find((ele: Element) => {
       if (ele.numberId) {
         return ele?.numberId === node?.numberId
       }
@@ -52,8 +77,9 @@ export function Portal (props: TelportProps) {
 
     if (modal) {
       const el = findNode(modal)
-      // @ts-ignore
       el.style.display = 'block'
+
+      boundary(modal, el)
     }
   }
 
@@ -62,7 +88,6 @@ export function Portal (props: TelportProps) {
 
     if (modal) {
       const el = findNode(modal)
-      // @ts-ignore
       el.style.display = 'none'
     }
   }
@@ -76,23 +101,23 @@ export function Portal (props: TelportProps) {
     if (!node) {
       el.className = 'otaku-teleport-container'
       el.style.cssText = `
-          display: ${visible ? 'block' : 'none'};
-          z-index: ${zIndex};
-          position: fixed;
-          top: ${position.top}px;
-          left: ${position.left}px;
-        `
+        display: ${visible ? 'block' : 'none'};
+        z-index: ${zIndex};
+        position: fixed;
+        top: ${position.top}px;
+        left: ${position.left}px;
+      `
       modal.numberId = id
       modal.teleportId = Symbol(id)
 
       if (!el.numberId) {
         el.numberId = id
         el.teleportId = Symbol(id)
-        modalRoot?.appendChild(el)
+        mountNode?.appendChild(el)
 
         id++
       }
-
+      boundary(modal, el)
       setMountContainer(el)
     }
   }
@@ -106,49 +131,42 @@ export function Portal (props: TelportProps) {
       }
     })
 
-    if (modalRoot) observer.observe(modalRoot)
+    if (mountNode) observer.observe(mountNode)
     if (container.current?.parentElement.numberId) {
       visible ? showNode() : hideNode()
     }
 
     visibleChange?.(visible)
 
-    const fn = (doc: Document) => {
+    const doc = fromEvent(document, 'click').subscribe(e => {
       const parentElement = container.current.parentElement
 
-      // @ts-ignore
-      if (!parentElement?.contains(doc.target)) {
+      if (!parentElement?.contains(e.target as Node)) {
         if (visible) {
           clickOutSide?.()
         }
       }
-    }
-
-    // @ts-ignore
-    document.addEventListener('click', fn)
+    })
 
     return () => {
-      document.removeEventListener('click', fn)
+      doc.unsubscribe()
       observer.disconnect()
     }
   }, [visible])
 
   useEffect(() => {
-    window?.addEventListener('scroll', e => {
+    const observer = fromEvent(window, 'scroll').subscribe(e => {
       if (visible) {
         const modal = container.current?.parentElement
-        const node = findNode(modal)
+        const node = findNode(modal as Element)
 
-        if (node) {
-          const position = modal.children[1].getBoundingClientRect()
-
-          node.style.top = `${position.top}px`
-          node.style.left = `${position.left}px`
-
-          console.log(node, position)
-        }
+        boundary(modal, node)
       }
     })
+
+    return () => {
+      observer.unsubscribe()
+    }
   }, [visible])
 
   return (

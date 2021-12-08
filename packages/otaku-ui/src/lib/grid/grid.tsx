@@ -1,5 +1,5 @@
-import { repeat } from 'lodash'
-import React, { ReactNode, useState } from 'react'
+
+import React from 'react'
 import './style.scss'
 
 interface GridProps {
