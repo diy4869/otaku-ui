@@ -2,7 +2,6 @@ import React, { Children, useState } from 'react'
 import './style.scss'
 import { Input } from '../input/input'
 import { Portal } from '../portal/portal'
-import { ClickOutSide } from '@lib/clickOutside/clickOutside'
 
 interface SelectProps {
   children: React.ReactNode[]

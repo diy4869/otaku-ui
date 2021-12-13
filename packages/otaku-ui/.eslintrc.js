@@ -16,6 +16,7 @@ module.exports = {
     'plugin:react-hooks/recommended'
   ],
   parser: '@typescript-eslint/parser',
+  // parser: 'babel-eslint',
   parserOptions: {
     ecmaFeatures: {
       jsx: true

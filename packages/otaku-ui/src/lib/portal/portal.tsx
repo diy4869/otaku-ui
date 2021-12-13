@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { fromEvent } from 'rxjs'
-import { throttleTime } from 'rxjs/operators'
+// import { throttleTime } from 'rxjs/operators'
 // import throttle from 'lodash/throttle'
 
 interface TelportProps {
@@ -9,21 +9,20 @@ interface TelportProps {
   children: React.ReactNode
   visible?: boolean
   zIndex?: number
-  mountNode: HTMLElement
-  visibleChange?: () => void
-  onHide?: () => void
+  mountNode?: HTMLBodyElement
+  visibleChange?: (show?: boolean) => void
   clickOutSide?: () => void
 }
 
-interface HTMLElement {
-  numberId: number
-  telportId: symbol
+interface HTMLDivElement extends HTMLElement {
+  numberId?: number
+  teleportId?: symbol
 }
 
 let id = 1
 
 export function Portal (props: TelportProps) {
-  const container = useRef<HTMLDivElement>(null)
+  const container = useRef<HTMLDivElement>()
   // 防止 modal 关闭后，portal 渲染的元素为空
   const [mountContainer, setMountContainer] = useState(
     document.createElement('div')
@@ -31,7 +30,7 @@ export function Portal (props: TelportProps) {
   const {
     children,
     className,
-    mountNode = document.querySelector('body'),
+    mountNode = document.querySelector('body') as HTMLBodyElement,
     zIndex = 2000,
     visible = false,
     visibleChange,
@@ -49,9 +48,9 @@ export function Portal (props: TelportProps) {
       // 处理下边界
       const h = node.offsetHeight
       const minHeight = Math.floor(node.offsetHeight + position.top)
-      const maxHeight = mountNode!.offsetHeight
-      const parentElement = container.current?.parentElement
-      const parentHeight = parentElement!.offsetHeight
+      const maxHeight = mountNode.offsetHeight
+      const parentElement = container.current?.parentElement as HTMLDivElement
+      const parentHeight = parentElement.offsetHeight
       // console.log(minHeight, maxHeight)
       if (minHeight > maxHeight) {
         const top = position.top - h - parentHeight - 5
@@ -62,14 +61,15 @@ export function Portal (props: TelportProps) {
     }
   }
 
-  const findNode = (node: Element) => {
-    const children = Array.of(...mountNode?.children)
+  const findNode = (node: HTMLDivElement) => {
+    const children = Array.of(...mountNode.children)
 
-    return children.find((ele: Element) => {
+    return children.find((ele) => {
       if (ele.numberId) {
         return ele?.numberId === node?.numberId
       }
-    })
+      return false
+    }) as HTMLDivElement | undefined
   }
 
   const showNode = () => {
@@ -77,9 +77,11 @@ export function Portal (props: TelportProps) {
 
     if (modal) {
       const el = findNode(modal)
-      el.style.display = 'block'
 
-      boundary(modal, el)
+      if (el) {
+        el.style.display = 'block'
+        boundary(modal, el)
+      }
     }
   }
 
@@ -88,13 +90,13 @@ export function Portal (props: TelportProps) {
 
     if (modal) {
       const el = findNode(modal)
-      el.style.display = 'none'
+      if (el) el.style.display = 'none'
     }
   }
 
   const init = () => {
     const el: HTMLDivElement = mountContainer
-    const modal = container.current?.parentElement
+    const modal = (container.current as HTMLDivElement).parentElement as HTMLDivElement
     const position = modal.children[1].getBoundingClientRect()
     const node = findNode(modal)
 
@@ -132,14 +134,14 @@ export function Portal (props: TelportProps) {
     })
 
     if (mountNode) observer.observe(mountNode)
-    if (container.current?.parentElement.numberId) {
+    if ((container.current?.parentElement as HTMLDivElement).numberId) {
       visible ? showNode() : hideNode()
     }
 
     visibleChange?.(visible)
 
     const doc = fromEvent(document, 'click').subscribe(e => {
-      const parentElement = container.current.parentElement
+      const parentElement = container.current?.parentElement
 
       if (!parentElement?.contains(e.target as Node)) {
         if (visible) {
@@ -155,12 +157,12 @@ export function Portal (props: TelportProps) {
   }, [visible])
 
   useEffect(() => {
-    const observer = fromEvent(window, 'scroll').subscribe(e => {
+    const observer = fromEvent(window, 'scroll').subscribe(() => {
       if (visible) {
-        const modal = container.current?.parentElement
-        const node = findNode(modal as Element)
+        const modal = container.current?.parentElement as HTMLDivElement
+        const node = findNode(modal)
 
-        boundary(modal, node)
+        if (node) boundary(modal, node)
       }
     })
 

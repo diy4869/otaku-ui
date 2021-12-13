@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { Button, ButtonProps } from '../button/button'
 import './style.scss';
 
 
@@ -196,56 +195,5 @@ export function Input (props: InputProps) {
         )
       }
     </>
-  )
-}
-
-interface SearchButtonProps {
-  size: 'small' | 'middle' | 'large'
-  inputProps?: InputProps,
-  buttonProps?: ButtonProps,
-  children: React.ReactNode
-}
-
-export const SearchButton = (props: SearchButtonProps) => {
-  const {
-    size = 'middle',
-    inputProps,
-    buttonProps,
-    children
-  } = props
-
-  return (
-    <div className={`otaku-search-button otaku-search-button-${size}`}>
-      {/* <div> */}
-        <Input
-          {
-            ...inputProps
-          }
-          size={size}
-          type="search"
-          afterNode={
-            <Button
-              {
-              ...buttonProps
-              }
-              size={size}>
-              {children}
-            </Button>
-          }
-        ></Input>
-      {/* </div> */}
-
-      {/* <Telport className="otaku-search-popup">
-        <ul className="otaku-search-list">
-          {
-            Array(10).fill(undefined).map((_, index) => {
-              return (
-              <li className="otaku-search-item">{index}</li>
-              )
-            })
-          }
-        </ul>
-      </Telport> */}
-    </div>
   )
 }

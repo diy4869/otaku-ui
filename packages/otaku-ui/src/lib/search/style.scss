@@ -1,0 +1,29 @@
+.otaku-search-button {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.otaku-search-popup {
+  width: 220px;
+  border: 2px solid red;
+  position: absolute;
+  top: 50px;
+  .otaku-search-list {
+    background: white;
+  }
+  .otaku-search-item {
+    padding: 10px;
+    border-bottom: 1px solid red;
+  }
+}
+
+.otaku-search-button-small {
+  height: 32px;
+}
+.otaku-search-button-middle {
+  height: 36px;
+}
+.otaku-search-button-large {
+  height: 40px;
+}

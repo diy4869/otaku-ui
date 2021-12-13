@@ -1,5 +1,5 @@
 import dayjs from 'dayjs'
-import React, { useState, useEffect, MouseEventHandler } from 'react'
+import React, { useState, useEffect } from 'react'
 import './style.scss'
 
 interface YearProps {

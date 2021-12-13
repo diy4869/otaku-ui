@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React from 'react'
 import { Rules } from 'async-validator'
 import FormValidate from './store'
 import './style.scss'
