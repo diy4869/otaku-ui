@@ -7,7 +7,7 @@ const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
-// const { transformSync, transform } = require('@babel/core')
+const { transformSync, transform } = require('@babel/core')
 
 let importSynx = `
   import * as React from 'react'
@@ -110,27 +110,22 @@ module.exports = function mdLoader (source) {
             retainLines: true
           })
 
-          // const result = transformSync(code, {
-          //   // sourceType: 'module',
-          //   filename: 'test.js',
-          //   presets: [
-          //     // '@babel/preset-env',
-          //     // '@babel/preset-react',
-          //     [
-          //       '@babel/preset-typescript',
-          //       {
-          //         isTsx: true,
-          //         allExtensions: true
-          //       }
-          //     ]
-          //   ],
-          //   // plugins: [
-          //   //   // '@babel/plugin-syntax-typescript',
-          //   //   '@babel/plugin-transform-typescript',
-          //   //   '@babel/plugin-syntax-jsx'
-          //   // ]
-          // })
-          // console.log(result)
+          const result = transformSync(code, {
+            // sourceType: 'module',
+            filename: 'test.js',
+            presets: [
+              '@babel/preset-env',
+              
+              '@babel/preset-react',
+              '@babel/preset-typescript',
+            ],
+            // plugins: [
+            //   // '@babel/plugin-syntax-typescript',
+            //   '@babel/plugin-transform-typescript',
+            //   '@babel/plugin-syntax-jsx'
+            // ]
+          })
+          console.log(result)
           const generatorAST = parser(code)
 
           traverse(generatorAST, {

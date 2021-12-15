@@ -15,22 +15,27 @@ import:
 
 ```tsx
 function Demo () {
-  const a = 1
+  const a: number = 1
 
   console.log(a)
-
+  
   return (
+    <div>
       <Grid gap={10}>
         {
           Array.from({
             length: 24
           }).map((_, index) => {
             return (
-              <GridItem key={index} className="demo-container">{index + 1}</GridItem>
+              <GridItem 
+                key={index} 
+                className={`demo-container ${index % 2 === 0 ? 'blue' : 'red'}`}>{index + 1}
+              </GridItem>
             )
           })
         }
       </Grid>
+    </div>
   )
 }
 

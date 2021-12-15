@@ -25,7 +25,10 @@ function Demo () {
             length: 24
           }).map((_, index) => {
             return (
-              <GridItem key={index} className={`demo-container`}>{index + 1}</GridItem>
+              <GridItem 
+                key={index} 
+                className={`demo-container ${index % 2 === 0 ? 'blue' : 'red'}`}>{index + 1}
+              </GridItem>
             )
           })
         }
