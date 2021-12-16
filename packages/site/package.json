@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generator-api": "node ./webpack/loader/generator-api.js",
     "demo-test": "node ./webpack/loader/test.js",
     "dev": "cross-env NODE_ENV=development webpack serve --hot --open --progress --config webpack/webpack.dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.config.js",

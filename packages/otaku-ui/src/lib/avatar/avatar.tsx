@@ -2,13 +2,18 @@ import React from 'react'
 import './style.scss'
 
 interface AvatarProps {
+  // 图片大小
   size?: number
+  /**
+   * 图片地址
+   */
   src?: string
   alt?: string
   className?: string
+  test?:(a?: number) => void
 }
 
-export const Avatar = (props: AvatarProps): JSX.Element => {
+export function Avatar (props: AvatarProps) {
   const { src, className, alt, size = 40 } = props
 
   return (
@@ -21,4 +26,8 @@ export const Avatar = (props: AvatarProps): JSX.Element => {
       <img src={src} alt={alt} />
     </div>
   )
+}
+
+export function test () {
+  console.log(1)
 }
