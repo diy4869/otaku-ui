@@ -6,11 +6,12 @@ interface AvatarProps {
   size?: number
   /**
    * 图片地址
+   * @zh-cn sdfsf
    */
   src?: string
   alt?: string
   className?: string
-  test?:(a?: number) => void
+  test?: (a?: number) => void
 }
 
 export function Avatar (props: AvatarProps) {

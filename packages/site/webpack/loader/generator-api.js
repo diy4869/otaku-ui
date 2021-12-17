@@ -1,10 +1,8 @@
 const path = require('path')
 const fs = require('fs')
-const traverse = require('@babel/traverse').default
-const parser = require('./compiler')
+const ts = require('typescript')
 const libPath = path.resolve(__dirname, '../../../otaku-ui')
 const entryPath = path.resolve(libPath, './src/index.ts')
-const t = require('@babel/types')
 
 const readFile = path => {
   return fs.readFileSync(path, {
@@ -14,52 +12,83 @@ const readFile = path => {
 const entryContent = readFile(entryPath)
 const lib = new Map()
 const exportLibPath = []
-const ast = parser(entryContent)
+const tsconfig = require('../../../otaku-ui/tsconfig.json')
+const program = ts.createProgram([entryPath], tsconfig)
 
-traverse(ast, {
-  ExportAllDeclaration ({ node }) {
-    const value = node.source.value
-    const filePath = path.resolve(libPath, './src', `${value}.tsx`)
+const parser = (filename, content) => {
+  return ts.createSourceFile(filename, content, ts.ScriptTarget.ESNext, true)
+}
+const getDeclaration = kind => ts.SyntaxKind[kind]
 
-    lib.set(filePath, undefined)
-    exportLibPath.push(filePath)
-  }
-})
+const ast = parser('index.ts', entryContent)
 
-const fileContent = readFile(exportLibPath[0])
-const fileAst = parser(fileContent)
-const data = []
+// console.log(ast)
 
-traverse(fileAst, {
-  enter (path) {
-    if (path.isFunction()) {
-      const result = path.findParent(path => path.isExportDeclaration())
-      if (result) {
-        const node = path.node
-        let exportName
+const getExportPath = () => {
+  const filePath = []
 
-        if (node.type === 'ArrowFunctionExpression') {
-          const parent = path.parent
-          exportName = parent.id.name
-        }
-        if (node.type === 'FunctionDeclaration') {
-          exportName = node.id.name
-        }
+  ast.forEachChild(node => {
+    if (getDeclaration(node.kind) === 'ExportDeclaration') {
+      const value = node.moduleSpecifier.text
 
-        const fnArgs = node.params.map(args => {
-          const name = args.typeAnnotation.typeAnnotation.typeName.name
-          console.log(result)
-          return {
-            name: args.name,
-            typeName: name
-          }
-        })
-
-        data.push({
-          exportName
-        })
-
-      }
+      filePath.push({
+        export: [],
+        path: path.resolve(libPath, './src', `${value}.tsx`)
+      })
     }
+  })
+
+  return filePath
+}
+
+const result = getExportPath()
+
+// console.log(result)
+const index = 0
+const content = readFile(result[index].path)
+const libAST = parser(result[index].path, content)
+
+program.getTypeChecker()
+const sourceFile = program.getSourceFiles()
+
+const fileName = sourceFile.map(item => item.fileName)
+
+let api = {}
+
+libAST.forEachChild(node => {
+  if (getDeclaration(node.kind) === 'InterfaceDeclaration') {
+    api = {
+      name: node.name.escapedText,
+      code: content.substring(node.pos, node.end),
+      property: node.members.map(item => {
+        return {
+          name: item.name.escapedText,
+          type: content.substring(item.type.pos, item.type.end),
+          required: item.questionToken ? false : true,
+          defaultValue: undefined,
+          jsDoc: ts.getJSDocTags(item).map(children => {
+            return {
+              tagName: children.tagName.escapedText,
+              content: children.comment
+            }
+          })
+        }
+      })
+    }
+    console.log(api)
+  }
+
+  if (getDeclaration(node.kind) === 'FunctionDeclaration') {
+    // console.log(node)
+
+    const fnArgs = node.parameters.map(args => {
+      return {
+        name: args.name.escapedText,
+        type:
+          getDeclaration(args.type.kind) === 'TypeReference'
+            ? args.type.typeName.escapedText
+            : ''
+      }
+    })
   }
 })
