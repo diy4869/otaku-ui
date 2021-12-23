@@ -60,7 +60,7 @@ export function CodeExample (props: Example) {
           </Tooltip>
         </li>
       </ul>
-      <ul>
+      {/* <ul>
         {data.map((item, index) => {
           return (
             <li
@@ -73,7 +73,7 @@ export function CodeExample (props: Example) {
             </li>
           )
         })}
-      </ul>
+      </ul> */}
       {collapse && (
         <HighlightCode
           lang={data[currentIndex].lang}

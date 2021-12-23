@@ -1,6 +1,6 @@
 ---
 import: 
-  import { Button, Grid, GridItem } from 'otaku-ui'
+  import { Button, Space, Grid, GridItem } from 'otaku-ui'
 ---
 
 [[toc]]
@@ -13,24 +13,15 @@ import:
 
 ```tsx
 ReactDOM.render(
-  <Grid count={5}>
-    <GridItem>
-      <Button>默认按钮</Button>
-    </GridItem>
-    <GridItem>
-      <Button type="primary">主要按钮</Button>
-    </GridItem>
-    <GridItem>
-      <Button type="success">成功按钮</Button>
-    </GridItem>
-    <GridItem>
-      <Button type="warning">警告按钮</Button>
-    </GridItem>
-    <GridItem>
-      <Button type="danger">错误按钮</Button>
-    </GridItem>
-  </Grid>, 
-container)
+  <Space>
+    <Button>默认按钮</Button>
+    <Button type="primary">主要按钮</Button>
+    <Button type="success">成功按钮</Button>
+    <Button type="warning">警告按钮</Button>
+    <Button type="danger">错误按钮</Button>
+  </Space>, 
+  container
+)
 
 ```
 :::

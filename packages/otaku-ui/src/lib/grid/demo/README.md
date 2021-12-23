@@ -15,9 +15,7 @@ import:
 
 ```tsx
 function Demo () {
-  const a: number = 1
-
-  console.log(a)
+  const a = 1
   
   return (
     <div>
@@ -29,7 +27,7 @@ function Demo () {
             return (
               <GridItem 
                 key={index} 
-                className={`demo-container ${index % 2 === 0 ? 'blue' : 'red'}`}>{index + 1}
+                className="demo-container">{index + 1}
               </GridItem>
             )
           })

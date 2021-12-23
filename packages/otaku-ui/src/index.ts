@@ -26,3 +26,6 @@ export * from './lib/form/formItem'
 export * from './lib/progress/progress'
 export * from './lib/select/select'
 export * from './lib/cropper/cropper'
+
+export * from './lib/space/space'
+export * from './lib/space/space'

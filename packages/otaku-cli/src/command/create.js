@@ -35,11 +35,11 @@ const writeTemplate = (templateDir, writeDir, componentName, templateOptions = {
 
 module.exports = async (name) => {
   const componentName = camelCase(name, { pascalCase: true })
-  
-  const writeDir = path.resolve(__dirname, '../../src/lib', name)
+  const rootDir = path.resolve(__dirname, '../../../')
+  const writeDir = path.resolve(rootDir, './otaku-ui/src/lib', name)
   const templateDir = path.resolve(__dirname, '../template')
-  
-  const entryPath = path.resolve(__dirname, '../../src', 'index.ts')
+  const entryPath = path.resolve(rootDir, './otaku-ui/src', 'index.ts')
+
   let content = fs.readFileSync(entryPath, {
     encoding: 'utf-8'
   })

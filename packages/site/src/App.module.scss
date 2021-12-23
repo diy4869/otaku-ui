@@ -42,6 +42,7 @@
     padding: 10px 0 0 0px;
     box-sizing: border-box;
     overflow-x: auto;
+    height: calc(100vh - 60px);
     h3 {
       margin: 10px 15px;
     }
@@ -74,8 +75,9 @@
     position: relative;
     // border: 2px solid red;
     box-sizing: border-box;
-    
-    height: 100%;
+    height: calc(100vh - 60px);
+    overflow-x: auto;
+    // height: 100%;
     // &::-webkit-scrollbar {
     //   display: none;
     // }

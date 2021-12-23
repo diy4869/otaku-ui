@@ -51,7 +51,7 @@ export function Portal (props: TelportProps) {
       const maxHeight = mountNode.offsetHeight
       const parentElement = container.current?.parentElement as HTMLDivElement
       const parentHeight = parentElement.offsetHeight
-      // console.log(minHeight, maxHeight)
+      console.log(minHeight, maxHeight, position)
       if (minHeight > maxHeight) {
         const top = position.top - h - parentHeight - 5
         node.style.top = `${top}px`
@@ -142,7 +142,6 @@ export function Portal (props: TelportProps) {
 
     const doc = fromEvent(document, 'click').subscribe(e => {
       const parentElement = container.current?.parentElement
-
       if (!parentElement?.contains(e.target as Node)) {
         if (visible) {
           clickOutSide?.()

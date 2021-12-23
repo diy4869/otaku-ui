@@ -51,7 +51,7 @@ export function Month(props: MonthProps) {
 
             return (
               <li
-                key="index"
+                key={index}
                 className={`
                   otaku-month-item
                   ${m === dayjs().month() + 1 ? 'otaku-datepicker-currentMonth' : ''}

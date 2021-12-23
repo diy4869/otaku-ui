@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import isBetween from 'dayjs/plugin/isBetween'
-import {  Lunar } from 'lunar-typescript'
+import { Lunar } from 'lunar-typescript'
 import { useCalendar } from '../../../hooks/index'
 import './style.scss'
 
@@ -34,7 +34,6 @@ export const getDateResult = (date: dayjs.ConfigType = new Date(), format = 'YYY
   }
 }
 
-
 export function Calendar (props: CalendarProps) {
   const {
     date,
@@ -64,7 +63,6 @@ export function Calendar (props: CalendarProps) {
   useEffect(
     () => {
       setSelectDate(dayjs(date).format('YYYY-M-D'))
-      console.log(date, dayjs(selectDate).format('YYYY-M-D'))
     },
     [date, selectDate]
   )
@@ -73,9 +71,7 @@ export function Calendar (props: CalendarProps) {
     const dataset = e.target.tagName === 'SPAN' ? e.target.parentElement.dataset : e.target.dataset
     const { type, date, disabled } = dataset
     
-    console.log(e)
     if (disabled !== 'true' && date && type === 'current') {
-      console.log(date)
       setSelectDate(date)
       onClick?.(getDateResult(date, format))
     }
