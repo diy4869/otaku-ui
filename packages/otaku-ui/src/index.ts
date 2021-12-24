@@ -28,4 +28,6 @@ export * from './lib/select/select'
 export * from './lib/cropper/cropper'
 
 export * from './lib/space/space'
-export * from './lib/space/space'
+export * from './lib/message/message'
+export * from './lib/alert/alert'
+export * from './lib/breadCrumbs/breadCrumbs'

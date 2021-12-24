@@ -1,0 +1,23 @@
+.otaku-bread-crumbs {
+  display: flex;
+
+  .otaku-bread-crumbs-item {
+    color: #262626;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    gap: 0 5px;
+    padding-left: 5px;
+
+    &:nth-last-of-type(1) {
+      .otaku-bread-crumbs-separator {
+        display: none;
+      }
+    }
+
+    .otaku-icon-right {
+      font-size: 12px;
+      font-weight: bold;
+    }
+  }
+}

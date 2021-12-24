@@ -58,6 +58,41 @@ export default [
     ]
   },
   {
+    title: "导航",
+    children: [
+      {
+        title: "Bread Crumbs 面包屑",
+        path: "/nav/breadCrumbs",
+        component: lazy(() => import('otaku-ui/src/lib/breadCrumbs/demo/README.md'))
+      },
+      {
+        title: "Timeline 时间线",
+        path: "/nav/timeline",
+        component: lazy(() => import('otaku-ui/src/lib/timeline/demo/README.md'))
+      },
+      {
+        title: 'Pagination 分页',
+        path: '/nav/pagination',
+        component: lazy(() => import('otaku-ui/src/lib/pagination/demo/README.md'))
+      }
+    ]
+  },
+  {
+    title: "通知",
+    children: [
+      {
+        title: "Alert 警告",
+        path: "/alert",
+        component: lazy(() => import('otaku-ui/src/lib/alert/demo/README.md'))
+      },
+      {
+        title: "Message 信息",
+        path: "/message",
+        component: lazy(() => import('otaku-ui/src/lib/message/demo/README.md'))
+      }
+    ]
+  },
+  {
     title: "表单",
     children: [
       {
@@ -123,16 +158,6 @@ export default [
         title: "search 搜索框",
         path: "/display/search",
         component: lazy(() => import('otaku-ui/src/lib/search/demo/README.md'))
-      },
-      {
-        title: "timeline 时间线",
-        path: "/display/timeline",
-        component: lazy(() => import('otaku-ui/src/lib/timeline/demo/README.md'))
-      },
-      {
-        title: 'pagination 分页',
-        path: '/display/pagination',
-        component: lazy(() => import('otaku-ui/src/lib/pagination/demo/README.md'))
       },
       {
         title: 'rate 评分',
