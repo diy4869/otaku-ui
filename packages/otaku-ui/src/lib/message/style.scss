@@ -1,0 +1,27 @@
+@import '../../style/var.scss';
+
+.otaku-message {
+  background: white;
+  border-radius: $radius;
+  box-shadow: $shadow;
+  padding: 10px;
+  cursor: pointer;
+
+  .otaku-message-icon {
+    margin-right: 5px;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  .otaku-icon-info {
+    color: #0f73f7;
+  }
+  .otaku-icon-success {
+    color: #2DA641;
+  }
+  .otaku-icon-warning {
+    color: #ffb540;
+  }
+  .otaku-icon-error {
+    color: #f51010;
+  }
+}

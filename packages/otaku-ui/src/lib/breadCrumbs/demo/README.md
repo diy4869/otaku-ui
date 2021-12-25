@@ -43,7 +43,7 @@ function Demo () {
         type.map((item, index) => {
           return (
             <BreadCrumbsItem 
-              icon={<span class="iconfont otaku-icon-user"></span>}
+              icon={<span className="iconfont otaku-icon-user"></span>}
               key={index}>{item}</BreadCrumbsItem>
             )
         })
