@@ -5,8 +5,6 @@ import:
 
 [[toc]]
 
-# 撒旦法
-
 ## Grid 网格
 
 ::: demo
@@ -22,7 +20,7 @@ function Demo () {
       <Grid gap={10}>
         {
           Array.from({
-            length: 24
+            length: 12
           }).map((_, index) => {
             return (
               <GridItem 

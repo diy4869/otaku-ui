@@ -13,7 +13,6 @@ import:
 
 ```tsx
 ReactDOM.render(<Checkbox>多选框</Checkbox>, container)
-
 ```
 :::
 
@@ -25,7 +24,6 @@ ReactDOM.render(<Checkbox>多选框</Checkbox>, container)
 
 ```tsx
 ReactDOM.render(<Checkbox checked={true}>多选框</Checkbox>, container)
-
 ```
 :::
 
@@ -52,5 +50,4 @@ interface CheckBoxProps {
   children?: React.ReactNode[]
   onChange?: (checked?: boolean) => void
 }
-
 ```

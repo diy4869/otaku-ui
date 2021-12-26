@@ -2,19 +2,13 @@ import React, { Suspense, useEffect } from 'react'
 import { hot } from 'react-hot-loader/root'
 import style from './App.module.scss'
 
-import {
-  HashRouter as Router,
-  Route,
-  Switch,
-  NavLink,
-  Redirect
-} from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
 import http from './api'
 import { useState } from 'react'
 
-function App () {
+function App() {
   const [data, setData] = useState<{
     stargazers_count?: number
   }>({})
@@ -22,8 +16,8 @@ function App () {
     http
       .get('https://api.github.com/repos/diy4869/otaku-ui', {
         headers: {
-          Authorization: 'token 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'
-        }
+          Authorization: 'token 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',
+        },
       })
       .then(res => {
         console.log(res)
@@ -36,77 +30,67 @@ function App () {
   }, [])
 
   return (
-    <Suspense fallback={<div></div>}>
-      <Router>
-        <div className={style['otaku-home']}>
-          <header className={style['otaku-header']}>
-            {/* otaku-ui | OTAKU-UI |  */}
-            <div className={style['otaku-title']}>
-              <span>OTAKU-UI</span>
-            </div>
+    <Router>
+      <div className={style['otaku-home']}>
+        <header className={style['otaku-header']}>
+          {/* otaku-ui | OTAKU-UI |  */}
+          <div className={style['otaku-title']}>
+            <span>OTAKU-UI</span>
+          </div>
 
-            <div>
-              <a href='https://github.com/diy4869/otaku-ui' target='_blank'>
-                GitHub
-              </a>
-              <span
-                className={`iconfont otaku-icon-star-fill ${style['github-star']}`}
-              ></span>
-              <span className={`${style['github-star']}`}>
-                {data.stargazers_count ?? 0}
-              </span>
-            </div>
-          </header>
-          <aside className={style['content']}>
-            <aside className={style['sidebar']}>
-              {routes.map(item => {
-                return (
-                  <>
-                    <h3 className={style['title']}>{item.title}</h3>
-                    <div className={style['otaku-menu']}>
-                      {item.children.map(children => {
-                        return (
-                          <NavLink
-                            activeClassName={style['active']}
-                            className={`${style['otaku-menu-item']}`}
-                            to={children.path}
-                          >
-                            {children.title}
-                          </NavLink>
-                        )
-                      })}
-                    </div>
-                  </>
-                )
-              })}
-            </aside>
+          <div>
+            <a href="https://github.com/diy4869/otaku-ui" target="_blank">
+              GitHub
+            </a>
+            <span className={`iconfont otaku-icon-star-fill ${style['github-star']}`}></span>
+            <span className={`${style['github-star']}`}>{data.stargazers_count ?? 0}</span>
+          </div>
+        </header>
+        <aside className={style['content']}>
+          <aside className={style['sidebar']}>
+            {routes.map(item => {
+              return (
+                <>
+                  <h3 className={style['title']}>{item.title}</h3>
+                  <div className={style['otaku-menu']}>
+                    {item.children.map(children => {
+                      return (
+                        <NavLink
+                          activeClassName={style['active']}
+                          className={`${style['otaku-menu-item']}`}
+                          to={children.path}
+                        >
+                          {children.title}
+                        </NavLink>
+                      )
+                    })}
+                  </div>
+                </>
+              )
+            })}
+          </aside>
+          <Suspense fallback={<div></div>}>
             <aside className={style['main']}>
               <Switch>
                 {routes.map(router => {
                   return router.children.map(children => {
-                    return (
-                      <Route
-                        path={children.path}
-                        component={children.component}
-                        key={children.path}
-                      />
-                    )
+                    return <Route path={children.path} component={children.component} key={children.path} />
                   })
                 })}
-                <Route path='*' component={NotFound}></Route>
+                <Route path="*" component={NotFound}></Route>
                 <Redirect
-                  from='/'
+                  from="/"
                   to={{
-                    pathname: '/dev/introduce'
+                    pathname: '/dev/introduce',
                   }}
                 ></Redirect>
               </Switch>
               {/* <CodeExample></CodeExample> */}
             </aside>
-          </aside>
-        </div>
-      </Router>
-    </Suspense>
+          </Suspense>
+        </aside>
+      </div>
+    </Router>
   )
 }
 

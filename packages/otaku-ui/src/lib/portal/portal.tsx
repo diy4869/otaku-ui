@@ -156,17 +156,21 @@ export function Portal (props: TelportProps) {
   }, [visible])
 
   useEffect(() => {
-    const observer = fromEvent(window, 'scroll').subscribe(() => {
+    const fn = () => {
       if (visible) {
         const modal = container.current?.parentElement as HTMLDivElement
         const node = findNode(modal)
-
+        console.log(node)
         if (node) boundary(modal, node)
       }
-    })
+    }
+
+    const scrollObserver = fromEvent(window, 'scroll').subscribe(fn)
+    const resizeObserver = fromEvent(window, 'resize').subscribe(fn)
 
     return () => {
-      observer.unsubscribe()
+      scrollObserver.unsubscribe()
+      resizeObserver.unsubscribe()
     }
   }, [visible])
 

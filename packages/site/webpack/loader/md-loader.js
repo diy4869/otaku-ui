@@ -138,8 +138,7 @@ ${injectCode}
 `
               current.code = `${data.import}
 
-${current.code}
-`
+${current.code}`
             },
             CallExpression (path) {
               const callee = path.node.callee

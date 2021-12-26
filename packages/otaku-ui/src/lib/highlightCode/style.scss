@@ -1,18 +1,33 @@
 .otaku-code-container {
-  padding: 20px;
+  padding: 10px;
   background: white;
   // border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   position: relative;
+  display: grid;
+  grid-template-columns: auto 1fr;
   .otaku-code-lang {
     position: absolute;
     right: 10px;
     top: 5px;
     color: #bfbfbf;
   }
+  .otaku-code-line-container {
+    list-style: none;
+    padding: 0 10px;
+    border-right: 1px solid #e7e7e7;
+    text-align: center;
+    .otaku-code-line {
+      list-style: none;
+      line-height: 1.45;
+      font-size: 14px;
+      color: #333333;
+    }
+  }
   pre {
     background: white;
     margin: 0;
+    padding: 0 10px;
   }
   code {
     // padding: 15px;

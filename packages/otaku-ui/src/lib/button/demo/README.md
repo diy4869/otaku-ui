@@ -22,7 +22,6 @@ ReactDOM.render(
   </Space>, 
   container
 )
-
 ```
 :::
 
@@ -35,7 +34,6 @@ ReactDOM.render(
 
 ```tsx
 ReactDOM.render(<Button type="primary" shape="round">主要按钮</Button>, container)
-  
 ```
 :::
 
@@ -66,8 +64,6 @@ ReactDOM.render(
   </Grid>,
   container
 )
-
-
 ```
 :::
 
@@ -98,8 +94,6 @@ ReactDOM.render(
   </Grid>,
   container
 )
-
-
 ```
 :::
 
@@ -130,7 +124,6 @@ ReactDOM.render(
   </Grid>,
   container
 )
-
 ```
 :::
 
@@ -164,8 +157,6 @@ function Demo () {
 }
 
 ReactDOM.render(<Demo/>, container)
-
-
 ```
 :::
 
@@ -198,7 +189,6 @@ ReactDOM.render(
   </Grid>,
   container
 )
-
 ```
 :::
 
@@ -221,8 +211,6 @@ ReactDOM.render(
   </Grid>,
   container
 )
-
-
 ```
 :::
 
@@ -244,5 +232,4 @@ export interface ButtonProps {
   size?: 'small' | 'middle' |'large' // 大小
   onClick?:() => void
 }
-
 ```
