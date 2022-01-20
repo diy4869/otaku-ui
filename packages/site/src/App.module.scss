@@ -93,6 +93,9 @@
 :global {
   .markdown-body {
     width: 800px;
+    table {
+      display: table;
+    }
     .table-of-contents {
       position: fixed;
       right: 40px;
@@ -126,6 +129,7 @@
       }
     }
   }
+  
 
   @media (max-width: 767px) {
     .markdown-body {

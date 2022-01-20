@@ -786,7 +786,7 @@
   padding-right: 20px;
 }
 
-/* .markdown-body code {
+.markdown-body code {
   padding: .2em .4em;
   margin: 0;
   font-size: 85%;
@@ -810,9 +810,9 @@
 
 .markdown-body .highlight {
   margin-bottom: 16px;
-} */
+} 
 
-/* .markdown-body .highlight pre {
+.markdown-body .highlight pre {
   margin-bottom: 0;
   word-break: normal;
 }
@@ -837,7 +837,7 @@
   word-wrap: normal;
   background-color: initial;
   border: 0;
-} */
+}
 
 .markdown-body .commit-tease-sha {
   display: inline-block;

@@ -97,7 +97,7 @@ const baseConfig = {
       // },
       {
         test: /\.md$/,
-        use: ['babel-loader', path.resolve(__dirname, '../webpack/loader/index.js')]
+        use: ['babel-loader',  path.resolve(__dirname, '../webpack/loader/index.js')]
       },
       {
         test: /\.(js|jsx)$/,

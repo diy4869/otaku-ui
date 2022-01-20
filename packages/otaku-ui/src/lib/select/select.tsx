@@ -1,4 +1,4 @@
-import React, { Children, useState } from 'react'
+import React, { useState } from 'react'
 import './style.scss'
 import { Input } from '../input/input'
 import { Portal } from '../portal/portal'
@@ -11,7 +11,7 @@ export function Select (props: SelectProps) {
   const { children } = props
   const [show, setShow] = useState(false)
 
-  const change = e => {
+  const click = (e: React.MouseEventHandler<HTMLUListElement>) => {
     console.log(e.target)
   }
   const focus = () => {
@@ -26,7 +26,7 @@ export function Select (props: SelectProps) {
         className='otaku-select-input'
         onFocus={focus}></Input>
       <Portal visible={show} clickOutSide={() => setShow(false)}>
-        <ul className='otaku-select' onClick={change}>
+        <ul className='otaku-select' onClick={() => click}>
           {children}
         </ul>
       </Portal>

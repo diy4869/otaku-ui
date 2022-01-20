@@ -38,7 +38,7 @@ export function Pagination (props: PaginationProps) {
         page < maxPage ? setPage(++page) : setPage(maxPage)
         break
       default:
-        setPage(current)
+        setPage(current as number)
         break
     }
 
@@ -79,7 +79,7 @@ export function Pagination (props: PaginationProps) {
       }
       {
        pagination?.map((item) => {
-          return renderPageItem(item)
+          return renderPageItem(item as number)
        })
       }
       {

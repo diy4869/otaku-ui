@@ -145,6 +145,11 @@ export default [
     title: '展示',
     children: [
       {
+        title: "avatar 头像",
+        path: "/display/avatar",
+        component: lazy(() => import('otaku-ui/src/lib/avatar/demo/README.md'))
+      },
+      {
         title: "table 表格",
         path: "/display/table",
         component: lazy(() => import('otaku-ui/src/lib/table/demo/README.md'))

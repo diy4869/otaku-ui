@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { message, Message } from './message'
+import { Message } from './message'
 import { styleToStr } from '../../utils'
-import debounce from 'lodash/debounce'
+// import debounce from 'lodash/debounce'
 
 
 interface Options {

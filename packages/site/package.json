@@ -8,6 +8,7 @@
     "demo-test": "node ./webpack/loader/test.js",
     "dev": "cross-env NODE_ENV=development webpack serve --hot --open --progress --config webpack/webpack.dev.config.js",
     "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.prod.config.js",
+    "build:dev": "cross-env NODE_ENV=development webpack --config webpack/webpack.dev.config.js",
     "build:server": "cross-env NODE_ENV=development webpack --config webpack/webpack.server.config.js",
     "build:ssr": "npm run build && npm run build:server",
     "test": "echo \"Error: no test specified\" && exit 1"
