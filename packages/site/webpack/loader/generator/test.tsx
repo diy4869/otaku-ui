@@ -1,11 +1,18 @@
 import { a } from './type'
+import testExportDefault from './type2'
+
 type N = number
 
 interface B {
   fn: void
 }
 
-export interface Props extends B {
+interface C {
+  fn2: void
+}
+
+
+export interface Props extends B, C {
   /**
    * xxxx
    * @zh-cn 中文

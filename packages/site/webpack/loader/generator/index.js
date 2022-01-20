@@ -31,6 +31,7 @@ const program = ts.createProgram([entryPath], tsconfig)
 const parser = (filename, content) => {
   return ts.createSourceFile(filename, content, ts.ScriptTarget.ESNext, true)
 }
+
 const isExport = node => node.modifiers?.length === 1 && getDeclaration(node.modifiers[0].kind)  === 'ExportKeyword'
 const getDeclaration = kind => ts.SyntaxKind[kind]
 const ast = parser('index.ts', entryContent)
@@ -54,61 +55,100 @@ const getExportPath = () => {
 }
 
 const exportLibPath = getExportPath()
-
-
-const index = 0
 const content = readFile(path.resolve(__dirname, './test.tsx'))
 const libAST = parser('./index.tsx', content)
-
 const sourceFile = program.getSourceFile(entryPath)
 
-
 const api = {}
-
+const importPath = {}
 const exportList = []
 
 libAST.forEachChild(node => {
-  if (getDeclaration(node.kind) === 'InterfaceDeclaration') {
-    api[node.name.escapedText] = {
-      name: node.name.escapedText,
-      code: content.substring(node.pos, node.end),
-      property: node.members.map(item => {
+  const type = getDeclaration(node.kind)
+
+  switch (type) {
+    case 'ImportDeclaration':
+      const importClause = node.importClause
+
+      if (importClause.namedBindings) {
+        // 解构引入
+        importClause.namedBindings.elements.reduce((obj, current) => {
+          obj[current.name.escapedText] = {
+            // 解构
+            deconstruct: true,
+            name: current.name.escapedText,
+            importPath: node.moduleSpecifier.text
+          }
+
+          return obj
+        }, api)
+      } else {
+        // 命名导出
+        const name = importClause.name.escapedText
+        importPath[name] = {
+          name,
+          nameExport: true,
+          importPath: node.moduleSpecifier.text
+        }
+      }
+      break
+    case 'InterfaceDeclaration':
+      // 继承的接口
+      const extendsInterface = node.heritageClauses?.[0].types?.map(item => {
         return {
-          name: item.name.escapedText,
-          type: content.substring(item.type.pos, item.type.end),
-          required: item.questionToken ? false : true,
-          defaultValue: undefined,
-          jsDoc: ts.getJSDocTags(item).map(children => {
-            return {
-              tagName: children.tagName.escapedText,
-              content: children.comment
-            }
-          })
+          name: item.expression.escapedText
         }
       })
-    }
-  }
 
-
-  if (getDeclaration(node.kind) === 'FunctionDeclaration') {
-    exportList.push({
-      exportDefault: false,
-      export: isExport(node),
-      functionName: node.name.escapedText,
-      args:  node.parameters?.map(args => {
-        const typeName = getDeclaration(args?.type?.kind) === 'TypeReference'
-          ? args.type.typeName.escapedText : ''
-        const type = api[typeName]
-
-        return {
-          name: args.name.escapedText,
-          type
-        }
+      api[node.name.escapedText] = {
+        name: node.name.escapedText,
+        code: content.substring(node.pos, node.end),
+        extendProperty: extendsInterface?.reduce((total, current) => {
+          return total.concat(api[current.name])
+        }, []),
+        property: node.members.map(item => {
+          return {
+            name: item.name.escapedText,
+            type: content.substring(item.type.pos, item.type.end),
+            required: item.questionToken ? false : true,
+            defaultValue: undefined,
+            jsDoc: ts.getJSDocTags(item).map(children => {
+              return {
+                tagName: children.tagName.escapedText,
+                content: children.comment
+              }
+            })
+          }
+        })
+      }
+      break
+    case 'TypeAliasDeclaration':
+      api[node.name.escapedText] = {
+        name: node.name.escapedText,
+        code: content.substring(node.pos, node.end)
+      }
+      break
+    case 'FunctionDeclaration':
+      exportList.push({
+        exportDefault: false,
+        export: isExport(node),
+        functionName: node.name.escapedText,
+        args:  node.parameters?.map(args => {
+          const typeName = getDeclaration(args?.type?.kind) === 'TypeReference'
+            ? args.type.typeName.escapedText : ''
+          const type = api[typeName]
+  
+          return {
+            name: args.name.escapedText,
+            type
+          }
+        })
       })
-    })
-    console.log(exportList)
+      break
   }
 })
 
+console.log(exportList)
 
+console.log(api)
 
