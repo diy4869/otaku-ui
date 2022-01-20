@@ -11,17 +11,16 @@ const readFile = path => {
 }
 
 const getDefaultValue = node => {
-  const arr = []
+  let arr = []
 
-  node.forEachChild(el => {
-    console.log(el)
-    arr = el.declarationList.declarations[0].name.elements.map(children => {
-      return {
-        name: children.name.escapedText,
-        value: children.initializer?.text
-      }
-    })
-  })
+  // node.forEachChild(el => {
+  //   arr = el.declarationList.declarations[0].name.elements.map(children => {
+  //     return {
+  //       name: children.name.escapedText,
+  //       value: children.initializer?.text
+  //     }
+  //   })
+  // })
 }
 
 const entryContent = readFile(entryPath)
@@ -64,7 +63,9 @@ const libAST = parser('./index.tsx', content)
 const sourceFile = program.getSourceFile(entryPath)
 
 
-let api = {}
+const api = {}
+
+const exportList = []
 
 libAST.forEachChild(node => {
   if (getDeclaration(node.kind) === 'InterfaceDeclaration') {
@@ -89,19 +90,25 @@ libAST.forEachChild(node => {
   }
 
 
-  if (getDeclaration(node.kind) === 'FunctionDeclaration' && isExport(node)) {
-    
-    getDefaultValue(node.body)
-    // console.log(node.getChildren())
+  if (getDeclaration(node.kind) === 'FunctionDeclaration') {
+    exportList.push({
+      exportDefault: false,
+      export: isExport(node),
+      functionName: node.name.escapedText,
+      args:  node.parameters?.map(args => {
+        const typeName = getDeclaration(args?.type?.kind) === 'TypeReference'
+          ? args.type.typeName.escapedText : ''
+        const type = api[typeName]
 
-    const fnArgs = node.parameters?.map(args => {
-      return {
-        name: args.name.escapedText,
-        type:
-          getDeclaration(args?.type?.kind) === 'TypeReference'
-            ? args.type.typeName.escapedText
-            : ''
-      }
+        return {
+          name: args.name.escapedText,
+          type
+        }
+      })
     })
+    console.log(exportList)
   }
 })
+
+
+

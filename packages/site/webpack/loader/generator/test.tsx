@@ -1,3 +1,4 @@
+import { a } from './type'
 type N = number
 
 interface B {
@@ -14,6 +15,7 @@ export interface Props extends B {
   b?: string,
   c: boolean,
   d: any,
+  f: a
   size: 'small' | 'middle' | 'large'
   e: (a: number) => void
 }

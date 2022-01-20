@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { formValidate } from './form'
+import React, { useState, useEffect, useContext } from 'react'
+import { formValidate, FormContext } from './form'
 import './style.scss'
 
 interface FormItemProps {
@@ -12,17 +12,18 @@ interface FormItemProps {
 export function FormItem (props: FormItemProps) {
   const {
     label,
-    name,
+    ruleName,
     required,
     children
   } = props
 
-  const { labelWidth, model, labelAlign, requiredAlign } = formValidate.getOptions()
+  const FormOptions = useContext(FormContext)
+  const { labelWidth, model, labelAlign, requiredAlign } = FormOptions
   const [validateErrors] = useState(formValidate.validateErrors)
 
   useEffect(() => {
-    console.log(formValidate.validateErrors, validateErrors)
-  }, [validateErrors])
+    console.log(formValidate, validateErrors, FormOptions)
+  }, [formValidate, validateErrors])
 
   
   return (
