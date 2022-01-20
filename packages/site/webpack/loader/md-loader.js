@@ -23,7 +23,7 @@ const reactMarkdownTemplate = (str, importSynx, content) => {
     ${str}
 
     function MdReact () {
-      return <div className='b-md-container markdown-body'>${content}</div>
+      return <div className='markdown-body'>${content}</div>
     }
 
     export default MdReact

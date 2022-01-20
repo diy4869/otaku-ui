@@ -1,0 +1,27 @@
+.otaku-table {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-collapse: collapse;
+  
+  th, tr {
+    text-align: left;
+  }
+
+  th {
+    display: table-row;
+    width: 100%;
+    background: #fafafa;
+  }
+  .otaku-table-multiple {
+    width: 20px;
+  }
+  .otaku-table-row {
+    &:nth-of-type(even) {
+      background: #fafafa;
+    }
+  }
+  td {
+    border: 1px solid #e0e0e0;
+    padding: 16px 24px;
+  }
+}

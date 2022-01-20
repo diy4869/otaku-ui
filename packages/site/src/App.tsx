@@ -7,6 +7,7 @@ import routes from './router/index'
 import NotFound from './components/notFound/notFound'
 import http from './api'
 import { useState } from 'react'
+import './assets/github-markdown-css/index.css'
 
 function App() {
   const [data, setData] = useState<{

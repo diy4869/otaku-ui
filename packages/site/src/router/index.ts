@@ -145,6 +145,11 @@ export default [
     title: '展示',
     children: [
       {
+        title: "table 表格",
+        path: "/display/table",
+        component: lazy(() => import('otaku-ui/src/lib/table/demo/README.md'))
+      },
+      {
         title: "progress 进度条",
         path: "/display/progress",
         component: lazy(() => import('otaku-ui/src/lib/progress/demo/README.md'))
