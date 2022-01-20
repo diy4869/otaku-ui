@@ -20,13 +20,16 @@ export default class FormValidate {
     return this.options
   }
 
+  get validateStatus () {
+    return this.status
+  }
+
   validate() {
     const {
       model = {},
       rules = {}
     } = this.options
     const validator = new Schema(rules)
-    console.log(rules)
     return new Promise((resolve, reject) => {
       validator.validate(model, {
         firstFields: true

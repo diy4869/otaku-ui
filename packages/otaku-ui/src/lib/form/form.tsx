@@ -3,24 +3,19 @@ import { Rules } from 'async-validator'
 import FormValidate from './store'
 import './style.scss'
 
-export {
-  FormValidate
-
-}
-
-
-export const formValidate = new FormValidate()
-
 export interface BaseForm {
   labelAlign?: 'left' | 'right'
   requiredAlign?: 'left' | 'right'
   model?: {
-    [key: string]: any
+    [key: string]: unknown
   }
   labelWidth?: string
   disabled?: boolean
   rules?: Rules
 }
+
+export const FormContext = React.createContext<BaseForm | null>(null)
+export const formValidate = new FormValidate()
 
 export interface FormProps extends BaseForm {
   children: React.ReactNode[]
@@ -41,6 +36,14 @@ export function Form (props: FormProps) {
     getFormInstance
   } = props
 
+  const options = {
+    labelAlign,
+    requiredAlign,
+    disabled,
+    labelWidth,
+    model,
+    rules
+  }
   formValidate.setOptions({
     labelAlign,
     requiredAlign,
@@ -52,8 +55,14 @@ export function Form (props: FormProps) {
   getFormInstance?.(formValidate)
   
   return (
-    <form>
-      <ul className="otaku-form" >{children}</ul>
-    </form>
+    <FormContext.Provider value={options}>
+      <form>
+        <ul className="otaku-form">{children}</ul>
+      </form>
+    </FormContext.Provider>
   )
+}
+
+export {
+  FormValidate
 }

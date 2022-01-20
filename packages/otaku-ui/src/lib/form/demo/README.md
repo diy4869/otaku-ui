@@ -8,13 +8,9 @@ import:
 
 ::: demo
 
-```tsx example
-<Example></Example>
-```
-
 ```tsx
 function Example() {
-  let formValidate: FormValidate
+  let formValidate
 
   const form = useRef(null)
   const [model, setModel] = useState({
@@ -72,5 +68,7 @@ function Example() {
     </Form>
   )
 }
+
+ReactDOM.render(<Example/>, container)
 ```
 :::
