@@ -34,6 +34,23 @@ const exportLibPath = getExportPath()
 const sourceFile = program.getSourceFile(entryPath)
 
 const filePath = path.resolve(__dirname, './test.tsx')
+
+
+
+// parserFileResult.set(1, 2)
+
+
+
+
 const data = transform(filePath)
+
+console.log(data)
+
+
+
+
+
+
+
 
 
