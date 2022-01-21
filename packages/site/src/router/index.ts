@@ -11,6 +11,11 @@ export default [
         component: lazy(() => import('@docs/dev/introduce.md'))
       },
       {
+        title: "test",
+        path: "/test",
+        component: lazy(() => import('@docs/dev/test.md'))
+      },
+      {
         title: "安装",
         path: "/dev/install",
         component: lazy(() => import('@docs/dev/install.md'))

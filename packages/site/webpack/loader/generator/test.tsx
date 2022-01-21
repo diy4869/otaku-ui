@@ -18,6 +18,10 @@ export interface Props extends B, C {
    * @zh-cn 中文
    * @en 英语
   */
+ /**
+  * a
+  * @test 1
+  */
   a: N,
   b?: string,
   c: boolean,
@@ -33,10 +37,14 @@ function B ({ c, b, d = 2 }) {
   )
 }
 
-export  function Test (props: Props) {
+export function Test (props: Props) {
   const { a, b = 'middle' } = props
 
   return (
     <div>hello world</div>
   )
 }
+
+export default function C () {}
+
+

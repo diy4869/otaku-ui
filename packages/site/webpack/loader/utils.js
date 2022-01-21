@@ -1,4 +1,7 @@
 
+const ts = require('typescript')
+const fs = require('fs')
+
 const get = (tokens, index) => {
   const map = new Map()
   let startIndex = undefined
@@ -31,11 +34,6 @@ const get = (tokens, index) => {
 
       for (let j = startIndex; j < endIndex; j++) {
         if (tokens[j].type === 'fence') {
-          if (tokens[j].info.includes('example')) {
-            // data.example = tokens[j].content
-          } else {
-            // data.example = data.example ? data.example : data.code
-          }
           if (['tsx', 'jsx'].includes(tokens[j].info)) {
             data.lang = tokens[j].info
             data.code = tokens[j].content
@@ -56,4 +54,36 @@ const get = (tokens, index) => {
   return map
 }
 
-module.exports.get = get
+const getDeclaration = kind => ts.SyntaxKind[kind]
+const isExport = node => {
+  node.modifiers?.length === 1 &&
+  getDeclaration(node.modifiers[0].kind)  === 'ExportKeyword'
+}
+
+const isExportDefault = node => {
+  node.modifiers?.length === 2 && 
+  getDeclaration(node.modifiers[0].kind)  === 'ExportKeyword' && 
+  getDeclaration(node.modifiers[0].kind)  === 'DefaultKeyword'
+}
+
+const readFile = path => {
+  return fs.readFileSync(path, {
+    encoding: 'utf-8'
+  })
+}
+
+const parser = (filename, content) => {
+  return ts.createSourceFile(filename, content, ts.ScriptTarget.ESNext, true)
+}
+
+
+
+exports.get = get
+exports.getDeclaration = getDeclaration
+exports.isExport = isExport
+exports.isExportDefault = isExportDefault
+exports.parser = parser
+exports.readFile =  readFile
+
+
+

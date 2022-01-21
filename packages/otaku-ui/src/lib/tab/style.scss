@@ -1,0 +1,24 @@
+@import '../../style/var.scss';
+
+.otaku-tab {
+    display: flex;
+    position: relative;
+    .otaku-tab-pane {
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+    .otaku-tab-pane-active {
+        border-bottom: 2px solid $primaryColor;
+    }
+    &::after {
+        content: '';
+        width: 100%;
+        border-bottom: 1px solid #e5e5e5;
+        position: absolute;
+        bottom: 0px;
+        z-index: 100;
+    }
+}
+.otaku-tab-content {
+    margin-top: 16px;    
+}

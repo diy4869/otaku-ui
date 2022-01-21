@@ -18,13 +18,13 @@ interface tableColumnOptions {
 }
 
 interface TableProps {
-  children: React.ReactNode
-  multiple?: boolean
-  border?: boolean
-  stripe?: boolean
   data: {
     [key: string]: unknown
   }[]
+  children?: React.ReactNode
+  multiple?: boolean
+  border?: boolean
+  stripe?: boolean
   tableColumn: tableColumnOptions[]
 }
 
