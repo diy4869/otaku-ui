@@ -33,34 +33,33 @@ const transform = filePath => {
     const getType = (currentPath, typeName) => {
       const type = api[typeName]
 
-      return new Promise((resolve, reject) => {
         if (type) {
           // 说明是引入的
           if (type.importPath) {
             const importPath = path.resolve(filePath, '../')
-            const parserPath = enhancedResolve.create({
+            const parserPath = enhancedResolve.create.sync({
               extensions: ['.ts', '.tsx'],
             })
   
-            parserPath({}, importPath, type.importPath, {}, (err, result) => {
-              if (err) reject(err)
+            const result = parserPath({}, importPath, type.importPath, {})
+            if (result) {
               // 判断该文件时否已经被解析过
               if (map[result]) {
-                const data = map[currentPath]
-                data.type[typeName].reference = map[result].type[typeName]
-                resolve()
+                api[typeName].typeReference = map[result].type[typeName]
+
+                return api[typeName].typeReference
               } else {
                 run(result)
-                const data = map[currentPath]
-                data.type[typeName].reference = map[result].type[typeName]
 
-                resolve()
+                api[typeName].typeReference = map[result].type[typeName]
+
+                return api[typeName].typeReference
               }
-            })
+            }
           }
-          resolve(type)
+
+          return type
         }
-      })
     }
 
     ast.forEachChild(node => {
@@ -108,14 +107,13 @@ const transform = filePath => {
             }, []),
             property: node.members.map(item => {
               const type = content.substring(item.type.pos, item.type.end)
-              item.type.kind === 177 ? getType(filePath, item.type.typeName.escapedText) : undefined
-              
+                            
               return {
                 name: item.name.escapedText,
                 type: type,
                 required: item.questionToken ? false : true,
                 defaultValue: undefined,
-                reference: api[node.name.escapedText],
+                typeReference: item.type.kind === 177 ? getType(filePath, item.type.typeName.escapedText) : undefined,
                 jsDoc: ts.getJSDocTags(item).map(children => {
                   return {
                     tagName: children.tagName.escapedText,
@@ -139,7 +137,7 @@ const transform = filePath => {
             functionName: node.name.escapedText,
             args: node.parameters?.map(args => {
               const typeName =
-                getDeclaration(args?.type?.kind) === 'TypeReference' ? args.type.typeName.escapedText : ''
+                getDeclaration(args?.type?.kind) === 'TypetypeReference' ? args.type.typeName.escapedText : ''
               const type = api[typeName]
 
               return {
