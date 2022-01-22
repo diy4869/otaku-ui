@@ -35,15 +35,15 @@ module.exports = async () => {
       new webpack.DefinePlugin({
         'process.env': JSON.stringify(env)
       }),
-      new FriendlyErrorsWebpackPlugin({
-        compilationSuccessInfo: {
-          messages: [
-            ` 项目启动成功，地址是：\n
-                              http://localhost:8080\n
-            `
-          ]
-        }
-      })
+      // new FriendlyErrorsWebpackPlugin({
+      //   compilationSuccessInfo: {
+      //     messages: [
+      //       ` 项目启动成功，地址是：\n
+      //                         http://localhost:8080\n
+      //       `
+      //     ]
+      //   }
+      // })
     ]
   })
 

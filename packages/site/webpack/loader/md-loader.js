@@ -7,13 +7,17 @@ const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
-const { transformSync, transform } = require('@babel/core')
+const apiType = require('./generator/index')
+const React = require('react')
+const ReactDOMServer = require('react-dom/server')
+const json5 = require('json5')
 
 let importSynx = `
   import * as React from 'react'
   import Block from 'Block'
   import { CodeExample } from 'CodeExample'
   import { HighlightCode } from 'otaku-ui'
+  import { Api } from 'site-component/api/api'
 `
 let str = importSynx
 
@@ -81,6 +85,44 @@ module.exports = function mdLoader (source) {
         } else {
           // closing tag
           return '</Block>'
+        }
+      }
+    })
+    .use(container, 'api', {
+      render (tokens, index) {
+        if (tokens[index].nesting === 1) {
+          const fileData = Object.values(apiType)[0]        
+          const result = data.api.module.map(component => {
+            return fileData.function[component]
+          })
+
+          const renderComponent = result.reduce((str, current, index) => {
+            // current.toString = () => {
+            //   return current
+            // }
+            // const vnode = React.createElement('Api', {
+            //   data: current,
+            //   key: index
+            // })
+            
+            // console.log()
+            str.push( ` <Api data={\`${json5.stringify(current)}\`}></Api>`)
+
+
+            return str
+          }, [])
+
+          console.log(renderComponent)
+
+          
+          // console.log( `<>${renderComponent}`)
+          return `<>
+          { 
+            ${renderComponent}
+          }`
+        
+        } else {
+          return `</>`
         }
       }
     })

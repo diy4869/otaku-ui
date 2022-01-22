@@ -17,7 +17,7 @@ export interface ButtonProps {
 
   size?: 'small' | 'middle' |'large'
   children?: React.ReactNode
-  onClick?:() => void
+  onClick?: () => void
 }
 
 export const Button = (props: ButtonProps) => {

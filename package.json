@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "commitlint": "^13.1.0",
+    "json5": "^2.2.0",
     "typedoc": "^0.22.11"
   }
 }

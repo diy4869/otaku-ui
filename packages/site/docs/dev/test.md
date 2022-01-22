@@ -1,10 +1,9 @@
 ---
-import:
-    import { Api } from '../../src/components/api/api.tsx'
+api:
+  {
+    module: ['Button']
+  }
 ---
-::: demo
 
-```tsx
-ReactDOM.render(<Api/>, container)
-```
+::: api
 :::

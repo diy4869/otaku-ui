@@ -114,6 +114,7 @@ const baseConfig = {
 
   resolve: {
     alias: {
+      'site-component': path.resolve(__dirname, '../src/components'),
       Block: path.resolve(__dirname, '../src/components/block/block.tsx'),
       CodeExample: path.resolve(__dirname, '../src/components/codeExample/codeExample.tsx'),
       ReactDOM: '@hot-loader/dom',

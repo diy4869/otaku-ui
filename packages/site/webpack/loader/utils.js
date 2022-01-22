@@ -1,6 +1,7 @@
 
 const ts = require('typescript')
 const fs = require('fs')
+const enhancedResolve = require('enhanced-resolve')
 
 const get = (tokens, index) => {
   const map = new Map()
@@ -76,7 +77,18 @@ const parser = (filename, content) => {
   return ts.createSourceFile(filename, content, ts.ScriptTarget.ESNext, true)
 }
 
+const getAbsolutePath = (basePath, relativePath) => {
+  const parserPath = enhancedResolve.create.sync({
+    extensions: ['.ts', '.tsx', '.js'],
+  })
 
+  const absolutePath = parserPath({
+    resolveToContext: true,
+    mainFields: ['main', 'exports']
+  }, basePath, relativePath, {})
+
+  return absolutePath
+}
 
 exports.get = get
 exports.getDeclaration = getDeclaration
@@ -84,6 +96,7 @@ exports.isExport = isExport
 exports.isExportDefault = isExportDefault
 exports.parser = parser
 exports.readFile =  readFile
+exports.getAbsolutePath = getAbsolutePath
 
 
 

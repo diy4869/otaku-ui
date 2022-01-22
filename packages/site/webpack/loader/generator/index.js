@@ -4,7 +4,7 @@ const ts = require('typescript')
 const libPath = path.resolve(__dirname, '../../../../otaku-ui')
 const entryPath = path.resolve(libPath, './src/index.ts')
 const { transform } = require('../transform/index')
-const { getDeclaration, parser, readFile } = require('../utils')
+const { getDeclaration, parser, readFile, getAbsolutePath } = require('../utils')
 
 const tsconfig = require('../../../../otaku-ui/tsconfig.json')
 const program = ts.createProgram([entryPath], tsconfig)
@@ -21,7 +21,7 @@ const getExportPath = () => {
 
       filePath.push({
         export: [],
-        path: path.resolve(libPath, './src', `${value}.tsx`)
+        path: getAbsolutePath(path.resolve(libPath, './src'), value)
       })
     }
   })
@@ -35,9 +35,20 @@ const sourceFile = program.getSourceFile(entryPath)
 
 const filePath = path.resolve(__dirname, './test.tsx')
 
-const data = transform(filePath)
+const transformAll = () => {
+  const obj = {}
+  
+  for (let i = 0; i < exportLibPath.length; i++) {
+    transform(exportLibPath[i].path, obj)
+  }
+  console.log(obj)
+}
 
-console.log(data)
+console.log(exportLibPath)
+module.exports = transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx', {})
+// const data = transform(filePath)
+
+// console.log(exportLibPath)
 
 
 

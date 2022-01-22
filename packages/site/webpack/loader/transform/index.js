@@ -1,161 +1,232 @@
-const { getDeclaration, isExport, isExportDefault, readFile, parser } = require('../utils')
+const {
+  getDeclaration,
+  isExport,
+  isExportDefault,
+  readFile,
+  parser,
+  getAbsolutePath
+} = require('../utils')
 const ts = require('typescript')
 const path = require('path')
 const fs = require('fs')
-const enhancedResolve = require('enhanced-resolve')
+
 const { promisify } = require('util')
 
+/**
+ *
+ * @param {string} currentPath 当前的文件
+ * @param {string} typeName 当前文件引用到的类型
+ * @returns
+ */
+const getReferenceType = (typeName, fileMap) => {
+  if (!typeName) return
 
-const transform = filePath => {
+  const type = fileMap.type[typeName]
+
+  if (type) return type
+  // 说明是引入的
+  const absolutePath = fileMap.import[typeName].importPath
+  if (absolutePath) {
+    if (absolutePath.includes('node_modules')) {
+      return 'node_modules'
+    }
+    // 判断该文件时否已经被解析过
+    if (map[absolutePath]) {
+      fileMap.type[typeName].typeReference = map[absolutePath].type[typeName]
+
+      return fileMap.type[typeName].typeReference
+    } else {
+      run(absolutePath)
+
+      fileMap.import[typeName].typeReference = map[absolutePath].type[typeName]
+
+      return fileMap.import[typeName].typeReference
+    }
+  }
+}
+
+const transformArgs = (node, fileMap) => {
+  return node.parameters?.map(args => {
+    const typeName = args?.type?.kind === 177
+        ? getReferenceType(args.type.typeName.escapedText, fileMap)
+        : ''
+
+    return {
+      name: args.name.escapedText,
+      type: typeName
+    }
+  })
+}
+
+const isFunction = (node, fileMap) => {
+  const isVariableFunction = node => {
+    const initializer = node?.declarationList?.declarations?.[0]?.initializer
+
+    if (initializer) {
+      if (ts.isArrowFunction(initializer)) {
+        return initializer
+      }
+
+      return false
+    }
+    return false
+  }
+
+  const isArrowFunction = ts.isArrowFunction(node)
+  const isFunctionExpression = ts.isFunctionExpression(node)
+  // const isFunctionLike = ts.isFunctionLike(node)
+  const isVariFunctionNode = isVariableFunction(node)
+
+  if (isVariFunctionNode) {
+    const functionName = isVariFunctionNode.parent.name.escapedText
+
+    fileMap.function[functionName] = {
+      export: isExport(node),
+      functionName: functionName,
+      arrowFunction: ts.isArrowFunction(isVariFunctionNode),
+      asyncFunction: ts.isAsyncFunction(isVariFunctionNode),
+      args: transformArgs(isVariFunctionNode, fileMap)
+    }
+
+    return isVariFunctionNode
+  } else if (ts.isFunctionDeclaration(node)) {
+    // 普通函数
+    return node
+  } else if (isArrowFunction) {
+    return isArrowFunction
+  } else if (isFunctionExpression) {
+    return isFunctionExpression
+  }
+}
+
+const transform = (filePath, map = {}) => {
+  // console.log(ts.resolve, filePath)
   // 存放每个文件的解析结果
-  const map = {}
+  // const map = {}
   /**
-   * 
+   *
    * @param {*} filePath 当前的文件路径
    * @param {*} refererPath 引用的文件路径
-   * @returns 
+   * @returns
    */
-  const run = (filePath) => {
+  const run = filePath => {
     if (map[filePath]) return
+    if (filePath.includes('.scss')) return
+    if (filePath.includes('node_modules')) return
 
     const content = readFile(filePath)
     const ast = parser(filePath, content)
-    const api = {}
-    const importPath = {}
-    const exportList = []
 
-    /**
-     * 
-     * @param {string} currentPath 当前的文件
-     * @param {string} typeName 当前文件引用到的类型
-     * @returns 
-     */
-    const getType = (currentPath, typeName) => {
-      const type = api[typeName]
-
-        if (type) {
-          // 说明是引入的
-          if (type.importPath) {
-            const importPath = path.resolve(filePath, '../')
-            const parserPath = enhancedResolve.create.sync({
-              extensions: ['.ts', '.tsx'],
-            })
-  
-            const result = parserPath({}, importPath, type.importPath, {})
-            if (result) {
-              // 判断该文件时否已经被解析过
-              if (map[result]) {
-                api[typeName].typeReference = map[result].type[typeName]
-
-                return api[typeName].typeReference
-              } else {
-                run(result)
-
-                api[typeName].typeReference = map[result].type[typeName]
-
-                return api[typeName].typeReference
-              }
-            }
-          }
-
-          return type
-        }
+    const fileMap = {
+      // 定义的类型
+      type: {},
+      import: {},
+      function: {}
     }
 
     ast.forEachChild(node => {
       const type = getDeclaration(node.kind)
+      // isFunction(node, fileMap)
 
       switch (type) {
         case 'ImportDeclaration':
-          const importClause = node.importClause
+          if (!node.importClause) return
 
-          if (importClause.namedBindings) {
+          const importClause = node.importClause
+          const importPath = path.resolve(filePath, '../')
+          const absolutePath = getAbsolutePath(
+            importPath,
+            node.moduleSpecifier.text
+          )
+          console.log(absolutePath)
+          if (absolutePath.includes('.scss')) return
+          if (importClause?.namedBindings) {
             // 解构引入
             importClause.namedBindings.elements.reduce((obj, current) => {
               obj[current.name.escapedText] = {
                 // 解构
                 deconstruct: true,
+                // 默认导出的
+                default: importClause.name
+                  ? importClause.name.escapedText
+                  : undefined,
                 name: current.name.escapedText,
-                importPath: node.moduleSpecifier.text,
+                importPath: absolutePath
               }
 
               return obj
-            }, api)
+            }, fileMap.import)
           } else {
             // 命名导出
             const name = importClause.name.escapedText
-            importPath[name] = {
+            fileMap.import[name] = {
               name,
               nameExport: true,
-              importPath: node.moduleSpecifier.text,
+              importPath: node.moduleSpecifier.text
             }
           }
           break
         case 'InterfaceDeclaration':
           // 继承的接口
-          const extendsInterface = node.heritageClauses?.[0].types?.map(item => {
-            return {
-              name: item.expression.escapedText,
+          const extendsInterface = node.heritageClauses?.[0].types?.map(
+            item => {
+              return {
+                name: item.expression.escapedText
+              }
             }
-          })
+          )
 
-          api[node.name.escapedText] = {
+          fileMap.type[node.name.escapedText] = {
+            type: 'interface',
             name: node.name.escapedText,
             code: content.substring(node.pos, node.end),
             extendProperty: extendsInterface?.reduce((total, current) => {
-              return total.concat(api[current.name])
+              return total.concat(fileMap.type[current.name])
             }, []),
             property: node.members.map(item => {
               const type = content.substring(item.type.pos, item.type.end)
-                            
+
               return {
                 name: item.name.escapedText,
                 type: type,
                 required: item.questionToken ? false : true,
                 defaultValue: undefined,
-                typeReference: item.type.kind === 177 ? getType(filePath, item.type.typeName.escapedText) : undefined,
+                typeReference:
+                  item.type.kind === 177
+                    ? getReferenceType(item.type.typeName.escapedText, fileMap)
+                    : undefined,
                 jsDoc: ts.getJSDocTags(item).map(children => {
                   return {
                     tagName: children.tagName.escapedText,
-                    content: children.comment,
+                    content: children.comment
                   }
-                }),
+                })
               }
-            }),
+            })
           }
           break
         case 'TypeAliasDeclaration':
-          api[node.name.escapedText] = {
+          fileMap.type[node.name.escapedText] = {
+            type: 'type',
             name: node.name.escapedText,
-            code: content.substring(node.pos, node.end),
+            code: content.substring(node.pos, node.end)
           }
           break
         case 'FunctionDeclaration':
-          exportList.push({
+          fileMap.function[node.name.escapedText] = {
             exportDefault: isExportDefault(node),
             export: isExport(node),
             functionName: node.name.escapedText,
-            args: node.parameters?.map(args => {
-              const typeName =
-                getDeclaration(args?.type?.kind) === 'TypetypeReference' ? args.type.typeName.escapedText : ''
-              const type = api[typeName]
-
-              return {
-                name: args.name.escapedText,
-                type,
-              }
-            }),
-          })
+            args: transformArgs(node, fileMap)
+          }
+          break
+        default:
+          isFunction(node, fileMap)
           break
       }
     })
 
-    map[filePath] = {
-      type: api,
-      importPath,
-      exportList,
-    }
-
+    map[filePath] = fileMap
   }
 
   run(filePath)

@@ -1,27 +1,32 @@
 import React, { useState } from 'react'
 import {Tab, TabPane, HighlightCode, Table} from 'otaku-ui'
 import './style.scss'
+import json5 from 'json5'
 
-export function Api () {
+interface ApiProps {
+  data: string
+}
+export function Api (props: ApiProps) {
   const code = `type ButtonType = 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger' | 'link'
 
 export interface ButtonProps {
   disabled?: boolean
   loading?: boolean
   ghost?: boolean
-  icon?: string
-  bgcolor?: string
-  color?: string
-  className?: string
-  href?: string
-  target?: '_blank' | '_self'
-  shape?: 'round' | 'circle'
-  type?: ButtonType
-  iconDirection?: 'left' | 'right' 
   size?: 'small' | 'middle' |'large'
   children?: React.ReactNode
   onClick?:() => void
 }`
+
+const { data } = props
+
+console.log(props)
+// console.log(json5.parse(data))
+console.log(JSON.parse(data))
+
+if (data) {
+  // console.log(eval(data))
+}
 
   const tableData = [
     {

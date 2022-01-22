@@ -1,5 +1,6 @@
 import { a } from './type'
 import testExportDefault from './type2'
+import React, { useState } from 'react'
 
 type N = number
 
@@ -28,13 +29,12 @@ export interface Props extends B, C {
   d: any,
   f: a
   size: 'small' | 'middle' | 'large'
+  g: React.ReactNode[]
   e: (a: number) => void
 }
 
-function B ({ c, b, d = 2 }) {
-  return (
-    <div>B组件</div>
-  )
+export const arrowFunction = () => {
+
 }
 
 export function Test (props: Props) {
@@ -45,6 +45,10 @@ export function Test (props: Props) {
   )
 }
 
-export default function C () {}
+export const asyncFunction = async () => {
+
+}
+
+export default ()  => {}
 
 

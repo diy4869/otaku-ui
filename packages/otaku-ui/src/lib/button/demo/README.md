@@ -1,6 +1,10 @@
 ---
 import: 
   import { Button, Space, Grid, GridItem } from 'otaku-ui'
+api:
+  {
+    module: ['Button']
+  }
 ---
 
 [[toc]]
@@ -233,3 +237,6 @@ export interface ButtonProps {
   onClick?:() => void
 }
 ```
+
+::: api
+:::
