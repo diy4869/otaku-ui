@@ -4,58 +4,16 @@ import './style.scss'
 import json5 from 'json5'
 
 interface ApiProps {
+  code: string
   data: string
 }
+
 export function Api (props: ApiProps) {
-  const code = `type ButtonType = 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger' | 'link'
 
-export interface ButtonProps {
-  disabled?: boolean
-  loading?: boolean
-  ghost?: boolean
-  size?: 'small' | 'middle' |'large'
-  children?: React.ReactNode
-  onClick?:() => void
-}`
+  const { code, data } = props
+  const tableData = eval(data)
 
-const { data } = props
-
-console.log(props)
-// console.log(json5.parse(data))
-console.log(JSON.parse(data))
-
-if (data) {
-  // console.log(eval(data))
-}
-
-  const tableData = [
-    {
-      name: 'disabled',
-      required: false,
-      type: 'number',
-      defaultValue: '',
-      desc: '禁用',
-    },
-    {
-      name: 'loading',
-      required: false,
-      type: 'number',
-      defaultValue: '',
-      desc: '禁用',
-    },
-    {
-      name: 'size',
-      required: false,
-      type: 'small | middle | large',
-      desc: '禁用',
-    },
-    {
-        name: 'onClick',
-        required: false,
-        type: '() => void'
-    }
-  ]
-
+  console.log(tableData)
   const tableColumn = [
     {
       label: '属性',
@@ -77,7 +35,7 @@ if (data) {
     {
       label: '默认值',
       prop: 'defaultValue',
-      defaultValue: '这是没有数据的情况',
+      defaultValue: '',
     },
     {
       label: '描述',

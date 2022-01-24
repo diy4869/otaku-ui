@@ -5,4 +5,9 @@
         border-top: none;
         padding-top: 0;
     }
+    .otaku-table-row {
+        td:nth-of-type(3) {
+            // background: red;
+        }
+    }
 }

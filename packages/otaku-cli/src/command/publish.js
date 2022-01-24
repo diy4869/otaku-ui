@@ -14,9 +14,9 @@ module.exports = async () => {
 
   if (await checkDirectory(sitePath)) {
     await execPromise(`rm -rf ${buildPath}`)
-    await copy(sitePath, buildPath)
+    // await copy(sitePath, buildPath)
     const command = [
-      `cd ${path.resolve(basePath, './otaku-ui-docs')}`,
+      `cd ${sitePath}`,
       'git add -A',
       `git commit -m "docs: 更新文档，日期: ${dayjs().format(
         'YYYY-MM-DD HH:mm:ss'
@@ -27,6 +27,7 @@ module.exports = async () => {
 
     await execPromise(str)
     spinner.succeed('构建完成')
+    await execPromise(`rm -rf ${sitePath}`)
   } else {
     spinner.fail('构建失败')
   }

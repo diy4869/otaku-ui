@@ -13,8 +13,7 @@ export interface ButtonProps {
   target?: '_blank' | '_self'
   shape?: 'round' | 'circle'
   type?: 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger' | 'link'
-  iconDirection?: 'left' | 'right' 
-
+  iconDirection?: 'left' | 'right'
   size?: 'small' | 'middle' |'large'
   children?: React.ReactNode
   onClick?: () => void

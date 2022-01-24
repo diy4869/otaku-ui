@@ -105,8 +105,14 @@ module.exports = function mdLoader (source) {
             //   key: index
             // })
             
-            // console.log()
-            str.push( ` <Api data={\`${json5.stringify(current)}\`}></Api>`)
+            // console.log()\\
+            const interface = current.args[0].type
+
+            str.push( ` <Api 
+              code={\`${interface.code}\`}
+              data={\`${json5.stringify(interface.property)}\`}
+              ></Api>`)
+
 
 
             return str
