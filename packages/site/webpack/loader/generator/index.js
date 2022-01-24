@@ -44,8 +44,6 @@ const transformAll = () => {
   console.log(obj)
 }
 
-console.log(exportLibPath)
-module.exports = transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx', {})
 // const data = transform(filePath)
 
 // console.log(exportLibPath)
@@ -53,7 +51,7 @@ module.exports = transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\bu
 
 
 
-
+module.exports = transform
 
 
 

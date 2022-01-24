@@ -91,8 +91,11 @@
 
 // md 内的样式
 :global {
+  .markdown-body li+li {
+    margin-top: 0;
+  }
   .markdown-body {
-    width: calc(100% - 150px);
+    width: calc(100% - 200px);
     table:not([class^=otaku-]) {
       display: table;
     }
@@ -105,6 +108,7 @@
       box-shadow: 0px 10px 50px 0 rgb(0 35 114 / 10%);
       li {
         // margin: 10px 0;
+        
       }
       a {
         color: #3064FF;
@@ -120,12 +124,6 @@
       margin-bottom: 0;
       li {
         list-style: none;
-      }
-    }
-    li:not([class^=otaku-]) {
-      list-style: initial;
-      & + li {
-        margin-top: 0;
       }
     }
   }

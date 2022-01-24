@@ -7,17 +7,15 @@ const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
-const apiType = require('./generator/index')
-const React = require('react')
-const ReactDOMServer = require('react-dom/server')
+const transform = require('./generator/index')
 const json5 = require('json5')
 
 let importSynx = `
   import * as React from 'react'
-  import Block from 'Block'
-  import { CodeExample } from 'CodeExample'
   import { HighlightCode } from 'otaku-ui'
   import { Api } from 'site-component/api/api'
+  import { CodeExample } from 'site-component/codeExample/codeExample'
+  import Block from 'site-component/block/block'
 `
 let str = importSynx
 
@@ -39,8 +37,15 @@ const reactMarkdownTemplate = (str, importSynx, content) => {
 module.exports = function mdLoader (source) {
   const { content, data } = matter(source)
 
+  let apiType
+  
   if (this.hot) {
     str = importSynx
+    if (data.api) {
+      const path = 'D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx'
+      apiType = transform(path, {}) 
+    }
+
     //   // console.log(this.resourcePath)
     // this.addDependency(this.resourcePath)
   }
@@ -97,15 +102,7 @@ module.exports = function mdLoader (source) {
           })
 
           const renderComponent = result.reduce((str, current, index) => {
-            // current.toString = () => {
-            //   return current
-            // }
-            // const vnode = React.createElement('Api', {
-            //   data: current,
-            //   key: index
-            // })
-            
-            // console.log()\\
+
             const interface = current.args[0].type
 
             str.push( ` <Api 

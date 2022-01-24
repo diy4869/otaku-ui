@@ -14,7 +14,8 @@
     "noEmit": false,
     "paths": {
       "@docs/": ["./docs"],
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "site-component": ["./src/components"]
     }
   },
   "exclude": [

@@ -32,9 +32,7 @@ module.exports = async () => {
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': JSON.stringify(env)
-      }),
+
       // new FriendlyErrorsWebpackPlugin({
       //   compilationSuccessInfo: {
       //     messages: [

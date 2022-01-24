@@ -18,7 +18,7 @@ const baseConfig = {
   mode: env,
   entry: './src/index.tsx',
   output: {
-    path: path.join(__dirname, '../dist'),
+    path: path.join(__dirname, '../dist/docs'),
     filename: 'js/[name].[contenthash].js',
     chunkFilename: 'js/[name].[contenthash].js'
   },
@@ -115,8 +115,6 @@ const baseConfig = {
   resolve: {
     alias: {
       'site-component': path.resolve(__dirname, '../src/components'),
-      Block: path.resolve(__dirname, '../src/components/block/block.tsx'),
-      CodeExample: path.resolve(__dirname, '../src/components/codeExample/codeExample.tsx'),
       ReactDOM: '@hot-loader/dom',
       '@docs': path.resolve(__dirname, '../docs'),
       '@': path.resolve(__dirname, '../src'),
@@ -130,6 +128,9 @@ const baseConfig = {
   target: 'web',
   devtool: env === 'development' ? 'source-map' : 'source-map',
   plugins: [
+    // new webpack.DefinePlugin({
+    //   'process.env': JSON.stringify(env)
+    // }),
     new HtmlWebpackPlugin({
       title: 'otaku-ui',
       filename: 'index.html',
