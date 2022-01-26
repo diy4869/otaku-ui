@@ -5,9 +5,11 @@ import { styleToStr } from '../../utils'
 // import debounce from 'lodash/debounce'
 
 
+type MessageType = 'info' | 'success' | 'warning' | 'error'
+
 interface Options {
   duration?: number
-  type?: 'info' | 'success' | 'warning' | 'error'
+  type?: MessageType
   content?: React.ReactNode
 }
 
@@ -89,7 +91,7 @@ if (!instance) {
 const message: message = {}
 
 type.forEach(current => {
-  message[current as Options['type']] = (content: React.ReactNode, duration = 3000) => {
+  message[current as MessageType] = (content: React.ReactNode, duration = 3000) => {
       instance?.create({
         type: current as Options['type'],
         content,

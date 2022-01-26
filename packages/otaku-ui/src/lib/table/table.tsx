@@ -13,7 +13,7 @@ interface renderArgs {
 interface tableColumnOptions {
   label: string
   prop: string
-  defaultValue?: unknown
+  defaultValue?: React.ReactNode
   render?: (data: renderArgs) => React.ReactNode
 }
 
@@ -79,7 +79,11 @@ export function Table(props: TableProps) {
                     return (
                       <>
                         <td key={childrenIndex}>
-                          {children.render ? children.render(data) : get(item, children.prop, children.defaultValue)}
+                          {
+                            children.render ? 
+                            children.render(data) : 
+                            get(item, children.prop, children.defaultValue)
+                          }
                         </td>
                       </>
                     )

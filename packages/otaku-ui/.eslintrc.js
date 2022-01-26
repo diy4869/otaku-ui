@@ -36,7 +36,7 @@ module.exports = {
     'no-use-before-define': 'off',
     'max-depth': 'error',
     'max-len': [
-      'error',
+      'warn',
       {
         code: 120
       }

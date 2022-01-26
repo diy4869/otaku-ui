@@ -16,6 +16,7 @@
     "noEmit": false,
     "jsx": "react",
     "outDir": "dist",
+    "types": ["../otaku-ui/src/types/*"],
     "paths": {
       "@*": ["./src/*"],
       "@style*": ["./src/style*"]

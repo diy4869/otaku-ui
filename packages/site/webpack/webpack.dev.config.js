@@ -26,9 +26,10 @@ module.exports = async () => {
         errors: false
       },
       quiet: true,
-      useLocalIp: true,
+      // writeToDisk: true,
+      // useLocalIp: true,
       historyApiFallback: true,
-      clientLogLevel: 'none'
+      clientLogLevel: 'none',
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin(),

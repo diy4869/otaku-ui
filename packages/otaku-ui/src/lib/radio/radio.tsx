@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './style.scss'
 
 interface Data {
@@ -28,13 +28,13 @@ export function Radio (props: RadioProps) {
     disabled
   } = props
 
-  const [
-    val,
-    setVal
-  ] = useState(value)
+  // const [
+  //   val,
+  //   setVal
+  // ] = useState(value)
 
-  // @ts-ignore
-  const change = (e) => {
+
+  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(
       e.target.checked,
       e.target.name
@@ -44,8 +44,8 @@ export function Radio (props: RadioProps) {
   return (
     <div className="otaku-radio-container">
       {
-        data?.map((item) => (
-            <label htmlFor="value" className="otaku-radio-label">
+        data?.map((item, index) => (
+            <label htmlFor="value" className="otaku-radio-label" key={index}>
               <input
                 type="radio"
                 name={value}

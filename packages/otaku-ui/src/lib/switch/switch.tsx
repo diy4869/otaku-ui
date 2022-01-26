@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import './style.scss'
 
 interface SwitchProps {
@@ -38,8 +38,8 @@ export function Switch (props: SwitchProps) {
     },
     [value]
   )
-  // @ts-ignore
-  const change = (e) => {
+
+  const change = (e: ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target
     setChecked(checked)
     onChange?.(checked)

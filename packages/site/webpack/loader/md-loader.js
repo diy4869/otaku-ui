@@ -18,6 +18,7 @@ let importSynx = `
   import Block from 'site-component/block/block'
 `
 let str = importSynx
+let demoIndex = 0
 
 const reactMarkdownTemplate = (str, importSynx, content) => {
   const data = `
@@ -37,20 +38,17 @@ const reactMarkdownTemplate = (str, importSynx, content) => {
 module.exports = function mdLoader (source) {
   const { content, data } = matter(source)
 
-  let apiType
+
   
   if (this.hot) {
     str = importSynx
-    if (data.api) {
-      const path = 'D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx'
-      apiType = transform(path, {}) 
-    }
+
 
     //   // console.log(this.resourcePath)
     // this.addDependency(this.resourcePath)
   }
   // demo 数量
-  let demoIndex = 0
+  
   let demoName
 
   const md = new MarkdownIt({
@@ -96,6 +94,9 @@ module.exports = function mdLoader (source) {
     .use(container, 'api', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
+          const path = 'D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx'
+          const apiType = transform(path, {}) 
+          
           const fileData = Object.values(apiType)[0]        
           const result = data.api.module.map(component => {
             return fileData.function[component]
@@ -105,7 +106,7 @@ module.exports = function mdLoader (source) {
 
             const interface = current.args[0].type
 
-            str.push( ` <Api 
+            str.push( `<Api 
               code={\`${interface.code}\`}
               data={\`${json5.stringify(interface.property)}\`}
               ></Api>`)

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './style.scss';
 
-
 interface InputProps {
   value?: string
   placeholder?: string
@@ -81,7 +80,7 @@ export function Input (props: InputProps) {
     [value]
   )
 
-  const change = (e: any) => {
+  const change = (e) => {
     setInputValue(e.target.value)
     onChange?.(inputValue)
     onInput?.(inputValue)

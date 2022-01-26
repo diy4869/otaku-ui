@@ -22,7 +22,7 @@ export function Api (props: ApiProps) {
     {
       label: '是否必填',
       prop: 'required',
-      render(data) {
+      render(data: { row: any }) {
         const {row} = data
 
         return <span>{row.require ? '是' : '否'}</span>

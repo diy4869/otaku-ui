@@ -96,13 +96,13 @@ export function Rate (props: RateProps) {
     }
   }
 
-  // @ts-ignore
-  const paint = (e, type: 'click' | 'mousemove' | 'mouseout') => () => {
+
+  const paint = (e: React.MouseEvent<HTMLUListElement, MouseEvent>, type: 'click' | 'mousemove' | 'mouseout') => () => {
     const { target } = e
     const index = Number(target.dataset.index)
 
     if (readonly) return
-    if (e.target.classList.contains('otaku-star')) {
+    if (target.classList.contains('otaku-star')) {
       if (type === 'mousemove') {
         render(
           0,
@@ -117,6 +117,7 @@ export function Rate (props: RateProps) {
           ))
         }
       } else if (type === 'mouseout') {
+        // eslint-disable-next-line no-unmodified-loop-condition
         for (let i = index; index > 0; i--) {
           if (!star[i]?.click) {
             star[i].checked = false

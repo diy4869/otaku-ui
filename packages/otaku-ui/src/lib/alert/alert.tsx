@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import './style.scss'
 
 interface AlertProps {
@@ -12,6 +12,6 @@ export function Alert (props: AlertProps) {
   } = props
 
   return (
-    <div></div>
+    <div>{children}</div>
   )
 }

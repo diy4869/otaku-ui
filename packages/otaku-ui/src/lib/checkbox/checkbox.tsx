@@ -12,9 +12,9 @@ interface CheckBoxProps {
 
 export function CheckboxGroup (props: CheckBoxProps) {
   const {
-    disabled,
+    // disabled,
     // checked,
-    indeterminate,
+    // indeterminate,
     children
   } = props
 
