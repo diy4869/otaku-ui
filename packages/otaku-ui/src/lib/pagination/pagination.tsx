@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { usePagination, usePaginationProps } from '../../hooks/index'
+import { usePagination, type usePaginationProps } from '../../hooks/index'
 import './style.scss'
 
-interface PaginationProps extends usePaginationProps {
+export interface PaginationProps extends usePaginationProps {
   circle?: boolean
-  pageChange?:(page?: number) => void
+  pageChange?: (page?: number) => void
 }
 
 export function Pagination (props: PaginationProps) {

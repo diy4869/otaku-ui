@@ -1,7 +1,9 @@
 
 const ts = require('typescript')
 const fs = require('fs')
+const path = require('path')
 const enhancedResolve = require('enhanced-resolve')
+
 
 const get = (tokens, index) => {
   const map = new Map()
@@ -57,14 +59,14 @@ const get = (tokens, index) => {
 
 const getDeclaration = kind => ts.SyntaxKind[kind]
 const isExport = node => {
-  node.modifiers?.length === 1 &&
+  return node.modifiers?.length === 1 &&
   getDeclaration(node.modifiers[0].kind)  === 'ExportKeyword'
 }
 
 const isExportDefault = node => {
-  node.modifiers?.length === 2 && 
+  return node.modifiers?.length === 2 && 
   getDeclaration(node.modifiers[0].kind)  === 'ExportKeyword' && 
-  getDeclaration(node.modifiers[0].kind)  === 'DefaultKeyword'
+  getDeclaration(node.modifiers[1].kind)  === 'DefaultKeyword'
 }
 
 const readFile = path => {
@@ -78,6 +80,10 @@ const parser = (filename, content) => {
 }
 
 const getAbsolutePath = (basePath, relativePath) => {
+  const reg = /^\.\S+$/g
+
+  if (!relativePath.match(reg)) return 'node_modules'
+
   const parserPath = enhancedResolve.create.sync({
     extensions: ['.ts', '.tsx', '.js'],
   })
@@ -90,6 +96,23 @@ const getAbsolutePath = (basePath, relativePath) => {
   return absolutePath
 }
 
+const backPath = (absolutePath, relativePath) => {
+  const arr = absolutePath.split(path.sep)
+  const relative = relativePath.split('/')
+
+  for (let i = 0; i < relative.length - 1; i++) {
+    if (relativePath[i] === '.') {
+      arr.pop()
+    }
+    if (relativePath[i] === '..') {
+      arr.pop()
+    }
+  }
+
+  return arr.join(path.sep)
+}
+
+exports.backPath = backPath
 exports.get = get
 exports.getDeclaration = getDeclaration
 exports.isExport = isExport

@@ -76,13 +76,15 @@ export function Table(props: TableProps) {
                       columnIndex: childrenIndex
                     }
 
+                    const render = get(item, children.prop, children.defaultValue) as string
+
                     return (
                       <>
                         <td key={childrenIndex}>
                           {
                             children.render ? 
                             children.render(data) : 
-                            get(item, children.prop, children.defaultValue)
+                            render
                           }
                         </td>
                       </>

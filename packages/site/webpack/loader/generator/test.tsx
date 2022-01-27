@@ -37,18 +37,21 @@ export const arrowFunction = () => {
 
 }
 
+export function b ({a = 1, b = 3}) {
+
+}
+
 export function Test (props: Props) {
   const { a, b = 'middle' } = props
 
+  const fn = () => {
+
+  }
+  
   return (
     <div>hello world</div>
   )
 }
 
-export const asyncFunction = async () => {
-
-}
-
-export default ()  => {}
 
 

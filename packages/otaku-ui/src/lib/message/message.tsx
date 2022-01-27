@@ -19,5 +19,3 @@ export function Message (props: MessageProps) {
     </div>
   )
 }
-
-export * from './notice'
