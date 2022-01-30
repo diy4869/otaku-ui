@@ -70,6 +70,7 @@
   .main {
     grid-area: main;
     background: #f7f8fa;
+
     padding: 20px;
     // overflow-x: auto;
     position: relative;
@@ -92,11 +93,11 @@
 // md 内的样式
 :global {
   .markdown-body li+li {
-    margin-top: 0;
+    margin-top: 0 !important;
   }
   .markdown-body {
     width: calc(100% - 200px);
-    table:not([class^=otaku-]) {
+    table:not([class^=".otaku-"]) {
       display: table;
     }
     .table-of-contents {
@@ -115,11 +116,11 @@
         font-size: 14px;
       }
     }
-    pre:not([class^=otaku-]) {
+    pre:not([class^=".otaku-"]) {
       padding: 0;
       font-size: 14px;
     }
-    ol:not([class^=otaku-]) {
+    ol:not([class^=".otaku-"]), ul:not([class^=".otaku-"]) {
       padding-left: 0;
       margin-bottom: 0;
       li {

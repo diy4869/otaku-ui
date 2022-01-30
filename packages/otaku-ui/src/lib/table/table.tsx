@@ -81,11 +81,13 @@ export function Table(props: TableProps) {
                     return (
                       <>
                         <td key={childrenIndex}>
-                          {
-                            children.render ? 
-                            children.render(data) : 
-                            render
-                          }
+                          <div className="otaku-cell-content">
+                            {
+                              children.render ? 
+                              children.render(data) : 
+                              render
+                            }
+                          </div>
                         </td>
                       </>
                     )

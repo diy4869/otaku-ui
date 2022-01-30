@@ -221,22 +221,5 @@ ReactDOM.render(
 
 ## API
 
-```ts
-export interface ButtonProps {
-  disabled?: boolean // 禁用
-  loading?: boolean // 加载
-  ghost?: boolean // 幽灵按钮
-  icon?: string // icon
-  bgcolor?: string // 背景色
-  children?: React.ReactNode
-  target?: '_blank' | '_self'
-  shape?: 'round' | 'circle'
-  type?: 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger' | 'link'
-  iconDirection?: 'left' | 'right'  // icon方向
-  size?: 'small' | 'middle' |'large' // 大小
-  onClick?:() => void
-}
-```
-
 ::: api
 :::
