@@ -4,7 +4,7 @@ import { fromEvent } from 'rxjs'
 // import { throttleTime } from 'rxjs/operators'
 // import throttle from 'lodash/throttle'
 
-interface TelportProps {
+interface TeleportProps {
   className?: string
   children: React.ReactNode
   visible?: boolean
@@ -21,7 +21,7 @@ interface HTMLDivElement extends HTMLElement {
 
 let id = 1
 
-export function Portal (props: TelportProps) {
+export function Portal (props: TeleportProps) {
   const container = useRef<HTMLDivElement>()
   // 防止 modal 关闭后，portal 渲染的元素为空
   const [mountContainer, setMountContainer] = useState(
@@ -101,7 +101,7 @@ export function Portal (props: TelportProps) {
     const node = findNode(modal)
 
     if (!node) {
-      el.className = 'otaku-teleport-container'
+      el.className = `otaku-teleport-container ${className || ''}`
       el.style.cssText = `
         display: ${visible ? 'block' : 'none'};
         z-index: ${zIndex};

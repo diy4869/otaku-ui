@@ -54,7 +54,6 @@ const setDefaultValue = (node, currentFile, content) => {
    * @returns
    */
 const run = (filePath, fileMap) => {
-  console.log(filePath)
   if (fileMap[filePath]) return
   if (filePath.includes('.scss')) return
   if (filePath.includes('node_modules')) return
@@ -98,9 +97,7 @@ const run = (filePath, fileMap) => {
           const relativePath = backPath(filePath, value)
           const exportPath = getAbsolutePath(relativePath, value)
 
-          console.log(exportPath)
           transform(exportPath, fileMap)
-          console.log(fileMap[exportPath])
           currentFile.exportFile[exportPath] = fileMap[exportPath]
         }
        

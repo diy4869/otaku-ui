@@ -2,14 +2,14 @@
 
 .otaku-select-container {
   // position: relative;
-  width: 220px;
+  width: 240px;
 }
 
 .otaku-select {
-  width: 220px;
+  width: 240px;
   height: 208px;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  border: 1px solid #d9d9d9;
+  box-shadow: $shadow;
+  // border: 1px solid #d9d9d9;
   background: white;
   border-radius: $radius;
   margin-top: 4px;
@@ -19,6 +19,10 @@
   margin-top: 5px;
 }
 
+.rotate {
+  transition: 0.2s transform cubic-bezier(0.075, 0.82, 0.165, 1);
+  transform: rotate(180deg);
+}
 .otaku-select::-webkit-scrollbar {
   width: 5px;
 }
@@ -28,15 +32,24 @@
   border-radius: 6px;
 }
 
-.otaku-select-options {
+.otaku-select-option {
   height: 40px;
-  line-height: 40px;
   box-sizing: border-box;
-  padding: 0 5px;
+  padding: 0 10px;
   font-size: 14px;
   color: #262626;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
-  &-active {
+  &:hover {
+    color: $primaryColor;
     background: rgba(44, 104, 255, 0.06);
+  }
+  &-active {
+    color: $primaryColor;
+  }
+  &-multiple-active {
+    color: $primaryColor;
   }
 }

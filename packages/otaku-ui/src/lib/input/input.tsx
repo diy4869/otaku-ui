@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Icon } from '../icon/icon'
 import './style.scss';
 
 interface InputProps {
@@ -10,9 +11,9 @@ interface InputProps {
   bgcolor?: string
   rows?: number
   cols?: number
-  beforeIcon?: string
+  beforeIcon?: React.ReactNode
   beforeNode?: React.ReactNode
-  afterIcon?: string
+  afterIcon?: React.ReactNode
   clear?: boolean
   afterNode?: React.ReactNode
   showPassword?: boolean
@@ -109,7 +110,10 @@ export function Input (props: InputProps) {
                   ...style
                 }}>
                   {
-                    beforeIcon ? <span className={`otaku-input-icon-left iconfont ${beforeIcon}`} onClick={leftClick}></span> : ''
+                    typeof beforeIcon === 'string' ? <Icon 
+                    className='otaku-input-icon-left'
+                    name={beforeIcon} 
+                    onClick={leftClick}></Icon> : beforeIcon
                   }
                   <input
                     className={`
@@ -156,7 +160,10 @@ export function Input (props: InputProps) {
                       : ''
                   }
                   {
-                    afterIcon ? <span className={`otaku-input-icon-right iconfont ${afterIcon}`} onClick={rightClick}></span> : ''
+                     typeof afterIcon === 'string' ? <Icon 
+                      className='otaku-input-icon-right'
+                      name={afterIcon} 
+                      onClick={rightClick}></Icon> : afterIcon
                   }
                 </div>
                 {

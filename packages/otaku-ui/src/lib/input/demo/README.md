@@ -80,12 +80,12 @@ ReactDOM.render(
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="前面的icon" beforeIcon="otaku-icon-search-line"></Input>
+      <Input placeholder="前面的icon" beforeIcon="search-line"></Input>
     </li>
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="后面的icon" afterIcon="otaku-icon-search-line"></Input>
+      <Input placeholder="后面的icon" afterIcon="search-line"></Input>
     </li>
   </ul>,
   container

@@ -20,6 +20,11 @@
       text-align: center;
       display: flex;
       justify-content: space-between;
+      padding: 0 15px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    &-content {
+      padding: 15px;
     }
   }
 }

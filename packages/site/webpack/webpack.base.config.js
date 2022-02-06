@@ -69,7 +69,7 @@ const baseConfig = {
         ],
       },
       {
-        test: /\.(png|jpg|gif|webp)$/i,
+        test: /\.(png|jpg|gif|webp|jfif)$/i,
         use: [
           {
             loader: 'url-loader',

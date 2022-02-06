@@ -41,17 +41,16 @@ const transformAll = () => {
   const obj = {}
   
   for (let i = 0; i < exportLibPath.length; i++) {
-    console.log(exportLibPath[i])
     transform(exportLibPath[i].path, obj)
   }
-  console.log(obj)
+
 
   return obj
 }
 
 // transform(filePath, {})
 
-transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\pagination\\pagination.tsx', {})
+// transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\pagination\\pagination.tsx', {})
 // console.log(exportLibPath)
 transformAll()
 

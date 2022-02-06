@@ -4,3 +4,5 @@ interface EventTarget {
   },
   classList: DOMTokenList
 }
+
+declare module '*.jfif'
