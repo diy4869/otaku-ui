@@ -139,6 +139,11 @@ export default [
         path: "/form/date-picker",
         component: lazy(() => import('otaku-ui/src/lib/datePicker/demo/README.md'))
       },
+      {
+        title: "Upload 上传",
+        path: "/form/upload",
+        component: lazy(() => import('otaku-ui/src/lib/upload/demo/README.md'))
+      },
       // {
       //   title: "form 表单",
       //   path: "/form/form",

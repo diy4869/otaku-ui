@@ -16,6 +16,6 @@ export function Icon (props: IconProps) {
   } = props
 
   return (
-    <span className={`otaku-icon iconfont otaku-icon-${name} ${className}`} onClick={onClick}></span>
+    <span className={`otaku-icon iconfont otaku-icon-${name} ${className ?? ''}`} onClick={onClick}></span>
   )
 }

@@ -1,0 +1,50 @@
+@import '../../style/var.scss';
+
+
+.otaku-alert-info {
+  background: #EDF4FF;
+  border: 1px solid #94B4EB;
+}
+.otaku-alert-success {
+  background: #F0FAF2;
+  border: 1px solid #9FD6A8;
+}
+.otaku-alert-warning {
+  background: #FFF5ED;
+  border: 1px solid #F1924E;
+}
+.otaku-alert-error {
+  background: #FFEBEB;
+  border: 1px solid #F52F3E;
+}
+
+.otaku-alert {
+  // background: white;
+  border-radius: $radius;
+  // box-shadow: $shadow;
+  padding: 10px;
+  cursor: pointer;
+
+  .otaku-alert-icon {
+    margin-right: 5px;
+    font-size: 20px;
+    vertical-align: middle;
+  }
+  .otaku-alert-content {
+    color: #262626;
+    font-size: 14px;
+  }
+
+  .otaku-icon-info {
+    color: #0f73f7;
+  }
+  .otaku-icon-success {
+    color: #2DA641;
+  }
+  .otaku-icon-warning {
+    color: #ffb540;
+  }
+  .otaku-icon-error {
+    color: #f51010;
+  }
+}

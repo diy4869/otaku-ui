@@ -1,0 +1,33 @@
+@import '../../style/var.scss';
+
+.otaku-upload-container {
+  input[type="file"] {
+    // display: none;
+  }
+
+  .otaku-upload {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed #d9d9d9;
+    border-radius: $radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .add {
+      font-size: 24px;
+    }
+  }
+  .otaku-drag-upload {
+    width: 500px;
+    height: 150px;
+    border: 2px dashed #d9d9d9;
+    border-radius: $radius;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .otaku-drag-upload-hover {
+    border: 2px dashed $primaryColor;
+  }
+}
