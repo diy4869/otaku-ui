@@ -5,4 +5,8 @@ interface EventTarget {
   classList: DOMTokenList
 }
 
+interface HTMLInputElement extends HTMLElement{
+
+}
+
 declare module '*.jfif'

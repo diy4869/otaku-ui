@@ -9,15 +9,15 @@ const { merge } = require('webpack-merge')
 const webpackBaseConfig = require('./webpack.base.config')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
-const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+
 const OptimizationCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-// const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 // const PrerenderSPAPlugin = require('prerender-spa-plugin')
-// const smp = new SpeedMeasurePlugin()
+const smp = new SpeedMeasurePlugin()
 
-const prodConfig = merge(webpackBaseConfig, {
+const prodConfig = smp.wrap(merge(webpackBaseConfig, {
   optimization: {
     usedExports: true,
     sideEffects: true,
@@ -74,6 +74,9 @@ const prodConfig = merge(webpackBaseConfig, {
     source: false
   },
   plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerPort: 9888
+    }),
     new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(env)
@@ -82,20 +85,14 @@ const prodConfig = merge(webpackBaseConfig, {
     new OptimizationCssAssetsPlugin({
       assetNameRegExp: /\.css$/g,
       cssProcessor: require('cssnano')
-    }),
-    new ProgressBarPlugin({
-      callback: function () {
-        console.log('打包完成')
-        return null
-      }
     })
   ]
-})
+}))
 
-if (process.env.NODE_ENV === 'development') {
-  prodConfig.plugins.push(
-    new BundleAnalyzerPlugin()
-  )
-}
+// if (process.env.NODE_ENV === 'development') {
+//   prodConfig.plugins.push(
+//     new BundleAnalyzerPlugin()
+//   )
+// }
 
 module.exports = prodConfig
