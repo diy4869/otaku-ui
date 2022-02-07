@@ -3,7 +3,7 @@ import:
   import { Select, SelectOption } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## Select 下拉框
 

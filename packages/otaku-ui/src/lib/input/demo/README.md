@@ -3,7 +3,7 @@ import:
   import { Input, Grid, GridItem, Button } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## 一个普通的输入框
 

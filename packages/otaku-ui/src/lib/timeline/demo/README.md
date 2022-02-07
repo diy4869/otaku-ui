@@ -3,7 +3,7 @@ import:
   import { Timeline, TimelineItem } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## Timeline 时间线
 

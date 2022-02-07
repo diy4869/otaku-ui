@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react"
 import { Icon } from "../icon/icon"
 import "./style.scss"
 
+
 interface UploadProps {
   action: string
   accept?: string
@@ -13,15 +14,15 @@ interface UploadProps {
   beforeUpload?: () => void
 }
 
-// interface FileSystemDirectoryReader {
-//   readEntries: (callback: (FileEntry?: Array<FileSystemFileEntry | FileSystemDirectoryEntry>) => void) => void
-// }
+interface DragDirectory {
+  type: "file" | "directory"
+  name: string
+  size: number
+  files?: DragDirectory[]
+  file?: File
+}
 
-// interface FileSystemEntry {
-//   createReader: () => FileSystemDirectoryReader
-// }
-
-export function Upload(props: UploadProps) {
+export function Upload (props: UploadProps) {
   const {
     action,
     accept,
@@ -39,7 +40,6 @@ export function Upload(props: UploadProps) {
     console.log(e, e.target.files)
   }
 
-
   document.addEventListener("drop", e => e.preventDefault())
   document.addEventListener("dragover", e => e.preventDefault())
 
@@ -56,37 +56,40 @@ export function Upload(props: UploadProps) {
   }
 
   const onDrop = (e: React.DragEvent) => {
-    console.log("onDrop", e, e.dataTransfer.files, e.dataTransfer.items)
-
     const travserse = () => {
       const fileList = []
+
       const dfs = (files: FileSystemDirectoryEntry) => {
-        const directory = []
+        const directory: DragDirectory[] = []
 
         if (files?.isDirectory) {
           const reader = files.createReader()
 
-          reader.readEntries((entries) => {
+          reader.readEntries(entries => {
             for (const item of entries) {
               if (item.isDirectory) {
                 directory.push({
                   name: item.name,
                   type: "directory",
-                  files: dfs(item)
+                  size: 0,
+                  files: dfs(item as FileSystemDirectoryEntry)
                 })
               } else {
-                console.log(item)
-                item.file((children: File) => {
+                ;(item as FileSystemFileEntry).file((children: File) => {
                   directory.push({
                     type: "file",
+                    name: children.name,
+                    size: children.size,
                     file: children
                   })
                 })
               }
             }
           })
+
+          return directory
         }
-        
+
         return directory
       }
 
@@ -104,15 +107,29 @@ export function Upload(props: UploadProps) {
           fileList.push({
             type: "directory",
             name: result?.name,
-            files: dfs(result)
+            files: dfs(result as FileSystemDirectoryEntry)
           })
         }
       }
 
-      console.log(fileList)
+      return fileList
     }
 
-    travserse()
+    const fileList = travserse()
+    console.log(fileList)
+
+    const flat = (fileList) => {
+      return fileList.reduce((total, current) => {
+        return total.concat(
+          current.type === 'directory' ? flat(current.files) : current
+        )
+      }, [])
+    }
+
+    Promise.resolve().then(() => {
+      console.log(flat(fileList))
+    })
+
 
 
     setDragState("drop")
@@ -121,12 +138,9 @@ export function Upload(props: UploadProps) {
 
   return (
     <div className='otaku-upload-container'>
-      <label className='otaku-upload-label'>
-        <input type='file' name='upload' ref={file} onChange={change} />
-        {/* {children} */}
-        {drag ? (
-          <div
-            className={`
+      {drag ? (
+        <div
+          className={`
                 otaku-drag-upload 
                 ${
                   ["dragEnter", "dragOver"].includes(dragState)
@@ -134,18 +148,21 @@ export function Upload(props: UploadProps) {
                     : ""
                 }
               `}
-            onDrop={onDrop}
-            onDragEnter={onDragEnter}
-            onDragOver={onDragOver}
-            onDragLeave={onDragLeave}>
-            拖拽
-          </div>
-        ) : (
+          onDrop={onDrop}
+          onDragEnter={onDragEnter}
+          onDragOver={onDragOver}
+          onDragLeave={onDragLeave}>
+          拖拽
+        </div>
+      ) : (
+        <label className='otaku-upload-label'>
+          <input type='file' name='upload' ref={file} onChange={change} />
+          {/* {children} */}
           <div className='otaku-upload'>
             <Icon name='add-bold' className='add'></Icon>
           </div>
-        )}
-      </label>
+        </label>
+      )}
     </div>
   )
 }

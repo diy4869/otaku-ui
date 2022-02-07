@@ -3,7 +3,7 @@ import:
   import { DatePicker } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## DatePicker
 

@@ -2,7 +2,7 @@
 import:
   import { Rate } from 'otaku-ui'
 ---
-[[toc]]
+
 
 ## Rate 评分
 

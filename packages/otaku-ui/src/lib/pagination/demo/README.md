@@ -3,7 +3,7 @@ import:
   import { Pagination } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## 普通分页
 

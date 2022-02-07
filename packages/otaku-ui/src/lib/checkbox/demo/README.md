@@ -3,7 +3,7 @@ import:
   import { Checkbox, CheckboxGroup } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## Checkbox
 

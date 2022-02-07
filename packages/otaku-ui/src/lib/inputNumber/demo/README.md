@@ -3,7 +3,7 @@ import:
   import { InputNumber, Grid, GridItem } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## InputNumber 计数器
 

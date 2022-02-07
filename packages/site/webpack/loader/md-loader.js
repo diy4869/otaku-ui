@@ -1,8 +1,6 @@
 const MarkdownIt = require('markdown-it')
 const container = require('markdown-it-container')
 const matter = require('gray-matter')
-const anchor = require('markdown-it-anchor')
-const toc = require('markdown-it-toc-done-right')
 const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
@@ -12,43 +10,28 @@ const json5 = require('json5')
 
 let importSynx = `
   import * as React from 'react'
-  import { HighlightCode } from 'otaku-ui'
+  import { HighlightCode, Anchor, AnchorItem } from 'otaku-ui'
   import { Api } from 'site-component/api/api'
+  import { createPortal } from 'react-dom'
   import { CodeExample } from 'site-component/codeExample/codeExample'
   import Block from 'site-component/block/block'
 `
+
 let str = importSynx
 let demoIndex = 0
 
-const reactMarkdownTemplate = (str, importSynx, content) => {
-  const data = `
-    ${importSynx}
-    ${str}
-
-    function MdReact () {
-      return <div className='markdown-body'>${content}</div>
-    }
-
-    export default MdReact
-  `
-
-  return data
-}
 
 module.exports = function mdLoader (source) {
   const { content, data } = matter(source)
 
-
-  
   if (this.hot) {
     str = importSynx
-
 
     //   // console.log(this.resourcePath)
     // this.addDependency(this.resourcePath)
   }
   // demo 数量
-  
+
   let demoName
 
   const md = new MarkdownIt({
@@ -67,19 +50,6 @@ module.exports = function mdLoader (source) {
       return template
     }
   })
-    .use(anchor, {
-      level: 3,
-      permalink: anchor.permalink.linkInsideHeader({
-        symbol: `
-            <span class="b-anchor"></span>
-            <span aria-hidden="false">#</span>
-          `,
-        placement: 'before'
-      })
-    })
-    .use(toc, {
-      level: 2
-    })
     .use(container, 'desc', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
@@ -94,37 +64,32 @@ module.exports = function mdLoader (source) {
     .use(container, 'api', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
-          const path = 'D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx'
-          const apiType = transform(path, {}) 
-          
-          const fileData = Object.values(apiType)[0]        
+          const path =
+            'D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx'
+          const apiType = transform(path, {})
+
+          const fileData = Object.values(apiType)[0]
           const result = data.api.module.map(component => {
             return fileData.function[component]
           })
 
           const renderComponent = result.reduce((str, current, index) => {
-
             const interface = current.args[0].type
 
-            str.push( `<Api 
+            str.push(`<Api 
               code={\`${interface.code}\`}
               data={\`${json5.stringify(interface.property)}\`}
               ></Api>`)
 
-
-
             return str
           }, [])
 
-          console.log(renderComponent)
 
-          
           // console.log( `<>${renderComponent}`)
           return `<>
           { 
             ${renderComponent}
           }`
-        
         } else {
           return `</>`
         }
@@ -161,7 +126,7 @@ module.exports = function mdLoader (source) {
           //   filename: 'test.js',
           //   presets: [
           //     '@babel/preset-env',
-              
+
           //     '@babel/preset-react',
           //     '@babel/preset-typescript',
           //   ],
@@ -221,6 +186,20 @@ ${current.code}`
         }
       }
     })
+  
+  const ast = md.parse(content, {})
+  const anchor = ast.reduce((total, current, currentIndex) => {
+    if (current.type === 'heading_open') {
+      total.push({
+        tag: current.tag,
+        level: current.markup.length,
+        name: ast[currentIndex + 1].content
+      })
+    }
+
+    return total
+  }, [])
+
 
   const mdToHtml = md
     .render(content)
@@ -228,5 +207,37 @@ ${current.code}`
     .replace(/<br>/g, '<br />')
     .replace(/class=/g, 'className=')
 
-  return reactMarkdownTemplate(str, data.import, mdToHtml)
+
+  const reactMarkdownTemplate = (str, data, content, anchor) => {
+      return `
+        ${data.import}
+        ${str}
+    
+        function MdReact () {
+          return (
+            <>
+              <div className='markdown-body'>${content}</div>
+              ${
+                !data.anchor ? '' :  `
+                <Anchor>
+                  ${
+                    anchor.reduce((str, item) => {
+                      str += `<AnchorItem title={\`${item.name}\`}></AnchorItem>`
+                      
+                      return str
+                    }, '')
+                  }
+                </Anchor>
+              `
+              }
+             
+            </>
+          )
+        }
+    
+        export default MdReact
+      `
+  }
+
+  return  reactMarkdownTemplate(str, data, mdToHtml, anchor)
 }

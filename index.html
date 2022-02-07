@@ -6,26 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        div {
-            width: 500px;
-            height: 200px;
-            border: 2px solid red;
-        }
     </style>
 </head>
 <body>
-    <!-- <input type="file"></input> -->
-    <div></div>
 </body>
 <script>
-    document.addEventListener('drop', e => e.preventDefault())
-    document.addEventListener('dragover', e => e.preventDefault())
-
-    const div = document.getElementsByTagName('div')[0]
-
-    div.addEventListener('drop', (e) => {
-        // e.dataTransfer.dropEffect = 'move'
-        console.log(e.dataTransfer.files)
-    })
 </script>
 </html>

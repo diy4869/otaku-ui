@@ -4,6 +4,7 @@ import { Dialog } from '../dialog/dialog'
 import { Button } from '../button/button'
 import miku from './miku.jfif'
 import 'cropperjs/src/css/cropper.scss'
+// import 'cropperjs/src/css/cropper.css'
 import './cropper.scss'
 
 interface ImageCropperProps {
@@ -25,10 +26,12 @@ export function ImageCropper (props: ImageCropperProps) {
         // eslint-disable-next-line no-new
         new Cropper(image.current, {
           aspectRatio: aspectRatio,
-          preview: container.current
+          preview: container.current,
+          ready (e) {
+            console.log(e)
+          }
         })
-      }
-  
+      } 
     }
   }, [show, container, image, aspectRatio])
 

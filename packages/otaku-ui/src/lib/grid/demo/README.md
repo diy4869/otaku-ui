@@ -3,7 +3,7 @@ import:
   import { Grid, GridItem } from 'otaku-ui'
 ---
 
-[[toc]]
+
 
 ## Grid 网格
 
