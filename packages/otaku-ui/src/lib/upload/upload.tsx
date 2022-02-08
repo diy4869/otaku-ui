@@ -86,8 +86,6 @@ export function Upload (props: UploadProps) {
               }
             }
           })
-
-          return directory
         }
 
         return directory
@@ -156,7 +154,7 @@ export function Upload (props: UploadProps) {
         </div>
       ) : (
         <label className='otaku-upload-label'>
-          <input type='file' name='upload' ref={file} onChange={change} />
+          <input type='file' name='upload' ref={file} onChange={change} webkitdirectory multiple/>
           {/* {children} */}
           <div className='otaku-upload'>
             <Icon name='add-bold' className='add'></Icon>

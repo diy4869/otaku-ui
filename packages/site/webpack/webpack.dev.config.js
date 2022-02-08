@@ -11,9 +11,13 @@ const { merge } = require('webpack-merge')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const address = require('address')
 const portFinder = require('portfinder')
+const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
+const smp = new SpeedMeasurePlugin()
 
 module.exports = async () => {
-  const devConfig = merge(webpackBaseConfig, {
+  const devConfig = smp.wrap(merge(webpackBaseConfig, {
     devServer: {
       static: {
         directory: path.join(__dirname, 'src'),
@@ -45,6 +49,10 @@ module.exports = async () => {
       // clientLogLevel: 'none',
     },
     plugins: [
+      new BundleAnalyzerPlugin({
+        analyzerPort: 18888
+      }),
+      new webpack.HotModuleReplacementPlugin(),
 
       // new FriendlyErrorsWebpackPlugin({
       //   compilationSuccessInfo: {
@@ -56,7 +64,7 @@ module.exports = async () => {
       //   }
       // })
     ]
-  })
+  }))
 
   const port = await portFinder.getPortPromise({
     port: 8080,

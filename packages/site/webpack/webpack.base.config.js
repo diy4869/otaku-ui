@@ -8,6 +8,7 @@ const path = require('path')
 const env = require('./env')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 
 console.log(path.resolve(__dirname, '../webpack/loader/index.js'))
 console.log(path.resolve(__dirname, '../../otaku-ui/src/index.ts'))
@@ -107,7 +108,7 @@ const baseConfig = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['ts-loader']
+        use: ['swc-loader']
       }
     ]
   },
@@ -126,7 +127,7 @@ const baseConfig = {
     extensions: ['.js', '.ts', '.tsx']
   },
   target: 'web',
-  devtool: env === 'development' ? 'source-map' : 'source-map',
+  devtool: env === 'development' ? 'source-map' : false,
   plugins: [
     // new webpack.DefinePlugin({
     //   'process.env': JSON.stringify(env)
@@ -137,6 +138,11 @@ const baseConfig = {
       template: path.resolve(__dirname, '../page/index.html'),
       inject: true,
       minify: true
+    }),
+    new ProgressBarPlugin({
+      callback: function () {
+        console.log('打包完成')
+      }
     }),
     new MiniCssExtractPlugin({
       filename: 'css/[name]_[contenthash].css',
