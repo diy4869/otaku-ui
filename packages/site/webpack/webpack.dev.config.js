@@ -15,24 +15,36 @@ const portFinder = require('portfinder')
 module.exports = async () => {
   const devConfig = merge(webpackBaseConfig, {
     devServer: {
-      contentBase: path.join(__dirname, '/src'),
+      static: {
+        directory: path.join(__dirname, 'src'),
+      },
+      // contentBase: path.join(__dirname, '/src'),
       // publicPath: '//',
       host: 'localhost',
       hot: true,
       compress: true,
-      noInfo: true,
-      overlay: {
-        warnings: true,
-        errors: false
-      },
-      quiet: true,
+      // noInfo: true,
+      // overlay: {
+      //   warnings: true,
+      //   errors: false
+      // },
+      // quiet: true,
       // writeToDisk: true,
-      // useLocalIp: true,
       historyApiFallback: true,
-      clientLogLevel: 'none',
+      client: {
+        logging: "info",
+        // Can be used only for `errors`/`warnings`
+        //
+        // overlay: {
+        //   errors: true,
+        //   warnings: true,
+        // }
+        overlay: false,
+        progress: true,
+      },
+      // clientLogLevel: 'none',
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
 
       // new FriendlyErrorsWebpackPlugin({
       //   compilationSuccessInfo: {
