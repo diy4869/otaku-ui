@@ -1,6 +1,10 @@
 ---
 import:
   import { Input, Grid, GridItem, Button } from 'otaku-ui'
+api:
+  {
+    module: ['Input']
+  }
 ---
 
 
@@ -134,4 +138,9 @@ ReactDOM.render(
 )
 
 ```
+:::
+
+## api
+
+::: api
 :::

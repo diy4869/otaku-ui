@@ -108,7 +108,7 @@ const baseConfig = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['swc-loader']
+        use: ['ts-loader']
       }
     ]
   },
@@ -139,11 +139,11 @@ const baseConfig = {
       inject: true,
       minify: true
     }),
-    new ProgressBarPlugin({
-      callback: function () {
-        console.log('打包完成')
-      }
-    }),
+    // new ProgressBarPlugin({
+    //   callback: function () {
+    //     console.log('打包完成')
+    //   }
+    // }),
     new MiniCssExtractPlugin({
       filename: 'css/[name]_[contenthash].css',
       chunkFilename: 'css/[name]_[chunkhash].css'

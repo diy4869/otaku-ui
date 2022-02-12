@@ -276,15 +276,28 @@ const getReferenceType = (typeName, currentFile, fileMap) => {
 }
 
 const saveExport = (node, name, currentFile, type) => {
+  const getReferenceType = (type) => {
+    switch (type) {
+      case 'function':
+        return currentFile.function[name]
+      case 'interface':
+        return currentFile.type[name]
+      case 'type':
+        return currentFile.type[name]
+      default:
+        return null
+    }
+  }
+  
   if (isExportDefault(node)) {
     currentFile.export.default = {
       type: type,
-      ...currentFile.type[name]
+      reference: getReferenceType(type) 
     }
   } else if (isExport(node)) {
     currentFile.export[name] = {
       type: type,
-      ...currentFile.type[name]
+      reference: getReferenceType(type) 
     }
   }
 }

@@ -1,6 +1,10 @@
 ---
 import:
   import { Grid, GridItem } from 'otaku-ui'
+api:
+  {
+    module: ['Grid', 'GridItem']
+  }
 ---
 
 
@@ -51,4 +55,9 @@ ReactDOM.render(<Demo/>, container)
   color: blue;
 }
 ```
+:::
+
+## api
+
+::: api
 :::

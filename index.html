@@ -8,7 +8,7 @@
     <style></style>
   </head>
   <body>
-    <input type="file" webkitdirectory multiple />
+    <input type="file" multiple />
 
     <button onclick="upload()">上传</button>
   </body>
@@ -17,7 +17,7 @@
 
     file.onchange = e => {
       e.preventDefault()
-    //   upload()
+      //   upload()
     }
 
     function upload() {
@@ -28,7 +28,7 @@
       const fd = new FormData()
 
       for (const item of file.files) {
-        fd.append('file', item)
+        fd.append('files', item)
       }
 
       ajax.send(fd)
@@ -37,16 +37,18 @@
         if (ajax.readyState === 4 && ajax.status === 200) {
         }
       }
-
-      ajax.upload.onloadstart = e => {
+      ajax.addEventListener('load', e => {
+        console.log('加载', e)
+      })
+      ajax.addEventListener('loadstart', e => {
         console.log('开始加载', e)
-      }
-      ajax.upload.progress = e => {
+      })
+      ajax.addEventListener('progress', e => {
         console.log('上传中', e)
-      }
-      ajax.upload.onloadend = e => {
+      })
+      ajax.addEventListener('loadend', e => {
         console.log('上传完成', e)
-      }
+      })
     }
     // console.log(file.files)
   </script>

@@ -5,7 +5,7 @@ const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
-const transform = require('./generator/index')
+const { transform, transformAll } = require('./generator/index')
 const json5 = require('json5')
 
 let importSynx = `
@@ -64,21 +64,46 @@ module.exports = function mdLoader (source) {
     .use(container, 'api', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
-          const path =
-            'D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\button\\button.tsx'
-          const apiType = transform(path, {})
+          const interface = []
+          const type = []
 
-          const fileData = Object.values(apiType)[0]
-          const result = data.api.module.map(component => {
-            return fileData.function[component]
+
+          const apiType = transformAll()
+        
+          const findExport = () => {
+            return data.api.module.map(item => {
+              const filePath = Object.keys(apiType).find(children => {
+                if (apiType[children].export[item]) {
+                  return true
+                }
+              })
+
+              return {
+                name: item,
+                type: filePath ? apiType[filePath].export[item].reference : null
+              }
+            })
+
+            
+          }
+          const result = findExport()
+
+          console.log(result)
+
+          result.forEach(item => {
+            const type = item.type.args[0].type
+
+            if (type.type === 'interface') {
+              interface.push(type.code)
+            }
           })
 
           const renderComponent = result.reduce((str, current, index) => {
-            const interface = current.args[0].type
+            const type = current.type.args[0].type
 
             str.push(`<Api 
-              code={\`${interface.code}\`}
-              data={\`${json5.stringify(interface.property)}\`}
+              code={\`${interface.join('\n\n')}\`}
+              data={\`${json5.stringify(type.property)}\`}
               ></Api>`)
 
             return str

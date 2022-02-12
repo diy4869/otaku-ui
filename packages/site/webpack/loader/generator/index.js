@@ -52,16 +52,15 @@ const transformAll = () => {
 
 // transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\pagination\\pagination.tsx', {})
 // console.log(exportLibPath)
-transformAll()
-
-
 
 
 // console.log(
 // backPath(picker, '../../calendar/calendar')
 // console.log(glob.sync('**/*.d.ts'))
 
-module.exports = transform
+module.exports.transformAll = transformAll
+
+module.exports.transform = transform
 
 
 

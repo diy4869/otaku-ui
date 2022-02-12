@@ -17,7 +17,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const smp = new SpeedMeasurePlugin()
 
 module.exports = async () => {
-  const devConfig = smp.wrap(merge(webpackBaseConfig, {
+  const devConfig = merge(webpackBaseConfig, {
     devServer: {
       contentBase: path.join(__dirname, '/src'),
       // publicPath: '//',
@@ -36,10 +36,10 @@ module.exports = async () => {
       clientLogLevel: 'none',
     },
     plugins: [
-      new BundleAnalyzerPlugin({
-        analyzerPort: 18888
-      }),
-      new webpack.HotModuleReplacementPlugin(),
+      // new BundleAnalyzerPlugin({
+      //   analyzerPort: 18888
+      // }),
+      // new webpack.HotModuleReplacementPlugin(),
 
       // new FriendlyErrorsWebpackPlugin({
       //   compilationSuccessInfo: {
@@ -51,7 +51,7 @@ module.exports = async () => {
       //   }
       // })
     ]
-  }))
+  })
 
   const port = await portFinder.getPortPromise({
     port: 8080,
