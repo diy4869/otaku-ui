@@ -46,9 +46,7 @@ const prodConfig = smp.wrap(merge(webpackBaseConfig, {
       }
     },
     minimizer: [
-      new CssMinimizerPlugin({
-        cache: true
-      }),
+      new CssMinimizerPlugin(),
       new TerserPlugin({
         parallel: true,
         // sourceMap: env === 'development',
@@ -63,12 +61,12 @@ const prodConfig = smp.wrap(merge(webpackBaseConfig, {
     ]
   },
   // 长缓存
-  // cache: {
-  //   type: 'filesystem',
-  //   buildDependencies: {
-  //     config: [__dirname]
-  //   }
-  // },
+  cache: {
+    type: 'filesystem',
+    buildDependencies: {
+      config: [__dirname]
+    }
+  },
   stats: {
     modules: false,
     source: false
@@ -82,9 +80,15 @@ const prodConfig = smp.wrap(merge(webpackBaseConfig, {
       'process.env': JSON.stringify(env)
     }),
     // 压缩css
-    new OptimizationCssAssetsPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano')
+    // new OptimizationCssAssetsPlugin({
+    //   assetNameRegExp: /\.css$/g,
+    //   cssProcessor: require('cssnano')
+    // }),
+    new ProgressBarPlugin({
+      callback: function () {
+        console.log('打包完成')
+        return null
+      }
     })
   ]
 }))
