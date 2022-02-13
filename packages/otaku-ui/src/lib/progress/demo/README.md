@@ -2,6 +2,10 @@
 import:
   import { Progress, Grid, GridItem, Button, InputNumber } from 'otaku-ui';
   import { useState } from 'react';
+api:
+  {
+    module: ['Progress']
+  }
 ---
 
 
@@ -129,16 +133,7 @@ ReactDOM.render(<Demo/>, container)
 ```
 :::
 
-## API
+## api
 
-```ts
-interface ProgressProps {
-  inner?: boolean
-  percentage?: number
-  max?: number
-  color?: string
-  type?: 'circle'
-  direction?: 'vertical' | 'horizontal'
-  lineWidth?: number
-}
-```
+::: api
+:::

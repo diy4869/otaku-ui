@@ -1,6 +1,10 @@
 ---
 import:
   import { Pagination } from 'otaku-ui'
+api:
+  {
+    module: ['Pagination']
+  }
 ---
 
 
@@ -53,18 +57,5 @@ ReactDOM.render(<Pagination></Pagination>, container)
 
 ## API
 
-```tsx
-
-export interface usePaginationProps {
-  current?: number // 当前页
-  total?: number // 总页数
-  pageSize?: number // 每页条数 默认 10
-  slicePage?: number // 超过一定页数，中间需要渲染的页码数量
-}
-
-interface PaginationProps extends usePaginationProps {
-  circle?: boolean // 是否圆形展示
-  pageChange?:(page?: number) => void // 页数改变触发的事件
-}
-
-```
+::: api
+:::

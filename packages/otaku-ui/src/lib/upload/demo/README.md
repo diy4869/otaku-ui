@@ -1,6 +1,10 @@
 ---
 import: 
   import { Upload, Button } from 'otaku-ui';
+api:
+  {
+    module: ['Upload']
+  }
 ---
 
 ## Upload
@@ -22,4 +26,10 @@ import:
 ```tsx
  <Upload drag={true}></Upload>
 ```
+:::
+
+
+## api
+
+::: api
 :::

@@ -1,6 +1,10 @@
 ---
 import: 
   import { Table } from 'otaku-ui'
+api:
+  {
+    module: ['Table']
+  }
 ---
 
 ## Table
@@ -73,3 +77,7 @@ ReactDOM.render(<Example/>, container)
 ```
 :::
 
+## api
+
+::: api
+:::

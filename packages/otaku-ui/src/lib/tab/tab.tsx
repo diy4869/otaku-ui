@@ -34,8 +34,10 @@ export function TabPane (props: TabPaneProps) {
 export function Tab (props: TabProps) {
   const {
     active,
-    children
   } = props
+
+  const children = Array.isArray(props.children) ? props.children : [props.children]
+
 
   const [current, setCurrent] = useState(`${active}`)
   const [tabData, setTabData] = useState<React.ReactElement>()

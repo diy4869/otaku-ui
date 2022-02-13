@@ -1,6 +1,10 @@
 ---
 import: 
   import { Switch } from 'otaku-ui'
+api:
+  {
+    module: ['Switch']
+  }
 ---
 
 ## Switch
@@ -19,4 +23,11 @@ ReactDOM.render(<Switch></Switch>, container)
 ```tsx
 ReactDOM.render(<Switch disabled></Switch>, container)
 ```
+:::
+
+
+
+## api
+
+::: api
 :::

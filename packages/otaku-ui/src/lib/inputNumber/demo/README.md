@@ -1,6 +1,10 @@
 ---
 import:
   import { InputNumber, Grid, GridItem } from 'otaku-ui'
+api:
+  {
+    module: ['InputNumber']
+  }
 ---
 
 
@@ -84,20 +88,8 @@ ReactDOM.render(<InputNumber disabled></InputNumber>, container)
 ```
 :::
 
-## API
 
-```ts
-interface InputNumberProps {
-  value?: number
-  min?: number
-  max?: number
-  step?: number
-  size?: 'small' | 'middle' | 'large'
-  disabled?: boolean
-  readonly?: boolean
-  onChange?: (val?: number) => void
-  onBlur?: React.FocusEventHandler<HTMLInputElement>
-  onFocus?: React.FocusEventHandler<HTMLInputElement>
-  onInput?: React.FormEventHandler<HTMLInputElement> 
-}
-```
+## api
+
+::: api
+:::

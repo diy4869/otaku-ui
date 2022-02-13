@@ -1,6 +1,10 @@
 ---
 import:
   import { BreadCrumbs, BreadCrumbsItem, Message } from 'otaku-ui'
+api:
+  {
+    module: ['BreadCrumbs', 'BreadCrumbsItem']
+  }
 ---
 
 ## BreadCrumbs 面包屑
@@ -54,4 +58,10 @@ function Demo () {
 
 ReactDOM.render(<Demo/>, container)
 ```
+:::
+
+
+## api
+
+::: api
 :::

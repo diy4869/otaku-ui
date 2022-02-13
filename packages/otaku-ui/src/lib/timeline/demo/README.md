@@ -1,6 +1,10 @@
 ---
 import:
   import { Timeline, TimelineItem } from 'otaku-ui'
+api:
+  {
+    module: ['Timeline', 'TimelineItem']
+  }
 ---
 
 
@@ -29,4 +33,9 @@ ReactDOM.render(
 )
 
 ```
+:::
+
+## api
+
+::: api
 :::

@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "test": "node test",
     "commit": "cz",
     "release": "standard-version"
   },

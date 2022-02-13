@@ -1,6 +1,10 @@
 ---
 import:
   import { Avatar } from 'otaku-ui'
+api:
+  {
+    module: ['Avatar']
+  }
 ---
 
 ## Avatar 头像
@@ -29,4 +33,9 @@ function Demo () {
 
 ReactDOM.render(<Demo/>, container)
 ```
+:::
+
+## api
+
+::: api
 :::

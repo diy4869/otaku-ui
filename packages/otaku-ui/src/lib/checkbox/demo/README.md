@@ -1,6 +1,10 @@
 ---
 import: 
   import { Checkbox, CheckboxGroup } from 'otaku-ui'
+api:
+  {
+    module: ['Checkbox', 'CheckboxGroup']
+  }
 ---
 
 
@@ -39,15 +43,7 @@ ReactDOM.render(<Checkbox disabled>多选框</Checkbox>, container)
 :::
 
 
-## API
+## api
 
-```ts
-interface CheckBoxProps {
-  checked?: boolean
-  disabled?: boolean
-  indeterminate?: boolean
-  value?: string | number
-  children?: React.ReactNode[]
-  onChange?: (checked?: boolean) => void
-}
-```
+::: api
+:::

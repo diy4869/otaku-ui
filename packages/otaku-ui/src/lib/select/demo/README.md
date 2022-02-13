@@ -1,6 +1,10 @@
 ---
 import: 
   import { Select, SelectOption } from 'otaku-ui'
+api:
+  {
+    module: ['Select', 'SelectOption']
+  }
 ---
 
 
@@ -31,4 +35,9 @@ function Demo () {
 ReactDOM.render(<Demo/>, container)
 
 ```
+:::
+
+## api
+
+::: api
 :::

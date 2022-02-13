@@ -8,12 +8,20 @@ interface ApiProps {
   data: string
 }
 
+interface ApiData {
+  name: string
+  data: string
+}
+
 export function Api (props: ApiProps) {
 
   const { code, data } = props
-  const tableData = eval(data)
 
-  console.log(tableData)
+  console.log(props)
+  const string = data.replace('(\\)\g' , '')
+  console.log(string)
+  // const evalData: ApiData[] = json5.parse(string)
+
   const tableColumn = [
     {
       label: '属性',
@@ -49,9 +57,20 @@ export function Api (props: ApiProps) {
         <TabPane name='类型定义' id={0}>
           <HighlightCode lang={'ts'} code={code}></HighlightCode>
         </TabPane>
-        <TabPane name='API' id={1}>
-          <Table data={tableData} tableColumn={tableColumn}></Table>
-        </TabPane>
+        {/* <TabPane name='API' id={1}>
+          {
+            evalData?.map(item => {
+              const tableData = eval(item.data)
+
+              return (
+                <section>
+                  <h2>{item.name}</h2>
+                  <Table data={tableData} tableColumn={tableColumn}></Table>
+                </section>
+              )
+            })
+          }
+        </TabPane> */}
       </Tab>
     </aside>
   )

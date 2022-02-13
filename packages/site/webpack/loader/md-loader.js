@@ -64,8 +64,7 @@ module.exports = function mdLoader (source) {
     .use(container, 'api', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
-          const interface = []
-          const type = []
+          
 
 
           const apiType = transformAll()
@@ -83,12 +82,11 @@ module.exports = function mdLoader (source) {
                 type: filePath ? apiType[filePath].export[item].reference : null
               }
             })
-
-            
           }
           const result = findExport()
-
-          console.log(result)
+          const interface = []
+          const type = []
+          const apiData = []
 
           result.forEach(item => {
             const type = item.type.args[0].type
@@ -96,25 +94,20 @@ module.exports = function mdLoader (source) {
             if (type.type === 'interface') {
               interface.push(type.code)
             }
+
+            apiData.push({
+              name: json5.stringify(item.name),
+              data: json5.stringify(type.property)
+            })
+
           })
 
-          const renderComponent = result.reduce((str, current, index) => {
-            const type = current.type.args[0].type
-
-            str.push(`<Api 
-              code={\`${interface.join('\n\n')}\`}
-              data={\`${json5.stringify(type.property)}\`}
-              ></Api>`)
-
-            return str
-          }, [])
-
-
-          // console.log( `<>${renderComponent}`)
+          
           return `<>
-          { 
-            ${renderComponent}
-          }`
+            <Api 
+              code={\`${interface.join('\n\n')}\`}
+              data={\`${JSON.stringify(apiData)}\`}
+              ></Api>`
         } else {
           return `</>`
         }

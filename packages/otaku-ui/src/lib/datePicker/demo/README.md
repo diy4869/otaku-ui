@@ -1,6 +1,10 @@
 ---
 import:
   import { DatePicker } from 'otaku-ui'
+api:
+  {
+    module: ['DatePicker']
+  }
 ---
 
 
@@ -38,4 +42,10 @@ ReactDOM.render(<DatePicker firstWeek="一"></DatePicker>, container)
 ```tsx
 ReactDOM.render(<DatePicker lunarDate={true}></DatePicker>, container)
 ```
+:::
+
+
+## API
+
+::: api
 :::

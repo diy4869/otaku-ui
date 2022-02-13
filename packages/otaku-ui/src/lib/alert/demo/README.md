@@ -1,6 +1,10 @@
 ---
 import:
   import { Alert } from 'otaku-ui'
+api:
+  {
+    module: ['Alert']
+  }
 ---
 
 ## Alert 警告
@@ -37,4 +41,9 @@ ReactDOM.render(<Demo/>, container)
   margin-bottom: 20px;
 }
 ```
+:::
+
+## api
+
+::: api
 :::

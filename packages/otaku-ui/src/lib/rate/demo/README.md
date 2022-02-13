@@ -1,6 +1,10 @@
 ---
 import:
   import { Rate } from 'otaku-ui'
+api:
+  {
+    module: ['Rate']
+  }
 ---
 
 
@@ -98,4 +102,10 @@ function Demo () {
 }
 ReactDOM.render(<Demo/>, container)
 ```
+:::
+
+
+## api
+
+::: api
 :::
