@@ -108,7 +108,7 @@ const baseConfig = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['ts-loader']
+        use: ['swc-loader']
       }
     ]
   },

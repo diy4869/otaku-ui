@@ -28,7 +28,7 @@ export * from './lib/select/index'
 export * from './lib/cropper/cropper'
 
 export * from './lib/space/space'
-export * from './lib/message/message'
+export * from './lib/message/index'
 export * from './lib/alert/alert'
 export * from './lib/breadCrumbs/breadCrumbs'
 export * from './lib/table/table'

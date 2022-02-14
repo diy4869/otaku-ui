@@ -65,8 +65,10 @@ export function Portal (props: TeleportProps) {
     const children = Array.of(...mountNode.children)
 
     return children.find((ele) => {
-      if (ele.numberId) {
-        return ele?.numberId === node?.numberId
+      const e = ele as HTMLDivElement
+
+      if (e.numberId) {
+        return e?.numberId === node?.numberId
       }
       return false
     }) as HTMLDivElement | undefined

@@ -2,6 +2,10 @@
 import: 
   import { useRef } from 'react';
   import { Tooltip, Button } from 'otaku-ui';
+api:
+  {
+    module: ['Tooltip']
+  }
 ---
 
 ## Tooltip

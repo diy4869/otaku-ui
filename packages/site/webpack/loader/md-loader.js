@@ -64,11 +64,8 @@ module.exports = function mdLoader (source) {
     .use(container, 'api', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
-          
-
-
           const apiType = transformAll()
-        
+    
           const findExport = () => {
             return data.api.module.map(item => {
               const filePath = Object.keys(apiType).find(children => {
@@ -92,6 +89,11 @@ module.exports = function mdLoader (source) {
             const type = item.type.args[0].type
 
             if (type.type === 'interface') {
+              if (type.extendProperty) {
+                type.extendProperty.forEach(children => {
+                  interface.push(children.code)
+                })
+              }
               interface.push(type.code)
             }
 
@@ -101,6 +103,7 @@ module.exports = function mdLoader (source) {
             })
 
           })
+          console.log(interface)
 
           
           return `<>

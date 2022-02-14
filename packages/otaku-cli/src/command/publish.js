@@ -9,11 +9,11 @@ module.exports = async () => {
   const spinner = ora('正在努力构建中').start()
   const basePath = path.resolve(__dirname, '../../../../')
   const sitePath = path.resolve(basePath, './packages/site/dist')
-  const buildPath = path.resolve(basePath, './otaku-ui-docs/docs')
+  // const buildPath = path.resolve(basePath, './otaku-ui-docs/docs')
   const execPromise = promisify(exec)
 
   if (await checkDirectory(sitePath)) {
-    await execPromise(`rm -rf ${buildPath}`)
+    // await execPromise(`rm -rf ${buildPath}`)
     // await copy(sitePath, buildPath)
     const command = [
       `cd ${sitePath}`,
@@ -21,7 +21,7 @@ module.exports = async () => {
       `git commit -m "docs: 更新文档，日期: ${dayjs().format(
         'YYYY-MM-DD HH:mm:ss'
       )}"`,
-      'git push origin master'
+      'git push -f origin master'
     ]
     // console.log(command)
     const str = command.join(' && ')

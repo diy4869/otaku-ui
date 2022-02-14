@@ -11,12 +11,12 @@ type B = 'start' | 'end'
 type C = `${A}-${B}` | A
 
 interface TooltipProps {
-  children?: React.ReactNode
   content: string
+  children?: React.ReactNode
   placement?: C
   arrow?: boolean
-  theme?: "light" | "light-border" | "material" | "translucent"
-  trigger?: "click" | "focus"
+  theme?: 'light' | 'light-border' | 'material' | 'translucent'
+  trigger?: 'click' | 'focus'
   interactive?: boolean,
   delay?: number | [number, number]
   duration?: number | [number, number]
@@ -54,6 +54,6 @@ export function Tooltip(props: TooltipProps) {
   })
 
   return (
-    <div className="otaku-tooltip" ref={ref}>{children}</div>
+    <div className='otaku-tooltip' ref={ref}>{children}</div>
   )
 }

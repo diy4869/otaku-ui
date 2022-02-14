@@ -67,7 +67,7 @@ export function Calendar (props: CalendarProps) {
     [date, selectDate]
   )
 
-  const click = (e) => {
+  const click = (e: React.BaseSyntheticEvent) => {
     const dataset = e.target.tagName === 'SPAN' ? e.target.parentElement.dataset : e.target.dataset
     const { type, date, disabled } = dataset
     

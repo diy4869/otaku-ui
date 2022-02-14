@@ -81,7 +81,7 @@ export function Input (props: InputProps) {
     [value]
   )
 
-  const change = (e) => {
+  const change = (e: React.BaseSyntheticEvent) => {
     setInputValue(e.target.value)
     onChange?.(inputValue)
     onInput?.(inputValue)

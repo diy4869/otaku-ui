@@ -36,7 +36,7 @@ export function InputNumber (props: InputNumberProps) {
     setInputVal(value)
   }, [value])
 
-  const change = e => {
+  const change = (e: React.BaseSyntheticEvent) => {
     setInputVal(e.target.value)
     onChange?.(e.target.value)
   }

@@ -84,12 +84,12 @@ const prodConfig = smp.wrap(merge(webpackBaseConfig, {
     //   assetNameRegExp: /\.css$/g,
     //   cssProcessor: require('cssnano')
     // }),
-    new ProgressBarPlugin({
-      callback: function () {
-        console.log('打包完成')
-        return null
-      }
-    })
+    // new ProgressBarPlugin({
+    //   callback: function () {
+    //     console.log('打包完成')
+    //     return null
+    //   }
+    // })
   ]
 }))
 

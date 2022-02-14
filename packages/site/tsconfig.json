@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "../buildDocs/dist",
+    "outDir": "./dist/docs",
     "module": "esnext",
     "target": "es5",
     "lib": ["esnext", "dom"],
@@ -12,6 +12,8 @@
     "moduleResolution": "node",
     "strict": true,
     "noEmit": false,
+
+    "types": ["node_modules", "../otaku-ui/src/types/*"],
     "paths": {
       "@docs/": ["./docs"],
       "@/*": ["./src/*"],
@@ -21,7 +23,6 @@
   "exclude": [
     "node_modules",
     "build",
-    "../otaku-ui-docs/dist",
     "webpack"
   ]
 }

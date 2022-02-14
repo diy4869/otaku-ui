@@ -23,7 +23,7 @@ export const SelectContext = React.createContext<Context>({
 })
 
 export function Select (props: SelectProps) {
-  const { value, disabled, size, multiple = true, placeholder, children } = props
+  const { value, disabled, size, multiple, placeholder, children } = props
   const [show, setShow] = useState(false)
   const [active, setActive] = useState(value || undefined)
   const [selected, setSelected] = useState(value as Array<string | number> || [])
@@ -64,7 +64,7 @@ export function Select (props: SelectProps) {
         className='otaku-select-input'
         afterIcon={<Icon name={`arrow-down ${show ? 'rotate' : ''}`}></Icon>}
         onFocus={focus}></Input>
-      <Portal visible={show}>
+      <Portal visible={show} clickOutSide={() => setShow(false)}>
         <SelectContext.Provider value={{
           multiple,
           selected: multiple ? selected : active ?? undefined
