@@ -8,15 +8,11 @@
   "scripts": {
     "test": "node test",
     "commit": "cz",
-    "release": "standard-version"
+    "release": "standard-version",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
-  },
-  "husky": {
-    "hooks": {
-      "commit-msg": "echo 'hello world'"
-    }
   },
   "config": {
     "commitizen": {
@@ -26,15 +22,14 @@
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
-    "@commitlint/prompt-cli": "^16.1.0",
     "@types/webpack": "^5.28.0",
+    "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "lint-staged": "^12.3.3",
     "prettier": "^2.5.1",
     "standard-version": "^9.3.1"
   },
   "dependencies": {
-    "commitlint": "^16.1.0",
     "json5": "^2.2.0",
     "typedoc": "^0.22.11"
   }

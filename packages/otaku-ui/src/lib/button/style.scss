@@ -7,6 +7,9 @@
   // font-size: 12px;
   box-sizing: border-box;
   padding: 0;
+  &:hover {
+    cursor: pointer;
+  }
   &:disabled {
     cursor: not-allowed;
   }

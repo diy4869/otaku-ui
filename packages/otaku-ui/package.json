@@ -18,6 +18,7 @@
     "@commitlint/prompt-cli": "^16.1.0",
     "@popperjs/core": "^2.11.0",
     "async-validator": "^4.0.7",
+    "classnames": "^2.3.1",
     "commitlint": "^16.1.0",
     "cropperjs": "^1.5.12",
     "dayjs": "^1.10.7",
