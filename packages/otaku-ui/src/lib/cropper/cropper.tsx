@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useEffect, useState, useRef } from 'react'
+import React, { useLayoutEffect, useState, useRef } from 'react'
 import Cropper from 'cropperjs'
 import { Dialog } from '../dialog/dialog'
 import { Button } from '../button/button'
@@ -46,7 +46,6 @@ export function ImageCropper (props: ImageCropperProps) {
             ref={image}
             className='otaku-image-cropper-image'
           />
-          
         </div>
         <div className='otaku-image-cropper-preview' ref={container}></div>
       </Dialog>

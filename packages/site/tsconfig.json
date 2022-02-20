@@ -13,7 +13,7 @@
     "strict": true,
     "noEmit": false,
 
-    "types": ["node_modules", "../otaku-ui/src/types/*"],
+    "types": ["node_modules", "../otaku-ui/src/types/**"],
     "paths": {
       "@docs/": ["./docs"],
       "@/*": ["./src/*"],

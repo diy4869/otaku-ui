@@ -1,9 +1,10 @@
 .otaku-cropper-dialog {
   .otaku-dialog-content {
-    display: flex;
+    // display: grid;
+    // grid-template-columns: 1fr 100px;
     height: 500px;
     .otaku-image-cropper {
-      // width: 100%;
+      width: 100%;
       max-height: 100%;
     }
   }

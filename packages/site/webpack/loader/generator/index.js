@@ -37,16 +37,16 @@ const sourceFile = program.getSourceFile(entryPath)
 
 const filePath = path.resolve(__dirname, './test.tsx')
 
-// const transformAll = () => {
-//   const obj = {}
+const transformAll = () => {
+  const obj = {}
   
-//   for (let i = 0; i < exportLibPath.length; i++) {
-//     transform(exportLibPath[i].path, obj)
-//   }
+  for (let i = 0; i < exportLibPath.length; i++) {
+    transform(exportLibPath[i].path, obj)
+  }
 
 
-//   return obj
-// }
+  return obj
+}
 
 // transform(filePath, {})
 

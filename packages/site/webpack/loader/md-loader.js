@@ -103,7 +103,7 @@ module.exports = function mdLoader (source) {
             })
 
           })
-          console.log(interface)
+          // console.log(interface)
 
           
           return `<>
@@ -239,7 +239,7 @@ ${current.code}`
             <>
               <div className='markdown-body'>${content}</div>
               ${
-                !data.anchor ? '' :  `
+                data.anchor ? '' :  `
                 <Anchor>
                   ${
                     anchor.reduce((str, item) => {
@@ -251,7 +251,6 @@ ${current.code}`
                 </Anchor>
               `
               }
-             
             </>
           )
         }
