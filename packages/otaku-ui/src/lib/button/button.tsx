@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import './style.scss'
 
 export interface ButtonProps {
@@ -16,7 +17,7 @@ export interface ButtonProps {
   iconDirection?: 'left' | 'right'
   size?: 'small' | 'middle' |'large'
   children?: React.ReactNode
-  onClick?: () => void
+  onClick?: React.MouseEventHandler<HTMLElement>
 }
 
 export const Button = (props: ButtonProps) => {
@@ -35,51 +36,59 @@ export const Button = (props: ButtonProps) => {
     target = '_blank',
     type = 'default',
     size = 'middle',
-    onClick
+    onClick,
+    ...rest
   } = props
 
-  const Icon = loading ? 'otaku-icon-loading' : icon || ''
-
-  const direction = iconDirection === 'left' ? (
-    <>
-      {
-        Icon ? <span className={`iconfont otaku-button-icon ${Icon}`}></span> : ''
-      }
-      { children }
-    </>
-  ) : (
-    <>
-      {children}
-      {
-        Icon ? <span className={`iconfont otaku-button-icon ${Icon}`}></span> : ''
-      }
-    </>
+  const classes = classNames(
+    'otaku-button',
+    `otaku-button-size-${size}`,
+    `otaku-button-${type}`,
+    {
+      'otaku-input-disabled': disabled,
+      'otaku-button-loading': loading,
+      [`otaku-button-${type}-ghost`]: ghost,
+      [`otaku-button-shape-${shape}`]: shape,
+    },
+    className
   )
+  
+  const style = {
+    backgroundColor: bgcolor,
+    borderColor: bgcolor,
+    color
+  }
+
+  const isDisabled = disabled || loading
+
+  const Icon = loading ? 'otaku-icon-loading' : icon
+
+  const childNode = Icon
+    ? iconDirection === 'left'
+      ? (<>
+        <span className={`iconfont otaku-button-icon ${Icon}`}></span>
+        { children }
+        </>)
+      : (<>
+        {children }
+        <span className={`iconfont otaku-button-icon ${Icon}`}></span>
+        </>)
+    : children
+
+    
+  if (type === 'link') {
+    return <a href={href} target={target} className="otaku-button-link">{children}</a>
+  }
 
   return (
-    type === 'link' ?
-      <a href={href} target={target} className="otaku-button-link">{children}</a>
-    : <button
-      className={`
-        otaku-button
-        otaku-button-size-${size}
-        otaku-button-${type}
-        ${disabled ? 'otaku-input-disabled' : ''}
-        ${loading ? 'otaku-button-loading' : ''}
-        ${ghost ? `otaku-button-${type}-ghost` : ''}
-        ${className ?? ''}
-        ${shape ? `otaku-button-shape-${shape}` : ''}
-      `}
-      style={{
-        backgroundColor: bgcolor,
-        borderColor: bgcolor,
-        color
-      }}
-      disabled={disabled || loading}
-      onClick={onClick}>
-      {
-        direction
-      }
+    <button
+      {...rest}
+      className={classes}
+      style={style}
+      disabled={isDisabled}
+      onClick={onClick}
+    >
+        {childNode}
     </button>
   )
 }
