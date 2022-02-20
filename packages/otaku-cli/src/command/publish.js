@@ -21,7 +21,7 @@ module.exports = async () => {
       `git commit -m "docs: 更新文档，日期: ${dayjs().format(
         'YYYY-MM-DD HH:mm:ss'
       )}"`,
-      'git push -f origin master'
+      'git push origin master'
     ]
     // console.log(command)
     const str = command.join(' && ')

@@ -10,6 +10,7 @@ type A = 'top' | 'left' | 'right' | 'bottom'
 type B = 'start' | 'end'
 type C = `${A}-${B}` | A
 
+
 interface TooltipProps {
   content: string
   children?: React.ReactNode

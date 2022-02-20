@@ -214,7 +214,29 @@ const run = (filePath, fileMap) => {
           name: node.name.escapedText,
           export: isExport(node),
           exportDefault: isExportDefault(node),
-          code: content.substring(node.pos, node.end).trimStart()
+          code: content.substring(node.pos, node.end).trimStart(),
+          typeReference: node.type.types.reduce((arr, current) => {
+            if (current.kind === 197) {
+              current.templateSpans.forEach(children => {
+                if (children.type.kind === 177) {
+                  const referenceName = children.type.typeName.escapedText
+
+                  if (currentFile.type[referenceName]) {
+                    const find = arr.find(item => item.name === referenceName)
+                    if (!find) arr.push(currentFile.type[referenceName])
+                    return arr
+                  }
+                }
+              })
+            }
+            if (current.kind === 177) {
+              // 是否已经添加过
+              const find = arr.find(item => item.name === current.typeName.escapedText)
+              if (find) return arr
+            }
+
+            return arr
+          }, [])
         }
         saveExport(node, node.name.escapedText, currentFile, 'type')
         break
