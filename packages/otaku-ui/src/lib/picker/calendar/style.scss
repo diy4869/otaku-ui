@@ -6,14 +6,6 @@ $grid-gap: 5px 10px;
 
 .otaku-calendar-container {
   cursor: pointer;
-  // ul {
-  //   padding: 0;
-  //   margin: 0;
-  //   li {
-  //     list-style: none;
-  //     padding: 0;
-  //   }
-  // }
   .otaku-calendar-week {
     display: grid;
     grid-template-columns: $grid-column;

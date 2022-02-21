@@ -1,5 +1,6 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useContext } from 'react'
 import { SelectContext } from './select'
+import classNames from 'classnames'
 import { Icon } from '../icon/icon'
 
 export interface SelectOptionsProps {
@@ -17,14 +18,18 @@ export function SelectOption (props: SelectOptionsProps) {
     selected.includes(value) ? 
     'otaku-select-option-multiple-active' : selected === value ? 'otaku-select-option-active' : ''
 
-  return <li 
-    className={
-      `otaku-select-option 
-      ${className}`}
+  return (
+    <li 
+      className={classNames('otaku-select-option', className)}
+      data-label={label}
       value={value}>
-        <span value={value}>
-          {label || children}
-        </span>
-        { multiple && Array.isArray(selected) && selected.includes(value) && <Icon name="select-bold"></Icon>}
+      <span value={value} data-label={label}>{label || children}</span>
+        {
+          multiple && 
+          Array.isArray(selected) && 
+          selected.includes(value) && 
+          <Icon name="select-bold"></Icon>
+        }
     </li>
+  )
 }

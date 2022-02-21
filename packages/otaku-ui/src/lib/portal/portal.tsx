@@ -51,7 +51,7 @@ export function Portal (props: TeleportProps) {
       const maxHeight = mountNode.offsetHeight
       const parentElement = container.current?.parentElement as HTMLDivElement
       const parentHeight = parentElement.offsetHeight
-      console.log(minHeight, maxHeight, position)
+
       if (minHeight > maxHeight) {
         const top = position.top - h - parentHeight - 5
         node.style.top = `${top}px`
@@ -129,7 +129,6 @@ export function Portal (props: TeleportProps) {
   useEffect(() => {
     // 解决浏览器大小改变，导致弹窗位置错位
     const observer = new ResizeObserver(() => {
-      console.log()
       if (visible) {
         init()
       }
@@ -144,7 +143,10 @@ export function Portal (props: TeleportProps) {
 
     const doc = fromEvent(document, 'click').subscribe(e => {
       const parentElement = container.current?.parentElement
-      if (!parentElement?.contains(e.target as Node)) {
+
+      if (
+        !parentElement?.contains(e.target as Node) && 
+        !mountContainer.contains(e.target as Node)) {
         if (visible) {
           clickOutSide?.()
         }
@@ -162,7 +164,6 @@ export function Portal (props: TeleportProps) {
       if (visible) {
         const modal = container.current?.parentElement as HTMLDivElement
         const node = findNode(modal)
-        console.log(node)
         if (node) boundary(modal, node)
       }
     }

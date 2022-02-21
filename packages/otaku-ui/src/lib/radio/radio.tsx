@@ -1,30 +1,18 @@
 import React from 'react'
 import './style.scss'
 
-interface Data {
-  name: string
-  id?: string | number
-}
+
 interface RadioProps {
+  label: string
   value: string
-  data: Data[]
   disabled?: boolean
   children?: React.ReactNode
 }
 
 export function Radio (props: RadioProps) {
   const {
-    value = '1',
-    data = [
-      {
-        id: '1',
-        name: '男'
-      },
-      {
-        id: '2',
-        name: '女'
-      }
-    ],
+    label,
+    value,
     disabled
   } = props
 
@@ -43,21 +31,19 @@ export function Radio (props: RadioProps) {
 
   return (
     <div className="otaku-radio-container">
-      {
-        data?.map((item, index) => (
-            <label htmlFor="value" className="otaku-radio-label" key={index}>
+
+            <label htmlFor="value" className="otaku-radio-label">
               <input
                 type="radio"
                 name={value}
                 id="value"
-                data-id={item.id}
+                data-id={label}
                 className="otaku-radio"
                 disabled={disabled}
                 onChange={change}/>
-              <span>{item.name}</span>
+              <span>{value}</span>
             </label>
         ))
-      }
     </div>
   )
 }

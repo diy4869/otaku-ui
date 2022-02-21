@@ -27,8 +27,7 @@ export function Select (props: SelectProps) {
   const [show, setShow] = useState(false)
   const [active, setActive] = useState(value || undefined)
   const [selected, setSelected] = useState(value as Array<string | number> || [])
-  // const [value, setValue] = useState()
-
+  const [selectValue, setSelectValue] = useState()
 
   useEffect(() => {
     value && multiple ? setSelected(value as Array<string | number>) : setActive(value)
@@ -46,7 +45,9 @@ export function Select (props: SelectProps) {
       }
     } else {
       setActive(e.target.value)
-      console.log(selected)
+      setShow(false)
+      setSelectValue(e.target.dataset.label)
+      console.log(e.target.dataset)
     }
   }
 
@@ -57,6 +58,7 @@ export function Select (props: SelectProps) {
   return (
     <div className='otaku-select-container'>
       <Input
+        value={selectValue}
         size={size}
         disabled={disabled}
         readonly
@@ -67,7 +69,7 @@ export function Select (props: SelectProps) {
       <Portal visible={show} clickOutSide={() => setShow(false)}>
         <SelectContext.Provider value={{
           multiple,
-          selected: multiple ? selected : active ?? undefined
+          selected: multiple ? selected : active ?? ''
         }}>
           <ul className='otaku-select' onClick={click}>
             {children}
