@@ -175,6 +175,7 @@ export function Portal (props: TeleportProps) {
       scrollObserver.unsubscribe()
       resizeObserver.unsubscribe()
     }
+
   }, [visible])
 
   return (

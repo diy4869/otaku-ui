@@ -17,14 +17,13 @@ api:
 
 ```tsx
 function Demo () {
-  const a = 1
-  
+
   return (
     <div>
       <Grid gap={10}>
         {
           Array.from({
-            length: 12
+            length: 5
           }).map((_, index) => {
             return (
               <GridItem 

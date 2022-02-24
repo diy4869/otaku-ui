@@ -1,10 +1,12 @@
 const MarkdownIt = require('markdown-it')
 const container = require('markdown-it-container')
+
 const matter = require('gray-matter')
 const parser = require('./compiler')
 const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
+const markdownItAnchor = require('markdown-it-anchor')
 const { transform, transformAll } = require('./generator/index')
 const json5 = require('json5')
 
@@ -49,6 +51,16 @@ module.exports = function mdLoader (source) {
       // process.exit()
       return template
     }
+  })
+  .use(markdownItAnchor, {
+    level: 3,
+    permalink: markdownItAnchor.permalink.linkInsideHeader({
+      symbol: `
+          <span class="b-anchor"></span>
+          <span aria-hidden="false">#</span>
+        `,
+      placement: 'before'
+    })
   })
     .use(container, 'desc', {
       render (tokens, index) {

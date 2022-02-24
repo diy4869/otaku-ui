@@ -9,7 +9,7 @@ api:
 
 
 
-## Checkbox
+## Checkbox 多选框
 
 ::: demo
 

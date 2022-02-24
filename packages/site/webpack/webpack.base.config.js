@@ -9,16 +9,38 @@ const env = require('./env')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
-console.log(path.resolve(__dirname, '../webpack/loader/index.js'))
-console.log(path.resolve(__dirname, '../../otaku-ui/src/index.ts'))
 // process.exit()
+
+const options = {
+  presets: [
+    ['@babel/preset-env', {
+      useBuiltIns: 'usage',
+      corejs: 3,
+      targets: {
+        node: 'current',
+        chrome: '59'
+      }
+    }],
+    '@babel/preset-react'
+  ],
+  plugins: ['@babel/plugin-transform-runtime']
+}
 
 const baseConfig = {
   context: process.cwd(),
   mode: env,
-  entry: './src/index.tsx',
+  entry: {
+    app: './src/index.tsx',
+    'editor.worker': 'monaco-editor/esm/vs/editor/editor.worker.js',
+		'json.worker': 'monaco-editor/esm/vs/language/json/json.worker',
+		'css.worker': 'monaco-editor/esm/vs/language/css/css.worker',
+		'html.worker': 'monaco-editor/esm/vs/language/html/html.worker',
+		'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker'
+  },
   output: {
+    globalObject: 'self',
     path: path.join(__dirname, '../dist/docs'),
     filename: 'js/[name].[contenthash].js',
     chunkFilename: 'js/[name].[contenthash].js'
@@ -98,12 +120,17 @@ const baseConfig = {
       // },
       {
         test: /\.md$/,
-        use: ['babel-loader',  path.resolve(__dirname, '../webpack/loader/index.js')]
+        use: [{
+          loader: 'babel-loader',
+          // options
+        },  path.resolve(__dirname, '../webpack/loader/index.js')]
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
+        use: [{
+          loader: 'babel-loader'
+        }, 'eslint-loader']
       },
       {
         test: /\.(ts|tsx)$/,
@@ -132,6 +159,7 @@ const baseConfig = {
     // new webpack.DefinePlugin({
     //   'process.env': JSON.stringify(env)
     // }),
+    new MonacoWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'otaku-ui',
       filename: 'index.html',

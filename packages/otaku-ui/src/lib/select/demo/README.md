@@ -13,12 +13,41 @@ api:
 
 ::: demo
 
-简单的评分
+简单的单选
 
 ```tsx
 function Demo () {
   return (
     <Select>
+      {
+        new Array(20).fill().map((_, index) => {
+          return (
+            <SelectOption
+              value={index}
+              key={index}>第{index}个选项</SelectOption>
+          )
+        })
+      }
+    </Select>
+  )
+}
+
+ReactDOM.render(<Demo/>, container)
+
+```
+:::
+
+
+## Select 多选
+
+::: demo
+
+简单的单选
+
+```tsx
+function Demo () {
+  return (
+    <Select multiple>
       {
         new Array(20).fill().map((_, index) => {
           return (

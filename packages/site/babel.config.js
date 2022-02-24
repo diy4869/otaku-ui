@@ -5,13 +5,21 @@
  */
 module.exports = {
   presets: [
-    '@babel/preset-env',
-    [
-      '@babel/preset-typescript',
-      {
-        isTsx: true
+    ['@babel/preset-env', {
+      corejs: 3,
+      useBuiltIns: 'usage',
+      targets: {
+        node: 'current',
+        chrome: '59'
       }
-    ],
+    }],
+    // [
+    //   '@babel/preset-typescript',
+    //   {
+    //     isTsx: true
+    //   }
+    // ],
     '@babel/preset-react'
-  ]
+  ],
+  plugins: ['@babel/plugin-transform-runtime']
 }

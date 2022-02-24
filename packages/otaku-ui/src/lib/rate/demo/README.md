@@ -15,6 +15,21 @@ api:
 简单的评分
 
 ```tsx
+ReactDOM.render(
+  <Rate>
+
+  <span classname="iconfont otaku-icon-heart"></span>
+</Rate>, container)
+```
+:::
+
+## 自定义渲染 
+
+::: demo
+
+简单的评分
+
+```tsx
 ReactDOM.render(<Rate></Rate>, container)
 ```
 :::
@@ -73,6 +88,8 @@ ReactDOM.render(<Rate readonly={true} score={42.5} maxScore={100} showScore></Ra
 ReactDOM.render(<Rate readonly={true} score={42.5} maxScore={100} showScore count={10}></Rate>, container)
 ```
 :::
+
+
 
 ## 自定义 文字
 

@@ -1,86 +1,63 @@
 ---
-import: 
-  import { useRef } from 'react';
-  import { Tooltip, Button } from 'otaku-ui';
+import:
+  import { Grid, GridItem } from 'otaku-ui'
 api:
   {
-    module: ['Tooltip']
+    module: ['Grid', 'GridItem']
   }
 ---
 
-## Tooltip
+
+
+## Grid 网格
 
 ::: demo
 
-多个方向的 Tooltip
+一个简单的网格
 
 ```tsx
 function Demo () {
-  const text = 'prompt text';
-  const buttonWidth = 70;
-
+  const class = `demo-container ${index % 2 === 0 ? 'red' : 'blue'}`
+  
   return (
-    <div className="demo-tooltip">
-      <div style={{ marginLeft: buttonWidth, whiteSpace: 'nowrap', display: 'flex' }}>
-        <Tooltip placement="top-start" content={text}>
-          <Button>TL</Button>
-        </Tooltip>
-        <Tooltip placement="top" content={text}>
-          <Button>Top</Button>
-        </Tooltip>
-        <Tooltip placement="top-end" content={text}>
-          <Button>TR</Button>
-        </Tooltip>
-      </div>
-      <div style={{ width: buttonWidth, float: 'left' }}>
-        <Tooltip placement="left-start" content={text}>
-          <Button>LT</Button>
-        </Tooltip>
-        <Tooltip placement="left" content={text}>
-          <Button>Left</Button>
-        </Tooltip>
-        <Tooltip placement="left-end" content={text}>
-          <Button>LB</Button>
-        </Tooltip>
-      </div>
-      <div style={{ width: buttonWidth, marginLeft: buttonWidth * 4 }}>
-        <Tooltip placement="right-start" content={text}>
-          <Button>RT</Button>
-        </Tooltip>
-        <Tooltip placement="right" content={text}>
-          <Button>Right</Button>
-        </Tooltip>
-        <Tooltip placement="right-end" content={text}>
-          <Button>RB</Button>
-        </Tooltip>
-      </div>
-      <div style={{ marginLeft: buttonWidth, clear: 'both', whiteSpace: 'nowrap', display: 'flex'  }}>
-        <Tooltip placement="bottom-start" content={text}>
-          <Button>BL</Button>
-        </Tooltip>
-        <Tooltip placement="bottom" content={text}>
-          <Button>Bottom</Button>
-        </Tooltip>
-        <Tooltip placement="bottom-end" content={text}>
-          <Button>BR</Button>
-        </Tooltip>
-      </div>
+    <div>
+      <Grid gap={10}>
+        {
+          Array.from({
+            length: 5
+          }).map((_, index) => {
+            return (
+              <GridItem 
+                key={index} 
+                className={class}>{index + 1}
+              </GridItem>
+            )
+          })
+        }
+      </Grid>
     </div>
   )
 }
 
-ReactDOM.render(
-  <Demo/>,
-  container,
-);
+ReactDOM.render(<Demo/>, container)
 ```
+
 ```css
-.demo-tooltip .otaku-button {
-  width: 70px;
+.demo-container {
+  background: black;
+  color: white;
+  padding-left: 5px;
+}
+.red {
+  color: red;
+}
+.blue {
+  color: blue;
 }
 ```
 :::
 
+## api
 
 ::: api
 :::

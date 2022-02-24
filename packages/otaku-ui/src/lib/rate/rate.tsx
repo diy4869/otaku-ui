@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import NP from 'number-precision'
+import classNames from 'classnames'
 import throttle from 'lodash/throttle'
 import './style.scss'
 
@@ -11,6 +12,7 @@ interface RateProps {
   size?: number
   color?: string
   readonly?: boolean
+  children?: React.ReactNode
   textRender?: (index: number, score: number) => React.ReactNode
 }
 
@@ -23,7 +25,8 @@ export function Rate (props: RateProps) {
     count = 5,
     score = 0,
     maxScore = 10,
-    textRender
+    textRender,
+    children
   } = props
 
   const [
@@ -149,6 +152,7 @@ export function Rate (props: RateProps) {
     }
   }
 
+  console.log(children)
   return (
     <div className="otaku-rate">
       <ul
@@ -172,20 +176,24 @@ export function Rate (props: RateProps) {
           20
         )()}>
         {
-          star?.map((item, index) => (
+          star?.map((item, index) => {
+            const className = item.checked ? 'otaku-icon-star-fill' : 
+            item.half ? 'otaku-icon-star-half' : 'otaku-icon-star'
+
+            return (
               <li
-                className={`
-                  otaku-star iconfont 
-                  ${item.checked ? 'otaku-icon-star-fill' : item.half ? 'otaku-icon-star-half' : 'otaku-icon-star'
-                }`}
+                className={classNames('otaku-star',  'iconfont', className)}
                 style={{
                   color,
                   fontSize: size
                 }}
                 key={index}
                 data-index={index}
-              ></li>
-          ))
+              >
+                <span className={classNames()}></span>
+              </li>
+            )
+         })
         }
         {
           showScore ? (

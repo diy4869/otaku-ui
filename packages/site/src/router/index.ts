@@ -123,12 +123,11 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/switch/demo/README.md'))
         // component: lazy(() => import('@docs/form/switch.md'))
       },
-      // {
-      //   title: "radio 单选框",
-      //   path: "/form/radio",
-      //   component: lazy(() => import('otaku-ui/src/lib/radio/demo/README.md'))
-      //   // component: lazy(() => import('@docs/form/radio.md'))
-      // },
+      {
+        title: "radio 单选框",
+        path: "/form/radio",
+        component: lazy(() => import('otaku-ui/src/lib/radio/demo/README.md'))
+      },
       {
         title: "checkbox 多选框",
         path: "/form/checkbox",

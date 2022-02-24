@@ -46,6 +46,7 @@ export function DatePicker(props: DateTimePickerProps) {
   }
 
   const changeDate = (type: "month" | "calendar", date: dayjs.ConfigType) => {
+    console.log(date)
     setSelectDate(dayjs(date))
     setShowPicker(type)
   }
@@ -63,6 +64,7 @@ export function DatePicker(props: DateTimePickerProps) {
         }}></Input>
       <Portal visible={show} clickOutSide={() => {
         setShow(false)
+        setShowPicker('calendar')
       }}>
         <div
           className='otaku-datetime-picker'

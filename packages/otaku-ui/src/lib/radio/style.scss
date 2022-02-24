@@ -2,6 +2,7 @@
 
 .otaku-radio-container {
   display: flex;
+  font-size: 14px;
   .otaku-radio-label {
     display: flex;
     align-items: center;
@@ -11,7 +12,7 @@
       border: 1px solid $primaryColor;
       border-radius: 50%;
       appearance: none;
-      margin: 10px;
+      // margin: 5px;
       vertical-align: middle;
       display: flex;
       justify-content: center;
@@ -27,7 +28,28 @@
           border-radius: 50%;
         }
       }
+      &:disabled {
+        background: #f7f7f7;
+        border-color: #e5e5e5;
+
+        &::before {
+          display: inline-block;
+          content: '';
+          width: 8px;
+          height: 8px;
+          background: #c2c2c2;
+          border-radius: 50%;
+        }
+
+      }
       
+    }
+    span {
+      color: #595959;
+      margin-left: 8px;
+    }
+    .otaku-radio-disabled {
+      color: #e5e5e5;
     }
   }
 }

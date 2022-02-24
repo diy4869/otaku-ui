@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import classNames from 'classnames'
 import React, { useState, useEffect } from 'react'
 import './style.scss'
 
@@ -16,8 +17,8 @@ export function Month(props: MonthProps) {
 
   
   useEffect(() => {
-    setSelectDate(selectDate)
-  }, [selectDate])
+    setSelectDate(dayjs(date))
+  }, [date])
 
   const switchMonth = (type: 'year' | 'month', direction: 'left' | 'right') => {
     const result = direction === 'left' ? selectDate.subtract(1, type) : selectDate.add(1, type)
@@ -52,11 +53,10 @@ export function Month(props: MonthProps) {
             return (
               <li
                 key={index}
-                className={`
-                  otaku-month-item
-                  ${m === dayjs().month() + 1 ? 'otaku-datepicker-currentMonth' : ''}
-                  ${selectDate.month() + 1 === m ? 'active' : ''}
-                `}
+                className={classNames('otaku-month-item', {
+                  active: selectDate.month() + 1 === m,
+                  'otaku-datepicker-currentMonth': m === dayjs().month() + 1
+                })}
                 onClick={() => onClick(index)}>
                 {m}月</li>
             )

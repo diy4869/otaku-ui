@@ -7,15 +7,16 @@
     "sourceMap": true,
     "baseUrl": ".",
     "jsx": "react",
-    "allowJs": true,
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
-    "strict": true,
+    "strict": false,
     "noEmit": false,
     "paths": {
       "@docs/": ["./docs"],
       "@/*": ["./src/*"],
-      "site-component": ["./src/components"]
+      "site-component": ["./src/components"],
+      "otaku-ui": ["../otaku-ui/src/index.ts"]
     }
   },
   "exclude": [
