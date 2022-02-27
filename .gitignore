@@ -4,3 +4,4 @@ package-lock.json
 *.log
 .CodeCounter
 coverage
+.VSCodeCounter

@@ -17,9 +17,8 @@ export function Api (props: ApiProps) {
 
   const { code, data } = props
 
-  console.log(props)
   const string = data.replace('(\\)\g' , '')
-  console.log(string)
+
   // const evalData: ApiData[] = json5.parse(string)
 
   const tableColumn = [

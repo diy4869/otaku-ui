@@ -19,6 +19,13 @@
         z-index: 100;
     }
 }
+
 .otaku-tab-content {
     margin-top: 16px;    
+}
+
+.otaku-tab-center  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -18,6 +18,25 @@ ReactDOM.render(<Radio>单选框</Radio>, container)
 ```
 :::
 
+## 单选框组
+
+::: demo
+
+```tsx
+ReactDOM.render(
+  <RadioGroup value={1}>
+    {
+      new Array(3).fill(undefined).map((_, index) => {
+        return (
+          <Radio value={index} key={index}>第{index}个单选</Radio>
+        )
+      })
+    }
+  </RadioGroup>, container)
+```
+:::
+
+
 ## 默认选中
 
 ::: demo
@@ -42,23 +61,9 @@ ReactDOM.render(<Radio checked={true} disabled>多选框</Radio>, container)
 :::
 
 
-## 单选框组
 
-::: demo
 
-```tsx
-ReactDOM.render(
-  <RadioGroup>
-    {
-      new Array(3).fill(undefined).map((_, index) => {
-        return (
-          <Radio>第{index}个单选</Radio>
-        )
-      })
-    }
-  </RadioGroup>, container)
-```
-:::
+## Api
 
 ::: api
 :::

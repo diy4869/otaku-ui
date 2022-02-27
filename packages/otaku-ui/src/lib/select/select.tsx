@@ -35,6 +35,7 @@ export function Select (props: SelectProps) {
 
   const click = (e: React.BaseSyntheticEvent) => {
     console.log(e, e.target, e.target.value)
+    
     if (multiple) {
       if (!selected.includes(e.target.value)) {
         setSelected([...selected, e.target.value])

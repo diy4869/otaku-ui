@@ -1,59 +1,79 @@
 ---
-import:
-  import { Grid, GridItem } from 'otaku-ui'
+import: 
+  import { Table } from 'otaku-ui'
 api:
   {
-    module: ['Grid', 'GridItem']
+    module: ['Table']
   }
 ---
 
-
-
-## Grid 网格
+## Table
 
 ::: demo
 
-一个简单的网格
-
 ```tsx
-function Demo () {
-  const class = `demo-container ${index % 2 === 0 ? 'red' : 'blue'}`
-  
+function Example () {
+  const tableData = [
+    {
+      name: 'disabled',
+      required: false,
+      type: 'number',
+      defaultValue: '',
+      desc: '禁用'
+    },
+    {
+      name: 'loading',
+      required: false,
+      type: 'number',
+      defaultValue: '',
+      desc: '禁用'
+    },
+    {
+      name: 'size',
+      required: false,
+      type: 'small | middle | large',
+      // defaultValue: '',
+      desc: '禁用'
+    }
+  ]
+
+  const tableColumn = [
+    {
+      label: '属性',
+      prop: 'name'
+    },
+    {
+      label: '是否必填',
+      prop: 'required',
+      render(data) {
+        const { row } = data
+
+        return (
+          <span>{ row.require ? '是' : '否'}</span>
+        )
+      },
+    },
+    {
+      label: '类型',
+      prop: 'type'
+    },
+    {
+      label: '默认值',
+      prop: 'defaultValue',
+      defaultValue: '这是没有数据的情况'
+    },
+    {
+      label: '描述',
+      prop: 'desc'
+    }
+  ]
+
   return (
-    <div>
-      <Grid gap={10}>
-        {
-          Array.from({
-            length: 5
-          }).map((_, index) => {
-            return (
-              <GridItem 
-                key={index} 
-                className={class}>{index + 1}
-              </GridItem>
-            )
-          })
-        }
-      </Grid>
-    </div>
+    <Table data={tableData} tableColumn={tableColumn}></Table>
   )
 }
 
-ReactDOM.render(<Demo/>, container)
-```
-
-```css
-.demo-container {
-  background: black;
-  color: white;
-  padding-left: 5px;
-}
-.red {
-  color: red;
-}
-.blue {
-  color: blue;
-}
+ReactDOM.render(<Example/>, container)
 ```
 :::
 

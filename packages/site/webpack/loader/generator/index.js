@@ -50,7 +50,7 @@ const transformAll = () => {
 
 // transform(filePath, {})
 
-transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\tooltip\\tooltip.tsx', {})
+transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\table\\table.tsx', {})
 // console.log(exportLibPath)
 
 

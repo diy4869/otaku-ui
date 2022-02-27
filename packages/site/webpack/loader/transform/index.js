@@ -187,16 +187,19 @@ const run = (filePath, fileMap) => {
             const type = content
               .substring(item.type.pos, item.type.end)
               .trimStart()
+            
+            const typeReference = item.type.kind === 177
+              ? getReferenceType(item.type.typeName.escapedText, currentFile, fileMap)
+              : item?.type?.elementType?.kind === 177 
+              ? getReferenceType(item.type.elementType.typeName.escapedText, currentFile, fileMap) 
+              : undefined
 
             return {
               name: item.name.escapedText,
               type: type,
               required: item.questionToken ? false : true,
               defaultValue: undefined,
-              typeReference:
-                item.type.kind === 177
-                  ? getReferenceType(item.type.typeName.escapedText, currentFile, fileMap)
-                  : undefined,
+              typeReference: typeReference,
               jsDoc: ts.getJSDocTags(item).map(children => {
                 return {
                   tagName: children.tagName.escapedText,

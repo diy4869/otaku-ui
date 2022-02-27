@@ -60,11 +60,8 @@ export function CodeExample (props: Example) {
       });
 
       setShowEdit(true)
-
       setInstance(editorInstance)
     }
-
-    
   }
 
   return (

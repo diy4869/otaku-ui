@@ -10,11 +10,12 @@ interface renderArgs {
   rowIndex: number
   columnIndex: number
 }
+
 interface tableColumnOptions {
   label: string
   prop: string
   defaultValue?: React.ReactNode
-  render?: (data: renderArgs) => React.ReactNode
+  render?: (data?: renderArgs) => React.ReactNode
 }
 
 interface TableProps {

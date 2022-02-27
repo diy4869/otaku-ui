@@ -90,7 +90,7 @@ if (!instance) {
 
 const message: message = {}
 
-type.forEach(current => {
+type.forEach((current) => {
   message[current as MessageType] = (content: React.ReactNode, duration = 3000) => {
       instance?.create({
         type: current as Options['type'],

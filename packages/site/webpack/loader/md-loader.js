@@ -53,7 +53,7 @@ module.exports = function mdLoader (source) {
     }
   })
   .use(markdownItAnchor, {
-    level: 3,
+    level: [2, 3],
     permalink: markdownItAnchor.permalink.linkInsideHeader({
       symbol: `
           <span class="b-anchor"></span>
@@ -96,6 +96,16 @@ module.exports = function mdLoader (source) {
           const interface = []
           const type = []
           const apiData = []
+          const property = []
+
+          
+          const appendType = (property) => {
+            const find = property.find(property => property.typeReference)
+
+            if (find) {
+              find.typeReference.type === 'interface' ? interface.push(find.typeReference.code) : type.push(find.typeReference.code)
+            }
+          }
 
           result.forEach(item => {
             const type = item.type.args[0].type
@@ -103,11 +113,15 @@ module.exports = function mdLoader (source) {
             if (type.type === 'interface') {
               if (type.extendProperty) {
                 type.extendProperty.forEach(children => {
+                  appendType(children.property)
                   interface.push(children.code)
                 })
+                
               }
+              appendType(type.property)
               interface.push(type.code)
             }
+
 
             apiData.push({
               name: json5.stringify(item.name),

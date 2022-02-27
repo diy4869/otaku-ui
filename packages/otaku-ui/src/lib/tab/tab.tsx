@@ -1,8 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
+import classNames from 'classnames'
 import './style.scss'
 
 interface TabProps {
   active: 0,
+  center?: boolean
   children: React.ReactElement[]
 }
 
@@ -33,6 +35,7 @@ export function TabPane (props: TabPaneProps) {
 
 export function Tab (props: TabProps) {
   const {
+    center,
     active,
   } = props
 
@@ -53,7 +56,11 @@ export function Tab (props: TabProps) {
     <Context.Provider value={{
       current: `${current}`
     }}>
-      <ul className="otaku-tab" onClick={(e) => {
+      <ul 
+        className={classNames('otaku-tab', {
+          'otaku-tab-center': center
+        })} 
+        onClick={(e) => {
           const dataset = e.target.dataset
           const find = children.find(item => `${item.props.id}` === dataset.id)
 

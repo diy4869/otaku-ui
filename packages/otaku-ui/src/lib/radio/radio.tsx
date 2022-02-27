@@ -1,51 +1,30 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import classNames from "classnames"
-import { Space } from '../space/space'
+import  { RadioGruopContext } from './radioGroup'
 import "./style.scss"
 
-interface RadioGroupProps {
-  children: React.ReactNode[]
-}
-
 interface RadioProps {
-  value: string
+  value: number | string
   checked?: boolean
   disabled?: boolean
   children?: React.ReactNode
-  onChange?: (e: React.BaseSyntheticEvent) => void
-}
-
-export function RadioGroup (props: RadioGroupProps) {
-  const {
-    children
-  } = props
-
-  return (
-    <Space>{children}</Space>
-    // <ul className="otaku-radio-group-container">
-    //   {
-    //     children.map((node, index) => {
-    //       return (
-    //         <li key={index} className="otaku-radio-group-item">{node}</li>
-    //       )
-    //     })
-    //   }
-    // </ul>
-  )
+  onChange?: (e?: React.BaseSyntheticEvent) => void
 }
 
 export function Radio(props: RadioProps) {
-  const { checked, disabled, children } = props
+  const { checked, disabled, children, onChange } = props
   const [val, setVal] = useState(checked)
+  const context = useContext(RadioGruopContext)
 
   useEffect(() => {
     setVal(checked)
   }, [checked])
 
 
-  const change = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked, e.target.name)
+  const change = (e: React.BaseSyntheticEvent) => {
+    console.log(e, e.target.checked, e.target.name)
     setVal(e.target.checked)
+    onChange?.(e)
   }
 
   return (
@@ -54,7 +33,8 @@ export function Radio(props: RadioProps) {
         <input
           type='radio'
           id='value'
-          checked={checked}
+          name={context?.name}
+          checked={val}
           className='otaku-radio'
           disabled={disabled}
           onChange={change}
@@ -66,5 +46,3 @@ export function Radio(props: RadioProps) {
     </div>
   )
 }
-
-

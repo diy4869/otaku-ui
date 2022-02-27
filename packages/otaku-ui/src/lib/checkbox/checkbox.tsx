@@ -1,38 +1,18 @@
 import React, { ChangeEvent, useState, useEffect } from 'react'
+import classNames from 'classnames'
 import './style.scss'
 
-interface CheckBoxProps {
+export interface CheckboxProps {
   checked?: boolean
   disabled?: boolean
   indeterminate?: boolean
   value?: string | number
   children?: React.ReactNode[]
-  onChange?: (checked?: boolean) => void
+  onChange?: (e?: React.BaseSyntheticEvent) => void
 }
 
-export function CheckboxGroup (props: CheckBoxProps) {
-  const {
-    // disabled,
-    // checked,
-    // indeterminate,
-    children
-  } = props
-
-  return (
-    <div>
-      {children}
-      {/* {
-        children?.map(item => {
-          return React.createElement(item.type)
-        })
-      } */}
-    </div>
-  )
-}
-
-export function Checkbox (props: CheckBoxProps) {
+export function Checkbox (props: CheckboxProps) {
   const { disabled, checked = false, indeterminate, children, onChange } = props
-
   const [inputChecked, setInputChecked] = useState(checked)
   const [half, setHalf] = useState(indeterminate)
 
@@ -43,7 +23,7 @@ export function Checkbox (props: CheckBoxProps) {
 
   const change = (e: ChangeEvent<HTMLInputElement>) => {
     setInputChecked(e.target.checked)
-    onChange?.(e.target.checked)
+    onChange?.(e)
   }
 
   return (
@@ -52,24 +32,29 @@ export function Checkbox (props: CheckBoxProps) {
         type='checkbox'
         disabled={disabled}
         checked={inputChecked}
-        className={`
-          otaku-checkbox
-          iconfont
-          ${inputChecked ? 'is-checked' : half ? 'is-half' : ''}
-          ${
-            inputChecked
+        className={
+          classNames(
+            'otaku-checkbox',
+            'iconfont',
+            [
+              inputChecked ? 'is-checked' : half ? 'is-half' : '',
+              inputChecked
               ? 'otaku-icon-checkbox-fill'
               : half
               ? 'otaku-icon-checkbox-indeterminate-fill'
               : ''
-          }
-        `}
+            ],
+          )}
         onChange={change}
       />
       <span
-        className={`otaku-checkbox-label ${
-          inputChecked ? 'is-checked' : half ? 'is-half' : ''
-        }`}>
+        className={
+          classNames('otaku-checkbox-label', [
+            inputChecked ? 'is-checked' : half ? 'is-half' : ''
+          ],
+          {
+            'otaku-checkbox-disabled': disabled
+          })}>
         {children}
       </span>
     </label>

@@ -17,7 +17,6 @@ api:
 
 ```tsx
 function Demo () {
-
   return (
     <div>
       <Grid gap={10}>

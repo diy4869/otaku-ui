@@ -3,6 +3,8 @@
 .otaku-checkbox-label {
   display: flex;
   align-items: center;
+  color: #595959;
+  font-size: 14px;
   .otaku-checkbox {
     width: 16px;
     height: 16px;
@@ -21,6 +23,7 @@
       cursor: not-allowed;
       background-color: #F7F7F7;
       border-color: #E5E5E5;
+      color: #BFBFBF;
     }
   }
 
@@ -32,5 +35,9 @@
   }
   .is-checked {
     color: $primaryColor;
+  }
+  .otaku-checkbox-disabled {
+    color: #BFBFBF;
+    cursor: not-allowed;
   }
 }
