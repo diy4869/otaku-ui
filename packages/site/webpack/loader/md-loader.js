@@ -221,7 +221,7 @@ ${current.code}`
               desc={\`${current.desc}\`}
               lang={\`${current?.lang}\`}
               example={${current.example}}
-              code={\`${current.code}\`}
+              code={\`${[data.import, current.code].join('\n\n')}\`}
               style={{
                 lang: \`${current.style.lang}\`,
                 code: \`${current.style.code}\`

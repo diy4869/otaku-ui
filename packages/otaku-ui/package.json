@@ -5,6 +5,7 @@
   "main": "src/index.ts",
   "scripts": {
     "lint": "eslint .",
+    "build": "tsc -d",
     "lint:style": "stylelint \"**/*.{css,scss}\" --fix",
     "lint:fix": "eslint . --ext \".ts,.tsx\" --fix",
     "test": "echo \"Error: no test specified\" && exit 1",

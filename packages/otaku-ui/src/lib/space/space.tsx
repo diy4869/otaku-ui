@@ -4,7 +4,7 @@ import './style.scss'
 interface SpaceProps {
   direction?: 'row' | 'column'
   gap: number | [number, number]
-  children: React.ReactNode[]
+  children: React.ReactNode[] | React.ReactNode
 }
 
 export function Space (props: SpaceProps) {
