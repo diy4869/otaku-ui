@@ -15,7 +15,7 @@ api:
 ::: demo
 
 ```tsx
-ReactDOM.render(<Progress></Progress>, container)
+ReactDOM.createRoot(container).render(<Progress></Progress>)
 ```
 :::
 
@@ -24,7 +24,7 @@ ReactDOM.render(<Progress></Progress>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<Progress>10%</Progress>, container)
+ReactDOM.createRoot(container).render(<Progress>10%</Progress>)
 ```
 :::
 
@@ -34,7 +34,7 @@ ReactDOM.render(<Progress>10%</Progress>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<Progress inner percentage={50}>50%</Progress>, container)
+ReactDOM.createRoot(container).render(<Progress inner percentage={50}>50%</Progress>)
 ```
 :::
 
@@ -43,7 +43,7 @@ ReactDOM.render(<Progress inner percentage={50}>50%</Progress>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<Progress inner percentage={50} color="red">50%</Progress>, container)
+ReactDOM.createRoot(container).render(<Progress inner percentage={50} color="red">50%</Progress>)
 ```
 :::
 
@@ -52,17 +52,14 @@ ReactDOM.render(<Progress inner percentage={50} color="red">50%</Progress>, cont
 ::: demo
 
 ```tsx
-ReactDOM.render(
-  <Grid>
+ReactDOM.createRoot(container).render(<Grid>
     <GridItem>
       <Progress inner percentage={50} color="red" direction="vertical">50%</Progress>
     </GridItem>
     <GridItem>
       <Progress percentage={50}  direction="vertical">50%</Progress>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 ```
 :::
 
@@ -72,8 +69,7 @@ ReactDOM.render(
 
 ```tsx
 
-ReactDOM.render(
-  <Grid>
+ReactDOM.createRoot(container).render(<Grid>
     <GridItem>
       <Progress percentage={50}  type="circle">50%</Progress>
     </GridItem>
@@ -83,9 +79,7 @@ ReactDOM.render(
     <GridItem>
       <Progress percentage={90}  type="circle" >90%</Progress>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 ```
 :::
 
@@ -122,7 +116,7 @@ function Demo () {
   )
 }
 
-ReactDOM.render(<Demo/>, container)
+ReactDOM.createRoot(container).render(<Demo/>)
 ```
 
 ```css

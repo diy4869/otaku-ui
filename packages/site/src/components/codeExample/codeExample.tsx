@@ -1,8 +1,7 @@
 import React, { useState, useRef } from 'react'
-import { HighlightCode, HighlightCodeProps } from 'otaku-ui'
+import { HighlightCode, HighlightCodeProps, Icon } from 'otaku-ui'
 import * as copy from 'copy-to-clipboard'
 import { Editor } from '../editor/editor'
-import { Sandbox } from '../sandbox/sandbox'
 import { Tooltip } from 'otaku-ui'
 import classnames from 'classnames'
 import './style.scss'
@@ -55,13 +54,11 @@ export function CodeExample (props: Example) {
           __html: desc
         }}
       ></div>
-
-        <Sandbox></Sandbox>
-
       <div className='otaku-example'>{example}</div>
       <ul className='otaku-operation'>
         <li onClick={edit}>
           <Tooltip content='编辑'>
+            {/* <Icon name='edit'></Icon> */}
             <span>编辑</span>
           </Tooltip>
         </li>
@@ -74,7 +71,7 @@ export function CodeExample (props: Example) {
           }}
         >
           <Tooltip content='复制'>
-            <span className='iconfont otaku-icon-copy'></span>
+            <Icon name='copy'></Icon>
           </Tooltip>
         </li>
         <li
@@ -84,9 +81,10 @@ export function CodeExample (props: Example) {
           }}
         >
           <Tooltip content={collapse ? '折叠' : '展开'}>
-            <span
+            <Icon name='code'></Icon>
+            {/* <span
               className={`iconfont otaku-icon-${collapse ? 'code' : 'code'}`}
-            ></span>
+            ></span> */}
           </Tooltip>
         </li>
       </ul>
@@ -111,7 +109,7 @@ export function CodeExample (props: Example) {
         ></HighlightCode>
       )}
       <Editor code={code} lang={lang}></Editor>
-       <div ref={container} className={'otaku-edit-container'}></div>
+
       {/* {
         showEdit &&
       } */}

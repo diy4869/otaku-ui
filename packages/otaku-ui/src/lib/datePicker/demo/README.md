@@ -16,7 +16,7 @@ api:
 一个简单的日期选择器
 
 ```tsx
-ReactDOM.render(<DatePicker></DatePicker>, container)
+ReactDOM.createRoot(container).render(<DatePicker></DatePicker>)
 
 ```
 :::
@@ -28,7 +28,7 @@ ReactDOM.render(<DatePicker></DatePicker>, container)
 一个简单的日期选择器
 
 ```tsx
-ReactDOM.render(<DatePicker firstWeek="一"></DatePicker>, container)
+ReactDOM.createRoot(container).render(<DatePicker firstWeek="一"></DatePicker>)
 ```
 :::
 
@@ -40,7 +40,7 @@ ReactDOM.render(<DatePicker firstWeek="一"></DatePicker>, container)
 一个简单的日期选择器
 
 ```tsx
-ReactDOM.render(<DatePicker lunarDate={true}></DatePicker>, container)
+ReactDOM.createRoot(container).render(<DatePicker lunarDate={true}></DatePicker>)
 ```
 :::
 

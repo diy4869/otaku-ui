@@ -20,7 +20,7 @@ function Demo () {
   return (
     <Select>
       {
-        new Array(20).fill().map((_, index) => {
+        new Array(2000).fill().map((_, index) => {
           return (
             <SelectOption
               value={index}
@@ -32,7 +32,7 @@ function Demo () {
   )
 }
 
-ReactDOM.render(<Demo/>, container)
+ReactDOM.createRoot(container).render(<Demo/>)
 
 ```
 :::
@@ -61,7 +61,7 @@ function Demo () {
   )
 }
 
-ReactDOM.render(<Demo/>, container)
+ReactDOM.createRoot(container).render(<Demo/>)
 
 ```
 :::

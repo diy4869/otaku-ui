@@ -1,6 +1,14 @@
+@import '../../style/var.scss';
+
 .otaku-anchor {
   background: white;
   &-item {
+    font-size: 13px;
+    color: #595959;
+    line-height: 28px;
     cursor: pointer;
+  }
+  &-item-active {
+    color: $primaryColor;
   }
 }

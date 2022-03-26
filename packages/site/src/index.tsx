@@ -1,8 +1,12 @@
 import * as React from 'react'
-import * as ReactDOM from 'react-dom'
-import App from './App'
+import { createRoot } from 'react-dom/client'
 
+import App from './App'
+import '../src/assets/fonts/iconfont.css'
+// import '../s'
+// import '../../otaku-ui/src/fonts/iconfont.css'
 import './assets/style/reset.scss'
 
+const container = document.getElementById('root')
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+createRoot(container).render(<App/>)

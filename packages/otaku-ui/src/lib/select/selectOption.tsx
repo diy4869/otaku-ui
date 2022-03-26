@@ -4,13 +4,12 @@ import classNames from 'classnames'
 import { Icon } from '../icon/icon'
 
 export interface SelectOptionsProps {
-  label?: number | string
   value?: number | string
   children?: React.ReactNode[]
 }
 
 export function SelectOption (props: SelectOptionsProps) {
-  const { label, value, children } = props
+  const { value, children } = props
   const { selected, multiple } = useContext(SelectContext)
 
   const className = multiple && 
@@ -21,9 +20,8 @@ export function SelectOption (props: SelectOptionsProps) {
   return (
     <li 
       className={classNames('otaku-select-option', className)}
-      data-label={label}
       value={value}>
-      <span value={value} data-label={label}>{label || children}</span>
+      <span value={value}>{children}</span>
         {
           multiple && 
           Array.isArray(selected) && 

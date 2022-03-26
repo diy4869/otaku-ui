@@ -34,15 +34,10 @@ module.exports = async () => {
       // },
       // quiet: true,
       // writeToDisk: true,
+      liveReload: false,
       historyApiFallback: true,
       client: {
-        logging: "info",
-        // Can be used only for `errors`/`warnings`
-        //
-        // overlay: {
-        //   errors: true,
-        //   warnings: true,
-        // }
+        logging: "none",
         overlay: false,
         progress: true,
       },

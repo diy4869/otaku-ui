@@ -69,6 +69,6 @@ function Example() {
   )
 }
 
-ReactDOM.render(<Example/>, container)
+ReactDOM.createRoot(container).render(<Example/>)
 ```
 :::

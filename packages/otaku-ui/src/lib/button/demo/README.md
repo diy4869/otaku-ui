@@ -16,16 +16,13 @@ api:
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(
-  <Space>
+ReactDOM.createRoot(container).render(<Space>
     <Button>默认按钮</Button>
     <Button type="primary">主要按钮</Button>
     <Button type="success">成功按钮</Button>
     <Button type="warning">警告按钮</Button>
     <Button type="danger">错误按钮</Button>
-  </Space>, 
-  container
-)
+  </Space>)
 ```
 :::
 
@@ -37,7 +34,7 @@ ReactDOM.render(
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(<Button type="primary" shape="round">主要按钮</Button>, container)
+ReactDOM.createRoot(container).render(<Button type="primary" shape="round">主要按钮</Button>)
 ```
 :::
 
@@ -48,8 +45,7 @@ ReactDOM.render(<Button type="primary" shape="round">主要按钮</Button>, cont
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(
-  <Grid count={5}>
+ReactDOM.createRoot(container).render(<Grid count={5}>
     <GridItem>
       <Button disabled>默认按钮</Button>
     </GridItem>
@@ -65,9 +61,7 @@ ReactDOM.render(
     <GridItem>
       <Button type="danger" disabled>错误按钮</Button>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 ```
 :::
 
@@ -78,8 +72,7 @@ ReactDOM.render(
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(
-  <Grid count={5}>
+ReactDOM.createRoot(container).render(<Grid count={5}>
     <GridItem>
       <Button loading>默认按钮</Button>
     </GridItem>
@@ -95,9 +88,7 @@ ReactDOM.render(
     <GridItem>
       <Button type="danger" loading>错误按钮</Button>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 ```
 :::
 
@@ -108,8 +99,7 @@ ReactDOM.render(
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(
-  <Grid count={5}>
+ReactDOM.createRoot(container).render(<Grid count={5}>
     <GridItem>
       <Button ghost>默认按钮</Button>
     </GridItem>
@@ -125,9 +115,7 @@ ReactDOM.render(
     <GridItem>
       <Button type="danger" ghost>错误按钮</Button>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 ```
 :::
 
@@ -160,7 +148,7 @@ function Demo () {
   )
 }
 
-ReactDOM.render(<Demo/>, container)
+ReactDOM.createRoot(container).render(<Demo/>)
 ```
 :::
 
@@ -171,7 +159,7 @@ ReactDOM.render(<Demo/>, container)
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(<Button type="danger" bgcolor="red">按钮</Button>, container)
+ReactDOM.createRoot(container).render(<Button type="danger" bgcolor="red">按钮</Button>)
 ```
 :::
 
@@ -182,17 +170,14 @@ ReactDOM.render(<Button type="danger" bgcolor="red">按钮</Button>, container)
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(
-  <Grid count={3}>
+ReactDOM.createRoot(container).render(<Grid count={3}>
     <GridItem>
       <Button type="primary" iconDirection="left" icon="otaku-icon-search-line">左边 icon 的按钮</Button>
     </GridItem>
     <GridItem>
       <Button type="primary" iconDirection="right" icon="otaku-icon-search-line">右边 icon 的按钮</Button>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 ```
 :::
 
@@ -204,17 +189,14 @@ ReactDOM.render(
 这个是按钮的描述
 
 ```tsx
-ReactDOM.render(
-  <Grid count={5}>
+ReactDOM.createRoot(container).render(<Grid count={5}>
     <GridItem>
       <Button type="primary" shape="round">圆角按钮</Button>
     </GridItem>
     <GridItem>
       <Button type="primary" shape="circle" icon="otaku-icon-search-line"></Button>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 ```
 :::
 

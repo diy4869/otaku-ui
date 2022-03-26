@@ -12,7 +12,7 @@ api:
 ::: demo
 
 ```tsx
-ReactDOM.render(<Switch></Switch>, container)
+ReactDOM.createRoot(container).render(<Switch></Switch>)
 ```
 :::
 
@@ -21,7 +21,7 @@ ReactDOM.render(<Switch></Switch>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<Switch disabled></Switch>, container)
+ReactDOM.createRoot(container).render(<Switch disabled></Switch>)
 ```
 :::
 

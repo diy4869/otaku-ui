@@ -80,7 +80,7 @@ function Demo() {
   )
 }
 
-ReactDOM.render(<Demo />, container)
+ReactDOM.createRoot(container).render(<Demo />)
 ```
 
 :::
@@ -92,7 +92,7 @@ ReactDOM.render(<Demo />, container)
 简单的 Checkbox
 
 ```tsx
-ReactDOM.render(<Checkbox>多选框</Checkbox>, container)
+ReactDOM.createRoot(container).render(<Checkbox>多选框</Checkbox>)
 ```
 
 :::
@@ -104,7 +104,7 @@ ReactDOM.render(<Checkbox>多选框</Checkbox>, container)
 简单的 Checkbox
 
 ```tsx
-ReactDOM.render(<Checkbox checked={true}>多选框</Checkbox>, container)
+ReactDOM.createRoot(container).render(<Checkbox checked={true}>多选框</Checkbox>)
 ```
 
 :::
@@ -116,8 +116,7 @@ ReactDOM.render(<Checkbox checked={true}>多选框</Checkbox>, container)
 禁用的 Checkbox
 
 ```tsx
-ReactDOM.render(
-  <>
+ReactDOM.createRoot(container).render(<>
     <Checkbox disabled>多选框</Checkbox>
     <Checkbox indeterminate disabled>
       多选框
@@ -125,9 +124,7 @@ ReactDOM.render(
     <Checkbox checked={true} disabled>
       多选框
     </Checkbox>
-  </>,
-  container
-)
+  </>)
 ```
 
 :::

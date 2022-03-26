@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 import './style.scss'
 
 interface IconProps {
@@ -16,6 +17,11 @@ export function Icon (props: IconProps) {
   } = props
 
   return (
-    <span className={`otaku-icon iconfont otaku-icon-${name} ${className ?? ''}`} onClick={onClick}></span>
+    <span 
+      className={
+        classNames('otaku-icon iconfont', `otaku-icon-${name}`, className)
+      }  
+      onClick={onClick}>
+    </span>
   )
 }

@@ -18,6 +18,9 @@ const SpeedMeasurePlugin = require('speed-measure-webpack-plugin')
 const smp = new SpeedMeasurePlugin()
 
 const prodConfig = smp.wrap(merge(webpackBaseConfig, {
+  stats: {
+    children: true
+  },
   optimization: {
     usedExports: true,
     sideEffects: true,
@@ -79,6 +82,7 @@ const prodConfig = smp.wrap(merge(webpackBaseConfig, {
     new webpack.DefinePlugin({
       'process.env': JSON.stringify(env)
     }),
+    
     // 压缩css
     // new OptimizationCssAssetsPlugin({
     //   assetNameRegExp: /\.css$/g,

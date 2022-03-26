@@ -14,8 +14,7 @@ api:
 ::: demo
 
 ```tsx
-ReactDOM.render(
-  <Timeline>
+ReactDOM.createRoot(container).render(<Timeline>
     <TimelineItem title="11:00">
       早上十一点
     </TimelineItem>
@@ -28,9 +27,7 @@ ReactDOM.render(
     <TimelineItem title="20:00">
       晚上八点
     </TimelineItem>
-  </Timeline>,
-  container
-)
+  </Timeline>)
 
 ```
 :::

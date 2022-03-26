@@ -12,7 +12,7 @@ api:
 ::: demo
 
 ```tsx
-ReactDOM.render(<ImageCropper></ImageCropper>, container)
+ReactDOM.createRoot(container).render(<ImageCropper></ImageCropper>)
 ```
 :::
 

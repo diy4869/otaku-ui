@@ -1,4 +1,7 @@
-import React from 'react'
+import React, {useRef, useEffect, useState } from 'react'
+import {Helmet} from 'react-helmet'
+import ReactDOM from 'react-dom/client'
+import { Button } from 'otaku-ui'
 import './style.scss'
 
 interface SandboxProps {
@@ -6,47 +9,69 @@ interface SandboxProps {
   children?: React.ReactNode
 }
 
-export function Sandbox (props: SandboxProps) {
+export function Sandbox(props: SandboxProps) {
   const {
-    code = `
-      ReactDOM.render(
-        React.createElement('div', null, 'iframe 渲染的内容'),
-        container
-      )
-    `
+    code
   } = props
+  const container = useRef(null)
+  const script = useRef(null)
 
-  const html = `
-    <!DOCTYPE html>
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-    
-        <style></style>
-      </head>
-      <body>
-        <div id="app"></div>
-      </body>
-      <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-      <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
-      <script>
-        const container = document.getElementById('app')
-        
-        ${code}
-      </script>
-    </html>
-  `
+  const [value, setValue] = useState(code)
+  const [html, setHTML] = useState('')
+
+  useEffect(() => {
+    // setCode(`React.createElement(otaku_ui.Button, {
+    //   type: 'primary'
+    // }, 'script 渲染的内容')`)
+
+    setValue(code)
+
+  }, [container, code])
+
+
+
+  const error = (e) => {
+    console.log(e)
+  }
+
+
 
   return (
-    <iframe 
-      className="sandbox-container" 
-      width="500" 
-      height="200"
-      srcDoc={html}
-      sandbox="allow-forms allow-pointer-lock allow-popups allow-modals allow-same-origin allow-scripts allow-top-navigation">
-    </iframe>
+    <div>
+      <div ref={container} className='test-render'></div>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: new Function(
+            'container',
+            'require',
+            'exports',
+            `              
+            if (!container) return
+                        
+            const React = require('react')
+            const ReactDOM = require('react-dom/client') 
+            
+            ${value}
+            `
+          )(container.current,  (args) => {
+            const path = {
+              'react': require('react'),
+              'react-dom/client': require('react-dom/client'),
+              'otaku-ui': require('otaku-ui')
+            }
+
+            return path[args]
+          }, {}),
+        }}></script>
+      {/* </Helmet> */}
+      {/* <iframe 
+        onError={error}
+        className="sandbox-container" 
+        width="500" 
+        height="200"
+        srcDoc={html}
+        sandbox="allow-forms allow-pointer-lock allow-popups allow-modals allow-same-origin allow-scripts allow-top-navigation">
+      </iframe> */}
+    </div>
   )
 }

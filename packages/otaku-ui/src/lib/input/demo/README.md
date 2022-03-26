@@ -16,7 +16,7 @@ api:
 一个普通的输入框
 
 ```tsx
-ReactDOM.render(<Input placeholder="输入点什么吧..."></Input>, container)
+ReactDOM.createRoot(container).render(<Input placeholder="输入点什么吧..."></Input>)
 ```
 :::
 
@@ -28,8 +28,7 @@ ReactDOM.render(<Input placeholder="输入点什么吧..."></Input>, container)
 一个普通的输入框
 
 ```tsx
-ReactDOM.render(
-  <ul>
+ReactDOM.createRoot(container).render(<ul>
     <li style={{
       marginBottom: '10px'
     }}>
@@ -43,9 +42,7 @@ ReactDOM.render(
       <li>
       <Input size="large" placeholder="大型输入框"></Input>
     </li>
-  </ul>,
-  container
-)
+  </ul>)
 
 ```
 :::
@@ -57,7 +54,7 @@ ReactDOM.render(
 一个普通的输入框
 
 ```tsx
-ReactDOM.render(<Input placeholder="输入点什么吧..." type="password"></Input>, container)
+ReactDOM.createRoot(container).render(<Input placeholder="输入点什么吧..." type="password"></Input>)
 ```
 :::
 
@@ -68,7 +65,7 @@ ReactDOM.render(<Input placeholder="输入点什么吧..." type="password"></Inp
 一个普通的输入框
 
 ```tsx
-ReactDOM.render(<Input placeholder="输入点什么吧..." disabled></Input>, container)
+ReactDOM.createRoot(container).render(<Input placeholder="输入点什么吧..." disabled></Input>)
 ```
 :::
 
@@ -79,8 +76,7 @@ ReactDOM.render(<Input placeholder="输入点什么吧..." disabled></Input>, co
 一个普通的输入框
 
 ```tsx
-ReactDOM.render(
-  <ul>
+ReactDOM.createRoot(container).render(<ul>
     <li style={{
       marginBottom: '10px'
     }}>
@@ -91,9 +87,7 @@ ReactDOM.render(
     }}>
       <Input placeholder="后面的icon" afterIcon="search-line"></Input>
     </li>
-  </ul>,
-  container
-)
+  </ul>)
 
 ```
 :::
@@ -105,7 +99,7 @@ ReactDOM.render(
 一个普通的输入框
 
 ```tsx
-ReactDOM.render(<Input placeholder="输入点什么吧..." clear></Input>, container)
+ReactDOM.createRoot(container).render(<Input placeholder="输入点什么吧..." clear></Input>)
 ```
 :::
 
@@ -117,8 +111,7 @@ ReactDOM.render(<Input placeholder="输入点什么吧..." clear></Input>, conta
 一个普通的输入框
 
 ```tsx
-ReactDOM.render(
-  <ul>
+ReactDOM.createRoot(container).render(<ul>
     <li style={{
       marginBottom: '10px'
     }}>
@@ -133,9 +126,7 @@ ReactDOM.render(
         <Button size="middle" type="primary">后面的按钮</Button>
       }></Input>
     </li>
-  </ul>,
-  container
-)
+  </ul>)
 
 ```
 :::

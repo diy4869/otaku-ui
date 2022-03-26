@@ -14,7 +14,7 @@ api:
 ::: demo
 
 ```tsx
-ReactDOM.render(<InputNumber></InputNumber>, container)
+ReactDOM.createRoot(container).render(<InputNumber></InputNumber>)
 ```
 :::
 
@@ -24,7 +24,7 @@ ReactDOM.render(<InputNumber></InputNumber>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<InputNumber step={2}></InputNumber>, container)
+ReactDOM.createRoot(container).render(<InputNumber step={2}></InputNumber>)
 ```
 :::
 
@@ -33,7 +33,7 @@ ReactDOM.render(<InputNumber step={2}></InputNumber>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<InputNumber max={10} min={1}></InputNumber>, container)
+ReactDOM.createRoot(container).render(<InputNumber max={10} min={1}></InputNumber>)
 ```
 :::
 
@@ -42,7 +42,7 @@ ReactDOM.render(<InputNumber max={10} min={1}></InputNumber>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<InputNumber value={0.1} step={0.1}></InputNumber>, container)
+ReactDOM.createRoot(container).render(<InputNumber value={0.1} step={0.1}></InputNumber>)
 ```
 :::
 
@@ -51,8 +51,7 @@ ReactDOM.render(<InputNumber value={0.1} step={0.1}></InputNumber>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(
-  <Grid count={3}>
+ReactDOM.createRoot(container).render(<Grid count={3}>
     <GridItem>
       <InputNumber size="small"></InputNumber>
     </GridItem>
@@ -62,9 +61,7 @@ ReactDOM.render(
     <GridItem>
       <InputNumber size="large"></InputNumber>
     </GridItem>
-  </Grid>,
-  container
-)
+  </Grid>)
 
 ```
 :::
@@ -74,7 +71,7 @@ ReactDOM.render(
 ::: demo
 
 ```tsx
-ReactDOM.render(<InputNumber readonly></InputNumber>, container)
+ReactDOM.createRoot(container).render(<InputNumber readonly></InputNumber>)
 ```
 :::
 
@@ -84,7 +81,7 @@ ReactDOM.render(<InputNumber readonly></InputNumber>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<InputNumber disabled></InputNumber>, container)
+ReactDOM.createRoot(container).render(<InputNumber disabled></InputNumber>)
 ```
 :::
 

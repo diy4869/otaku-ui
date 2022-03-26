@@ -13,7 +13,7 @@ api:
 
 ::: demo
 ```tsx
-ReactDOM.render(<Pagination total={200} current={2}></Pagination>, container)
+ReactDOM.createRoot(container).render(<Pagination total={200} current={2}></Pagination>)
 ```
 :::
 
@@ -23,7 +23,7 @@ ReactDOM.render(<Pagination total={200} current={2}></Pagination>, container)
 
 ::: demo
 ```tsx
-ReactDOM.render(<Pagination current={5} slicePage={3} total={200}></Pagination>, container)
+ReactDOM.createRoot(container).render(<Pagination current={5} slicePage={3} total={200}></Pagination>)
 ```
 :::
 
@@ -32,7 +32,7 @@ ReactDOM.render(<Pagination current={5} slicePage={3} total={200}></Pagination>,
 
 ::: demo
 ```tsx
-ReactDOM.render(<Pagination slicePage={3} total={200} pageSize={15}></Pagination>, container)
+ReactDOM.createRoot(container).render(<Pagination slicePage={3} total={200} pageSize={15}></Pagination>)
 ```
 :::
 
@@ -42,7 +42,7 @@ ReactDOM.render(<Pagination slicePage={3} total={200} pageSize={15}></Pagination
 ::: demo
 
 ```tsx
-ReactDOM.render(<Pagination circle={true}></Pagination>, container)
+ReactDOM.createRoot(container).render(<Pagination circle={true}></Pagination>)
 ```
 :::
 
@@ -51,7 +51,7 @@ ReactDOM.render(<Pagination circle={true}></Pagination>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(<Pagination></Pagination>, container)
+ReactDOM.createRoot(container).render(<Pagination></Pagination>)
 ```
 :::
 

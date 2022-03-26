@@ -9522,6 +9522,16 @@ modify-values@^1.0.0:
   resolved "https://registry.npmjs.org/modify-values/-/modify-values-1.0.1.tgz"
   integrity sha512-xV2bxeN6F7oYjZWTe/YPAy6MN2M+sL4u/Rlm2AHCIVGfo2p1yGmBHQ6vHehl4bRTZBdHu3TSkWdYgkwpYzAGSw==
 
+monaco-editor-esm-webpack-plugin@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/monaco-editor-esm-webpack-plugin/-/monaco-editor-esm-webpack-plugin-2.0.2.tgz#e8078ae651e04794467ca78b25ca953bd7c86fb6"
+  integrity sha512-XgZocETD9bcQdoLNBSPT5wPok6ypeqkBedC6i5qAViGnIi9rQHblkNAmQnTCyGJxcDcA2yBg+dsOYXZ0VHwuKg==
+
+monaco-editor-nls@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/monaco-editor-nls/-/monaco-editor-nls-2.0.0.tgz#2643f44b3b2309ef83b17836dca5d200a81a9713"
+  integrity sha512-gQy0LxyUkvmGFRfjRaFHFDdv3UjCX2DfjoL4Dy6mhcq94r6pu2mzcCWIxJz+y7FCrQwpj+xXXUpy0ynOrmONoQ==
+
 monaco-editor-webpack-plugin@^7.0.1:
   version "7.0.1"
   resolved "https://registry.npmmirror.com/monaco-editor-webpack-plugin/-/monaco-editor-webpack-plugin-7.0.1.tgz#ba19c60aba990184e36ad8722b1ed6a564527c7c"
@@ -10691,7 +10701,7 @@ postcss-less@^3.1.4:
 
 postcss-loader@^6.2.1:
   version "6.2.1"
-  resolved "https://registry.npmmirror.com/postcss-loader/-/postcss-loader-6.2.1.tgz#0895f7346b1702103d30fdc66e4d494a93c008ef"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-6.2.1.tgz#0895f7346b1702103d30fdc66e4d494a93c008ef"
   integrity sha512-WbbYpmAaKcux/P66bZ40bpWsBucjx/TTgVVzRZ9yUO8yQfVBlameJ0ZGVaPfH64hNSBh63a+ICP5nqOpBA0w+Q==
   dependencies:
     cosmiconfig "^7.0.0"
@@ -11223,7 +11233,7 @@ raw-body@2.4.2:
     iconv-lite "0.4.24"
     unpipe "1.0.0"
 
-react-dom@^17.0.0, react-dom@^17.0.2:
+react-dom@^17.0.0:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-17.0.2.tgz"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
@@ -11231,6 +11241,29 @@ react-dom@^17.0.0, react-dom@^17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
+
+react-dom@^18.0.0-rc.2-next-581f0c42e-20220310:
+  version "18.0.0-rc.2-next-581f0c42e-20220310"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-18.0.0-rc.2-next-581f0c42e-20220310.tgz#3b6c31c5207031e60311b05fa2a1dab599c36581"
+  integrity sha512-qKiVS3dOVcAkKN7MzbamVuUxfPPoxA0oEwmPLQRUYoCq7bSHaLdqAZZuROcCLY3OpjWYgGZoxvj+HUOKpKM6qQ==
+  dependencies:
+    loose-envify "^1.1.0"
+    scheduler "0.21.0-rc.2-next-581f0c42e-20220310"
+
+react-fast-compare@^3.1.1:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
+  integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
+
+react-helmet@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/react-helmet/-/react-helmet-6.1.0.tgz#a750d5165cb13cf213e44747502652e794468726"
+  integrity sha512-4uMzEY9nlDlgxr61NL3XbKRy1hEkXmKNXhjbAIOVw5vcFrsdYbH2FEwcNyWvWinl103nXgzYNlns9ca+8kFiWw==
+  dependencies:
+    object-assign "^4.1.1"
+    prop-types "^15.7.2"
+    react-fast-compare "^3.1.1"
+    react-side-effect "^2.1.0"
 
 react-hot-loader@^4.13.0:
   version "4.13.0"
@@ -11323,18 +11356,30 @@ react-router@5.2.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
+react-side-effect@^2.1.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-side-effect/-/react-side-effect-2.1.1.tgz#66c5701c3e7560ab4822a4ee2742dee215d72eb3"
+  integrity sha512-2FoTQzRNTncBVtnzxFOk2mCpcfxQpenBMbk5kSVBg5UcPqV9fRbgY2zhb7GTWWOlpFmAxhClBDlIq8Rsubz1yQ==
+
 react-simple-code-editor@^0.11.0:
   version "0.11.0"
   resolved "https://registry.npmjs.org/react-simple-code-editor/-/react-simple-code-editor-0.11.0.tgz"
   integrity sha512-xGfX7wAzspl113ocfKQAR8lWPhavGWHL3xSzNLeseDRHysT+jzRBi/ExdUqevSMos+7ZtdfeuBOXtgk9HTwsrw==
 
-react@^17.0.0, react@^17.0.2:
+react@^17.0.0:
   version "17.0.2"
   resolved "https://registry.npmjs.org/react/-/react-17.0.2.tgz"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
+
+react@^18.0.0-rc.2-next-581f0c42e-20220310:
+  version "18.0.0-rc.2-next-581f0c42e-20220310"
+  resolved "https://registry.yarnpkg.com/react/-/react-18.0.0-rc.2-next-581f0c42e-20220310.tgz#a638012296bc8427792fc1da7eec8d6d54eeace0"
+  integrity sha512-Kcs0Uw2kwroSX9uLryt+DJGtkM+7ox4g7IZLoPNSRFCzpo9gm7jpEvmPMsHt6mHO/H0AqFVWuTKYnb99i50U7w==
+  dependencies:
+    loose-envify "^1.1.0"
 
 read-cmd-shim@^2.0.0:
   version "2.0.0"
@@ -11896,6 +11941,13 @@ sax@>=0.6.0, sax@^1.2.4:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz"
   integrity sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==
+
+scheduler@0.21.0-rc.2-next-581f0c42e-20220310:
+  version "0.21.0-rc.2-next-581f0c42e-20220310"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.21.0-rc.2-next-581f0c42e-20220310.tgz#22a5b0ded142b3af2d0f4ed70884a52302a8bf67"
+  integrity sha512-bvyYk4T+0exxx87XVq0LVy2otuGc+CK3XVZe2kks7QBf8Shj0FcFScQIH+TySPVg8FMtp67iGUa4oX2DoCyI1A==
+  dependencies:
+    loose-envify "^1.1.0"
 
 scheduler@^0.20.2:
   version "0.20.2"
@@ -13870,6 +13922,14 @@ wordwrap@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/wordwrap/-/wordwrap-1.0.0.tgz"
   integrity sha1-J1hIEIkUVqQXHI0CJkQa3pDLyus=
+
+worker-loader@^3.0.8:
+  version "3.0.8"
+  resolved "https://registry.yarnpkg.com/worker-loader/-/worker-loader-3.0.8.tgz#5fc5cda4a3d3163d9c274a4e3a811ce8b60dbb37"
+  integrity sha512-XQyQkIFeRVC7f7uRhFdNMe/iJOdO6zxAaR3EWbDp45v3mDhrTi+++oswKNxShUNjPC/1xUp5DB29YKLhFo129g==
+  dependencies:
+    loader-utils "^2.0.0"
+    schema-utils "^3.0.0"
 
 wrap-ansi@^6.2.0:
   version "6.2.0"

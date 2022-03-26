@@ -14,7 +14,6 @@ let importSynx = `
   import * as React from 'react'
   import { HighlightCode, Anchor, AnchorItem } from 'otaku-ui'
   import { Api } from 'site-component/api/api'
-  import { createPortal } from 'react-dom'
   import { CodeExample } from 'site-component/codeExample/codeExample'
   import Block from 'site-component/block/block'
 `
@@ -194,16 +193,14 @@ module.exports = function mdLoader (source) {
               str += `
 ${injectCode}
 `
-              current.code = `${data.import}
-
-${current.code}`
+              // current.code = `${${current.code}`
             },
             CallExpression (path) {
               const callee = path.node.callee
               const objectName = callee?.object?.name
               const propertyName = callee?.property?.name
 
-              if (objectName === 'ReactDOM' && propertyName === 'render') {
+              if (propertyName === 'render') {
                 const args = path.node.arguments
                 const [example, container] = args
                 const exampleCode = code.substring(example.start, example.end)
@@ -250,6 +247,7 @@ ${current.code}`
 
   const mdToHtml = md
     .render(content)
+    .replace(/(tabindex=)/g, 'tabIndex=')
     .replace(/<hr>/g, '<hr />')
     .replace(/<br>/g, '<br />')
     .replace(/class=/g, 'className=')
@@ -285,5 +283,6 @@ ${current.code}`
       `
   }
 
+  console.log( reactMarkdownTemplate(str, data, mdToHtml, anchor))
   return  reactMarkdownTemplate(str, data, mdToHtml, anchor)
 }

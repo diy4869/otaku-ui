@@ -29,7 +29,7 @@ function Demo () {
   )
 }
 
-ReactDOM.render(<Demo/>, container)
+ReactDOM.createRoot(container).render(<Demo/>)
 ```
 :::
 
@@ -56,7 +56,7 @@ function Demo () {
   )
 }
 
-ReactDOM.render(<Demo/>, container)
+ReactDOM.createRoot(container).render(<Demo/>)
 ```
 :::
 

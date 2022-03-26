@@ -69,10 +69,7 @@ function Demo () {
   )
 }
 
-ReactDOM.render(
-  <Demo/>,
-  container,
-);
+ReactDOM.createRoot(container).render(<Demo/>)
 ```
 ```css
 .demo-tooltip .otaku-button {

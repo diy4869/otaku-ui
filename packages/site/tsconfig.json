@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
+    "resolveJsonModule": true,
     "downlevelIteration":true,
     "outDir": "./dist/docs",
     "module": "esnext",
-    "target": "es5",
+    "target": "es2017",
     "lib": ["esnext", "dom"],
-    "sourceMap": true,
+    "sourceMap": false,
     "baseUrl": ".",
     "jsx": "react",
     "allowJs": false,
@@ -13,6 +14,8 @@
     "moduleResolution": "node",
     "strict": false,
     "noEmit": false,
+    "noEmitHelpers": false,
+    "skipLibCheck": false,
     "paths": {
       "@docs/": ["./docs"],
       "@/*": ["./src/*"],

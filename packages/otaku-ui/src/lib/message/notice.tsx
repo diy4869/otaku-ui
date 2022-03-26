@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import { Message } from './message'
 import { styleToStr } from '../../utils'
 // import debounce from 'lodash/debounce'
@@ -54,7 +54,7 @@ export class Notice {
     container.id = `notice-${noticeId++}`
     container.style.marginBottom = '10px'
     this.container?.appendChild(container)
-    ReactDOM.render(<Message type={type}>{content}</Message>, container)
+    ReactDOM.createRoot(container).render(<Message type={type}>{content}</Message>)
 
     setTimeout(() => {
       this.destory()

@@ -14,7 +14,7 @@ api:
 简单的 Radio
 
 ```tsx
-ReactDOM.render(<Radio>单选框</Radio>, container)
+ReactDOM.createRoot(container).render(<Radio>单选框</Radio>)
 ```
 :::
 
@@ -23,10 +23,9 @@ ReactDOM.render(<Radio>单选框</Radio>, container)
 ::: demo
 
 ```tsx
-ReactDOM.render(
-  <RadioGroup value={1}>
+ReactDOM.createRoot(index).render(<RadioGroup value={1}>
     {
-      new Array(3).fill(undefined).map((_, index) => {
+      new Array(3).fill(undefined).map((_) => {
         return (
           <Radio value={index} key={index}>第{index}个单选</Radio>
         )
@@ -44,7 +43,7 @@ ReactDOM.render(
 简单的 Radio
 
 ```tsx
-ReactDOM.render(<Radio checked={true}>多选框</Radio>, container)
+ReactDOM.createRoot(container).render(<Radio checked={true}>多选框</Radio>)
 ```
 :::
 
@@ -55,8 +54,8 @@ ReactDOM.render(<Radio checked={true}>多选框</Radio>, container)
 禁用的 Radio
 
 ```tsx
-ReactDOM.render(<Radio disabled>多选框</Radio>, container)
-ReactDOM.render(<Radio checked={true} disabled>多选框</Radio>, container)
+ReactDOM.createRoot(container).render(<Radio disabled>多选框</Radio>)
+ReactDOM.createRoot(container).render(<Radio checked={true} disabled>多选框</Radio>)
 ```
 :::
 

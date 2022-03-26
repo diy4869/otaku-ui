@@ -15,11 +15,10 @@ api:
 简单的评分
 
 ```tsx
-ReactDOM.render(
-  <Rate>
+ReactDOM.createRoot(container).render(<Rate>
 
   <span classname="iconfont otaku-icon-heart"></span>
-</Rate>, container)
+</Rate>)
 ```
 :::
 
@@ -30,7 +29,7 @@ ReactDOM.render(
 简单的评分
 
 ```tsx
-ReactDOM.render(<Rate></Rate>, container)
+ReactDOM.createRoot(container).render(<Rate></Rate>)
 ```
 :::
 
@@ -41,7 +40,7 @@ ReactDOM.render(<Rate></Rate>, container)
 简单的评分
 
 ```tsx
-ReactDOM.render(<Rate readonly={true} score={4}></Rate>, container)
+ReactDOM.createRoot(container).render(<Rate readonly={true} score={4}></Rate>)
 ```
 :::
 
@@ -52,7 +51,7 @@ ReactDOM.render(<Rate readonly={true} score={4}></Rate>, container)
 简单的评分
 
 ```tsx
-ReactDOM.render(<Rate readonly={true} score={2.5}></Rate>, container)
+ReactDOM.createRoot(container).render(<Rate readonly={true} score={2.5}></Rate>)
 ```
 :::
 
@@ -63,7 +62,7 @@ ReactDOM.render(<Rate readonly={true} score={2.5}></Rate>, container)
 简单的评分
 
 ```tsx
-ReactDOM.render(<Rate readonly={true} score={542.5} maxScore={100}></Rate>, container)
+ReactDOM.createRoot(container).render(<Rate readonly={true} score={542.5} maxScore={100}></Rate>)
 ```
 :::
 
@@ -74,7 +73,7 @@ ReactDOM.render(<Rate readonly={true} score={542.5} maxScore={100}></Rate>, cont
 简单的评分
 
 ```tsx
-ReactDOM.render(<Rate readonly={true} score={42.5} maxScore={100} showScore></Rate>, container)
+ReactDOM.createRoot(container).render(<Rate readonly={true} score={42.5} maxScore={100} showScore></Rate>)
 ```
 :::
 
@@ -85,7 +84,7 @@ ReactDOM.render(<Rate readonly={true} score={42.5} maxScore={100} showScore></Ra
 简单的评分
 
 ```tsx
-ReactDOM.render(<Rate readonly={true} score={42.5} maxScore={100} showScore count={10}></Rate>, container)
+ReactDOM.createRoot(container).render(<Rate readonly={true} score={42.5} maxScore={100} showScore count={10}></Rate>)
 ```
 :::
 
@@ -117,7 +116,7 @@ function Demo () {
       }}></Rate>
   )
 }
-ReactDOM.render(<Demo/>, container)
+ReactDOM.createRoot(container).render(<Demo/>)
 ```
 :::
 

@@ -70,53 +70,32 @@
   .main {
     grid-area: main;
     background: #f7f8fa;
-
-    padding: 20px;
-    // overflow-x: auto;
     position: relative;
-    // border: 2px solid red;
     box-sizing: border-box;
     height: calc(100vh - 60px);
     overflow-x: auto;
-    display: flex;
-
-    // grid-template-areas: 1fr 200px;
-
-    // height: 100%;
-    // &::-webkit-scrollbar {
-    //   display: none;
-    // }
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 20px;
+    padding: 20px;
   }
 }
-// body { scroll-behavior: smooth; }
-
-// ol { counter-reset: list-item; }
-// li { display: block; counter-increment: list-item; }
-// li:before { content: counters(list-item,'.') ' '; }
 
 // md 内的样式
 :global {
   .otaku-anchor {
-    margin-left: 30px;
     height: fit-content;
     padding: 12px;
-    // background: #FFFFFF;
     position: sticky;
-    top: 20px;
-    // transform: translateX(calc(100% - 200px));
-    /* 1 */
-
-    // box-shadow: 0px 4px 16px rgba(0, 20, 77, 0.08);
-    border-radius: 8px;
-    color: #818C9F;
-    line-height: 24px;
-    font-size: 14px;
+    top: 0px;
+    border-radius: 4px;
+    // line-height: 24px;
+    // font-size: 14px;
   }
   .markdown-body li+li {
     margin-top: 0 !important;
   }
   .markdown-body {
-    width: calc(100% - 200px);
     table:not([class^=".otaku-"]) {
       display: table;
     }
@@ -127,10 +106,6 @@
       background: white;
       border-radius: 10px;
       box-shadow: 0px 10px 50px 0 rgb(0 35 114 / 10%);
-      li {
-        // margin: 10px 0;
-        
-      }
       a {
         color: #3064FF;
         font-size: 14px;
@@ -156,24 +131,3 @@
     }
   }
 }
-
-// .otaku-md-container {
-  
-//   table {
-//       border: 1px solid #f0f0f0;
-//       width: 100%;
-//       background: white;
-//       th, td {
-//         padding: 10px;
-//         border: 1px solid #f0f0f0;
-//         text-align: center;
-
-//       }
-//     }
-//     .otaku-anchor {
-//       & + span {
-//         color: #3064FF;
-//         display: none;
-//       }
-//     }
-// }
