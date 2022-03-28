@@ -29,7 +29,7 @@ module.exports = async () => {
     await execPromise(str)
     spinner.succeed('构建完成')
     // console.log(path.resolve(sitePath, './docs'))
-    await execPromise(`rm -rf ${path.resolve(sitePath, './docs')}`)
+    // await execPromise(`rm -rf ${path.resolve(sitePath, './docs')}`)
   } else {
     spinner.fail('构建失败')
   }
