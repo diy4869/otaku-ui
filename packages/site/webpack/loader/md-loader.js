@@ -283,6 +283,5 @@ ${injectCode}
       `
   }
 
-  console.log( reactMarkdownTemplate(str, data, mdToHtml, anchor))
   return  reactMarkdownTemplate(str, data, mdToHtml, anchor)
 }
