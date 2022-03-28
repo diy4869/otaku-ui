@@ -10,6 +10,10 @@
     .otaku-tab-pane-active {
         border-bottom: 2px solid $primaryColor;
     }
+    
+}
+
+.otaku-tab-active {
     &::after {
         content: '';
         width: 100%;

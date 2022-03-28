@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect } from 'react'
 import { hot } from 'react-hot-loader/root'
 import style from './App.module.scss'
-
+import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary'
 import { HashRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
@@ -32,7 +32,7 @@ function App() {
   }, [])
 
   return (
-    <Router>
+       <Router>
       <div className={style['otaku-home']}>
         <header className={style['otaku-header']}>
           {/* otaku-ui | OTAKU-UI |  */}
@@ -96,6 +96,8 @@ function App() {
         
       </div>
     </Router>
+
+   
   )
 }
 

@@ -1,8 +1,9 @@
 import React, { useState, useRef } from 'react'
-import { HighlightCode, HighlightCodeProps, Icon } from 'otaku-ui'
+import { HighlightCode, HighlightCodeProps, Icon, Tab, TabPane, message } from 'otaku-ui'
 import * as copy from 'copy-to-clipboard'
 import { Editor } from '../editor/editor'
 import { Tooltip } from 'otaku-ui'
+import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary'
 import classnames from 'classnames'
 import './style.scss'
 
@@ -48,72 +49,88 @@ export function CodeExample (props: Example) {
 
   return (
     <div className='otaku-code-example-container'>
-      <div
-        className='otaku-desc'
-        dangerouslySetInnerHTML={{
-          __html: desc
-        }}
-      ></div>
-      <div className='otaku-example'>{example}</div>
-      <ul className='otaku-operation'>
-        <li onClick={edit}>
-          <Tooltip content='编辑'>
-            {/* <Icon name='edit'></Icon> */}
-            <span>编辑</span>
-          </Tooltip>
-        </li>
-        <li
-          onClick={() => {
-            copy(data[currentIndex].code, {
-              debug: true
-            })
-            alert('复制成功')
+        <div
+          className='otaku-desc'
+          dangerouslySetInnerHTML={{
+            __html: desc
           }}
-        >
-          <Tooltip content='复制'>
-            <Icon name='copy'></Icon>
-          </Tooltip>
-        </li>
-        <li
-          onClick={() => {
-            collapse = !collapse
-            setCollapse(collapse)
-          }}
-        >
-          <Tooltip content={collapse ? '折叠' : '展开'}>
-            <Icon name='code'></Icon>
-            {/* <span
-              className={`iconfont otaku-icon-${collapse ? 'code' : 'code'}`}
-            ></span> */}
-          </Tooltip>
-        </li>
-      </ul>
-      {/* <ul>
-        {data.map((item, index) => {
-          return (
-            <li
-              key={index}
-              onClick={() => {
-                setCurrentIndex(index)
-              }}
-            >
-              lang: {item?.lang}
-            </li>
-          )
-        })}
-      </ul> */}
-      {collapse && (
-        <HighlightCode
-          lang={data[currentIndex].lang}
-          code={data[currentIndex].code}
-        ></HighlightCode>
-      )}
-      <Editor code={code} lang={lang}></Editor>
+        ></div>
+        <div className='otaku-example'>{example}</div>
+        <Tab active={undefined} center onChange={(data) => {
+          const { index } = data
 
-      {/* {
-        showEdit &&
-      } */}
-      
+          if (index === 1) {
+            message.success('复制成功', 1000)
+          }
+        }}>
+          <TabPane 
+            id={0}
+            name={
+             <Tooltip content='编辑'>
+              <Icon name='edit'></Icon>
+            </Tooltip>
+            }>
+            <Editor code={code} lang={lang}></Editor>
+          </TabPane>
+          <TabPane 
+            id={1}
+            name={
+            <Tooltip content='复制'>
+              <Icon name='copy'></Icon>
+            </Tooltip>
+            }>
+          </TabPane>
+          <TabPane 
+            id={2}
+            name={
+              <Tooltip content={collapse ? '折叠' : '展开'}>
+                <Icon name='code'></Icon>
+              </Tooltip>
+            }>
+            <HighlightCode
+              lang={data[currentIndex].lang}
+              code={data[currentIndex].code}
+            ></HighlightCode>
+          </TabPane>
+        </Tab>
+        {/* <ul className='otaku-operation'>
+          <li onClick={edit}>
+           
+          </li>
+          <li
+            onClick={() => {
+              copy(data[currentIndex].code, {
+                debug: true
+              })
+              alert('复制成功')
+            }}
+          >
+            <Tooltip content='复制'>
+              <Icon name='copy'></Icon>
+            </Tooltip>
+          </li>
+          <li
+            onClick={() => {
+              collapse = !collapse
+              setCollapse(collapse)
+            }}
+          >
+            <Tooltip content={collapse ? '折叠' : '展开'}>
+              <Icon name='code'></Icon>
+            </Tooltip>
+          </li>
+        </ul>
+        {collapse && (
+          <HighlightCode
+            lang={data[currentIndex].lang}
+            code={data[currentIndex].code}
+          ></HighlightCode>
+        )} */}
+
+        
+
     </div>
+   
   )
 }
+

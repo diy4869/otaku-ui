@@ -11,3 +11,11 @@ export const styleToStr = (style: CSSProperties): string => {
     return str
   }, '')
 }
+
+export const findDataset = (element: HTMLElement, key: string) => {
+  if (element === null) return
+  if (element.dataset[key]) return element
+  
+  // debugger
+  return findDataset(element.parentElement, key)
+}

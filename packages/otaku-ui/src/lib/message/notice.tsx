@@ -75,10 +75,10 @@ export class Notice {
 let instance: Notice | null = null
 
 interface message {
-  info? (message: React.ReactNode): void
-  success?(message: React.ReactNode): void
-  warning?(message: React.ReactNode): void
-  error?(message: React.ReactNode): void
+  info? (message: React.ReactNode, time: number): void
+  success?(message: React.ReactNode, time: number): void
+  warning?(message: React.ReactNode, time: number): void
+  error?(message: React.ReactNode, time: number): void
 }
 
 

@@ -1,7 +1,6 @@
 import React, {useRef, useEffect, useState } from 'react'
+
 import {Helmet} from 'react-helmet'
-import ReactDOM from 'react-dom/client'
-import { Button } from 'otaku-ui'
 import './style.scss'
 
 interface SandboxProps {
@@ -19,10 +18,58 @@ export function Sandbox(props: SandboxProps) {
   const [value, setValue] = useState(code)
   const [html, setHTML] = useState('')
 
+  const Require = (args) => {
+    const path = {
+      'react': require('react'),
+      'react-dom/client': require('react-dom/client'),
+      'otaku-ui': require('otaku-ui')
+    }
+
+    return path[args]
+  }
+
   useEffect(() => {
     // setCode(`React.createElement(otaku_ui.Button, {
     //   type: 'primary'
     // }, 'script 渲染的内容')`)
+
+    
+    // setHTML(
+    //   `
+    //   <!DOCTYPE html>
+    //   <html lang="en">
+    //     <head>
+    //       <meta charset="UTF-8" />
+    //       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    //       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    //       <title>Document</title>
+
+    //       <style></style>
+    //     </head>
+    //     <body>
+    //       <div id="app"></div>
+    //     </body>
+    //     <script>
+    //         const container = document.getElementById('app')
+
+            
+    //         function render (require, exports = {}) {
+    //           if (!container) return
+                          
+    //           const React = require('react')
+    //           const ReactDOM = require('react-dom/client') 
+              
+    //           ${code}
+    //         }
+
+    //         render(
+    //           ${Require}
+    //         )
+
+    //     </script>
+    //   </html>
+    //   `
+    // )
 
     setValue(code)
 
@@ -34,35 +81,31 @@ export function Sandbox(props: SandboxProps) {
     console.log(e)
   }
 
-
+  document.body.addEventListener('error', (e) => {
+    console.log(e)
+  })
+ 
 
   return (
     <div>
-      <div ref={container} className='test-render'></div>
-      <script
-        dangerouslySetInnerHTML={{
-          __html: new Function(
-            'container',
-            'require',
-            'exports',
-            `              
-            if (!container) return
-                        
-            const React = require('react')
-            const ReactDOM = require('react-dom/client') 
-            
-            ${value}
-            `
-          )(container.current,  (args) => {
-            const path = {
-              'react': require('react'),
-              'react-dom/client': require('react-dom/client'),
-              'otaku-ui': require('otaku-ui')
-            }
-
-            return path[args]
-          }, {}),
-        }}></script>
+        <div ref={container} className='test-render'></div>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: new Function(
+              'container',
+              'require',
+              'exports',
+              `              
+              if (!container) return
+              // debugger;
+              const React = require('react')
+              const ReactDOM = require('react-dom/client') 
+              
+              ${value}
+              `
+            )(container.current, Require, {}),
+          }}></script>
+     
       {/* </Helmet> */}
       {/* <iframe 
         onError={error}

@@ -9,28 +9,12 @@
     <style></style>
   </head>
   <body>
-      <script>
-        console.log(1)
-        </script>
     <div id="app"></div>
   </body>
-  <script crossorigin src="https://unpkg.com/react@17/umd/react.development.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
   <script>
       const container = document.getElementById('app')
 
-      ReactDOM.render(
-        React.createElement('div', null, 'iframe 渲染的内容'),
-        container
-      )
 
-      const  observer = new PerformanceObserver(function(list, obj) {
-        const entries = list.getEntries();
-        console.log(entries)
-        for (var i=0; i < entries.length; i++) {
-          // Process "mark" and "frame" events
-        }
-      });
-      observer.observe({entryTypes: ["paint", 'measure']});
+
   </script>
 </html>
