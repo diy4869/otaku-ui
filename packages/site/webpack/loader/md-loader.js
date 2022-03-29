@@ -51,6 +51,20 @@ module.exports = function mdLoader (source) {
       return template
     }
   })
+  // .use((md) => {
+  //   md.core.ruler.push('anchor', state => {
+  //     const token = state.tokens
+
+  //     for (let i = 0; i < token.length; i++) {
+  //       if (token[i] !== 'heading_open') {
+  //         continue
+  //       }
+        
+  //       const content = token[i + 1]
+  //     }
+
+  //   })
+  // })
   .use(markdownItAnchor, {
     level: [2, 3],
     permalink: markdownItAnchor.permalink.linkInsideHeader({
@@ -267,7 +281,9 @@ ${injectCode}
                 <Anchor>
                   ${
                     anchor.reduce((str, item) => {
-                      str += `<AnchorItem title={\`${item.name}\`}></AnchorItem>`
+                      str += `<AnchorItem 
+                        href={\`#${item.name.toLowerCase().replaceAll(' ', '-')}\`}
+                        title={\`${item.name}\`}></AnchorItem>`
                       
                       return str
                     }, '')

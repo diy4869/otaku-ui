@@ -40,3 +40,4 @@ export * from './lib/tab/tab'
 
 export * from './lib/icon/icon'
 export * from './lib/anchor/anchor'
+export * from './lib/link/link'

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from '../../lib/link/link'
 import './style.scss'
 
 interface AnchorProps {
@@ -6,6 +7,7 @@ interface AnchorProps {
 }
 
 interface AnchorItemProps {
+  href?: string
   title?: string
 }
 
@@ -23,9 +25,11 @@ export function Anchor (props: AnchorProps) {
 }
 
 export function AnchorItem (props: AnchorItemProps) {
-  const { title } = props
+  const { href, title } = props
 
   return (
-    <li className='otaku-anchor-item'>{title}</li>
+    <li className='otaku-anchor-item'>
+      <Link href={href}>{title}</Link>
+    </li>
   )
 }

@@ -66,7 +66,6 @@ const run = (filePath, fileMap) => {
     type: {},
     import: {},
     function: {},
-    // 普通 export 导出的，目前只有函数 会去记录， export {} 这种 无法拿到类型
     export: {},
     // export * from 导出的内容
     exportFile: {}

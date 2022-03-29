@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './style.scss'
 
-interface {{name}}Props {
+export interface {{name}}Props {
   children: React.ReactNode
 }
 
