@@ -116,6 +116,7 @@ function Demo () {
       }}></Rate>
   )
 }
+
 ReactDOM.createRoot(container).render(<Demo/>)
 ```
 :::
