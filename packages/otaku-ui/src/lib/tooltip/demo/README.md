@@ -16,64 +16,60 @@ api:
 
 ```tsx
 function Demo () {
-  const text = 'prompt text';
-  const buttonWidth = 70;
+  const arr = [
+    ['top-start', 'top', 'top-end'],
+    ['left-start','',  'right-start'],
+    ['left', '', 'right'],
+    ['left-end', '', 'right-end'],
+    ['bottom-start', 'bottom', 'bottom-end']
+  ]
 
   return (
-    <div className="demo-tooltip">
-      <div style={{ marginLeft: buttonWidth, whiteSpace: 'nowrap', display: 'flex' }}>
-        <Tooltip placement="top-start" content={text}>
-          <Button>TL</Button>
-        </Tooltip>
-        <Tooltip placement="top" content={text}>
-          <Button>Top</Button>
-        </Tooltip>
-        <Tooltip placement="top-end" content={text}>
-          <Button>TR</Button>
-        </Tooltip>
-      </div>
-      <div style={{ width: buttonWidth, float: 'left' }}>
-        <Tooltip placement="left-start" content={text}>
-          <Button>LT</Button>
-        </Tooltip>
-        <Tooltip placement="left" content={text}>
-          <Button>Left</Button>
-        </Tooltip>
-        <Tooltip placement="left-end" content={text}>
-          <Button>LB</Button>
-        </Tooltip>
-      </div>
-      <div style={{ width: buttonWidth, marginLeft: buttonWidth * 4 }}>
-        <Tooltip placement="right-start" content={text}>
-          <Button>RT</Button>
-        </Tooltip>
-        <Tooltip placement="right" content={text}>
-          <Button>Right</Button>
-        </Tooltip>
-        <Tooltip placement="right-end" content={text}>
-          <Button>RB</Button>
-        </Tooltip>
-      </div>
-      <div style={{ marginLeft: buttonWidth, clear: 'both', whiteSpace: 'nowrap', display: 'flex'  }}>
-        <Tooltip placement="bottom-start" content={text}>
-          <Button>BL</Button>
-        </Tooltip>
-        <Tooltip placement="bottom" content={text}>
-          <Button>Bottom</Button>
-        </Tooltip>
-        <Tooltip placement="bottom-end" content={text}>
-          <Button>BR</Button>
-        </Tooltip>
-      </div>
-    </div>
+    <ul className="demo-tooltip">
+      {
+        arr.map((row, index) => {
+          return (
+            <li index={index} class="row">
+                {
+                  row.map((column, columnIndex) => {
+                    if (index > 0 && index < 4 && ![0, 2].includes(columnIndex)) {
+                      return <span></span>
+                    } else {
+                      return (
+                        <Tooltip placement={column} content={column}>
+                          <Button>{column}</Button>
+                        </Tooltip>
+                      )
+                    }
+                  })
+                }
+            </li>
+          )
+        })
+      }
+    </ul>
   )
 }
 
 ReactDOM.createRoot(container).render(<Demo/>)
 ```
 ```css
+:root {
+  --gap: 8px;
+}
+.demo-tooltip {
+  display: grid;
+  grid-gap: var(--gap);
+  grid-template-rows: repeat(5, auto);
+}
+.demo-tooltip .row {
+  display: grid;
+  grid-gap: var(--gap);
+  grid-template-columns: repeat(3, 105px);
+}
+
 .demo-tooltip .otaku-button {
-  width: 70px;
+  width: 105px;
 }
 ```
 :::

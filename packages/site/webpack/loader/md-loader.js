@@ -25,6 +25,7 @@ let demoIndex = 0
 module.exports = function mdLoader (source) {
   const { content, data } = matter(source)
 
+
   if (this.hot) {
     str = importSynx
 
@@ -110,7 +111,6 @@ module.exports = function mdLoader (source) {
           const type = []
           const apiData = []
           const property = []
-
           
           const appendType = (property) => {
             const find = property.find(property => property.typeReference)
@@ -232,7 +232,7 @@ ${injectCode}
               desc={\`${current.desc}\`}
               lang={\`${current?.lang}\`}
               example={${current.example}}
-              code={\`${[data.import, current.code].join('\n\n')}\`}
+              code={\`${[data.import.split(';').join('\n'), current.code].join('\n\n')}\`}
               style={{
                 lang: \`${current.style.lang}\`,
                 code: \`${current.style.code}\`
@@ -268,36 +268,38 @@ ${injectCode}
 
 
   const reactMarkdownTemplate = (str, data, content, anchor) => {
-      return `
-        ${data.import}
-        ${str}
+    const code = data.import
+
+    const fn = `
+      function MdReact () {
+        return (
+          <>
+            <div className='markdown-body'>${content}</div>
+            ${
+              data.anchor ? '' :  `
+              <Anchor>
+                ${
+                  anchor.reduce((str, item) => {
+                    str += `<AnchorItem 
+                      href={\`#${item.name.toLowerCase().replaceAll(' ', '-')}\`}
+                      title={\`${item.name}\`}></AnchorItem>`
+                    
+                    return str
+                  }, '')
+                }
+              </Anchor>
+            `
+            }
+          </>
+        )
+      }
+      
+      export default MdReact
+    `
     
-        function MdReact () {
-          return (
-            <>
-              <div className='markdown-body'>${content}</div>
-              ${
-                data.anchor ? '' :  `
-                <Anchor>
-                  ${
-                    anchor.reduce((str, item) => {
-                      str += `<AnchorItem 
-                        href={\`#${item.name.toLowerCase().replaceAll(' ', '-')}\`}
-                        title={\`${item.name}\`}></AnchorItem>`
-                      
-                      return str
-                    }, '')
-                  }
-                </Anchor>
-              `
-              }
-            </>
-          )
-        }
-    
-        export default MdReact
-      `
+    return code + str + fn
   }
 
+  // console.log(reactMarkdownTemplate(str, data, mdToHtml, anchor))
   return  reactMarkdownTemplate(str, data, mdToHtml, anchor)
 }

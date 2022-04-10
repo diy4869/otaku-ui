@@ -23,15 +23,16 @@ ReactDOM.createRoot(container).render(<Radio>单选框</Radio>)
 ::: demo
 
 ```tsx
-ReactDOM.createRoot(index).render(<RadioGroup value={1}>
+ReactDOM.createRoot(container).render(<RadioGroup value={1}>
     {
-      new Array(3).fill(undefined).map((_) => {
+      new Array(3).fill(undefined).map((_, index) => {
         return (
           <Radio value={index} key={index}>第{index}个单选</Radio>
         )
       })
     }
-  </RadioGroup>, container)
+  </RadioGroup>
+)
 ```
 :::
 

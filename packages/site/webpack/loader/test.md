@@ -1,83 +1,81 @@
 ---
 import: 
-  import { Table } from 'otaku-ui'
+  import { useRef } from 'react';
+  import { Tooltip, Button } from 'otaku-ui';
 api:
   {
-    module: ['Table']
+    module: ['Tooltip']
   }
 ---
 
-## Table
+## Tooltip
 
 ::: demo
 
+多个方向的 Tooltip
+
 ```tsx
-function Example () {
-  const tableData = [
-    {
-      name: 'disabled',
-      required: false,
-      type: 'number',
-      defaultValue: '',
-      desc: '禁用'
-    },
-    {
-      name: 'loading',
-      required: false,
-      type: 'number',
-      defaultValue: '',
-      desc: '禁用'
-    },
-    {
-      name: 'size',
-      required: false,
-      type: 'small | middle | large',
-      // defaultValue: '',
-      desc: '禁用'
-    }
-  ]
-
-  const tableColumn = [
-    {
-      label: '属性',
-      prop: 'name'
-    },
-    {
-      label: '是否必填',
-      prop: 'required',
-      render(data) {
-        const { row } = data
-
-        return (
-          <span>{ row.require ? '是' : '否'}</span>
-        )
-      },
-    },
-    {
-      label: '类型',
-      prop: 'type'
-    },
-    {
-      label: '默认值',
-      prop: 'defaultValue',
-      defaultValue: '这是没有数据的情况'
-    },
-    {
-      label: '描述',
-      prop: 'desc'
-    }
-  ]
+function Demo () {
+  const text = 'prompt text';
+  const buttonWidth = 70;
 
   return (
-    <Table data={tableData} tableColumn={tableColumn}></Table>
+    <div className="demo-tooltip">
+      <div style={{ marginLeft: buttonWidth, whiteSpace: 'nowrap', display: 'flex' }}>
+        <Tooltip placement="top-start" content={text}>
+          <Button>TL</Button>
+        </Tooltip>
+        <Tooltip placement="top" content={text}>
+          <Button>Top</Button>
+        </Tooltip>
+        <Tooltip placement="top-end" content={text}>
+          <Button>TR</Button>
+        </Tooltip>
+      </div>
+      <div style={{ width: buttonWidth, float: 'left' }}>
+        <Tooltip placement="left-start" content={text}>
+          <Button>LT</Button>
+        </Tooltip>
+        <Tooltip placement="left" content={text}>
+          <Button>Left</Button>
+        </Tooltip>
+        <Tooltip placement="left-end" content={text}>
+          <Button>LB</Button>
+        </Tooltip>
+      </div>
+      <div style={{ width: buttonWidth, marginLeft: buttonWidth * 4 }}>
+        <Tooltip placement="right-start" content={text}>
+          <Button>RT</Button>
+        </Tooltip>
+        <Tooltip placement="right" content={text}>
+          <Button>Right</Button>
+        </Tooltip>
+        <Tooltip placement="right-end" content={text}>
+          <Button>RB</Button>
+        </Tooltip>
+      </div>
+      <div style={{ marginLeft: buttonWidth, clear: 'both', whiteSpace: 'nowrap', display: 'flex'  }}>
+        <Tooltip placement="bottom-start" content={text}>
+          <Button>BL</Button>
+        </Tooltip>
+        <Tooltip placement="bottom" content={text}>
+          <Button>Bottom</Button>
+        </Tooltip>
+        <Tooltip placement="bottom-end" content={text}>
+          <Button>BR</Button>
+        </Tooltip>
+      </div>
+    </div>
   )
 }
 
-ReactDOM.createRoot(container).render(<Example/>)
+ReactDOM.createRoot(container).render(<Demo/>)
+
+```
+```css
+.demo-tooltip .otaku-button {
+  width: 70px;
+}
 ```
 :::
 
-## api
-
-::: api
-:::

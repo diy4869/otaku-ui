@@ -8,10 +8,10 @@ import { createSystem, createDefaultMapFromCDN, createVirtualCompilerHost } from
 import lzstring from 'lz-string'
 import { Sandbox } from '../sandbox/sandbox'
 import { setLocaleData } from 'monaco-editor-nls'
-import zh_CN from 'monaco-editor-nls/locale/zh-hans.json'
+// import zh_CN from 'monaco-editor-nls/locale/zh-hans.json'
 import throttle from 'lodash/throttle'
 
-setLocaleData(zh_CN)
+// setLocaleData(zh_CN)
 
 import './style.scss'
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api'

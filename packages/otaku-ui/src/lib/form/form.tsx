@@ -11,6 +11,7 @@ export interface BaseForm {
   }
   labelWidth?: string
   disabled?: boolean
+  readonly?: boolean
   rules?: Rules
 }
 
@@ -32,6 +33,7 @@ export function Form (props: FormProps) {
     labelAlign = 'right',
     requiredAlign = 'left',
     disabled = false,
+    readonly = false,
     labelWidth = '80px',
     getFormInstance
   } = props
@@ -48,6 +50,7 @@ export function Form (props: FormProps) {
     labelAlign,
     requiredAlign,
     disabled,
+    readonly,
     labelWidth,
     model,
     rules

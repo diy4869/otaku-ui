@@ -9,7 +9,8 @@ const env = require('./env')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ProgressBarPlugin = require('progress-bar-webpack-plugin')
-const MonacoWebpackPlugin = require('monaco-editor-esm-webpack-plugin');
+// const MonacoWebpackPlugin = require('monaco-editor-esm-webpack-plugin');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
 
 // process.exit()
 
@@ -136,18 +137,18 @@ const baseConfig = {
       {
         test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        use: ['ts-loader']
+        use: ['swc-loader']
       },
-      {
-        test: /\.worker\.js$/,
-        use: { loader: "worker-loader" },
-      },
-       {
-         test: /\.js$/,
-         enforce: 'pre',
-         include: /node_modules[\\\/]monaco-editor[\\\/]esm/,
-         use: MonacoWebpackPlugin.loader
-       }
+      // {
+      //   test: /\.worker\.js$/,
+      //   use: { loader: "worker-loader" },
+      // },
+      //  {
+      //    test: /\.js$/,
+      //    enforce: 'pre',
+      //    include: /node_modules[\\\/]monaco-editor[\\\/]esm/,
+      //    use: MonacoWebpackPlugin.loader
+      //  }
     ]
   },
 

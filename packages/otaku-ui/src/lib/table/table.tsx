@@ -43,7 +43,6 @@ export function Table(props: TableProps) {
 
   return (
     <table className="otaku-table">
-      <thead>
         <th className="otaku-table-header">
           {
             multiple && <td className="otaku-table-multiple">
@@ -58,7 +57,6 @@ export function Table(props: TableProps) {
             })
           }
         </th>
-      </thead>
       <tbody className="otaku-table-body">
         {
           tableData.map((item, index) => {
