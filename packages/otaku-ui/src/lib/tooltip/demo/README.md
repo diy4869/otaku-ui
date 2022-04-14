@@ -74,5 +74,3 @@ ReactDOM.createRoot(container).render(<Demo/>)
 ```
 :::
 
-
-

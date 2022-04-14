@@ -2,7 +2,7 @@ import React, { Suspense, useEffect } from 'react'
 import { hot } from 'react-hot-loader/root'
 import style from './App.module.scss'
 import { ErrorBoundary } from './components/ErrorBoundary/ErrorBoundary'
-import { BrowserRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
 import http from './api'
@@ -72,7 +72,7 @@ function App() {
             })}
           </aside>
           <Suspense fallback={<div></div>}>
-            <aside className={style['main']}>
+            <aside className='main'>
               <Switch>
                 {routes.map(router => {
                   return router.children.map(children => {

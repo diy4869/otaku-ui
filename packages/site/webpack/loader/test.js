@@ -8,4 +8,4 @@ const content = fs.readFileSync(path.resolve(__dirname, './test.md'), {
 
 const result = loader(content)
 
-console.log(result)
+// console.log(result)

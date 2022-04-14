@@ -87,7 +87,7 @@ export function Sandbox(props: SandboxProps) {
  
 
   return (
-    <div>
+    <>
         <div ref={container} className='test-render'></div>
         <script
           dangerouslySetInnerHTML={{
@@ -115,6 +115,6 @@ export function Sandbox(props: SandboxProps) {
         srcDoc={html}
         sandbox="allow-forms allow-pointer-lock allow-popups allow-modals allow-same-origin allow-scripts allow-top-navigation">
       </iframe> */}
-    </div>
+    </>
   )
 }
