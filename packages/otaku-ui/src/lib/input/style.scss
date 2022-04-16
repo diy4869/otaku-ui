@@ -16,7 +16,7 @@
   }
   .otaku-input {
     width: 100%;
-    font-size: 14px;
+    font-size: 13px;
     outline: none;
     border: none;
   }
@@ -30,7 +30,7 @@
     cursor: not-allowed;
   }
   .iconfont {
-    font-size: 14px;
+    font-size: 13px;
     color: #999;
   }
 }
@@ -47,7 +47,7 @@
   & ~ .otaku-input-container {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-    border-left: none;
+    margin-right: -1px;
   }
 }
 
@@ -55,7 +55,8 @@
 .otaku-input-after-border {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  border-right: none;
+  // border-right: none;
+  margin-left: -1px;
 }
 
 .otaku-input-after {
@@ -89,7 +90,7 @@
 .otaku-input-size-middle {
   height: 32px;
   .otaku-input {
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 

@@ -10,7 +10,7 @@ interface UploadProps {
   multiple?: boolean
   directory?: boolean
   drag?: boolean
-  children: React.ReactNode
+  children?: React.ReactNode
   beforeUpload?: () => void
 }
 

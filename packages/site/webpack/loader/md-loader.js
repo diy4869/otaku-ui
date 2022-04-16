@@ -168,7 +168,7 @@ module.exports = function mdLoader (source) {
           }, [])
           
 
-          console.log(mdTableData)
+          // console.log(mdTableData)
 
           // const demoMarkdown = new MarkdownIt({})
 

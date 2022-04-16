@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { usePagination, type usePaginationProps } from '../../hooks/index'
+import { usePagination } from '../../hooks/index'
+import type { usePaginationProps } from '../../hooks/index'
 import './style.scss'
 
 export interface PaginationProps extends usePaginationProps {

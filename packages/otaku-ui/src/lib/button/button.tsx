@@ -16,6 +16,7 @@ export interface ButtonProps {
   type?: 'default' | 'text' | 'primary' | 'success' | 'warning' | 'danger' | 'link'
   iconDirection?: 'left' | 'right'
   size?: 'small' | 'middle' |'large'
+  style?: React.CSSProperties
   children?: React.ReactNode
   onClick?: React.MouseEventHandler<HTMLElement>
 }
@@ -31,6 +32,7 @@ export const Button = (props: ButtonProps) => {
     bgcolor,
     color,
     className,
+    style,
     iconDirection = 'left',
     href = '',
     target = '_blank',
@@ -53,12 +55,6 @@ export const Button = (props: ButtonProps) => {
     className
   )
   
-  const style = {
-    backgroundColor: bgcolor,
-    borderColor: bgcolor,
-    color
-  }
-
   const isDisabled = disabled || loading
 
   const Icon = loading ? 'otaku-icon-loading' : icon
@@ -84,7 +80,12 @@ export const Button = (props: ButtonProps) => {
     <button
       {...rest}
       className={classes}
-      style={style}
+      style={{
+        backgroundColor: bgcolor,
+        borderColor: bgcolor,
+        color,
+        ...style
+      }}
       disabled={isDisabled}
       onClick={onClick}
     >

@@ -6,10 +6,11 @@ import { fromEvent } from 'rxjs'
 
 interface TeleportProps {
   className?: string
-  children: React.ReactNode
   visible?: boolean
   zIndex?: number
   mountNode?: HTMLBodyElement
+  fullScreen?: boolean
+  children: React.ReactNode
   visibleChange?: (show?: boolean) => void
   clickOutSide?: () => void
 }
@@ -30,6 +31,7 @@ export function Portal (props: TeleportProps) {
   const {
     children,
     className,
+    fullScreen,
     mountNode = document.querySelector('body') as HTMLBodyElement,
     zIndex = 2000,
     visible = false,
@@ -39,7 +41,8 @@ export function Portal (props: TeleportProps) {
 
   const boundary = (modal: HTMLDivElement, node: HTMLDivElement) => {
     if (node) {
-      const position = modal.children[1].getBoundingClientRect()
+      const renderIndex = modal.children.length > 1 ? 1 : 0
+      const position = modal.children[renderIndex].getBoundingClientRect()
 
       node.style.top = `${position.top}px`
       node.style.left = `${position.left}px`
@@ -82,7 +85,9 @@ export function Portal (props: TeleportProps) {
 
       if (el) {
         el.style.display = 'block'
-        boundary(modal, el)
+        if (!fullScreen) {
+          boundary(modal, el)
+        }
       }
     }
   }
@@ -99,7 +104,9 @@ export function Portal (props: TeleportProps) {
   const init = () => {
     const el: HTMLDivElement = mountContainer
     const modal = (container.current as HTMLDivElement).parentElement as HTMLDivElement
-    const position = modal.children[1].getBoundingClientRect()
+    console.log(modal)
+    const renderIndex = modal.children.length > 1 ? 1 : 0
+    const position = modal.children[renderIndex].getBoundingClientRect()
     const node = findNode(modal)
 
     if (!node) {
@@ -164,7 +171,11 @@ export function Portal (props: TeleportProps) {
       if (visible) {
         const modal = container.current?.parentElement as HTMLDivElement
         const node = findNode(modal)
-        if (node) boundary(modal, node)
+        if (node) {
+          if (!fullScreen) {
+            boundary(modal, node)
+          }
+        }
       }
     }
 

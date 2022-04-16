@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import classNames from 'classnames'
 import { Icon } from '../icon/icon'
-import './style.scss';
+import './style.scss'
 
-interface InputProps {
+export interface InputProps {
   value?: string
   placeholder?: string
   readonly?: boolean
@@ -11,17 +12,17 @@ interface InputProps {
   bgcolor?: string
   rows?: number
   cols?: number
-  beforeIcon?: React.ReactNode
-  beforeNode?: React.ReactNode
-  afterIcon?: React.ReactNode
   clear?: boolean
-  afterNode?: React.ReactNode
   showPassword?: boolean
   resize?: boolean
   className?: string
   style?: React.CSSProperties
   type?: 'text' | 'search' | 'password' | 'textarea'
   size?: 'small' | 'middle' | 'large'
+  beforeIcon?: React.ReactNode
+  beforeNode?: React.ReactNode
+  afterIcon?: React.ReactNode
+  afterNode?: React.ReactNode
   onChange?:(val: string) => void
   onInput?:(val: string) => void
   onFocus?:() => void
@@ -61,25 +62,21 @@ export function Input (props: InputProps) {
     rightClick
   } = props
 
-  const [
-    inputValue,
-    setInputValue
-  ] = useState('')
+  const [inputValue,setInputValue] = useState('')
+  const [inputType, setInputType] = useState(type)
   
   let [
     show,
     setShow
   ] = useState(showPassword)
 
-  useEffect(
-    () => {
-      if (value) {
-        setInputValue(value)
-        onChange?.(inputValue)
-      }
-    },
-    [value]
-  )
+  useEffect(() => {
+    // if (value) {
+    //   setInputValue(value)
+    // }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[value])
+    
 
   const change = (e: React.BaseSyntheticEvent) => {
     setInputValue(e.target.value)
@@ -98,12 +95,10 @@ export function Input (props: InputProps) {
                   beforeNode ? <div className="otaku-input-before">{beforeNode}</div> : ''
                 }
               <div
-                className={`
-                  otaku-input-container
-                  ${className ?? ''}
-                  ${afterNode ? 'otaku-input-after-border' : ''}
-                  ${disabled ? 'otaku-input-disabled' : ''}
-                `}
+                className={classNames('otaku-input-container', className, {
+                  'otaku-input-after-border': afterNode,
+                  'otaku-input-disabled': disabled
+                })}
                 style={{
                   borderWidth: border ? '1px' : '0px',
                   background: disabled ? '#f7f7f7' : bgcolor,
@@ -116,11 +111,12 @@ export function Input (props: InputProps) {
                     onClick={leftClick}></Icon> : beforeIcon
                   }
                   <input
-                    className={`
-                      otaku-input
-                    `}
+                    style={{
+                      background: bgcolor
+                    }}
+                    className="otaku-input"
                     placeholder={placeholder}
-                    type={type}
+                    type={inputType}
                     value={inputValue}
                     disabled={disabled}
                     readOnly={readonly}
@@ -132,27 +128,22 @@ export function Input (props: InputProps) {
                   {
                     type === 'password'
                       ? <span
-                      className={`
-                        otaku-input-icon-right 
-                        iconfont 
-                        show-password
-                        ${show ? 'otaku-icon-eye-line' : show === false ? 'otaku-icon-eye-off-line' : ''}
-                      `}
+                      className={
+                        classNames(
+                          'otaku-input-icon-right iconfont show-password', 
+                          show ? 'otaku-icon-eye-line' : show === false ? 'otaku-icon-eye-off-line' : ''
+                      )}
                       onClick={() => {
                         show = !show
                         setShow(show)
+                        show ? setInputType('text') : setInputType('password')
                       }}></span>
                       : ''
                   }
                   {
                     clear && inputValue.length !== 0
                       ? <span
-                      className={`
-                        otaku-input-icon-right 
-                        iconfont 
-                        close
-                        otaku-icon-close-circle-line
-                      `}
+                      className={classNames('otaku-input-icon-right iconfont close otaku-icon-close-circle-line')}
                       onClick={() => {
                         setInputValue('')
                         onClear?.()
@@ -172,17 +163,18 @@ export function Input (props: InputProps) {
               </div>
             )
           : (
-          <div className={`otaku-textarea-container ${className}`} style={{
-            borderWidth: border ? '1px' : '0px',
-            background: bgcolor,
-            ...style
-          }}>
+          <div 
+            className={classNames('otaku-textarea-container', className)} 
+            style={{
+              borderWidth: border ? '1px' : '0px',
+              background: bgcolor,
+              ...style
+            }}>
             <textarea
-              className={`
-                ${disabled ? 'otaku-input-disabled' : ''}
-                otaku-input-textarea
-                ${className}
-              `}
+              className={
+                classNames('otaku-input-textarea', {
+                  'otaku-input-disabled': disabled,
+                })}
               style={{
                 background: bgcolor,
                 resize: !resize ? 'none' : 'initial'

@@ -1,29 +1,40 @@
-import React, { useState } from 'react'
-import { Button } from '../button/button'
-import { Input } from '../input/input'
+import React, { useState, useEffect } from 'react'
+import classNames from 'classnames'
+import { Button, ButtonProps } from '../button/button'
+import { Input, InputProps } from '../input/input'
 import './style.scss'
 
-interface SearchProps {
+interface SearchProps extends InputProps {
   size: 'small' | 'middle' | 'large'
+  ButtonProps: ButtonProps
   children: React.ReactNode
 }
 
 export const Search = (props: SearchProps) => {
-  const [val, setVal] = useState('')
   const {
+    value,
     size = 'middle',
     children
   } = props
+  const [val, setVal] = useState(value)
+
+  useEffect(() => {
+    if (value) {
+      setVal(value)
+    }
+    
+  }, [value])
 
   return (
-    <div className={`otaku-search-container otaku-search-size-${size}`}>
+    <div className={classNames('otaku-search-container', `otaku-search-size-${size}`)}>
       <Input
         type="search"
         value={val}
-        size={size}
+        {...props}
         afterNode={
           <Button
-            size={size}>
+            size={size}
+            {...props.ButtonProps}>
             {children}
           </Button>
         }

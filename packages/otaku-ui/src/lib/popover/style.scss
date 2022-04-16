@@ -1,4 +1,6 @@
+@use 'sass:math';
 @import '../../style/var.scss';
+
 
 $arrowSize: 12px;
 
@@ -32,17 +34,17 @@ $arrowSize: 12px;
 }
 
 .otaku-popover-tooltip[data-popper-placement^="top"] > .otaku-popover-arrow {
-  bottom: -$arrowSize / 2;
+  bottom: math.div(-$arrowSize, 2);
 }
 
 .otaku-popover-tooltip[data-popper-placement^="bottom"] > .otaku-popover-arrow {
-  top: -$arrowSize / 2;
+  top:  math.div(-$arrowSize, 2);
 }
 
 .otaku-popover-tooltip[data-popper-placement^="left"] > .otaku-popover-arrow {
-  right: -$arrowSize / 2;
+  right:  math.div(-$arrowSize, 2);
 }
 
 .otaku-popover-tooltip[data-popper-placement^="right"] > .otaku-popover-arrow {
-  left: -$arrowSize / 2;
+  left:  math.div(-$arrowSize, 2);
 }
