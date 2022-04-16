@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "json5": "^2.2.0",
-    "typedoc": "^0.22.11"
+    "typedoc": "^0.22.11",
+    "typescript": "^4.7.0-dev.20220408"
   }
 }
