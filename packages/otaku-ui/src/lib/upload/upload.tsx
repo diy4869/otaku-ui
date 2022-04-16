@@ -6,7 +6,7 @@ import "./style.scss"
 interface UploadProps {
   action: string
   accept?: string
-  methods?: "get" | "post" | "put"
+  methods?: 'get' | 'post' | 'put'
   multiple?: boolean
   directory?: boolean
   drag?: boolean
@@ -15,7 +15,7 @@ interface UploadProps {
 }
 
 interface DragDirectory {
-  type: "file" | "directory"
+  type: 'file' | 'directory'
   name: string
   size: number
   files?: DragDirectory[]

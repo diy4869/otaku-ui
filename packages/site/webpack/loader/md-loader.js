@@ -137,13 +137,49 @@ module.exports = function mdLoader (source) {
 
 
             apiData.push({
-              name: json5.stringify(item.name),
-              data: json5.stringify(type.property)
+              name: item.name,
+              data: type.property
             })
-
           })
-          // console.log(interface)
 
+          const header = ['属性', '是否必填', '类型', '默认值', '描述']
+
+          const mdTableData = apiData.reduce((total, current) => {
+            const { data } = current
+
+            const table = [
+              header.join('|'),
+              new Array(5).fill('---').join('|'),
+              data.map(children => {
+                return [
+                  children.name,
+                  children.required ? '是' : '否',
+                  children.type,
+                  children.defaultValue
+                ].join('|')
+              }).join('\n')
+            ]
+
+            total.push(
+              table.join('\n')
+            )
+
+            return total
+          }, [])
+          
+
+          console.log(mdTableData)
+
+          // const demoMarkdown = new MarkdownIt({})
+
+          //   demoMarkdown.use(md => {
+              
+          //     md.block.ruler.before('table', 'my_rule', state => {
+          //       console.log(md)
+          //     })
+          //   })
+
+            // demoMarkdown.render(mdTableData.join(''))
           
           return `<>
             <Api 
@@ -277,7 +313,7 @@ ${injectCode}
             <div className='markdown-body'>${content}</div>
             ${
               data.anchor ? '' :  `
-              <Anchor>
+              <Anchor target=".main">
                 ${
                   anchor.reduce((str, item) => {
                     str += `<AnchorItem 

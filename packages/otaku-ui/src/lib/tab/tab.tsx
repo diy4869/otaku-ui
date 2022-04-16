@@ -7,7 +7,7 @@ interface TabProps {
   active: 0,
   center?: boolean
   children?: React.ReactElement[]
-  onChange: (val: {
+  onChange?: (val: {
     value: number | string
     index: number
   }) => void

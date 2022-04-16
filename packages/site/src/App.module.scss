@@ -67,6 +67,11 @@
       }
     }
   }
+
+}
+
+// md 内的样式
+:global {
   .main {
     grid-area: main;
     background: #f7f8fa;
@@ -79,10 +84,7 @@
     gap: 20px;
     padding: 20px;
   }
-}
-
-// md 内的样式
-:global {
+  
   .otaku-anchor {
     height: fit-content;
     padding: 12px;

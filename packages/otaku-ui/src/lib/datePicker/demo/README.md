@@ -25,7 +25,7 @@ ReactDOM.createRoot(container).render(<DatePicker></DatePicker>)
 
 ::: demo
 
-一个简单的日期选择器
+设置开始日期
 
 ```tsx
 ReactDOM.createRoot(container).render(<DatePicker firstWeek="一"></DatePicker>)
@@ -37,7 +37,7 @@ ReactDOM.createRoot(container).render(<DatePicker firstWeek="一"></DatePicker>)
 
 ::: demo
 
-一个简单的日期选择器
+设置农历
 
 ```tsx
 ReactDOM.createRoot(container).render(<DatePicker lunarDate={true}></DatePicker>)

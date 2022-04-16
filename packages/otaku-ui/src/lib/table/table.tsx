@@ -3,10 +3,9 @@ import { Checkbox } from '../checkbox/checkbox'
 import get from 'lodash/get'
 import './style.scss'
 
+
 interface renderArgs {
-  row: {
-    [key: string]: unknown
-  },
+  row: Record<string, unknown>,
   rowIndex: number
   columnIndex: number
 }
@@ -19,9 +18,7 @@ interface tableColumnOptions {
 }
 
 interface TableProps {
-  data: {
-    [key: string]: unknown
-  }[]
+  data: Record<string, unknown>[]
   children?: React.ReactNode
   multiple?: boolean
   border?: boolean

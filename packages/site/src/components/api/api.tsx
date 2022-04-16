@@ -10,16 +10,18 @@ interface ApiProps {
 
 interface ApiData {
   name: string
-  data: string
+  data: Record<string, unknown>[]
 }
 
 export function Api (props: ApiProps) {
 
   const { code, data } = props
 
-  const string = data.replace('(\\)\g' , '')
+  // const string = data.replace('(\\)\g' , '')
 
-  // const evalData: ApiData[] = json5.parse(string)
+  const evalData: ApiData[] = json5.parse(data)
+
+  console.log(evalData)
 
   const tableColumn = [
     {
@@ -56,20 +58,20 @@ export function Api (props: ApiProps) {
         <TabPane name='类型定义' id={0}>
           <HighlightCode lang={'ts'} code={code}></HighlightCode>
         </TabPane>
-        {/* <TabPane name='API' id={1}>
+        <TabPane name='API' id={1}>
           {
             evalData?.map(item => {
-              const tableData = eval(item.data)
+
 
               return (
                 <section>
                   <h2>{item.name}</h2>
-                  <Table data={tableData} tableColumn={tableColumn}></Table>
+                  <Table data={item.data} tableColumn={tableColumn}></Table>
                 </section>
               )
             })
           }
-        </TabPane> */}
+        </TabPane>
       </Tab>
     </aside>
   )

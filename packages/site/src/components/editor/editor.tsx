@@ -98,7 +98,7 @@ export const Editor = (props: EditorProps) => {
     const data = ts.transpileModule(code, base)
 
     console.log(data)
-    // setTransformCode(data.outputText)
+    setTransformCode(data.outputText)
   
 
     new ResizeObserver(() => {
@@ -139,17 +139,19 @@ export const Editor = (props: EditorProps) => {
 
 
   return  (
-    <>
-      <ErrorBoundary 
-        onReset={(...args) => {
-            console.log(123, args)
-            return <div></div>
-        }}
-        fallback={<div>异常</div>} 
-        resetKeys={[transformCode]}>
-        <Sandbox code={transformCode}></Sandbox>
-      </ErrorBoundary>
+    <div className='editor-container'>
+      <div className='editor-demo'>
+        <ErrorBoundary 
+          onReset={(...args) => {
+              console.log(123, args)
+              return <div></div>
+          }}
+          fallback={<div>异常</div>} 
+          resetKeys={[transformCode]}>
+          <Sandbox code={transformCode}></Sandbox>
+        </ErrorBoundary>
+      </div>
       <div className='Editor' ref={divEl}></div>
-    </>
+    </div>
   ) 
 }

@@ -7,7 +7,7 @@ import "./style.scss"
 
 interface DateTimePickerProps {
   date?: dayjs.ConfigType
-  firstWeek?: "日" | "一"
+  firstWeek?: '日' | '一'
   placeholder?: string
   format?: string
   disabled?: boolean
@@ -46,7 +46,6 @@ export function DatePicker(props: DateTimePickerProps) {
   }
 
   const changeDate = (type: "month" | "calendar", date: dayjs.ConfigType) => {
-    console.log(date)
     setSelectDate(dayjs(date))
     setShowPicker(type)
   }
