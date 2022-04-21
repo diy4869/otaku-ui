@@ -1,22 +1,6 @@
 {
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "resolveJsonModule": true,
-    "downlevelIteration":true,
-    "outDir": "./dist/docs",
-    "module": "esnext",
-    "target": "es2017",
-    "lib": ["esnext", "dom"],
-    "sourceMap": false,
-    "baseUrl": ".",
-    "jsx": "react",
-    "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "node",
-    "strict": false,
-    "noEmit": false,
-    "noEmitOnError": true,
-    "noEmitHelpers": false,
-    "skipLibCheck": false,
     "paths": {
       "@docs/": ["./docs"],
       "@/*": ["./src/*"],
@@ -24,9 +8,5 @@
       "otaku-ui": ["../otaku-ui/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "build",
-    "webpack"
-  ]
+  "exclude": ["node_modules"]
 }

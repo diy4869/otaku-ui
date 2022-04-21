@@ -13237,6 +13237,11 @@ typescript@^4.5.5:
   resolved "https://registry.npmmirror.com/typescript/-/typescript-4.5.5.tgz#d8c953832d28924a9e3d37c73d729c846c5896f3"
   integrity sha512-TCTIul70LyWe6IJWT8QSYeA54WQe8EjQFU4wY52Fasj5UKx88LNYKCgBEHcOMOrFF1rKGbD8v/xcNWVUq9SymA==
 
+typescript@^4.7.0-dev.20220408:
+  version "4.7.0-dev.20220408"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.0-dev.20220408.tgz#52a049ad6c3c78856935692c3fc69aec8a40ec6d"
+  integrity sha512-2KgXRQXrjFEbm+ismaGoR803nTRQuc03XQ1crnlxXvQYIXasPiidwiczLc9i0rTo33KXIN2M6YiNtn1tZihHgw==
+
 uc.micro@^1.0.1, uc.micro@^1.0.5:
   version "1.0.6"
   resolved "https://registry.npmjs.org/uc.micro/-/uc.micro-1.0.6.tgz"

@@ -12,10 +12,23 @@ export const styleToStr = (style: CSSProperties): string => {
   }, '')
 }
 
-export const findDataset = (element: HTMLElement, key: string) => {
-  if (element === null) return
+export const findDataset = (element: HTMLElement, key: string): HTMLElement | null => {
+  if (element === null) return null
   if (element.dataset[key]) return element
   
-  // debugger
-  return findDataset(element.parentElement, key)
+  return findDataset(element.parentElement as HTMLElement, key)
+}
+
+export const timeFormat = (time: number) => {
+  const day = time / 1000 / 86400 >> 0
+  const hour = time % 86400 / 3600 >> 0
+  const minute = time % 86400 % 3600 / 60 >> 0
+  const second = time % 86400 % 3600 % 60 >> 0
+
+  return {
+    day,
+    hour,
+    minute,
+    second
+  }
 }
