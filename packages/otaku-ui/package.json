@@ -1,6 +1,6 @@
 {
   "name": "otaku-ui",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "src/index.ts",
   "scripts": {
@@ -13,6 +13,10 @@
   },
   "author": "",
   "license": "ISC",
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
   "dependencies": {
     "@commitlint/cli": "^13.1.0",
     "@commitlint/config-conventional": "^13.1.0",
@@ -32,7 +36,8 @@
     "recoil": "^0.6.1",
     "rxjs": "^7.4.0",
     "standard-version": "^9.3.1",
-    "tippy.js": "^6.3.7"
+    "tippy.js": "^6.3.7",
+    "vanilla-lazyload": "^17.8.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.1.0",

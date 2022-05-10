@@ -4,7 +4,7 @@
 import * as ts  from 'typescript'
 import { ErrorBoundary } from 'react-error-boundary'
 import React, {useRef, useState, useEffect } from 'react'
-import { createSystem, createDefaultMapFromCDN, createVirtualCompilerHost } from '@typescript/vfs'
+import { createSystem, createDefaultMapFromCDN, createVirtualCompilerHost, createVirtualTypeScriptEnvironment } from '@typescript/vfs'
 import lzstring from 'lz-string'
 import { Sandbox } from '../sandbox/sandbox'
 import { setLocaleData } from 'monaco-editor-nls'
@@ -95,6 +95,7 @@ export const Editor = (props: EditorProps) => {
   }
 
   useEffect(() => {
+    
     const data = ts.transpileModule(code, base)
 
     console.log(data)
@@ -106,27 +107,33 @@ export const Editor = (props: EditorProps) => {
     }).observe(document.body)
 
     const getTypescriptCDN = async () => {
+      console.log(divEl)
       if (divEl.current) {
-        initEditor()
+        await initEditor()
 
-        
-        // const fsMap = await createDefaultMapFromCDN(compilerOptions, ts.version, false, ts, lzstring)
+        const fsMap = await createDefaultMapFromCDN(compilerOptions, ts.version, true, ts, lzstring)
   
-        // fsMap.set('index.tsx', code)
+        fsMap.set('index.tsx', code)
   
-        // const system = createSystem(fsMap)
-        // const host = createVirtualCompilerHost(system, compilerOptions, ts)
+        const system = createSystem(fsMap)
+        const host = createVirtualCompilerHost(system, compilerOptions, ts)
   
-        // const program = ts.createProgram({
-        //   rootNames: [...fsMap.keys()],
-        //   options: compilerOptions,
-        //   host: host.compilerHost
-        // })
-        
-        // env.languageService.getDocumentHighlights('index.tsx', 0, ['index.tsx'])
-  
-  
-     
+        const program = ts.createProgram({
+          rootNames: [...fsMap.keys()],
+          options: compilerOptions,
+          host: host.compilerHost
+        })
+
+        debugger
+        const env = createVirtualTypeScriptEnvironment(system, ["index.ts"], ts, compilerOptions)
+
+// Requests auto-completions at `path.|`
+      const completions = env.languageService.getCompletionsAtPosition("index.ts", code.length, {})
+        const typeChecker = program.getTypeChecker()
+        console.log(env, completions)
+        console.log('324', typeChecker)
+
+        program.emit()
       }
     }
 

@@ -75,7 +75,7 @@ export class Notice {
 let instance: Notice | null = null
 
 type message = {
-  [K in MessageType]?: (message: React.ReactNode, time: number) => void
+  [K in MessageType]?: (message: React.ReactNode, time?: number) => void
 }
 
 const type = ['info', 'success', 'warning', 'error']

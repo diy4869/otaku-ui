@@ -143,11 +143,11 @@ export default [
         path: "/form/upload",
         component: lazy(() => import('otaku-ui/src/lib/upload/demo/README.md'))
       },
-      // {
-      //   title: "form 表单",
-      //   path: "/form/form",
-      //   component: lazy(() => import('otaku-ui/src/lib/form/demo/README.md'))
-      // }
+      {
+        title: "form 表单",
+        path: "/form/form",
+        component: lazy(() => import('otaku-ui/src/lib/form/demo/README.md'))
+      }
     ]
   },
   {

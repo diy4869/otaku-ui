@@ -22,13 +22,13 @@ export function Anchor (props: AnchorProps) {
   const { target = document.body, active, children } = props
   const [current, setCurrent] = useState(active)
 
-  console.log(children)
-
   const getScroll = (target: string | HTMLElement): HTMLElement => {
     if (typeof target === 'string') {
-      return document.querySelector(target)
+      const el = document.querySelector(target)
+
+      if (el) return el as HTMLElement
     }
-    return target
+    return target as HTMLElement
   }
 
   useLayoutEffect(() => {

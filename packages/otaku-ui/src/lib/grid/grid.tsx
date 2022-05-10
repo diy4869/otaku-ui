@@ -13,7 +13,8 @@ interface GridProps {
 
 interface GridItemProps {
   className?: string
-  children?: React.ReactNode[]
+  children?: React.ReactNode
+  onClick?: () => void
 }
 
 export function Grid (props: GridProps) {
@@ -38,7 +39,7 @@ export function Grid (props: GridProps) {
 }
 
 export function GridItem (props: GridItemProps) {
-  const { children, className } = props
+  const { children, className, onClick } = props
 
-  return <li className={`otaku-grid-item ${className ?? ''}`}>{children}</li>
+  return <li className={`otaku-grid-item ${className ?? ''}`} onClick={onClick}>{children}</li>
 }

@@ -4,7 +4,7 @@ import { findDataset } from '../../utils/index'
 import './style.scss'
 
 interface TabProps {
-  active: 0,
+  active: number,
   center?: boolean
   children?: React.ReactElement[]
   onChange?: (val: {

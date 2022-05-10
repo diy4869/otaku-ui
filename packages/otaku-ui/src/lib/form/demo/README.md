@@ -1,6 +1,6 @@
 ---
 import: 
-  import { useState, useRef } from 'react';
+  import { useState, useRef, createRef } from 'react';
   import { Form, FormItem, Button, Input, DatePicker, FormValidate } from 'otaku-ui';
 ---
 
@@ -10,6 +10,7 @@ import:
 
 ```tsx
 function Example() {
+  const ref = createRef(null)
   let formValidate
 
   const form = useRef(null)
@@ -30,7 +31,8 @@ function Example() {
     }
   }
 
-  const submit = () => {
+  const submit = (e) => {
+    e.preventDefault()
     formValidate.validate().then(res => {
       console.log('成功')
     })
@@ -40,10 +42,11 @@ function Example() {
     <Form
       rules={rules}
       model={model}
+      ref={ref}
       getFormInstance={(instance) => {
         formValidate = instance
       }}>
-      <FormItem label='输入框' name="input" required>
+      <FormItem label='输入框' field="input" required>
         <Input placeholder='输入点什么吧' onChange={(val) => {
           setModel({
             ...model,
@@ -51,7 +54,7 @@ function Example() {
           })
         }}></Input>
       </FormItem>
-      <FormItem label='输入框2' name="input2" required>
+      <FormItem label='输入框2' field="input2" required>
         <Input
           placeholder='输入点什么吧'
           onChange={val => {

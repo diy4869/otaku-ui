@@ -11,10 +11,11 @@ interface AvatarProps {
   src?: string
   alt?: string
   className?: string
+  onClick?: () => void
 }
 
 export function Avatar (props: AvatarProps) {
-  const { src, className, alt, size = 40 } = props
+  const { src, className, alt, size = 40, onClick } = props
   const [URL, setURL] = useState(src)
 
   const error = () => {
@@ -23,8 +24,9 @@ export function Avatar (props: AvatarProps) {
   }
 
   useEffect(() => {
-    setURL(URL)
-  }, [URL])
+    console.log(src)
+    setURL(src)
+  }, [src])
 
   return (
     <div
@@ -32,7 +34,8 @@ export function Avatar (props: AvatarProps) {
       style={{
         width: `${size}px`,
         height: `${size}px`
-      }}>
+      }}
+      onClick={onClick}>
       <img src={URL} alt={alt} onError={error}/>
     </div>
   )

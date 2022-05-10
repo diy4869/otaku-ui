@@ -1,13 +1,14 @@
 import React from 'react'
 import { Rules } from 'async-validator'
 import FormValidate from './store'
+// import { Space } from '../space/space'
 import './style.scss'
 
 export interface BaseForm {
   labelAlign?: 'left' | 'right'
   requiredAlign?: 'left' | 'right'
   model?: {
-    [key: string]: unknown
+    [key: string | number]: unknown
   }
   labelWidth?: string
   disabled?: boolean
@@ -19,13 +20,15 @@ export const FormContext = React.createContext<BaseForm | null>(null)
 export const formValidate = new FormValidate()
 
 export interface FormProps extends BaseForm {
-  children: React.ReactNode[]
+  children?: React.ReactNode[]
   onSubmit?: () => void
   onValidate?: () => void
   getFormInstance?: (instance: FormValidate) => void
 }
 
-export function Form (props: FormProps) {
+export const Form = React.forwardRef((props: FormProps, ref) => {
+
+  console.log('ref', ref)
   const {
     model = {},
     rules = {},
@@ -65,8 +68,7 @@ export function Form (props: FormProps) {
       </form>
     </FormContext.Provider>
   )
-}
+})
 
-export {
-  FormValidate
-}
+Form.displayName = 'Form'
+

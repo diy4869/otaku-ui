@@ -44,3 +44,7 @@ export * from './lib/anchor/anchor'
 export * from './lib/link/link'
 export * from './lib/drawer/drawer'
 export * from './lib/time/time'
+
+export * from './lib/dialog/dialog'
+
+export * from './lib/image/image'

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { usePagination } from '../../hooks/index'
 import type { usePaginationProps } from '../../hooks/index'
 import './style.scss'
@@ -18,7 +18,7 @@ export function Pagination (props: PaginationProps) {
     pageChange
   } = props
 
-  let [page, setPage] = useState(current)
+  const [page, setPage] = useState(current)
   const { pagination, maxPage, showPrevMore, showNextMore } = usePagination({
     current: page,
     total,
@@ -26,17 +26,17 @@ export function Pagination (props: PaginationProps) {
     slicePage
   })
   
-  // useEffect(() => {
-
-  // }, [page])
+  useEffect(() => {
+    setPage(page)
+  }, [page])
 
   const change = (direction?: 'left' | 'right' | 'center', current?: number) => {
     switch (direction) {
       case 'left':
-        page > 1 ? setPage(--page) : setPage(1)
+        page > 1 ? setPage(page - 1) : setPage(1)
         break
       case 'right':
-        page < maxPage ? setPage(++page) : setPage(maxPage)
+        page < maxPage ? setPage(page + 1) : setPage(maxPage)
         break
       default:
         setPage(current as number)

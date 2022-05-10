@@ -1,3 +1,5 @@
+@import '../../style/var.scss';
+
 $activeColor: #FF6B6B;
 
 .otaku-comment {
@@ -8,11 +10,14 @@ $activeColor: #FF6B6B;
     margin-left: 10px;
     .otaku-comment-time {
       color: #999;
+      font-size: 12px;
+      margin-top: 5px;
     }
     .otaku-comment-content {
       color: #333;
-      // font-size: 13px;
+      font-size: 13px;
       font-weight: 500;
+      line-height: 24px;
       margin-top: 5px;
     }
     .otaku-comment-actions {
@@ -34,6 +39,6 @@ $activeColor: #FF6B6B;
     }
   }
   .otaku-comment-reply {
-    color: #3064FF;
+    color: $primaryColor;
   }
 }

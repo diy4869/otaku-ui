@@ -4,7 +4,7 @@ import { Icon } from '../icon/icon'
 import './style.scss'
 
 export interface InputProps {
-  value?: string
+  value?: string | number
   placeholder?: string
   readonly?: boolean
   disabled?: boolean
@@ -30,6 +30,7 @@ export interface InputProps {
   onClear?: () => void
   leftClick?:() => void
   rightClick?:() => void
+  onEnter?:(e: React.BaseSyntheticEvent) => void
 }
 
 export function Input (props: InputProps) {
@@ -57,12 +58,13 @@ export function Input (props: InputProps) {
     onFocus,
     onChange,
     onInput,
+    onEnter,
     onClear,
     leftClick,
     rightClick
   } = props
 
-  const [inputValue,setInputValue] = useState('')
+  const [inputValue,setInputValue] = useState(value)
   const [inputType, setInputType] = useState(type)
   
   let [
@@ -71,17 +73,15 @@ export function Input (props: InputProps) {
   ] = useState(showPassword)
 
   useEffect(() => {
-    // if (value) {
-    //   setInputValue(value)
-    // }
+    setInputValue(value)
   // eslint-disable-next-line react-hooks/exhaustive-deps
   },[value])
     
 
   const change = (e: React.BaseSyntheticEvent) => {
     setInputValue(e.target.value)
-    onChange?.(inputValue)
-    onInput?.(inputValue)
+    onChange?.(e.target.value)
+    onInput?.(e.target.value)
   }
 
   return (
@@ -124,6 +124,12 @@ export function Input (props: InputProps) {
                     onInput={change}
                     onBlur={onBlur}
                     onFocus={onFocus}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
+                      console.log(e)
+                      if (e.code === 'Enter') {
+                        onEnter?.(e)
+                      }
+                    }}
                   ></input>
                   {
                     type === 'password'
@@ -141,7 +147,7 @@ export function Input (props: InputProps) {
                       : ''
                   }
                   {
-                    clear && inputValue.length !== 0
+                    clear && inputValue?.length !== 0
                       ? <span
                       className={classNames('otaku-input-icon-right iconfont close otaku-icon-close-circle-line')}
                       onClick={() => {

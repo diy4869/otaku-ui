@@ -268,7 +268,15 @@ ${injectCode}
               desc={\`${current.desc}\`}
               lang={\`${current?.lang}\`}
               example={${current.example}}
-              code={\`${[data.import.split(';').join('\n'), current.code].join('\n\n')}\`}
+              code={\`${
+                  [
+                    [
+                      // `import React from 'react'`, 
+                      // `import ReactDOM from 'react-dom/client'`, 
+                      data.import.split(';')
+                    ].join('\n'), 
+                    current.code
+                  ].join('\n\n')}\`}
               style={{
                 lang: \`${current.style.lang}\`,
                 code: \`${current.style.code}\`

@@ -84,7 +84,7 @@ const run = (filePath, fileMap) => {
          */ 
 
         if (node.exportClause) {
-          node.exportClause.elements.reduce((obj, current) => {
+          node.exportClause.elements?.reduce((obj, current) => {
             obj[current.name.escapedText] = {
               type: undefined
             }
@@ -217,7 +217,7 @@ const run = (filePath, fileMap) => {
           export: isExport(node),
           exportDefault: isExportDefault(node),
           code: content.substring(node.pos, node.end).trimStart(),
-          typeReference: node.type.types.reduce((arr, current) => {
+          typeReference: node.type?.types?.reduce((arr, current) => {
             if (current.kind === 197) {
               current.templateSpans.forEach(children => {
                 if (children.type.kind === 177) {

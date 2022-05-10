@@ -56,7 +56,7 @@ export function CodeExample (props: Example) {
           }}
         ></div>
         <div className='otaku-example'>{example}</div>
-        <Tab active={undefined} center onChange={(data) => {
+        <Tab active={currentIndex} center onChange={(data) => {
           const { index } = data
 
           if (index === 1) {
