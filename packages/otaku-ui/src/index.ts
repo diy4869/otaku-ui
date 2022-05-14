@@ -48,3 +48,4 @@ export * from './lib/time/time'
 export * from './lib/dialog/dialog'
 
 export * from './lib/image/image'
+export * from './lib/tree/tree'

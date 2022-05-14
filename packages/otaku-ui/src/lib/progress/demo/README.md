@@ -100,7 +100,7 @@ function Demo () {
       <InputNumber value={progress} step={10} onChange={val => {
         setProgress(val)
       }}></InputNumber>
-      <Grid class="demo-progress">
+      <Grid className="demo-progress">
         <GridItem>
           <Progress percentage={progress}  type="circle"></Progress>
         </GridItem>

@@ -29,7 +29,7 @@ function Demo () {
       {
         arr.map((row, index) => {
           return (
-            <li index={index} class="row">
+            <li index={index} className="row">
                 {
                   row.map((column, columnIndex) => {
                     if (index > 0 && index < 4 && ![0, 2].includes(columnIndex)) {
@@ -65,11 +65,11 @@ ReactDOM.createRoot(container).render(<Demo/>)
 .demo-tooltip .row {
   display: grid;
   grid-gap: var(--gap);
-  grid-template-columns: repeat(3, 105px);
+  grid-template-columns: repeat(3,150px);
 }
 
 .demo-tooltip .otaku-button {
-  width: 105px;
+  width: 150px;
 }
 ```
 :::

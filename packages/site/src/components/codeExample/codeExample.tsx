@@ -13,7 +13,7 @@ interface Example extends HighlightCodeProps {
     lang: string
     code: string
   }
-  example: React.ReactChildren
+  example: React.ReactNode
 }
 
 
@@ -63,7 +63,7 @@ export function CodeExample (props: Example) {
             message.success('复制成功', 1000)
           }
         }}>
-          <TabPane 
+          {/* <TabPane 
             id={0}
             name={
              <Tooltip content='编辑'>
@@ -71,7 +71,7 @@ export function CodeExample (props: Example) {
             </Tooltip>
             }>
             <Editor code={code} lang={lang}></Editor>
-          </TabPane>
+          </TabPane> */}
           <TabPane 
             id={1}
             name={

@@ -1,3 +1,5 @@
+@import '~/style/theme.scss';
+
 .otaku-home {
   min-width: 1000px;
   height: 100%;
@@ -63,7 +65,7 @@
         }
       }
       .active {
-        color: #3064FF;
+        color: var(--primaryColor);
       }
     }
   }

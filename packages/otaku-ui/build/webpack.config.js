@@ -130,8 +130,8 @@ module.exports = {
     ]
   },
   externals: {
-    react: 'react',
-    'react-dom': 'ReactDOM'
+    React: 'react',
+    ReactDOM: 'react-dom/client'
   },
   resolve: {
     alias: {

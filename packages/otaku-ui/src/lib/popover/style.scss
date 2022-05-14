@@ -10,7 +10,7 @@ $arrowSize: 12px;
   .otaku-popover-tooltip {
     background: white;
     padding: 10px;
-    border-radius: $radius;
+    border-radius: var(--radius);
     box-shadow: 0 2px 20px 0 rgba(0, 35, 144, 10%);
   }
 }

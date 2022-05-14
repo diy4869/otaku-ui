@@ -18,7 +18,7 @@ function Demo () {
   const type = ['info', 'success', 'warning', 'error']
 
   return (
-    <ul class="alert-demo-container">
+    <ul className="alert-demo-container">
         {
           type.map((item, index) => {
             return (

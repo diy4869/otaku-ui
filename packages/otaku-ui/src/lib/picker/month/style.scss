@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     color: #595959;
-    border-radius: $radius;
+    border-radius: var(--radius);
     cursor: pointer;
   }
   .otaku-month-item-active {

@@ -159,6 +159,11 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/avatar/demo/README.md'))
       },
       {
+        title: "tree 树",
+        path: "/display/tree",
+        component: lazy(() => import('otaku-ui/src/lib/tree/demo/README.md'))
+      },
+      {
         title: "table 表格",
         path: "/display/table",
         component: lazy(() => import('otaku-ui/src/lib/table/demo/README.md'))

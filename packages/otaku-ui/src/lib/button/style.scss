@@ -3,7 +3,7 @@
 .otaku-button {
   border: none;
   background: white;
-  border-radius: $radius;
+  border-radius: var(--radius);
   // font-size: 12px;
   box-sizing: border-box;
   padding: 0;

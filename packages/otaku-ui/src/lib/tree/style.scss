@@ -1,0 +1,13 @@
+.otaku-tree {
+  margin-left: 20px;
+  box-sizing: border-box;
+
+  &-node {
+    padding: 3px 0;
+    section {
+      display: flex;
+      font-size: 14px;
+    }
+    
+  }
+}

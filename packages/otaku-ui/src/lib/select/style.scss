@@ -8,10 +8,10 @@
 .otaku-select {
   width: 240px;
   height: 208px;
-  box-shadow: $shadow;
+  box-shadow: var(--shadow);
   // border: 1px solid #d9d9d9;
   background: white;
-  border-radius: $radius;
+  border-radius: var(--radius);
   margin-top: 4px;
   overflow: auto;
   // position: absolute;

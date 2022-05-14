@@ -77,7 +77,3 @@ ReactDOM.createRoot(container).render(<Example/>)
 ```
 :::
 
-## api
-
-::: api
-:::

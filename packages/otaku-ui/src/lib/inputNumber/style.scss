@@ -2,7 +2,7 @@
 
 .otaku-input-number-box {
   border: 1px solid #E5E5E5;
-  border-radius: $radius;
+  border-radius: var(--radius);
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 88px 32px;
@@ -26,7 +26,7 @@
   }
   .otaku-input-number-direction {
     background: white;
-    border-radius: 0 $radius $radius 0;
+    border-radius: 0 var(--radius) var(--radius) 0;
     border-left: 1px solid #E5E5E5;
     li {
       height: 16px;

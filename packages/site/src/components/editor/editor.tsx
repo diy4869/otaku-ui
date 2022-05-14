@@ -124,7 +124,6 @@ export const Editor = (props: EditorProps) => {
           host: host.compilerHost
         })
 
-        debugger
         const env = createVirtualTypeScriptEnvironment(system, ["index.ts"], ts, compilerOptions)
 
 // Requests auto-completions at `path.|`

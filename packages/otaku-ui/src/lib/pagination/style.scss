@@ -15,7 +15,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: $radius;
+    border-radius: var(--radius);
     box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
     cursor: pointer;
     // position: relative;

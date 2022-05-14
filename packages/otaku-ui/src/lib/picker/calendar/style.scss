@@ -29,7 +29,7 @@ $grid-gap: 5px 10px;
       display: grid;
       justify-items: center;
       align-items: center;
-      border-radius: $radius;
+      border-radius: var(--radius);
       box-sizing: border-box;
       color: #BFBFBF;
       font-size: 12px;

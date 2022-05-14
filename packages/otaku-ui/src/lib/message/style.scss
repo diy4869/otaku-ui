@@ -2,8 +2,8 @@
 
 .otaku-message {
   background: white;
-  border-radius: $radius;
-  box-shadow: $shadow;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   padding: 10px;
   cursor: pointer;
 

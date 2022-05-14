@@ -4,7 +4,7 @@ import { Icon } from '../icon/icon'
 import './style.scss'
 
 export interface InputProps {
-  value?: string | number
+  value?: string
   placeholder?: string
   readonly?: boolean
   disabled?: boolean
@@ -51,7 +51,7 @@ export function Input (props: InputProps) {
     resize = true,
     showPassword = false,
     type = 'text',
-    bgcolor = 'white',
+    bgcolor,
     border = true,
     size = 'middle',
     onBlur,
