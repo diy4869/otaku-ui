@@ -4,10 +4,30 @@
 
   &-node {
     padding: 3px 0;
-    section {
-      display: flex;
-      font-size: 14px;
-    }
-    
+    font-size: 14px;    
+  }
+  &-arrow {
+    color: #c8c8c8;
+    font-size: 14px;
+    transition: transform 0.1s;
+  }
+  &-arrow-rotate {
+    display: inline-block;
+    transform: rotate(90deg);
+  }
+  &-loading {
+    display: inline-block;
+    color: #c8c8c8;
+    font-size: 12px;
+    animation: rotate 0.8s infinite linear;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

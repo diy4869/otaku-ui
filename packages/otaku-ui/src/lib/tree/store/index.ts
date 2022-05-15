@@ -1,7 +1,7 @@
 import { TreeOptions } from "../tree"
 import { Node } from "./node"
 
-export class Store<T extends Record<string, unknown>[]> {
+export class Store<T extends Record<string, unknown>[] = []> {
   options: TreeOptions
   data: T
 
@@ -17,6 +17,7 @@ export class Store<T extends Record<string, unknown>[]> {
       const node: Node = new Node({
           id: item[id] as string | number,
           name: item[name]  as string,
+          treeOptions: this.options,
           data: item,
           depth,
           parent: parent,

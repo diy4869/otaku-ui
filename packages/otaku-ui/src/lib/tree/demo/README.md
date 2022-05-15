@@ -7,10 +7,64 @@ api:
   }
 ---
 
-## Tree 树
+## 异步加载的树
 
 ::: demo
 234
+
+```tsx
+function Example () {
+  const treeData = [
+    {
+      title: '0',
+      key: '0',
+    },
+    {
+      title: '1',
+      key: '1',
+    },
+    {
+      title: '2',
+      key: '2',
+    },
+  ];
+
+  const load = (node, resolve, reject) => {
+    console.log(node)
+    setTimeout(() => {
+      console.log(1)
+      const data = new Array(3).fill(undefined).map((item, index) => {
+        return {
+          key: `${node.name}-${index}`,
+          title: `${node.name}-${index}`,
+        }
+      })
+
+      console.log(data)
+      resolve(data)
+    }, 1000)
+  }
+
+  return (
+    <Tree 
+      options={{
+        id: 'key',
+        name: 'title',
+        children: 'children'
+      }}
+      data={treeData}
+      loadTree={load}/>
+  )
+}
+
+
+ReactDOM.createRoot(container).render(<Example/>)
+```
+:::
+
+## Tree 树
+
+::: demo
 
 ```tsx
 

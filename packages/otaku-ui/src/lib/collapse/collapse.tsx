@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useLayoutEffect } from 'react'
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react'
 import './style.scss'
 
 interface CollapseProps {
@@ -17,14 +17,16 @@ export function Collapse (props: CollapseProps) {
   const run = (init = false) => {
     if (container.current) {
       // transform: scaleY(${collapse ? 1 : 0});
+      // 
       container.current.style.cssText = `
-        height: ${collapse ? height : 0}px;
+        height: ${collapse ? 'auto' : '0px'};
         transition: all linear ${init ? '0s' : '0.2s'};
       `
     }
   }
   useLayoutEffect(() => {
     Promise.resolve().then(() => {
+      // const rect = container.current?.getBoundingClientRect()
       const h = container.current?.offsetHeight as number
       setHeight(h)
       run(true)
@@ -32,7 +34,7 @@ export function Collapse (props: CollapseProps) {
     })
   }, [])
 
-  useMemo(() => {
+  useEffect(() => {
     run()
   }, [collapse])
 
