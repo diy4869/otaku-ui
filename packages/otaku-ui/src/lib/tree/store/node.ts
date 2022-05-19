@@ -58,7 +58,7 @@ export class Node {
   }
 
   hasChecked (node: Node) {
-    if (!node?.children && node.checked !== false) return true
+    if (node?.children?.length === 0 && node.checked !== false) return true
     return node.children?.length !== 0 && node.children?.every((item: Node) => item.checked)
   }
 
@@ -70,14 +70,13 @@ export class Node {
     if (checked === false) {
       this.indeterminate = false
     }
-    this.checked = checked
 
-    console.log(this,checked)
+    this.checked = checked
     
     // 自上向下
     const currentToBottom = (node: Node, checked: boolean) => {
       node.children?.forEach(item => {
-        if (Array(item.children)) {
+        if (Array.isArray(item.children)) {
           currentToBottom(item, checked)
         }
         if (checked === false) {
@@ -112,10 +111,14 @@ export class Node {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   load (fn: (resolve: (res: any) => void, reject:  (err: any) => void) => void) {
     this.loading = true
+    // debugger
+    console.log('before loading', this)
     return new Promise<Record<string, unknown>[]>(fn).then((res) => {
+      console.log('after1 loading', this)
       if (!this.loaded) {
-        this.insert(res)
+        this.setChildren(res)
       }
+      console.log('after2 loading', this)
       if (this.checked) {
         this.setChecked(true)
       }
@@ -126,25 +129,35 @@ export class Node {
     })
   }
 
-  insert (data: Record<string, unknown>[]) {
-    const { id, name, children = 'children' } = this.treeOptions
+  private create (
+    id: string | number, 
+    name: string, data: Record<string, unknown>, 
+    children: Node[] = [],
+    parent: Node | null = null,
+    depth = 1
+  ) {
+    return new Node({
+      id,
+      name,
+      treeOptions: this.treeOptions,
+      data,
+      depth,
+      parent,
+      checked: false,
+      indeterminate: false,
+      collapse: false,
+      loading: false,
+      children
+    })
+  }
+
+  setChildren (data: Record<string, unknown>[]) {
+    const { id = 'id', name = 'name', children = 'children' } = this.treeOptions
 
     const dfs = (data: Record<string, unknown>[], depth: number, parent: Node) => {
       if (!data) return []
       const result = data.map((item) => {
-        const node: Node = new Node({
-          id: item[id] as string | number,
-          name: item[name]  as string,
-          treeOptions: this.treeOptions,
-          data: item,
-          depth,
-          parent,
-          checked: false,
-          indeterminate: false,
-          collapse: false,
-          loading: false,
-          children: []
-        })
+        const node: Node = this.create(item[id] as number | string, item[name] as string, item, [], parent, depth)
   
         node.children = Array.isArray(item[children]) 
           ? dfs(item[children] as Record<string, unknown>[], depth + 1, node) 
@@ -160,6 +173,16 @@ export class Node {
     this.children = this.children 
       ? this.children.concat(dfs(data, this.depth + 1, this)) 
       : dfs(data, this.depth + 1, this)
+  }
+
+  // 追加节点
+  append () {
+    console.log('append')
+  }
+
+  // 删除节点
+  remove () {
+    console.log('remove')
   }
 }
 

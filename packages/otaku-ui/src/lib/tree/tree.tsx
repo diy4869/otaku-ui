@@ -84,7 +84,7 @@ export function Tree (props: TreeProps) {
                       node.setChecked(e?.target.checked)
                       setTree([...tree])
                     }}></Checkbox>
-                  <span>{node.name}</span>
+                  <span>{node.name} --- loading: {'' + node.loading} --- loaded: {'' + node.loaded}</span>
                 </Space>
                 
                 {/* <span>depth: {node.depth}</span> */}

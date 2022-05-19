@@ -30,7 +30,6 @@ export function Collapse (props: CollapseProps) {
       const h = container.current?.offsetHeight as number
       setHeight(h)
       run(true)
-      console.log(h)
     })
   }, [])
 
