@@ -30,15 +30,17 @@ function Example () {
   ];
 
   const load = (node, resolve, reject) => {
-      const data = new Array(3).fill(undefined).map((item, index) => {
+    setTimeout(() => {
+       const data = new Array(3).fill(undefined).map((item, index) => {
         return {
           key: node.name + '-' + index,
           title: node.name + '-' + index,
         }
       })
 
-      console.log(data)
       resolve(data)
+    }, 1000)
+
   }
 
   return (

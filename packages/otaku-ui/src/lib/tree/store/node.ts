@@ -5,11 +5,12 @@ interface NodeOptions {
   name: string
   treeOptions: TreeOptions
   data: Record<string, unknown>
-  depth: number
-  checked: boolean
-  indeterminate: boolean
-  collapse: boolean
-  loading: boolean
+  depth?: number
+  checked?: boolean
+  indeterminate?: boolean
+  collapse?: boolean
+  loading?: boolean
+  async?: boolean
   parent: Node | null
   children: Node[] | null
 }
@@ -27,6 +28,7 @@ export class Node {
   parent: Node | null
   children: Node[] | null
   loaded: boolean
+  async?: boolean
   
   constructor (options: NodeOptions) {
     const { 
@@ -34,13 +36,14 @@ export class Node {
       name,
       treeOptions,
       data,
-      depth, 
-      parent, 
-      checked, 
-      indeterminate, 
-      collapse, 
-      loading, 
-      children 
+      parent,
+      children,
+      depth = 1,
+      checked = false, 
+      indeterminate = false, 
+      collapse = false, 
+      loading = false,
+      async = false
     } = options
 
     this.id = id
@@ -55,6 +58,7 @@ export class Node {
     this.collapse = collapse
     this.loading = loading
     this.loaded = false
+    this.async = async
   }
 
   hasChecked (node: Node) {
@@ -108,17 +112,18 @@ export class Node {
     this.collapse = collapse
   }
 
+  setLoading (loading: boolean) {
+    this.loading = loading
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   load (fn: (resolve: (res: any) => void, reject:  (err: any) => void) => void) {
     this.loading = true
-    // debugger
-    console.log('before loading', this)
     return new Promise<Record<string, unknown>[]>(fn).then((res) => {
-      console.log('after1 loading', this)
       if (!this.loaded) {
         this.setChildren(res)
       }
-      console.log('after2 loading', this)
+
       if (this.checked) {
         this.setChecked(true)
       }
@@ -129,7 +134,7 @@ export class Node {
     })
   }
 
-  private create (
+  private createNode (
     id: string | number, 
     name: string, data: Record<string, unknown>, 
     children: Node[] = [],
@@ -157,7 +162,7 @@ export class Node {
     const dfs = (data: Record<string, unknown>[], depth: number, parent: Node) => {
       if (!data) return []
       const result = data.map((item) => {
-        const node: Node = this.create(item[id] as number | string, item[name] as string, item, [], parent, depth)
+        const node: Node = this.createNode(item[id] as number | string, item[name] as string, item, [], parent, depth)
   
         node.children = Array.isArray(item[children]) 
           ? dfs(item[children] as Record<string, unknown>[], depth + 1, node) 

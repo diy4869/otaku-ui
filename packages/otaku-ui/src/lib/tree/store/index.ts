@@ -1,30 +1,39 @@
-import { TreeOptions } from "../tree"
+import type { TreeOptions } from "../tree"
 import { Node } from "./node"
+// import { flattern } from '../../../utils'
 
+interface StoreOptions {
+  treeOptions: TreeOptions
+  async?: boolean
+}
 export class Store<T extends Record<string, unknown>[] = []> {
-  options: TreeOptions
+  treeOptions: TreeOptions
   data: T
+  async: boolean
 
-  constructor (data: T, options: TreeOptions) {
+  constructor (data: T, options: StoreOptions) {
+    const {
+      treeOptions,
+      async = false
+    } = options
+
+    this.async = async
     this.data = data
-    this.options = options
+    this.treeOptions = treeOptions
   }
   
   createTree (data: T, depth = 1, parent: Node | null = null) {
-    const { id, name, children = 'children' } = this.options
+    const { id, name, children = 'children' } = this.treeOptions
 
     const result = data.map((item) => {
       const node: Node = new Node({
           id: item[id] as string | number,
           name: item[name]  as string,
-          treeOptions: this.options,
+          treeOptions: this.treeOptions,
           data: item,
+          async: this.async,
           depth,
-          parent: parent,
-          checked: false,
-          indeterminate: false,
-          collapse: false,
-          loading: false,
+          parent,
           children: []
         })
 
