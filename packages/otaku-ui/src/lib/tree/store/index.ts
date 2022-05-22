@@ -5,20 +5,25 @@ import { Node } from "./node"
 interface StoreOptions {
   treeOptions: TreeOptions
   async?: boolean
+  accordion?: boolean
 }
+
 export class Store<T extends Record<string, unknown>[] = []> {
   treeOptions: TreeOptions
   data: T
   async: boolean
+  accordion: boolean
 
   constructor (data: T, options: StoreOptions) {
     const {
       treeOptions,
+      accordion = false,
       async = false
     } = options
 
     this.async = async
     this.data = data
+    this.accordion = accordion
     this.treeOptions = treeOptions
   }
   
@@ -34,6 +39,7 @@ export class Store<T extends Record<string, unknown>[] = []> {
           async: this.async,
           depth,
           parent,
+          accordion: this.accordion,
           children: []
         })
 

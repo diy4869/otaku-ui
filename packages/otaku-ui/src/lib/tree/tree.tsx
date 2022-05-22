@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import classNames from 'classnames'
 import { Icon } from '../icon/icon'
 import { Checkbox } from '../checkbox'
-import { Collapse } from '../collapse/collapse'
+// import { Collapse } from '../collapse/collapse'
 import { Store } from './store'
 import { Node } from './store/node'
 import { Space } from '../space/space'
@@ -17,8 +17,9 @@ export interface TreeOptions {
 }
 
 export interface TreeProps {
-  data: Record<string, unknown>[]
-  options: TreeOptions
+  data?: Record<string, unknown>[]
+  options?: TreeOptions
+  accordion?: boolean
   loadTree?: (node?: Node, resolve?: (res?: unknown) => void, reject?: (err?: unknown) => void) => void
 }
 
@@ -29,13 +30,15 @@ export function Tree (props: TreeProps) {
       name: 'name',
       children: 'children'
     },
-    data,
+    data = [],
+    accordion = true,
     loadTree
   } = props
   const async = typeof loadTree === 'function'
   const store = new Store(data, {
     treeOptions: options,
-    async
+    async,
+    accordion
   })
   const [tree, setTree] = useState(store.createTree(data))
   const [flatternTree, setFlatternTree] = useState<Node[]>(flattern(tree) as Node[])

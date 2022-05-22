@@ -11,6 +11,7 @@ interface NodeOptions {
   collapse?: boolean
   loading?: boolean
   async?: boolean
+  accordion?: boolean
   parent: Node | null
   children: Node[] | null
 }
@@ -29,6 +30,7 @@ export class Node {
   children: Node[] | null
   loaded: boolean
   async?: boolean
+  accordion?: boolean
   
   constructor (options: NodeOptions) {
     const { 
@@ -39,6 +41,7 @@ export class Node {
       parent,
       children,
       depth = 1,
+      accordion = false,
       checked = false, 
       indeterminate = false, 
       collapse = false, 
@@ -59,6 +62,7 @@ export class Node {
     this.loading = loading
     this.loaded = false
     this.async = async
+    this.accordion = accordion
   }
 
   hasChecked (node: Node) {
@@ -109,7 +113,26 @@ export class Node {
   }
 
   setCollapse (collapse: boolean) {
-    this.collapse = collapse
+    if (this.accordion) {
+      if (collapse === false) {
+        this.collapse = false
+      } else {
+        if (this.depth === 1) {
+          this.collapse = collapse
+        } else {
+          const children = this.parent?.children
+
+          children?.forEach(node => {
+            node.collapse = false
+          })
+
+          this.collapse = true
+          
+        }
+      }
+    } else {
+      this.collapse = collapse
+    }
   }
 
   setLoading (loading: boolean) {
@@ -148,6 +171,7 @@ export class Node {
       data,
       depth,
       parent,
+      accordion: false,
       checked: false,
       indeterminate: false,
       collapse: false,

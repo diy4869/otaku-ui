@@ -87,110 +87,110 @@ module.exports = function mdLoader (source) {
         }
       }
     })
-    // .use(container, 'api', {
-    //   render (tokens, index) {
-    //     if (tokens[index].nesting === 1) {
-    //       const apiType = transformAll()
+    .use(container, 'api', {
+      render (tokens, index) {
+        if (tokens[index].nesting === 1) {
+          const apiType = transformAll()
     
-    //       const findExport = () => {
-    //         return data.api.module.map(item => {
-    //           const filePath = Object.keys(apiType).find(children => {
-    //             if (apiType[children].export[item]) {
-    //               return true
-    //             }
-    //           })
+          const findExport = () => {
+            return data.api.module.map(item => {
+              const filePath = Object.keys(apiType).find(children => {
+                if (apiType[children].export[item]) {
+                  return true
+                }
+              })
 
-    //           return {
-    //             name: item,
-    //             type: filePath ? apiType[filePath].export[item].reference : null
-    //           }
-    //         })
-    //       }
-    //       const result = findExport()
-    //       const interface = []
-    //       const type = []
-    //       const apiData = []
-    //       const property = []
+              return {
+                name: item,
+                type: filePath ? apiType[filePath].export[item].reference : null
+              }
+            })
+          }
+          const result = findExport()
+          const interface = []
+          const type = []
+          const apiData = []
+          const property = []
           
-    //       const appendType = (property) => {
-    //         const find = property.find(property => property.typeReference)
+          const appendType = (property) => {
+            const find = property.find(property => property.typeReference)
 
-    //         if (find) {
-    //           find.typeReference.type === 'interface' ? interface.push(find.typeReference.code) : type.push(find.typeReference.code)
-    //         }
-    //       }
+            if (find) {
+              find.typeReference.type === 'interface' ? interface.push(find.typeReference.code) : type.push(find.typeReference.code)
+            }
+          }
 
-    //       result.forEach(item => {
-    //         const type = item.type.args[0].type
+          result.forEach(item => {
+            const type = item.type.args[0].type
 
-    //         if (type.type === 'interface') {
-    //           if (type.extendProperty) {
-    //             type.extendProperty.forEach(children => {
-    //               appendType(children.property)
-    //               interface.push(children.code)
-    //             })
+            if (type.type === 'interface') {
+              if (type.extendProperty) {
+                type.extendProperty.forEach(children => {
+                  appendType(children.property)
+                  interface.push(children.code)
+                })
                 
-    //           }
-    //           appendType(type.property)
-    //           interface.push(type.code)
-    //         }
+              }
+              appendType(type.property)
+              interface.push(type.code)
+            }
 
 
-    //         apiData.push({
-    //           name: item.name,
-    //           data: type.property
-    //         })
-    //       })
+            apiData.push({
+              name: item.name,
+              data: type.property
+            })
+          })
 
-    //       const header = ['属性', '是否必填', '类型', '默认值', '描述']
+          const header = ['属性', '是否必填', '类型', '默认值', '描述']
 
-    //       const mdTableData = apiData.reduce((total, current) => {
-    //         const { data } = current
+          const mdTableData = apiData.reduce((total, current) => {
+            const { data } = current
 
-    //         const table = [
-    //           header.join('|'),
-    //           new Array(5).fill('---').join('|'),
-    //           data.map(children => {
-    //             return [
-    //               children.name,
-    //               children.required ? '是' : '否',
-    //               children.type,
-    //               children.defaultValue
-    //             ].join('|')
-    //           }).join('\n')
-    //         ]
+            const table = [
+              header.join('|'),
+              new Array(5).fill('---').join('|'),
+              data.map(children => {
+                return [
+                  children.name,
+                  children.required ? '是' : '否',
+                  children.type,
+                  children.defaultValue
+                ].join('|')
+              }).join('\n')
+            ]
 
-    //         total.push(
-    //           table.join('\n')
-    //         )
+            total.push(
+              table.join('\n')
+            )
 
-    //         return total
-    //       }, [])
+            return total
+          }, [])
           
 
-    //       // console.log(mdTableData)
+          // console.log(mdTableData)
 
-    //       // const demoMarkdown = new MarkdownIt({})
+          // const demoMarkdown = new MarkdownIt({})
 
-    //       //   demoMarkdown.use(md => {
+          //   demoMarkdown.use(md => {
               
-    //       //     md.block.ruler.before('table', 'my_rule', state => {
-    //       //       console.log(md)
-    //       //     })
-    //       //   })
+          //     md.block.ruler.before('table', 'my_rule', state => {
+          //       console.log(md)
+          //     })
+          //   })
 
-    //         // demoMarkdown.render(mdTableData.join(''))
+            // demoMarkdown.render(mdTableData.join(''))
           
-    //       return `<>
-    //         <Api 
-    //           code={\`${interface.join('\n\n')}\`}
-    //           data={\`${JSON.stringify(apiData)}\`}
-    //           ></Api>`
-    //     } else {
-    //       return `</>`
-    //     }
-    //   }
-    // })
+          return `<>
+            <Api 
+              code={\`${interface.join('\n\n')}\`}
+              data={\`${JSON.stringify(apiData)}\`}
+              ></Api>`
+        } else {
+          return `</>`
+        }
+      }
+    })
     .use(container, 'demo', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {

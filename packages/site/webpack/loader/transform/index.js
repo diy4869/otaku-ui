@@ -71,6 +71,8 @@ const run = (filePath, fileMap) => {
     exportFile: {}
   }
 
+  fileMap[filePath] = currentFile
+
   ast.forEachChild(node => {
     const type = getDeclaration(node.kind)
     // isFunction(node, currentFile)

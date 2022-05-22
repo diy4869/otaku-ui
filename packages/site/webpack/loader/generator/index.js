@@ -57,7 +57,8 @@ transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\table\\table.tsx', 
 // console.log(
 // backPath(picker, '../../calendar/calendar')
 // console.log(glob.sync('**/*.d.ts'))
-
+// const data = transformAll()
+// console.log(data)
 module.exports.transformAll = transformAll
 
 module.exports.transform = transform
