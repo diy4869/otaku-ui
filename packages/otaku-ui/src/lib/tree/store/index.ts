@@ -1,20 +1,22 @@
 import type { TreeOptions } from "../tree"
-import { Node } from "./node"
-// import { flattern } from '../../../utils'
+import { Node, NodeOptions } from "./node"
 
-interface StoreOptions {
+export interface StoreOptions {
   treeOptions: TreeOptions
   async?: boolean
   accordion?: boolean
 }
 
-export class Store<T extends Record<string, unknown>[] = []> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type storeData = Record<string, any>[]
+
+export class Store {
   treeOptions: TreeOptions
-  data: T
+  data: storeData
   async: boolean
   accordion: boolean
 
-  constructor (data: T, options: StoreOptions) {
+  constructor (data: storeData, options: StoreOptions) {
     const {
       treeOptions,
       accordion = false,
@@ -27,19 +29,21 @@ export class Store<T extends Record<string, unknown>[] = []> {
     this.treeOptions = treeOptions
   }
   
-  createTree (data: T, depth = 1, parent: Node | null = null) {
+  createNode (options: NodeOptions) {
+    return new Node(options)
+  }
+
+  createTree (data: storeData, depth = 1, parent: Node | null = null) {
     const { id, name, children = 'children' } = this.treeOptions
 
     const result = data.map((item) => {
-      const node: Node = new Node({
+      const node: Node = this.createNode({
           id: item[id] as string | number,
           name: item[name]  as string,
-          treeOptions: this.treeOptions,
           data: item,
-          async: this.async,
+          store: this,
           depth,
           parent,
-          accordion: this.accordion,
           children: []
         })
 
@@ -56,5 +60,15 @@ export class Store<T extends Record<string, unknown>[] = []> {
 
   setDefaultCheckedKeys () {
     console.log(2)
+  }
+
+  // 追加节点
+  append () {
+    console.log('append')
+  }
+
+  // 删除节点
+  remove () {
+    console.log('remove')
   }
 }

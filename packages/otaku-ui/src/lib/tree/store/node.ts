@@ -1,25 +1,23 @@
-import { TreeOptions } from "../tree"
+import { Store } from './index'
 
-interface NodeOptions {
+export interface NodeOptions {
   id: string | number
   name: string
-  treeOptions: TreeOptions
   data: Record<string, unknown>
   depth?: number
   checked?: boolean
   indeterminate?: boolean
   collapse?: boolean
   loading?: boolean
-  async?: boolean
-  accordion?: boolean
+  disabled?: boolean
   parent: Node | null
   children: Node[] | null
+  store: Store
 }
 
 export class Node {
   id: string | number
   name: string
-  treeOptions: TreeOptions
   data: Record<string, unknown>
   depth: number
   checked: boolean
@@ -27,31 +25,27 @@ export class Node {
   collapse: boolean
   loading: boolean
   parent: Node | null
+  store: Store
   children: Node[] | null
   loaded: boolean
-  async?: boolean
-  accordion?: boolean
   
   constructor (options: NodeOptions) {
     const { 
       id,
       name,
-      treeOptions,
       data,
       parent,
       children,
+      store,
       depth = 1,
-      accordion = false,
       checked = false, 
       indeterminate = false, 
       collapse = false, 
-      loading = false,
-      async = false
+      loading = false
     } = options
 
     this.id = id
     this.name = name
-    this.treeOptions = treeOptions
     this.data = data
     this.depth = depth
     this.parent = parent
@@ -61,8 +55,7 @@ export class Node {
     this.collapse = collapse
     this.loading = loading
     this.loaded = false
-    this.async = async
-    this.accordion = accordion
+    this.store = store
   }
 
   hasChecked (node: Node) {
@@ -113,7 +106,7 @@ export class Node {
   }
 
   setCollapse (collapse: boolean) {
-    if (this.accordion) {
+    if (this.store.accordion) {
       if (collapse === false) {
         this.collapse = false
       } else {
@@ -157,36 +150,23 @@ export class Node {
     })
   }
 
-  private createNode (
-    id: string | number, 
-    name: string, data: Record<string, unknown>, 
-    children: Node[] = [],
-    parent: Node | null = null,
-    depth = 1
-  ) {
-    return new Node({
-      id,
-      name,
-      treeOptions: this.treeOptions,
-      data,
-      depth,
-      parent,
-      accordion: false,
-      checked: false,
-      indeterminate: false,
-      collapse: false,
-      loading: false,
-      children
-    })
-  }
+ 
 
   setChildren (data: Record<string, unknown>[]) {
-    const { id = 'id', name = 'name', children = 'children' } = this.treeOptions
+    const { id = 'id', name = 'name', children = 'children' } = this.store.treeOptions
 
     const dfs = (data: Record<string, unknown>[], depth: number, parent: Node) => {
       if (!data) return []
       const result = data.map((item) => {
-        const node: Node = this.createNode(item[id] as number | string, item[name] as string, item, [], parent, depth)
+        const node: Node = this.store.createNode({
+          id: item[id] as number | string,
+          name: item[name] as string, 
+          data: item,
+          children: [],
+          store: this.store,
+          parent,
+          depth
+        })
   
         node.children = Array.isArray(item[children]) 
           ? dfs(item[children] as Record<string, unknown>[], depth + 1, node) 
@@ -202,16 +182,6 @@ export class Node {
     this.children = this.children 
       ? this.children.concat(dfs(data, this.depth + 1, this)) 
       : dfs(data, this.depth + 1, this)
-  }
-
-  // 追加节点
-  append () {
-    console.log('append')
-  }
-
-  // 删除节点
-  remove () {
-    console.log('remove')
   }
 }
 

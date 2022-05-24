@@ -19,7 +19,7 @@ export function Collapse (props: CollapseProps) {
   const run = (init = false) => {
     if (container.current) {
       container.current.style.cssText = `
-        height: ${collapse ? 'auto' : '0px'};
+        height: ${collapse ? `${height}px` : '0px'};
         transition: all linear ${init ? '0s' : '0.2s'};
       `
 
