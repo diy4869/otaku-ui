@@ -34,8 +34,8 @@ export const timeFormat = (time: number) => {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const flattern = (arr: Record<string, any>[], key = 'children'): Record<string, any>[] => {
-  return arr.reduce((total: Record<string, any>[], current) => {
+export const flattern = <T extends any[] = Record<string, any>[]>(arr: T, key = 'children'): Record<string, any>[] => {
+  return arr.reduce((total, current) => {
     const isArray = Array.isArray(current[key])
     total.push(current)
 

@@ -3,7 +3,7 @@ import { Store } from './index'
 export interface NodeOptions {
   id: string | number
   name: string
-  data: Record<string, unknown>
+  data: Record<string, unknown> | null
   depth?: number
   checked?: boolean
   indeterminate?: boolean
@@ -18,7 +18,7 @@ export interface NodeOptions {
 export class Node {
   id: string | number
   name: string
-  data: Record<string, unknown>
+  data: Record<string, unknown> | null
   depth: number
   checked: boolean
   indeterminate: boolean
@@ -28,6 +28,7 @@ export class Node {
   store: Store
   children: Node[] | null
   loaded: boolean
+  options: NodeOptions
   
   constructor (options: NodeOptions) {
     const { 
@@ -56,6 +57,11 @@ export class Node {
     this.loading = loading
     this.loaded = false
     this.store = store
+    this.options = options
+  }
+
+  setOptions (options: NodeOptions) {
+    this.options = options
   }
 
   hasChecked (node: Node) {
@@ -110,18 +116,13 @@ export class Node {
       if (collapse === false) {
         this.collapse = false
       } else {
-        if (this.depth === 1) {
-          this.collapse = collapse
-        } else {
-          const children = this.parent?.children
+        const children = this.parent?.children
+        
+        children?.forEach(node => {
+          node.collapse = false
+        })
 
-          children?.forEach(node => {
-            node.collapse = false
-          })
-
-          this.collapse = true
-          
-        }
+        this.collapse = true
       }
     } else {
       this.collapse = collapse
@@ -150,9 +151,7 @@ export class Node {
     })
   }
 
- 
-
-  setChildren (data: Record<string, unknown>[]) {
+  setChildren (data: Record<string, unknown>[], append = false) {
     const { id = 'id', name = 'name', children = 'children' } = this.store.treeOptions
 
     const dfs = (data: Record<string, unknown>[], depth: number, parent: Node) => {
@@ -163,7 +162,6 @@ export class Node {
           name: item[name] as string, 
           data: item,
           children: [],
-          store: this.store,
           parent,
           depth
         })
@@ -179,9 +177,13 @@ export class Node {
       return result
     }
 
-    this.children = this.children 
-      ? this.children.concat(dfs(data, this.depth + 1, this)) 
-      : dfs(data, this.depth + 1, this)
+    const result = dfs(data, this.depth + 1, this)
+
+    if (append) {
+      this.children = this.children ? this.children.concat(result) : result
+    } else {
+      this.children = result
+    }
   }
 }
 

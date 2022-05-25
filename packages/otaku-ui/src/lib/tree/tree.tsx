@@ -20,7 +20,12 @@ export interface TreeOptions {
 export interface TreeProps {
   data?: Record<string, unknown>[]
   options?: TreeOptions
+  height?: number
   accordion?: boolean
+  checkedAll?: boolean
+  defaultExpandAll?: boolean
+  defaultExpandKeys?: number[] | string[]
+  defaultCheckedKeys?: number[] | string[]
   loadTree?: (node?: Node, resolve?: (res?: unknown) => void, reject?: (err?: unknown) => void) => void
 }
 
@@ -32,7 +37,12 @@ export function Tree (props: TreeProps) {
       children: 'children'
     },
     data = [],
-    accordion = true,
+    defaultCheckedKeys = [],
+    defaultExpandKeys = [],
+    accordion = false,
+    checkedAll = false,
+    defaultExpandAll = false,
+    height,
     loadTree
   } = props
   const async = typeof loadTree === 'function'
@@ -44,6 +54,7 @@ export function Tree (props: TreeProps) {
   const treeRef = useRef(null)
   const [tree, setTree] = useState(store.createTree(data))
   const [flatternTree, setFlatternTree] = useState<Node[]>(flattern(tree) as Node[])
+  const [parentWidth, setParentWidth] = useState('100%')
   const [parentHeight, setParentHeight] = useState(0)
 
   useEffect(() => {
@@ -55,20 +66,32 @@ export function Tree (props: TreeProps) {
     setFlatternTree(flattern(tree) as Node[])
   }, [tree])
 
-  useLayoutEffect(() => {
-    
-      Promise.resolve().then(() => {
+  useEffect(() => {
+    if (defaultCheckedKeys) store.setCheckedKeys(defaultCheckedKeys)
+    if (defaultExpandKeys) store.setExpandKeys(defaultExpandKeys)
+    if (checkedAll) store.checkAll(checkedAll)
+    if (defaultExpandAll) store.expandAll(defaultExpandAll)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [defaultCheckedKeys, defaultExpandKeys, checkedAll, defaultExpandAll])
 
-        if (treeRef.current) {
-          console.dir(treeRef.current.parentNode)
-          const h = treeRef.current.parentNode.offsetHeight
-    
-          setParentHeight(h)
-          console.log(h)
-        }
+  useLayoutEffect(() => {
+    const observer = new MutationObserver((entries) => {
+      const el = entries[0].target as HTMLElement
+      // 如果有父级高度用父级的，否则自适应
+      setParentHeight(height || el.offsetHeight)
+    })
+
+    if (treeRef.current) {
+      observer.observe((treeRef.current as HTMLElement).parentNode as HTMLElement, {
+        childList: true,
+        subtree: true
       })
-    
-  }, [])
+    }
+
+    return (() => {
+      observer.disconnect()
+    })
+  }, [height])
 
   const showNode = (node: Node | null): boolean => {
     if (!node) return false
@@ -129,24 +152,29 @@ export function Tree (props: TreeProps) {
               node.setChecked(e?.target.checked)
               setTree([...tree])
             }}></Checkbox>
-          <span>{node.name} --- collapse: {'' + node.collapse} --- loaded: {'' + node.loaded}</span>
+          <span>{node.name} --- collapse: {'' + node.collapse} --- checked: {'' + node.checked} --- loaded: {'' + node.loaded}</span>
         </Space>
       </li>
     )
   }
 
+  /* 由于节点已经是被拍平的，所以对于非第一层的节点是不渲染的，然而 react-window 在计算的过程中，依然处理了 display: none; 的节点，所以在渲染期间，需要过滤掉不显示的节点 */
+  const displayNode = flatternTree.filter(node => showNode(node))
+
   return (
     <div className={classNames('otaku-tree')} ref={treeRef}>
-      {/* 由于节点已经是被拍平的，所以对于非第一层的节点是不渲染的，然而 react-window 在计算的过程中，依然处理了 display: none; 的节点，所以在渲染期间，需要过滤掉不显示的节点 */}
-      <FixedSizeList
+      <FixedSizeList<Node[]>
         width="100%"
+        height={parentHeight}
+        style={{
+          overflow: height ? 'auto' : 'none'
+        }}
         innerElementType="ul"
-        height={300} 
         itemSize={30}
-        itemCount={flatternTree.filter(node => showNode(node)).length}
-        itemData={flatternTree.filter(node => showNode(node))}>
+        itemCount={displayNode.length}
+        itemData={displayNode}>
         {treeNode}
-      </FixedSizeList> 
+      </FixedSizeList>     
     </div>   
   )
 }
