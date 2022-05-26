@@ -48,9 +48,11 @@ const transformAll = () => {
   return obj
 }
 
-// transform(filePath, {})
-
-transform('D:\\code\\otaku-ui\\packages\\otaku-ui\\src\\lib\\table\\table.tsx', {})
+const url = path.resolve(
+  __dirname,
+  '../../../../',
+  'otaku-ui/src/lib/table/table.tsx');
+transform(url, {})
 // console.log(exportLibPath)
 
 

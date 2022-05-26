@@ -325,7 +325,7 @@ ${injectCode}
                 ${
                   anchor.reduce((str, item) => {
                     str += `<AnchorItem 
-                      href={\`#${item.name.toLowerCase().replaceAll(' ', '-')}\`}
+                      href={\`#${item.name.toLowerCase().replace(/ /g, '-')}\`}
                       title={\`${item.name}\`}></AnchorItem>`
                     
                     return str
