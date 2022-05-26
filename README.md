@@ -2,6 +2,15 @@
 
 该项目是基于` React Hooks、Typescript、webpack `来实现的一个` UI库 `，目前依然属于不成熟状态，不适合生产环境。
 
+## 项目启动
+
+### 1.1 全局安装lerna
+```npm install -g lerna```
+### 1.2 安装依赖
+```lerna bootstrap```
+### 1.3 启动
+```cd packages/site```， 执行```npm run dev```会自动打开`http://localhost:8080/`页面
+
 ## otaku-cli
 
 先后执行 ```cd packages/otaku-ui```、`npm link` 即可，就可以在命令行使用` otaku-cli `了
