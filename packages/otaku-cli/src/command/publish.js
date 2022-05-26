@@ -3,18 +3,26 @@ const ora = require('ora')
 const { promisify } = require('util')
 const path = require('path')
 const { exec } = require('child_process')
-const { copy, checkDirectory } = require('../utils/fs')
+// const { copy, checkDirectory } = require('../utils/fs')
 
 module.exports = async () => {
-  const spinner = ora('正在努力构建中').start()
   const basePath = path.resolve(__dirname, '../../../../')
   const sitePath = path.resolve(basePath, './packages/site/dist')
-  // const buildPath = path.resolve(basePath, './otaku-ui-docs/docs')
   const execPromise = promisify(exec)
+  const spinner = ora()
+  const buildCommand = [
+    `cd ${sitePath}`,
+    'npm run build:dev',
+  ].join(' && ')
 
-  if (await checkDirectory(sitePath)) {
-    // await execPromise(`rm -rf ${buildPath}`)
-    // await copy(sitePath, buildPath)
+  let buildTime = 0
+
+  const interval = setInterval(() => {
+    buildTime++
+    spinner.start(`buildTime: ${buildTime}s`)
+  }, 1000)
+
+  execPromise(buildCommand).then(async () => {
     const command = [
       `cd ${sitePath}`,
       'git add -A',
@@ -23,14 +31,10 @@ module.exports = async () => {
       )}"`,
       'git push origin master'
     ]
-    // console.log(command)
     const str = command.join(' && ')
 
     await execPromise(str)
-    spinner.succeed('构建完成')
-    // console.log(path.resolve(sitePath, './docs'))
-    // await execPromise(`rm -rf ${path.resolve(sitePath, './docs')}`)
-  } else {
-    spinner.fail('构建失败')
-  }
+    spinner.succeed(`构建完成，本次耗时：${buildTime}s`)
+    clearInterval(interval)
+  })
 }

@@ -13,7 +13,7 @@
 
 ## otaku-cli
 
-先后执行 ```cd packages/otaku-ui```、`npm link` 即可，就可以在命令行使用` otaku-cli `了
+先后执行 ```cd packages/otaku-cli```、`npm link` 即可，就可以在命令行使用` otaku-cli `了
 
 ### 一些命令
 
