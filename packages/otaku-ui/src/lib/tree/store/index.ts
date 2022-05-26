@@ -123,7 +123,7 @@ export class Store {
     })
   }
 
-  checkAll (checked: boolean) {
+  checkedAll (checked: boolean) {
     this.root.setChecked(checked)
   }
 

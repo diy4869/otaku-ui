@@ -3,6 +3,7 @@ import { HighlightCode, HighlightCodeProps, Icon, Tab, TabPane, message } from '
 import * as copy from 'copy-to-clipboard'
 import { Editor } from '../editor/editor'
 import { Tooltip } from 'otaku-ui'
+import { VShow } from 'otaku-ui/src/directive/vShow'
 import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary'
 import classnames from 'classnames'
 import './style.scss'
@@ -23,7 +24,7 @@ export function CodeExample (props: Example) {
   const container = useRef(null)
   const [showEdit, setShowEdit] = useState(true)
   let [collapse, setCollapse] = useState(false)
-  let [currentIndex, setCurrentIndex] = useState(0)
+  let [currentIndex, setCurrentIndex] = useState(undefined)
   
   const [data] = useState([
     {
@@ -63,7 +64,7 @@ export function CodeExample (props: Example) {
             message.success('复制成功', 1000)
           }
         }}>
-          {/* <TabPane 
+          <TabPane 
             id={0}
             name={
              <Tooltip content='编辑'>
@@ -71,7 +72,7 @@ export function CodeExample (props: Example) {
             </Tooltip>
             }>
             <Editor code={code} lang={lang}></Editor>
-          </TabPane> */}
+          </TabPane>
           <TabPane 
             id={1}
             name={
@@ -88,8 +89,8 @@ export function CodeExample (props: Example) {
               </Tooltip>
             }>
             <HighlightCode
-              lang={data[currentIndex].lang}
-              code={data[currentIndex].code}
+              lang={data[0]?.lang}
+              code={data[0]?.code}
             ></HighlightCode>
           </TabPane>
         </Tab>

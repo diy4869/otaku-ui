@@ -54,7 +54,7 @@ export function Tree (props: TreeProps) {
   const treeRef = useRef(null)
   const [tree, setTree] = useState(store.createTree(data))
   const [flatternTree, setFlatternTree] = useState<Node[]>(flattern(tree) as Node[])
-  const [parentWidth, setParentWidth] = useState('100%')
+  // const [parentWidth, setParentWidth] = useState('100%')
   const [parentHeight, setParentHeight] = useState(0)
 
   useEffect(() => {
@@ -67,11 +67,11 @@ export function Tree (props: TreeProps) {
   }, [tree])
 
   useEffect(() => {
+    if (checkedAll) store.checkedAll(checkedAll)
     if (defaultCheckedKeys) store.setCheckedKeys(defaultCheckedKeys)
     if (defaultExpandKeys) store.setExpandKeys(defaultExpandKeys)
-    if (checkedAll) store.checkAll(checkedAll)
     if (defaultExpandAll) store.expandAll(defaultExpandAll)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [defaultCheckedKeys, defaultExpandKeys, checkedAll, defaultExpandAll])
 
   useLayoutEffect(() => {
