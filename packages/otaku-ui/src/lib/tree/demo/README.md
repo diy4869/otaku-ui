@@ -69,7 +69,9 @@ function Example () {
       }}>全选</Checkbox>
       <Tree 
         checkedAll={checkAll}
-        defaultExpandAll={true}
+        // defaultExpandAll={true}
+        defaultExpandKeys={['0-0','0-0-0']}
+        defaultCheckedKeys={['0-0-0-0', '0-0-0-2','0-0-1', '0-2']}
         options={{
           id: 'key',
           name: 'title',
@@ -77,7 +79,6 @@ function Example () {
         }}
       data={treeData}/> 
     </>
-   
   )
 }
 

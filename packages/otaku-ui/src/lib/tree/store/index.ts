@@ -87,7 +87,7 @@ export class Store {
 
     return flatternTree.reduce((total, current) => {
       if (indeterminate) {
-        if (current.checked || current.parent.indeterminate) {
+        if (current.checked || current.indeterminate) {
           total.concat(current)
         }
         return total
@@ -101,12 +101,26 @@ export class Store {
     const map = new Map(
       keys.map(item => [item, item])
     )
+    const flatternTree = flattern(this.root.children as Node[])
+
+    flatternTree.forEach(node => {
+      if (map.get(node.id)) {
+        node.setChecked(true)
+      }
+    })
   }
 
   setExpandKeys (keys: number[] | string[]) {
     const map = new Map(
       keys.map(item => [item, item])
     )
+    const flatternTree = flattern(this.root.children as Node[])
+
+    flatternTree.forEach(node => {
+      if (map.get(node.id)) {
+        node.setCollapse(true)
+      }
+    })
   }
 
   checkAll (checked: boolean) {
@@ -124,23 +138,5 @@ export class Store {
     }
     
     dfs(this.root.children as Node[])
-  }
-
-  // 追加节点
-  append (node: Node) {
-    if (node.depth === 0) return
-    const parentNode = node.parent as Node
-    parentNode.children?.push(node)
-  }
-
-  // 删除节点
-  remove (node: Node) {
-    if (node.depth === 0) return
-    const parentNode = node.parent as Node
-    const findIndex = parentNode?.children?.findIndex(item => item.id === node.id)
-
-    if (findIndex && findIndex !== -1) {
-      parentNode.children?.splice(findIndex, 1)
-    }
   }
 }

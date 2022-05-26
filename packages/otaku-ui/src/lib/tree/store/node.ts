@@ -28,7 +28,6 @@ export class Node {
   store: Store
   children: Node[] | null
   loaded: boolean
-  options: NodeOptions
   
   constructor (options: NodeOptions) {
     const { 
@@ -57,11 +56,6 @@ export class Node {
     this.loading = loading
     this.loaded = false
     this.store = store
-    this.options = options
-  }
-
-  setOptions (options: NodeOptions) {
-    this.options = options
   }
 
   hasChecked (node: Node) {
@@ -144,7 +138,6 @@ export class Node {
       if (this.checked) {
         this.setChecked(true)
       }
-      
     }).finally(() => {
       this.loaded = true
       this.loading = false
@@ -185,5 +178,20 @@ export class Node {
       this.children = result
     }
   }
-}
 
+  // 追加节点
+  append (node: Node) {
+    if (node.depth === 0) return
+    const parentNode = node.parent as Node
+    parentNode.children?.push(node)
+  }
+
+  // 删除节点
+  remove (node: Node) {
+    if (node.depth === 0) return
+    const parentNode = node.parent as Node
+    const findIndex = parentNode?.children?.findIndex(item => item.id === node.id)
+
+    if (findIndex && findIndex !== -1) parentNode.children?.splice(findIndex, 1)
+  }
+}
