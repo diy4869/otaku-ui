@@ -18,8 +18,8 @@ export function Progress (props: ProgressProps) {
     max = 100,
     type,
     inner,
-    lineWidth = 15,
-    color = '#3064FF'
+    lineWidth = 8,
+    color
   } = props
   
   const canvas = useRef<HTMLCanvasElement>(null)

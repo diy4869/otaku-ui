@@ -5,7 +5,7 @@ import './style.scss'
 
 export interface PaginationProps extends usePaginationProps {
   circle?: boolean
-  pageChange?: (page?: number) => void
+  pageChange?: (page: number) => void
 }
 
 export function Pagination (props: PaginationProps) {

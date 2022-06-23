@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import './style.scss'
 import LazyLoad from 'vanilla-lazyload'
+import classNames from 'classnames'
 
 export interface ImageProps {
   alt?: string
   src?: string
+  className?: string
 }
 
 
 export function Image (props: ImageProps) {
   const {
     src,
-    alt
+    alt,
+    className
   } = props
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export function Image (props: ImageProps) {
   }, [src])
 
   return (
-    <div className='otaku-image-container'>
+    <div className={classNames('otaku-image-container', className)}>
       <img data-src={src} alt={alt}  className="otaku-image"/>
     </div>
   )

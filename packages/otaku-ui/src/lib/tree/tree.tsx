@@ -21,6 +21,7 @@ export interface TreeProps {
   data?: Record<string, unknown>[]
   options?: TreeOptions
   height?: number
+  checkbox?: boolean
   accordion?: boolean
   checkedAll?: boolean
   defaultExpandAll?: boolean

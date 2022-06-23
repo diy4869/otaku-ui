@@ -54,3 +54,29 @@ const result = objectToString({
 })
 
 console.log(`{  \n${result.join('\n')}\n}`)
+
+function getDates(format, date) {
+    const str = format.replace(/(\w)\1+|(\w)/g, ({ length }, w, s) => {
+        return `(?<${w || s}>${s ? '\\d+' : '\\d'.repeat(length)})`
+    })
+    const regex = new RegExp(str)
+    
+    const match = date.match(regex);
+    // console.log(result)
+    const dateList = Object.entries(match.groups)
+    const result = dateList.reduce((str, current, index) => {
+        const [format, time] = current
+
+        str += format === 'D' ? `${time} ` : `${time}${index !== dateList.length - 1 ? ':' : ''}`
+
+        return str
+    }, '')
+
+    console.log(result)
+  }
+
+getDates('DD hh:mm:ss', '23 01:23:11')
+getDates('hh:mm:ss', '23 01:23:11')
+getDates('mm:ss', '23 01:23:11')
+getDates('ss', '23 01:23:11')
+

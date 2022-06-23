@@ -32,7 +32,7 @@ function App() {
   }, [])
 
   return (
-       <Router>
+    <Router>
       <div className={style['otaku-home']}>
         <header className={style['otaku-header']}>
           {/* otaku-ui | OTAKU-UI |  */}

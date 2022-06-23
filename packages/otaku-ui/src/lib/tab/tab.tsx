@@ -4,11 +4,11 @@ import { findDataset } from '../../utils/index'
 import './style.scss'
 
 interface TabProps {
-  active: number,
+  active: number | string | undefined,
   center?: boolean
   children?: React.ReactElement[]
   onChange?: (val: {
-    value: number | string
+    value: number | string | undefined
     index: number
   }) => void
 }
@@ -47,14 +47,14 @@ export function Tab (props: TabProps) {
     onChange
   } = props
 
-  const children = Array.isArray(props.children) ? props.children : [props.children]
+  const children = props.children ? Array.isArray(props.children) ? props.children : [props.children] : []
   const [current, setCurrent] = useState(active)
   const [tabData, setTabData] = useState<React.ReactElement>()
  
   useEffect(() => {
     const findIndex = children.findIndex(item => item.props.id === active)
     // debugger
-    if (findIndex !== -1) {
+    if (findIndex && findIndex !== -1) {
       setTabData(children[findIndex])
       setCurrent(children[findIndex].props.id)
     }
@@ -80,7 +80,7 @@ export function Tab (props: TabProps) {
 
               // 如果 2 次 点击的都是同一个 则取消当前选中状态
               if (current === children[findIndex].props.id) {
-                setTabData(null)
+                setTabData(undefined)
                 setCurrent(undefined)
 
                 onChange?.({

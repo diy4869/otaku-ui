@@ -3,15 +3,17 @@ import React, { useState, useEffect } from 'react'
 interface VShowProps {
   show?: boolean
   force?: boolean
+  flex?: boolean
   className?: string
   children?: React.ReactNode
 }
 
 export function VShow (props: VShowProps) {
-  const { show, force = false, className, children } = props
+  const { show, force = false, flex, className, children } = props
   const [visible, setVisible] = useState(show)
 
   useEffect(() => {
+
     setVisible(show)
   }, [show])
 
@@ -28,7 +30,7 @@ export function VShow (props: VShowProps) {
       <section 
         className={className}
         style={{
-        display: visible ? 'block' : 'none'
+        display: visible ? flex ? 'flex' : 'block' : 'none'
       }}>{children}</section>
     )
   }

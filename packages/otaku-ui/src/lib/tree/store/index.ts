@@ -39,7 +39,7 @@ export class Store {
     })
   }
 
-  private createRoot (children: Node[]) {
+  private createRoot (children: Node[] = []) {
     return new Node({
       id: 'root',
       name: 'root',

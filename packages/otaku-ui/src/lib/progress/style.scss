@@ -11,7 +11,7 @@
 
 .otaku-progress-container {
   min-width: 220px;
-  height: 15px;
+  height: 8px;
   background: rgba(44, 104, 255, 0.06);
   // border: 1px solid rgba(44, 104, 255);
   overflow: hidden;
@@ -34,7 +34,7 @@
 .otaku-progress-vertical {
   display: flex;
   flex-direction: column-reverse;
-  width: 15px;
+  width: 8px;
   height: 220px;
   background: rgba(44, 104, 255, 0.06);
   // border: 1px solid rgba(44, 104, 255);

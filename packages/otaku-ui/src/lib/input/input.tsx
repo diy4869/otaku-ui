@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import classNames from 'classnames'
+import { VShow } from '../../directive/vShow'
 import { Icon } from '../icon/icon'
 import './style.scss'
 
@@ -67,10 +68,7 @@ export function Input (props: InputProps) {
   const [inputValue,setInputValue] = useState(value)
   const [inputType, setInputType] = useState(type)
   
-  let [
-    show,
-    setShow
-  ] = useState(showPassword)
+  let [ show,setShow ] = useState(showPassword)
 
   useEffect(() => {
     setInputValue(value)
@@ -125,7 +123,6 @@ export function Input (props: InputProps) {
                     onBlur={onBlur}
                     onFocus={onFocus}
                     onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
-                      console.log(e)
                       if (e.code === 'Enter') {
                         onEnter?.(e)
                       }
@@ -146,16 +143,16 @@ export function Input (props: InputProps) {
                       }}></span>
                       : ''
                   }
-                  {
-                    clear && inputValue?.length !== 0
-                      ? <span
-                      className={classNames('otaku-input-icon-right iconfont close otaku-icon-close-circle-line')}
+                  <VShow show={clear && (inputValue || '')?.length !== 0}>
+                    <Icon 
+                      name='close-circle-line' 
+                      size={14}
+                      className="otaku-input-icon-right"
                       onClick={() => {
-                        setInputValue('')
-                        onClear?.()
-                      }}></span>
-                      : ''
-                  }
+                       setInputValue('')
+                       onClear?.()
+                    }}></Icon>
+                  </VShow>
                   {
                      typeof afterIcon === 'string' ? <Icon 
                       className='otaku-input-icon-right'

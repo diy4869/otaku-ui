@@ -1,166 +1,222 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useEffect } from "react"
 import { Icon } from "../icon/icon"
+import { DragUpload } from "./dragUpload"
+import { Progress } from "../progress/progress"
+import classNames from "classnames"
+import axios from 'axios'
+import { v4 as uuid } from 'uuid'
 import "./style.scss"
 
-
-interface UploadProps {
-  action: string
+export interface UploadProps {
+  action?: string
   accept?: string
-  methods?: 'get' | 'post' | 'put'
+  name?: string
+  headers: Record<string, string>
+  methods?: 'post' | 'put'
   multiple?: boolean
   directory?: boolean
+  withCredentials?: boolean
+  data: Record<string, any>
   drag?: boolean
+  formData?: boolean
+  limit?: number
+  max?: number
   children?: React.ReactNode
-  beforeUpload?: () => void
+  request?: (file: FileList) => void
+  onChange?: (file: FileList) => void
+  onUpload?: (type: 'success' | 'error', result: any) => void
+  beforeUpload?: (file: FileList) => boolean | Promise<boolean>
 }
 
-interface DragDirectory {
-  type: 'file' | 'directory'
-  name: string
-  size: number
-  files?: DragDirectory[]
-  file?: File
+declare module 'react' {
+  interface InputHTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    directory?: string;
+    webkitdirectory?: string;
+  }
 }
 
 export function Upload (props: UploadProps) {
   const {
     action,
     accept,
-    methods,
-    multiple,
-    directory,
-    drag,
+    headers, 
+    methods = 'post',
+    withCredentials,
+    multiple = false,
+    data = {},
+    directory = true,
+    drag = true,
+    name = 'file',
+    max = 3,
+    formData = false,
     children,
-    beforeUpload
+    beforeUpload,
+    request,
+    onChange,
+    onUpload
   } = props
-  const [dragState, setDragState] = useState("")
-  const file = useRef(null)
+  const [uploadFileList, setUploadFileList] = useState(new Map())
+
+  useEffect(() => {
+    console.log(1)
+  }, [])
+
+  const baseUpload = (fileList: FileList) => {
+    console.log('上传文件', fileList)
+    
+    const map = new Map()
+    const result = Object.keys(data).reduce((fd, current) => {
+      fd.append(current, data[current])
+      
+      return fd
+    }, new FormData())
+    
+
+    for (const file of fileList) {
+      const controlller = new AbortController()
+      const id = uuid()
+
+      map.set(id, {
+        file,
+        controlller,
+        status: 'pending',
+        progress: 0
+      })
+
+      if (formData) {
+        result.append(name, file)
+      }
+
+      axios({
+        url: action || 'https://httpbin.org/post',
+        method: methods,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          ...headers
+        },
+        withCredentials,
+        data: formData ? result : {
+          ...data,
+          [name]: file
+        },
+        onUploadProgress (e) {
+          console.log(e)
+          map.set(id, {
+            ...map.get(id),
+            progress: +((e.loaded / e.total) * 100).toFixed(2),
+            status: 'progress'
+          })
+          console.log((e.loaded / e.total) * 100)
+          setUploadFileList(new Map(map.entries()))
+        },
+        signal: controlller.signal
+      }).then(res => {
+        // debugger
+        map.set(id, {
+          ...map.get(id),
+          status: 'success'
+        })
+        console.log(res)
+        setUploadFileList(new Map(map.entries()))
+        onUpload?.('success', res.response.data)
+      }).catch((err) => {
+        // debugger
+        map.set(id, {
+          ...map.get(id),
+          status: 'error'
+        })
+        console.log(map)
+        setUploadFileList(new Map(map.entries()))
+        onUpload?.('error', err.response.data)
+      })
+    }
+  }
+
+  const uploadFile = (fileList: FileList) => {
+    const result = beforeUpload?.(fileList)
+    onChange?.(fileList)
+
+    if (typeof result === 'boolean') {
+      request ? request(fileList) : baseUpload(fileList)
+    } else if (result?.then) {
+      result.then(res => {
+        if (typeof res === 'boolean') {
+          res && request ? request(fileList) : baseUpload(fileList)
+        }
+      })
+    } else {
+      request ? request(fileList) : baseUpload(fileList)
+    }
+  }
 
   const change = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e, e.target.files)
+    if (e.target.files) uploadFile(e.target.files)
   }
+  
+  const drop = (e) => {
+    // console.log(e.dataTransfer.items)
+    // uploadFile(e[0]?.raw)
+    const fd = new FormData()
 
-  document.addEventListener("drop", e => e.preventDefault())
-  document.addEventListener("dragover", e => e.preventDefault())
+    fd.append(name, e[0]?.raw.getDirectory())
 
-  const onDragEnter = () => {
-    setDragState("dragEnter")
-  }
-
-  const onDragLeave = () => {
-    setDragState("dragLeave")
-  }
-
-  const onDragOver = () => {
-    setDragState("dragOver")
-  }
-
-  const onDrop = (e: React.DragEvent) => {
-    const travserse = () => {
-      const fileList = []
-
-      const dfs = (files: FileSystemDirectoryEntry) => {
-        const directory: DragDirectory[] = []
-
-        if (files?.isDirectory) {
-          const reader = files.createReader()
-
-          reader.readEntries(entries => {
-            for (const item of entries) {
-              if (item.isDirectory) {
-                directory.push({
-                  name: item.name,
-                  type: "directory",
-                  size: 0,
-                  files: dfs(item as FileSystemDirectoryEntry)
-                })
-              } else {
-                ;(item as FileSystemFileEntry).file((children: File) => {
-                  directory.push({
-                    type: "file",
-                    name: children.name,
-                    size: children.size,
-                    file: children
-                  })
-                })
-              }
-            }
-          })
-        }
-
-        return directory
+    axios({
+      url: action || 'https://httpbin.org/post',
+      method: methods,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        ...headers
+      },
+      withCredentials,
+      data: fd,
+      onUploadProgress (e) {
+        console.log(e)
+        // map.set(id, {
+        //   ...map.get(id),
+        //   progress: +((e.loaded / e.total) * 100).toFixed(2),
+        //   status: 'progress'
+        // })
+        console.log((e.loaded / e.total) * 100)
+        // setUploadFileList(new Map(map.entries()))
       }
-
-      for (const item of e.dataTransfer.items) {
-        const result = item.webkitGetAsEntry()
-
-        if (result?.isFile) {
-          const file = item.getAsFile()
-          fileList.push({
-            type: "file",
-            file
-          })
-        }
-        if (result?.isDirectory) {
-          fileList.push({
-            type: "directory",
-            name: result?.name,
-            files: dfs(result as FileSystemDirectoryEntry)
-          })
-        }
-      }
-
-      return fileList
-    }
-
-    const fileList = travserse()
-    console.log(fileList)
-
-    const flat = (fileList) => {
-      return fileList.reduce((total, current) => {
-        return total.concat(
-          current.type === 'directory' ? flat(current.files) : current
-        )
-      }, [])
-    }
-
-    Promise.resolve().then(() => {
-      console.log(flat(fileList))
+    }).then(res => {
+      console.log(res)
     })
-
-
-
-    setDragState("drop")
-    e.preventDefault()
   }
 
   return (
     <div className='otaku-upload-container'>
       {drag ? (
-        <div
-          className={`
-                otaku-drag-upload 
-                ${
-                  ["dragEnter", "dragOver"].includes(dragState)
-                    ? "otaku-drag-upload-hover"
-                    : ""
-                }
-              `}
-          onDrop={onDrop}
-          onDragEnter={onDragEnter}
-          onDragOver={onDragOver}
-          onDragLeave={onDragLeave}>
-          拖拽
-        </div>
+        <DragUpload onDrop={drop}></DragUpload>
       ) : (
         <label className='otaku-upload-label'>
-          <input type='file' name='upload' ref={file} onChange={change} webkitdirectory="webkitdirectory" multiple/>
+          <input 
+            type='file' 
+            name='upload' 
+            webkitdirectory={directory ? 'webkitdirectory' : undefined } 
+            multiple={multiple}
+            onChange={change}
+            accept={accept}/>
           {/* {children} */}
           <div className='otaku-upload'>
             <Icon name='add-bold' className='add'></Icon>
           </div>
         </label>
       )}
+      <ul>
+        {
+          [...uploadFileList.entries()].map((item) => {
+            const [id, data] = item
+
+            return (
+              <li key={id}>
+                <Progress percentage={data.progress}></Progress>
+                <span>{id} --- {data.file.name} --- {data.status}</span>
+              </li>
+            )
+          })
+        }
+      </ul>
     </div>
   )
 }
