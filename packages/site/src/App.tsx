@@ -11,26 +11,6 @@ import '../style/github-markdown-css/github-markdown-light.css'
 // import '../style/github-markdown-css/github-markdown-dark.css'
 
 function App() {
-  const [data, setData] = useState<{
-    stargazers_count?: number
-  }>({})
-  const getData = () => {
-    http
-      .get('https://api.github.com/repos/diy4869/otaku-ui', {
-        headers: {
-          Authorization: 'token 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',
-        },
-      })
-      .then(res => {
-        console.log(res)
-        setData(res.data)
-      })
-  }
-
-  useEffect(() => {
-    getData()
-  }, [])
-
   return (
     <Router>
       <div className={style['otaku-home']}>
@@ -41,11 +21,7 @@ function App() {
           </div>
 
           <div>
-            <a href="https://github.com/diy4869/otaku-ui" target="_blank">
-              GitHub
-            </a>
-            <span className={`iconfont otaku-icon-star-fill ${style['github-star']}`}></span>
-            <span className={`${style['github-star']}`}>{data.stargazers_count ?? 0}</span>
+            <a className="github-button" href="https://github.com/diy4869/otaku-ui" data-icon="octicon-star" data-show-count="true" aria-label="Star diy4869/otaku-ui on GitHub">Star</a>
           </div>
         </header>
         <aside className={style['content']}>
