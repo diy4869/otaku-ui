@@ -12,15 +12,14 @@ const json5 = require('json5')
 
 let importSynx = `
   import * as React from 'react'
-  import { HighlightCode, Anchor, AnchorItem } from 'otaku-ui'
-  import { Api } from 'site-component/api/api'
-  import { CodeExample } from 'site-component/codeExample/codeExample'
   import Block from 'site-component/block/block'
+  import { Api } from 'site-component/api/api'
+  import { HighlightCode, Anchor, AnchorItem } from 'otaku-ui'
+  import { CodeExample } from 'site-component/codeExample/codeExample'
 `
 
 let str = importSynx
 let demoIndex = 0
-
 
 module.exports = function mdLoader (source) {
   const { content, data } = matter(source)
@@ -263,7 +262,7 @@ ${injectCode}
             }
           })
           
-          const importCode = data.import.split(';').map(str => str.trimStart())
+          const importCode = data.import.split(';').map(str => str.trimStart()).filter((item) => item)
 
           return `
             <CodeExample
@@ -310,7 +309,7 @@ ${injectCode}
 
 
   const reactMarkdownTemplate = (str, data, content, anchor) => {
-    const code = data.import
+    const code = data.import?.split(';').map(str => str.trimStart()).filter((item) => item).join('\n')
 
     const fn = `
       function MdReact () {
@@ -338,7 +337,10 @@ ${injectCode}
       
       export default MdReact
     `
+
     
+    console.log(this.resourcePath)
+    console.log(code + str + fn)
     return code + str + fn
   }
 

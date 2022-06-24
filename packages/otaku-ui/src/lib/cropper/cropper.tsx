@@ -2,52 +2,99 @@ import React, { useLayoutEffect, useState, useRef } from 'react'
 import Cropper from 'cropperjs'
 import { Dialog } from '../dialog/dialog'
 import { Button } from '../button/button'
-import miku from './miku.jfif'
 import 'cropperjs/src/css/cropper.scss'
 // import 'cropperjs/src/css/cropper.css'
 import './cropper.scss'
 
 interface ImageCropperProps {
+  imageURL: string
+  visible?: boolean
   circle?: boolean
-  aspectRatio?: number
+  options: Omit<Cropper.Options, 'preview'>
+  action?: React.ReactNode
+  getInstance?: (instance: Cropper) => void
+  onClose?: () => void
+  onCancel?: () => void
+  onConfirm?: () => void
 }
 
 export function ImageCropper (props: ImageCropperProps) {
   const {
-    aspectRatio = 16 / 9
+    imageURL,
+    visible,
+    options,
+    action,
+    getInstance,
+    onCancel,
+    onClose,
+    onConfirm
   } = props
   const image = useRef<HTMLImageElement>(null)
   const container = useRef<HTMLDivElement>(null)
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(visible)
 
   useLayoutEffect(() => {
-    if (show) {
+    if (visible) {
       if (image.current && container.current) {
         // eslint-disable-next-line no-new
-        new Cropper(image.current, {
-          aspectRatio: aspectRatio,
+        const cropper = new Cropper(image.current, {
+          ...options,
           preview: container.current,
           ready (e) {
             console.log(e)
           }
         })
-      } 
+        setShow(visible)
+        getInstance?.(cropper)
+      }
     }
-  }, [show, container, image, aspectRatio])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible, container, image])
+
+
+  const cancel = () => {
+    setShow(false)
+    onCancel?.()
+  }
+
+  const confirm = () => {
+    setShow(false)
+    onConfirm?.()
+  }
+
+  const footer = (
+    <div className='otaku-cropper-footer'>
+      <Button onClick={cancel}>取消</Button>
+      <Button type="primary" onClick={confirm}>确定</Button>
+    </div>
+  )
 
   return (
     <aside className='otaku-cropper-container'>
-      <Button type="primary" onClick={() => setShow(true)}>图片裁剪</Button>
-      <Dialog show={show} title='图片裁剪' className='otaku-cropper-dialog'>
+      <Dialog 
+        show={show} 
+        title='图片裁剪' 
+        className='otaku-cropper-dialog'
+        width="auto"
+        footer={footer}
+        onClose={() => {
+          setShow(false)
+          onClose?.()
+        }}>
         <div className='otaku-image-cropper'>
           <img
-            src={miku}
+            src={imageURL}
             alt=''
             ref={image}
             className='otaku-image-cropper-image'
           />
         </div>
-        <div className='otaku-image-cropper-preview' ref={container}></div>
+        <div className='otaku-image-cropper-preview-container'>
+          <div className='otaku-image-cropper-preview' ref={container}></div>
+        </div>
+        <section className='otaku-action-container'>
+          {action}
+        </section>
       </Dialog>
     </aside>
 

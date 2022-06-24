@@ -5,13 +5,15 @@ import './style.scss'
 interface DialogProps {
   show?: boolean
   title?: string
+  width?: string
   children: React.ReactNode
   className?: string
+  footer?: React.ReactNode
   onClose?: () => void
 }
 
 export function Dialog (props: DialogProps) {
-  const { show, title, children, className, onClose } = props
+  const { show, title, width, children, className, footer, onClose } = props
   const [visible, setVisible] = useState(show)
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export function Dialog (props: DialogProps) {
     <Portal visible={visible} className={className}>
       <div className='otaku-dialog-mask'>
         <div className='otaku-dialog' style={{
-          width: '70vw'
+          width
         }}>
           <header className='otaku-dialog-header'>
             <div>{title}</div>
@@ -36,7 +38,7 @@ export function Dialog (props: DialogProps) {
               onClick={close}></span>
           </header>
           <main className='otaku-dialog-content'>{children}</main>
-          <footer className='otaku-dialog-footer'></footer>
+          <footer className='otaku-dialog-footer'>{footer}</footer>
         </div>
       </div>
     </Portal>

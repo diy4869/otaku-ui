@@ -6,7 +6,7 @@ interface SpaceProps {
   className?: string
   direction?: 'row' | 'column'
   center?: true
-  gap: number | [number, number]
+  gap?: number | [number, number]
   children: React.ReactNode[] | React.ReactNode
 }
 

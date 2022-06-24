@@ -22,10 +22,15 @@
       justify-content: space-between;
       padding: 0 15px;
       border-bottom: 1px solid #e5e5e5;
+      box-sizing: border-box;
     }
     &-content {
       // width: 100%;
       padding: 15px;
+    }
+    &-footer {
+      padding: 15px;
+      border-top: 1px solid #e5e5e5;
     }
   }
 }

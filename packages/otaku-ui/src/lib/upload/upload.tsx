@@ -11,12 +11,12 @@ export interface UploadProps {
   action?: string
   accept?: string
   name?: string
-  headers: Record<string, string>
+  headers?: Record<string, string>
   methods?: 'post' | 'put'
   multiple?: boolean
   directory?: boolean
   withCredentials?: boolean
-  data: Record<string, any>
+  data?: Record<string, any>
   drag?: boolean
   formData?: boolean
   limit?: number
@@ -106,7 +106,6 @@ export function Upload (props: UploadProps) {
             progress: +((e.loaded / e.total) * 100).toFixed(2),
             status: 'progress'
           })
-          console.log((e.loaded / e.total) * 100)
           setUploadFileList(new Map(map.entries()))
         },
         signal: controlller.signal
@@ -156,38 +155,14 @@ export function Upload (props: UploadProps) {
   const drop = (e) => {
     // console.log(e.dataTransfer.items)
     // uploadFile(e[0]?.raw)
-    const fd = new FormData()
-
-    fd.append(name, e[0]?.raw.getDirectory())
-
-    axios({
-      url: action || 'https://httpbin.org/post',
-      method: methods,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        ...headers
-      },
-      withCredentials,
-      data: fd,
-      onUploadProgress (e) {
-        console.log(e)
-        // map.set(id, {
-        //   ...map.get(id),
-        //   progress: +((e.loaded / e.total) * 100).toFixed(2),
-        //   status: 'progress'
-        // })
-        console.log((e.loaded / e.total) * 100)
-        // setUploadFileList(new Map(map.entries()))
-      }
-    }).then(res => {
-      console.log(res)
-    })
   }
 
   return (
     <div className='otaku-upload-container'>
       {drag ? (
-        <DragUpload onDrop={drop}></DragUpload>
+        <DragUpload onDrop={drop}>
+            <Icon name='add-bold' className='add'></Icon>
+        </DragUpload>
       ) : (
         <label className='otaku-upload-label'>
           <input 
