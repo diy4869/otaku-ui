@@ -47,18 +47,20 @@ export function Tab (props: TabProps) {
     onChange
   } = props
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const children = props.children ? Array.isArray(props.children) ? props.children : [props.children] : []
   const [current, setCurrent] = useState(active)
   const [tabData, setTabData] = useState<React.ReactElement>()
  
   useEffect(() => {
     const findIndex = children.findIndex(item => item.props.id === active)
-    // debugger
-    if (findIndex && findIndex !== -1) {
+
+    if (findIndex !== -1) {
       setTabData(children[findIndex])
       setCurrent(children[findIndex].props.id)
     }
-  }, [active])
+
+  }, [active, children])
 
   return (
     <Context.Provider value={{

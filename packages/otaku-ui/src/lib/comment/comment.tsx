@@ -2,7 +2,7 @@ import React from 'react'
 import { Avatar } from 'otaku-ui'
 import './style.scss'
 
-interface CommonetProps {
+export interface CommonetProps {
   avatar?: React.ReactNode
   cover?: string
   commentUser?: string

@@ -146,7 +146,7 @@ export const Editor = (props: EditorProps) => {
 
   return  (
     <div className='editor-container'>
-      <div className='editor-demo'>
+      {/* <div className='editor-demo'>
         <ErrorBoundary 
           onReset={(...args) => {
               console.log(123, args)
@@ -156,8 +156,8 @@ export const Editor = (props: EditorProps) => {
           resetKeys={[transformCode]}>
           <Sandbox code={transformCode}></Sandbox>
         </ErrorBoundary>
-      </div>
-      <div className='Editor' ref={divEl}></div>
+      </div> */}
+      <div className='editor' ref={divEl}></div>
     </div>
   ) 
 }

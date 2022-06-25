@@ -3,6 +3,14 @@ import { lazy } from 'react'
 
 export default [
   {
+    path: '/*',
+    component: lazy(() => import('../pages/home'))
+  },
+  {
+    path: '/playground',
+    component: lazy(() => import('../pages/playground'))
+  },
+  {
     title: "开发指南",
     children: [
       {
@@ -157,6 +165,11 @@ export default [
         title: "avatar 头像",
         path: "/display/avatar",
         component: lazy(() => import('otaku-ui/src/lib/avatar/demo/README.md'))
+      },
+      {
+        title: "comment 评论",
+        path: "/display/comment",
+        component: lazy(() => import('otaku-ui/src/lib/comment/demo/README.md'))
       },
       {
         title: "tree 树",

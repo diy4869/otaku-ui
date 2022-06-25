@@ -60,11 +60,9 @@ export function Api (props: ApiProps) {
         </TabPane>
         <TabPane name='API' id={1}>
           {
-            evalData?.map(item => {
-
-
+            evalData?.map((item, index) => {
               return (
-                <section>
+                <section key={index}>
                   <h2>{item.name}</h2>
                   <Table data={item.data} tableColumn={tableColumn}></Table>
                 </section>

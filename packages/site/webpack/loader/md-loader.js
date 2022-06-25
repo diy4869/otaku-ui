@@ -338,9 +338,6 @@ ${injectCode}
       export default MdReact
     `
 
-    
-    console.log(this.resourcePath)
-    console.log(code + str + fn)
     return code + str + fn
   }
 

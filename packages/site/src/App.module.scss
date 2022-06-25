@@ -9,9 +9,13 @@
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    background: #001938;
-    color: white;
+    background: white;
+    color: black;
     padding: 0 20px;
+    box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
+    position: relative;
+    z-index: 2000;
+    
     .otaku-title {
       // width: 200px;
       font-size: 20px;
@@ -24,12 +28,12 @@
       vertical-align: middle;
     }
     a {
-      color: white;
+      color: black;
       &:hover {
-          color: white;
+          color: var(--primaryColor);
       }
       &:active {
-          color: white;
+          color: var(--primaryColor);
       }
   }
   }

@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
 import './style.scss'
 
-interface BreadCrumbsProps {
+export interface BreadCrumbsProps {
   separator?: React.ReactNode
   children?: React.ReactNode
 }
 
-interface BreadCrumbsItemProps extends BreadCrumbsProps {
+export interface BreadCrumbsItemProps extends BreadCrumbsProps {
   icon?: React.ReactNode
 }
 
