@@ -6,11 +6,11 @@ import 'cropperjs/src/css/cropper.scss'
 // import 'cropperjs/src/css/cropper.css'
 import './cropper.scss'
 
-interface ImageCropperProps {
+export interface ImageCropperProps {
   imageURL: string
   visible?: boolean
   circle?: boolean
-  options: Omit<Cropper.Options, 'preview'>
+  options?: Omit<Cropper.Options, 'preview'>
   action?: React.ReactNode
   getInstance?: (instance: Cropper) => void
   onClose?: () => void

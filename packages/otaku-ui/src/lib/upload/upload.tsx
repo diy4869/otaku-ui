@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react"
 import { Icon } from "../icon/icon"
 import { DragUpload } from "./dragUpload"
 import { Progress } from "../progress/progress"
-import classNames from "classnames"
 import axios from 'axios'
 import { v4 as uuid } from 'uuid'
 import "./style.scss"
@@ -18,6 +17,7 @@ export interface UploadProps {
   withCredentials?: boolean
   data?: Record<string, any>
   drag?: boolean
+  autoUpload?: boolean
   formData?: boolean
   limit?: number
   max?: number
@@ -44,8 +44,9 @@ export function Upload (props: UploadProps) {
     withCredentials,
     multiple = false,
     data = {},
-    directory = true,
-    drag = true,
+    directory = false,
+    drag = false,
+    autoUpload = true,
     name = 'file',
     max = 3,
     formData = false,
@@ -136,15 +137,21 @@ export function Upload (props: UploadProps) {
     onChange?.(fileList)
 
     if (typeof result === 'boolean') {
-      request ? request(fileList) : baseUpload(fileList)
+      if (autoUpload) {
+        request ? request(fileList) : baseUpload(fileList)
+      }
     } else if (result?.then) {
       result.then(res => {
         if (typeof res === 'boolean') {
-          res && request ? request(fileList) : baseUpload(fileList)
+          if (autoUpload) {
+            res && request ? request(fileList) : baseUpload(fileList)
+          }
         }
       })
     } else {
-      request ? request(fileList) : baseUpload(fileList)
+      if (autoUpload) {
+        request ? request(fileList) : baseUpload(fileList)
+      }
     }
   }
 

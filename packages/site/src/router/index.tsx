@@ -152,6 +152,11 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/upload/demo/README.md'))
       },
       {
+        title: "UploadImage 上传",
+        path: "/form/UploadImage",
+        component: lazy(() => import('otaku-ui/src/lib/UploadImage/demo/README.md'))
+      },
+      {
         title: "form 表单",
         path: "/form/form",
         component: lazy(() => import('otaku-ui/src/lib/form/demo/README.md'))
@@ -165,6 +170,11 @@ export default [
         title: "avatar 头像",
         path: "/display/avatar",
         component: lazy(() => import('otaku-ui/src/lib/avatar/demo/README.md'))
+      },
+      {
+        title: "image-preview 图片预览",
+        path: "/form/imagePreview",
+        component: lazy(() => import('otaku-ui/src/lib/imagePreview/demo/README.md'))
       },
       {
         title: "comment 评论",

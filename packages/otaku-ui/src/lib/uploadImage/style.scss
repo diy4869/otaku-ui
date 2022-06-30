@@ -1,0 +1,32 @@
+.otaku-upload-image-preview-container {
+  width: 150px;
+  height: 150px;
+  border: 1.5px dashed #e8e8e8;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .otaku-upload-image-preview-mask {
+    width: 90%;
+    height: 90%;
+    background: rgba($color: #000000, $alpha: 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    color: white;
+    display: none;
+  }
+  .otaku-upload-image-preview {
+    max-width: 90%;
+    max-height: 90%;
+    text-align: center;
+    display: inline-block;
+    
+  }
+  .otaku-upload-image-preview:hover .otaku-upload-image-preview-mask {
+    display: block;
+  }
+}
