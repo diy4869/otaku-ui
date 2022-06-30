@@ -1,27 +1,14 @@
-import React, { Suspense, useState, useEffect } from 'react'
-import { NavLink, Routes, Outlet, Link, Route } from 'react-router-dom'
+import React, { Suspense, useState } from 'react'
+import { NavLink, Routes, Link, Route } from 'react-router-dom'
 import { Space } from 'otaku-ui'
+import GitHubStart from '../components/GithubStart'
 import style from '../App.module.scss'
 import routes from '../router/index'
-import http from '../api'
 
 export default function Home () {
   const [data, setData] = useState<{
     stargazers_count?: number
   }>({})
-
-  const getData = () => {
-    http
-      .get('https://api.github.com/repos/diy4869/otaku-ui', {
-        headers: {
-          Authorization: 'token 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'
-        }
-      })
-      .then(res => {
-        console.log(res)
-        setData(res.data)
-      })
-  }
 
   const processRouter = routes
     .filter(item => item.children)
@@ -45,10 +32,6 @@ export default function Home () {
     }, [])
 
     console.log(processRouter)
-  
-  useEffect(() => {
-    getData()
-  }, [])
 
   return (
     <div>
@@ -59,16 +42,8 @@ export default function Home () {
           </div>
 
           <Space>
-            <a href='https://github.com/diy4869/otaku-ui' target='_blank'>
-              GitHub
-            </a>
             <Link to='/playground'>Playground</Link>
-            <span
-              className={`iconfont otaku-icon-star-fill ${style['github-star']}`}
-            ></span>
-            <span className={`${style['github-star']}`}>
-              {data.stargazers_count ?? 0}
-            </span>
+            <GitHubStart/>
           </Space>
         </header>
         <aside className={style['content']}>
