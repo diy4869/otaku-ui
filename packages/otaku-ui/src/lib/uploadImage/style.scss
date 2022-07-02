@@ -20,13 +20,13 @@
     display: none;
   }
   .otaku-upload-image-preview {
-    max-width: 90%;
-    max-height: 90%;
+    width: 90%;
+    height: 90%;
     text-align: center;
     display: inline-block;
-    
   }
-  .otaku-upload-image-preview:hover .otaku-upload-image-preview-mask {
-    display: block;
-  }
+}
+
+.otaku-upload-image-preview-container:hover .otaku-upload-image-preview-mask {
+  display: flex;
 }

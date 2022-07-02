@@ -1,8 +1,8 @@
 @font-face {
   font-family: "iconfont"; /* Project id 1132676 */
-  src: url('iconfont.woff2?t=1648444621306') format('woff2'),
-       url('iconfont.woff?t=1648444621306') format('woff'),
-       url('iconfont.ttf?t=1648444621306') format('truetype');
+  src: url('iconfont.woff2?t=1656775065762') format('woff2'),
+       url('iconfont.woff?t=1656775065762') format('woff'),
+       url('iconfont.ttf?t=1656775065762') format('truetype');
 }
 
 .iconfont {
@@ -11,6 +11,22 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.otaku-icon-like-fill:before {
+  content: "\e869";
+}
+
+.otaku-icon-unlike-fill:before {
+  content: "\e86b";
+}
+
+.otaku-icon-moon:before {
+  content: "\e67c";
+}
+
+.otaku-icon-sun:before {
+  content: "\e694";
 }
 
 .otaku-icon-edit:before {
@@ -289,7 +305,7 @@
   content: "\e61a";
 }
 
-.otaku-icon-shanchu:before {
+.otaku-icon-delete:before {
   content: "\e61d";
 }
 

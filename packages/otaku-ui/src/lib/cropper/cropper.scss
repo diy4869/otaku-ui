@@ -16,6 +16,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 50%;
+  }
+  
+  .is-circle {
+    border-radius: 50%;
   }
 
   .otaku-image-cropper-preview {
