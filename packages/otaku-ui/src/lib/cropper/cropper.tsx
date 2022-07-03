@@ -18,6 +18,7 @@ export interface ImageCropperProps {
   options?: Omit<Cropper.Options, 'preview'>
   action?: React.ReactNode
   outputFilename?: string
+  children?: React.ReactNode
   getInstance?: (instance: Cropper) => void
   onClose?: () => void
   onCancel?: () => void
@@ -91,8 +92,9 @@ export function ImageCropper (props: ImageCropperProps) {
         })
       })
     }
-    const result = await getData()
     setShow(false)
+    
+    const result = await getData()
     onConfirm?.(result)
   }
 

@@ -17,10 +17,11 @@ export type UploadImageProps = {
   previewURL?: string
   crop?: boolean
   imageCropperProps?: Omit<ImageCropperProps, 'imageURL' | 'visible'>
+  children?: React.ReactNode
   request?: (file: File) => void
   beforeUpload?: (file: File) => boolean | Promise<boolean>
   beforeCrop?: (file: File) => boolean | Promise<boolean>
-  beforeRemove?: (file: File) => void
+  beforeRemove?: () => void
 } & baseUploadProps
 
 export type UploadImageState = 'select' | 'crop' | 'preview'
@@ -38,6 +39,7 @@ export function UploadImage (props: UploadImageProps) {
     imageCropperProps,
     beforeCrop,
     beforeUpload,
+    beforeRemove,
     onUpload,
     request
   } = props
@@ -106,6 +108,9 @@ export function UploadImage (props: UploadImageProps) {
         <ImageCropper 
           imageURL={imageURL} 
           visible={show} 
+          onCancel={() => {
+            setType('select')
+          }}
           onConfirm={(data) => {
             if (data?.blob) {
               const blobURL = URL.createObjectURL(data.blob)
@@ -124,7 +129,14 @@ export function UploadImage (props: UploadImageProps) {
               <ImagePreview value={imageURL}>
                 <Icon name="eye-line" color='white'></Icon>
               </ImagePreview>
-              <Icon name="delete" color='white'></Icon>
+              <Icon name="delete" color='white' onClick={() => {
+                const result = beforeRemove?.()
+                
+                if (!result) {
+                  setImageURL('')
+                  setType('select')
+                }
+              }}></Icon>
             </Space>
           </div>
           <img className='otaku-upload-image-preview' src={imageURL} alt="" />
