@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "4936669",
+      "name": "like-fill",
+      "font_class": "like-fill",
+      "unicode": "e869",
+      "unicode_decimal": 59497
+    },
+    {
+      "icon_id": "4936672",
+      "name": "unlike-fill",
+      "font_class": "unlike-fill",
+      "unicode": "e86b",
+      "unicode_decimal": 59499
+    },
+    {
+      "icon_id": "14401752",
+      "name": "moon",
+      "font_class": "moon",
+      "unicode": "e67c",
+      "unicode_decimal": 59004
+    },
+    {
+      "icon_id": "14401820",
+      "name": "sun",
+      "font_class": "sun",
+      "unicode": "e694",
+      "unicode_decimal": 59028
+    },
+    {
       "icon_id": "15838470",
       "name": "edit",
       "font_class": "edit",
@@ -491,7 +519,7 @@
     {
       "icon_id": "1159893",
       "name": "删除",
-      "font_class": "shanchu",
+      "font_class": "delete",
       "unicode": "e61d",
       "unicode_decimal": 58909
     },

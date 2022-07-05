@@ -1,10 +1,15 @@
 import React, { useLayoutEffect, useState, useRef } from 'react'
+import classNames from 'classnames'
 import Cropper from 'cropperjs'
 import { Dialog } from '../dialog/dialog'
 import { Button } from '../button/button'
 import 'cropperjs/src/css/cropper.scss'
-// import 'cropperjs/src/css/cropper.css'
 import './cropper.scss'
+
+interface outputResult {
+  file: File,
+  blob: Blob
+}
 
 export interface ImageCropperProps {
   imageURL: string
@@ -12,10 +17,12 @@ export interface ImageCropperProps {
   circle?: boolean
   options?: Omit<Cropper.Options, 'preview'>
   action?: React.ReactNode
+  outputFilename?: string
+  children?: React.ReactNode
   getInstance?: (instance: Cropper) => void
   onClose?: () => void
   onCancel?: () => void
-  onConfirm?: () => void
+  onConfirm?: (cropperData: outputResult) => void
 }
 
 export function ImageCropper (props: ImageCropperProps) {
@@ -24,6 +31,8 @@ export function ImageCropper (props: ImageCropperProps) {
     visible,
     options,
     action,
+    circle = false,
+    outputFilename = 'cropper.png',
     getInstance,
     onCancel,
     onClose,
@@ -31,6 +40,7 @@ export function ImageCropper (props: ImageCropperProps) {
   } = props
   const image = useRef<HTMLImageElement>(null)
   const container = useRef<HTMLDivElement>(null)
+  const [cropperInstance, setCropperInstance] = useState<Cropper>()
   const [show, setShow] = useState(visible)
 
   useLayoutEffect(() => {
@@ -44,6 +54,7 @@ export function ImageCropper (props: ImageCropperProps) {
             console.log(e)
           }
         })
+        setCropperInstance(cropper)
         setShow(visible)
         getInstance?.(cropper)
       }
@@ -57,9 +68,34 @@ export function ImageCropper (props: ImageCropperProps) {
     onCancel?.()
   }
 
-  const confirm = () => {
+  const confirm = async () => {
+    const getData = () => {
+      return new Promise<outputResult>((resolve, reject) => {
+        const canvasData = cropperInstance?.getCroppedCanvas({
+          imageSmoothingQuality: 'high'
+        })
+        canvasData?.toBlob((blob) => {
+          if (blob) {
+            // eslint-disable-next-line no-new
+            const file = new File([blob], outputFilename, {
+              type: blob?.type
+            })
+
+            resolve({
+              blob,
+              file
+            })
+          } else {
+            // eslint-disable-next-line prefer-promise-reject-errors
+            reject(null)
+          }
+        })
+      })
+    }
     setShow(false)
-    onConfirm?.()
+    
+    const result = await getData()
+    onConfirm?.(result)
   }
 
   const footer = (
@@ -89,7 +125,9 @@ export function ImageCropper (props: ImageCropperProps) {
             className='otaku-image-cropper-image'
           />
         </div>
-        <div className='otaku-image-cropper-preview-container'>
+        <div className={classNames('otaku-image-cropper-preview-container', {
+          'is-circle': circle
+        })}>
           <div className='otaku-image-cropper-preview' ref={container}></div>
         </div>
         <section className='otaku-action-container'>

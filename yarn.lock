@@ -11401,6 +11401,11 @@ react-live@^2.4.1:
     react-simple-code-editor "^0.11.0"
     unescape "^1.0.1"
 
+react-photo-view@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-photo-view/-/react-photo-view-1.2.1.tgz#07ecf23599f80ff2415b6a934d3f46811b402045"
+  integrity sha512-EfQaaMMaK78fsZQaO9BrxQG2DNCD/aZKP+Omo/jbFsdA3AVNiALenvPPJ5E19q3k41VBYrPSAY1ukE7hY1uBwQ==
+
 react-refresh@^0.11.0:
   version "0.11.0"
   resolved "https://registry.npmjs.org/react-refresh/-/react-refresh-0.11.0.tgz"

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import classNames from 'classnames'
 import './style.scss'
 
@@ -11,8 +11,7 @@ interface IconProps {
   onClick?: () => void
 }
 
-
-export function Icon (props: IconProps) {
+export const Icon = forwardRef((props: IconProps) => {
   const {
     className,
     name,
@@ -35,4 +34,10 @@ export function Icon (props: IconProps) {
       onClick={onClick}>
     </span>
   )
-}
+})
+
+Icon.displayName = 'Icon'
+
+// export function Icon (props: IconProps) {
+ 
+// }

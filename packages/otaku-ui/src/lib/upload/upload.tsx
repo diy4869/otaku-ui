@@ -63,8 +63,6 @@ export function Upload (props: UploadProps) {
   }, [])
 
   const baseUpload = (fileList: FileList) => {
-    console.log('上传文件', fileList)
-    
     const map = new Map()
     const result = Object.keys(data).reduce((fd, current) => {
       fd.append(current, data[current])
@@ -89,7 +87,7 @@ export function Upload (props: UploadProps) {
       }
 
       axios({
-        url: action || 'https://httpbin.org/post',
+        url: action,
         method: methods,
         headers: {
           'Content-Type': 'multipart/form-data',

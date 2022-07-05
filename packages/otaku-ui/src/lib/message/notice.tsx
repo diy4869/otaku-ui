@@ -40,7 +40,8 @@ export class Notice {
       this.container.style.cssText = styleToStr({
         position: 'fixed',
         top: '20px',
-        left: '50%'
+        left: '50%',
+        'z-index': 2000
       })
       document.body.appendChild(this.container)
     }
