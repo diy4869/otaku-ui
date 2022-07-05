@@ -16,6 +16,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     height: 100%;
+    #playground {
+      // width: 500px;
+      height: 500px;
+      border: 2px solid red;
+    }
     .editor {
       height: 900px;
     }

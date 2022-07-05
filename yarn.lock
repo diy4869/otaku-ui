@@ -3693,7 +3693,16 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@typescript/vfs@^1.3.5":
+"@typescript/twoslash@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@typescript/twoslash/-/twoslash-3.1.0.tgz#20b4d4bb58729681ff7f4b187af98757ea8723d4"
+  integrity sha512-kTwMUQ8xtAZaC4wb2XuLkPqFVBj2dNBueMQ89NWEuw87k2nLBbuafeG5cob/QEr6YduxIdTVUjix0MtC7mPlmg==
+  dependencies:
+    "@typescript/vfs" "1.3.5"
+    debug "^4.1.1"
+    lz-string "^1.4.4"
+
+"@typescript/vfs@1.3.5", "@typescript/vfs@^1.3.5":
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/@typescript/vfs/-/vfs-1.3.5.tgz#801e3c97b5beca4ff5b8763299ca5fd605b862b8"
   integrity sha512-pI8Saqjupf9MfLw7w2+og+fmb0fZS0J6vsKXXrp4/PDXEFvntgzXmChCXC/KefZZS0YGS6AT8e0hGAJcTsdJlg==
@@ -8962,6 +8971,11 @@ loader-utils@^2.0.0, loader-utils@^2.0.2:
     emojis-list "^3.0.0"
     json5 "^2.1.2"
 
+loader@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/loader/-/loader-2.1.1.tgz#8848b12a3f00572e5a4249333ccdac79773fb402"
+  integrity sha512-Z6nHbyKiECMexVUmpIAVXp+f+8okRtfiMAQ9j0eTtImCghxSqQwrbeSiAyCYKBnfvRlgXLdQt0tPuaZmcBQzpw==
+
 locate-path@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/locate-path/-/locate-path-2.0.0.tgz"
@@ -13672,6 +13686,11 @@ vlq@^1.0.0:
   version "1.0.1"
   resolved "https://registry.npmjs.org/vlq/-/vlq-1.0.1.tgz"
   integrity sha512-gQpnTgkubC6hQgdIcRdYGDSDc+SaujOdyesZQMv6JlfQee/9Mp0Qhnys6WxDWvQnL5WZdT7o2Ul187aSt0Rq+w==
+
+vscode-loader@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vscode-loader/-/vscode-loader-1.0.2.tgz#bbd369b0b03b85f3b2f028237d4503fdc525ef03"
+  integrity sha512-jkQ1bm2WhWy1ntRLUeJAtOkg8dw9qieajiCdvouQWKV87WNT5gTekHrfLWxTPi7i1BfaqsDFK4HnH4gswDyj6w==
 
 vscode-oniguruma@^1.6.1:
   version "1.6.2"

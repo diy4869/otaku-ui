@@ -65,6 +65,7 @@ const run = (filePath, fileMap) => {
     // 定义的类型
     type: {},
     import: {},
+    class: {},
     function: {},
     export: {},
     // export * from 导出的内容
@@ -75,8 +76,6 @@ const run = (filePath, fileMap) => {
 
   ast.forEachChild(node => {
     const type = getDeclaration(node.kind)
-    // isFunction(node, currentFile)
-    
 
     switch (type) {
       case 'ExportDeclaration':
@@ -188,19 +187,13 @@ const run = (filePath, fileMap) => {
             const type = content
               .substring(item.type.pos, item.type.end)
               .trimStart()
-            
-            const typeReference = item.type.kind === 177
-              ? getReferenceType(item.type.typeName.escapedText, currentFile, fileMap)
-              : item?.type?.elementType?.kind === 177 
-              ? getReferenceType(item.type.elementType.typeName.escapedText, currentFile, fileMap) 
-              : undefined
 
             return {
               name: item.name.escapedText,
               type: type,
               required: item.questionToken ? false : true,
               defaultValue: undefined,
-              typeReference: typeReference,
+              typeReference: getReferenceType(item, currentFile, fileMap),
               jsDoc: ts.getJSDocTags(item).map(children => {
                 return {
                   tagName: children.tagName.escapedText,
@@ -254,6 +247,56 @@ const run = (filePath, fileMap) => {
         setDefaultValue(node, currentFile, content)
         saveExport(node, node.name.escapedText, currentFile, 'function')
         break
+      case 'ClassDeclaration':
+        console.log('file：', filePath)
+        currentFile.class[node.name.escapedText] = {
+          exportDefault: isExportDefault(node),
+          export: isExport(node),
+          name: node.name.escapedText,
+          property: node.members.map(item => {
+            if (item.kind === 170) {
+              return {
+                name: 'constructor',
+                args: item.parameters.map(children => {
+                  return {
+                    name: children.name.escapedText,
+                    type: children.type === undefined ? null : content.substring(children.pos, children.end).trimStart(),
+                    defaultValue: content.substring(children?.initializer?.pos, children?.initializer?.end).trimStart(),
+                    typeReference: getReferenceType(children, currentFile, fileMap),
+                  }
+                })
+              }
+            } else if (item.kind === 168) {
+              return {
+                name: item.name.escapedText,
+                args: item.parameters.map(children => {
+                  const typeName = children.type?.typeName?.escapedText 
+                    ? children.type.typeName.escapedText : children.type 
+                    ? content.substring(children.type.pos, children.type.end).trimStart()
+                    : null
+
+
+                  return {
+                    name: children.name.escapedText,
+                    type: typeName,
+                    defaultValue: children.initializer ?  content.substring(children.initializer?.pos, children?.initializer?.end).trimStart() : null,
+                    typeReference: getReferenceType(children, currentFile, fileMap)
+                  }
+                })
+              }
+            } else {
+              const type = item.type?.typeName?.escapedText ? item.type.typeName : item.type
+
+              return {
+                name: item.name.escapedText,
+                type: content.substring(type?.pos, type?.end)?.trimStart(),
+                typeReference: getReferenceType(item, currentFile, fileMap)
+              }
+            }
+          })
+        }
+        saveExport(node, node.name.escapedText, currentFile, 'class')
+        break
       default:
         isFunction(node, currentFile, fileMap, content)
         break
@@ -269,8 +312,17 @@ const run = (filePath, fileMap) => {
  * @param {string} typeName 当前文件引用到的类型
  * @returns
  */
-const getReferenceType = (typeName, currentFile, fileMap) => {
-  if (!typeName) return
+
+const getReferenceType = (node, currentFile, fileMap) => {
+  if (!node) return
+
+  let typeName
+
+  if (node.type?.typeName?.escapedText) {
+    typeName = node.type?.typeName?.escapedText
+  } else if (node.type?.elementType?.typeName?.escapedText) {
+    typeName = node.type?.elementType?.typeName?.escapedText
+  }
 
   if (currentFile.type[typeName]) {
     return currentFile.type[typeName]
@@ -296,9 +348,9 @@ const getReferenceType = (typeName, currentFile, fileMap) => {
     }
   } else {
     // 都不存在
-    return typeName
+    return null
+
   }
-  
 }
 
 const saveExport = (node, name, currentFile, type) => {
@@ -306,9 +358,9 @@ const saveExport = (node, name, currentFile, type) => {
     switch (type) {
       case 'function':
         return currentFile.function[name]
+      case 'class':
+        return currentFile.class[name]
       case 'interface':
-        return currentFile.type[name]
-      case 'type':
         return currentFile.type[name]
       default:
         return null
@@ -318,7 +370,7 @@ const saveExport = (node, name, currentFile, type) => {
   if (isExportDefault(node)) {
     currentFile.export.default = {
       type: type,
-      reference: getReferenceType(type) 
+      reference: getReferenceType(type)
     }
   } else if (isExport(node)) {
     currentFile.export[name] = {
@@ -391,4 +443,4 @@ const transform = (filePath, map = {}) => {
   return map
 }
 
-exports.transform = transform
+exports.generator = generator

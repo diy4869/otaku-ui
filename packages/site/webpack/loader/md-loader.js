@@ -7,7 +7,7 @@ const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
 const markdownItAnchor = require('markdown-it-anchor')
-const { transform, transformAll } = require('./generator/index')
+const { generatorAPT } = require('./generator/index')
 const json5 = require('json5')
 
 let importSynx = `
@@ -89,7 +89,7 @@ module.exports = function mdLoader (source) {
     .use(container, 'api', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
-          const apiType = transformAll()
+          const apiType = generatorAPT
     
           const findExport = () => {
             return data.api.module.map(item => {
