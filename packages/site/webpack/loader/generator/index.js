@@ -9,12 +9,12 @@ const tsconfig = require('../../../../otaku-ui/tsconfig.json')
 const program = ts.createProgram([entryPath], tsconfig)
 const entryContent = readFile(entryPath)
 
+const parserPath = path.resolve(libPath, './src/lib/button/button.tsx')
+const result = generator(entryPath, {})
 
-const result = transform(entryPath, {})
 
 
-
-module.exports.generatorAPT = result
+module.exports.generatorAPI = result
 
 
 

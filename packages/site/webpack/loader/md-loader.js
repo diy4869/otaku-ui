@@ -7,7 +7,10 @@ const traverse = require('@babel/traverse').default
 const generate = require('@babel/generator').default
 const { get } = require('./utils')
 const markdownItAnchor = require('markdown-it-anchor')
-const { generatorAPT } = require('./generator/index')
+const path = require('path')
+const libPath = path.resolve(__dirname, '../../../otaku-ui')
+const entryPath = path.resolve(libPath, './src/index.ts')
+const { generator: generatorAPI } = require('./generator/core')
 const json5 = require('json5')
 
 let importSynx = `
@@ -89,7 +92,7 @@ module.exports = function mdLoader (source) {
     .use(container, 'api', {
       render (tokens, index) {
         if (tokens[index].nesting === 1) {
-          const apiType = generatorAPT
+          const apiType = generatorAPI(entryPath)
     
           const findExport = () => {
             return data.api.module.map(item => {

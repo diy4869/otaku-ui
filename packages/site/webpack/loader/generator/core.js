@@ -27,8 +27,6 @@ const setDefaultValue = (node, currentFile, content) => {
           if (property) {
             item.defaultValue = property.initializer 
               ? property.initializer.text : undefined
-            // item.defaultValue = property.initializer 
-            //   ? content.substring(property.initializer.pos, property.initializer.end) : undefined
           }
 
           return item
@@ -53,7 +51,139 @@ const setDefaultValue = (node, currentFile, content) => {
    * @param {*} refererPath 引用的文件路径
    * @returns
    */
-const run = (filePath, fileMap) => {
+
+/**
+ *
+ * @param {string} currentPath 当前的文件
+ * @param {string} typeName 当前文件引用到的类型
+ * @returns
+ */
+
+const getReferenceType = (node, currentFile, fileMap) => {
+  if (!node) return
+
+  let typeName
+
+  if (node.type?.typeName?.escapedText) {
+    typeName = node.type?.typeName?.escapedText
+  } else if (node.type?.elementType?.typeName?.escapedText) {
+    typeName = node.type?.elementType?.typeName?.escapedText
+  }
+
+  if (currentFile.type[typeName]) {
+    return currentFile.type[typeName]
+  } else if (currentFile.import[typeName]) {
+    // 说明是引入的
+    const absolutePath = currentFile.import[typeName].importPath
+    if (absolutePath) {
+      if (absolutePath.includes('node_modules')) {
+        return 'node_modules'
+      }
+      // 判断该文件时否已经被解析过
+      if (currentFile[absolutePath]) {
+        currentFile.type[typeName].typeReference = currentFile[absolutePath].type[typeName]
+
+        return currentFile.type[typeName].typeReference
+      } else {
+        generator(absolutePath, fileMap)
+
+        currentFile.import[typeName].typeReference = fileMap[absolutePath].type[typeName]
+
+        return currentFile.import[typeName].typeReference
+      }
+    }
+  } else {
+    // 都不存在
+    return null
+
+  }
+}
+
+const saveExport = (node, name, currentFile, type) => {
+  const getReferenceType = (type) => {
+    switch (type) {
+      case 'function':
+        return currentFile.function[name]
+      case 'class':
+        return currentFile.class[name]
+      case 'interface':
+        return currentFile.type[name]
+      default:
+        return null
+    }
+  }
+  
+  if (isExportDefault(node)) {
+    currentFile.export.default = {
+      type: type,
+      reference: getReferenceType(type)
+    }
+  } else if (isExport(node)) {
+    currentFile.export[name] = {
+      type: type,
+      reference: getReferenceType(type) 
+    }
+  }
+}
+
+const transformArgs = (node, currentFile, fileMap) => {
+  return node.parameters?.map(args => {
+    const typeName = args?.type?.kind === 177
+        ? getReferenceType(args, currentFile, fileMap)
+        : ''
+
+    return {
+      name: args.name.escapedText,
+      type: typeName
+    }
+  })
+}
+
+const isFunction = (node, currentFile, fileMap, content) => {
+  const isVariableFunction = node => {
+    const initializer = node?.declarationList?.declarations?.[0]?.initializer
+
+    if (initializer) {
+      if (ts.isArrowFunction(initializer)) {
+        return initializer
+      }
+
+      return false
+    }
+    return false
+  }
+
+  const isArrowFunction = ts.isArrowFunction(node)
+  const isFunctionExpression = ts.isFunctionExpression(node)
+  // const isFunctionLike = ts.isFunctionLike(node)
+  const isVariFunctionNode = isVariableFunction(node)
+
+  if (isVariFunctionNode) {
+    const functionName = isVariFunctionNode.parent.name.escapedText
+
+    currentFile.function[functionName] = {
+      export: isExport(node),
+      functionName: functionName,
+      arrowFunction: ts.isArrowFunction(isVariFunctionNode),
+      asyncFunction: ts.isAsyncFunction(isVariFunctionNode),
+      args: transformArgs(isVariFunctionNode, currentFile, fileMap)
+    }
+
+    setDefaultValue(isVariFunctionNode, currentFile, content)
+    saveExport(node, functionName, currentFile, 'function')
+
+    return isVariFunctionNode
+  } else if (ts.isFunctionDeclaration(node)) {
+    // 普通函数
+    return node
+  } else if (isArrowFunction) {
+    return isArrowFunction
+  } else if (isFunctionExpression) {
+    return isFunctionExpression
+  }
+}
+
+const generator = (filePath, fileMap = {}) => {
   if (fileMap[filePath]) return
   if (filePath.includes('.scss')) return
   if (filePath.includes('node_modules')) return
@@ -97,7 +227,7 @@ const run = (filePath, fileMap) => {
           const relativePath = backPath(filePath, value)
           const exportPath = getAbsolutePath(relativePath, value)
 
-          transform(exportPath, fileMap)
+          generator(exportPath, fileMap)
           currentFile.exportFile[exportPath] = fileMap[exportPath]
         }
        
@@ -129,7 +259,7 @@ const run = (filePath, fileMap) => {
             return obj
           }, currentFile.import)
 
-          run(absolutePath, fileMap)
+          generator(absolutePath, fileMap)
         } else {
           // 命名导出
           const name = importClause.name.escapedText
@@ -304,143 +434,8 @@ const run = (filePath, fileMap) => {
   })
 
   fileMap[filePath] = currentFile
-}
 
-/**
- *
- * @param {string} currentPath 当前的文件
- * @param {string} typeName 当前文件引用到的类型
- * @returns
- */
-
-const getReferenceType = (node, currentFile, fileMap) => {
-  if (!node) return
-
-  let typeName
-
-  if (node.type?.typeName?.escapedText) {
-    typeName = node.type?.typeName?.escapedText
-  } else if (node.type?.elementType?.typeName?.escapedText) {
-    typeName = node.type?.elementType?.typeName?.escapedText
-  }
-
-  if (currentFile.type[typeName]) {
-    return currentFile.type[typeName]
-  } else if (currentFile.import[typeName]) {
-    // 说明是引入的
-    const absolutePath = currentFile.import[typeName].importPath
-    if (absolutePath) {
-      if (absolutePath.includes('node_modules')) {
-        return 'node_modules'
-      }
-      // 判断该文件时否已经被解析过
-      if (currentFile[absolutePath]) {
-        currentFile.type[typeName].typeReference = currentFile[absolutePath].type[typeName]
-
-        return currentFile.type[typeName].typeReference
-      } else {
-        run(absolutePath, fileMap)
-
-        currentFile.import[typeName].typeReference = fileMap[absolutePath].type[typeName]
-
-        return currentFile.import[typeName].typeReference
-      }
-    }
-  } else {
-    // 都不存在
-    return null
-
-  }
-}
-
-const saveExport = (node, name, currentFile, type) => {
-  const getReferenceType = (type) => {
-    switch (type) {
-      case 'function':
-        return currentFile.function[name]
-      case 'class':
-        return currentFile.class[name]
-      case 'interface':
-        return currentFile.type[name]
-      default:
-        return null
-    }
-  }
-  
-  if (isExportDefault(node)) {
-    currentFile.export.default = {
-      type: type,
-      reference: getReferenceType(type)
-    }
-  } else if (isExport(node)) {
-    currentFile.export[name] = {
-      type: type,
-      reference: getReferenceType(type) 
-    }
-  }
-}
-
-const transformArgs = (node, currentFile, fileMap) => {
-  return node.parameters?.map(args => {
-    const typeName = args?.type?.kind === 177
-        ? getReferenceType(args.type.typeName.escapedText, currentFile, fileMap)
-        : ''
-
-    return {
-      name: args.name.escapedText,
-      type: typeName
-    }
-  })
-}
-
-const isFunction = (node, currentFile, fileMap, content) => {
-  const isVariableFunction = node => {
-    const initializer = node?.declarationList?.declarations?.[0]?.initializer
-
-    if (initializer) {
-      if (ts.isArrowFunction(initializer)) {
-        return initializer
-      }
-
-      return false
-    }
-    return false
-  }
-
-  const isArrowFunction = ts.isArrowFunction(node)
-  const isFunctionExpression = ts.isFunctionExpression(node)
-  // const isFunctionLike = ts.isFunctionLike(node)
-  const isVariFunctionNode = isVariableFunction(node)
-
-  if (isVariFunctionNode) {
-    const functionName = isVariFunctionNode.parent.name.escapedText
-
-    currentFile.function[functionName] = {
-      export: isExport(node),
-      functionName: functionName,
-      arrowFunction: ts.isArrowFunction(isVariFunctionNode),
-      asyncFunction: ts.isAsyncFunction(isVariFunctionNode),
-      args: transformArgs(isVariFunctionNode, currentFile, fileMap)
-    }
-
-    setDefaultValue(isVariFunctionNode, currentFile, content)
-    saveExport(node, functionName, currentFile, 'function')
-
-    return isVariFunctionNode
-  } else if (ts.isFunctionDeclaration(node)) {
-    // 普通函数
-    return node
-  } else if (isArrowFunction) {
-    return isArrowFunction
-  } else if (isFunctionExpression) {
-    return isFunctionExpression
-  }
-}
-
-const transform = (filePath, map = {}) => {
-  run(filePath, map)
-
-  return map
+  return fileMap
 }
 
 exports.generator = generator

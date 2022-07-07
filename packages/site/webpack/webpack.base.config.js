@@ -41,6 +41,7 @@ const baseConfig = {
 		'ts.worker': 'monaco-editor/esm/vs/language/typescript/ts.worker'
   },
   output: {
+    clean: true,
     globalObject: 'self',
     path: path.join(__dirname, '../dist/docs'),
     filename: 'js/[name].[contenthash].js',
