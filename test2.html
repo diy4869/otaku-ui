@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+
     <title>Document</title>
 
     <style></style>
@@ -12,9 +14,67 @@
     <div id="app"></div>
   </body>
   <script>
-      const container = document.getElementById('app')
+
+
+    const container = document.getElementById('app')
+
+    const module = new Map()
+    async function require (id, URL) {
+        function loadScript (URL) {
+          return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', URL)
+            xhr.send()
+
+            xhr.onreadystatechange = function (e) {
+              if (e.target.readyState === 4 && e.target.status === 200) {
+                console.log(e)
+                const code = new Function(
+                  'exports = {}',
+                  `${e.target.responseText}\n\n return exports`
+                )
+
+                const result = code.call(null, {})
+                resolve(result)
+              }
+            }
+          })
+        }
+
+        try {
+          if (!module.has(id)) {
+            const result = await loadScript(URL)
+            module.set(id, result)
+            
+            return module.get(id)
+          }
+        } catch (err) {
+
+        }
+        
+      }
+
+      (async function () {
+        var React = await require('react', 'https://unpkg.com/react@18/umd/react.development.js')
+        console.log('react', React)
+        console.log(window.React)
+        debugger
+        var ReactDOM = require('react-dom/client', 'https://unpkg.com/react-dom@18/umd/react-dom.development.js')
+        function App() {
+          return React.createElement('div', null, 'hello world')
+        }
+        ReactDOM
+          .createRoot(container)
+          .render(React.createElement(App, null))
+        })()
 
 
 
+
+
+    
+
+
+   
   </script>
 </html>

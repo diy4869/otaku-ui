@@ -378,7 +378,6 @@ const generator = (filePath, fileMap = {}) => {
         saveExport(node, node.name.escapedText, currentFile, 'function')
         break
       case 'ClassDeclaration':
-        console.log('file：', filePath)
         currentFile.class[node.name.escapedText] = {
           exportDefault: isExportDefault(node),
           export: isExport(node),

@@ -52,7 +52,7 @@ export function Progress (props: ProgressProps) {
 
       ctx.beginPath()
       ctx.lineWidth = 5
-      ctx.strokeStyle = color
+      ctx.strokeStyle = color as string
 
       // (Math.PI / 180) * 360
       ctx.arc(
