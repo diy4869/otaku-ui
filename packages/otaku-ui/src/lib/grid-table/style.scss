@@ -1,0 +1,19 @@
+.otaku-grid-table-container {
+  --grid-border-color: red;
+  --grid-border-width: 2px;
+  border-top: var(--grid-border-width) solid var(--grid-border-color);
+  border-left: var(--grid-border-width) solid var(--grid-border-color);
+  .otaku-grid-table-header,
+  .otaku-grid-table-row {
+    display: grid;
+    .otaku-grid-table-cell {
+      border-right: var(--grid-border-width) solid var(--grid-border-color);
+      border-bottom: var(--grid-border-width) solid var(--grid-border-color);
+      padding: 8px 10px;
+    }
+  }
+  .otaku-grid-table-body {
+    overflow: auto;
+  }
+}
+

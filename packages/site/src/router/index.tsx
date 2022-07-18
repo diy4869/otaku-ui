@@ -187,6 +187,11 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/tree/demo/README.md'))
       },
       {
+        title: "grid-table 表格",
+        path: "/display/gridTable",
+        component: lazy(() => import('otaku-ui/src/lib/grid-table/demo/README.md'))
+      },
+      {
         title: "table 表格",
         path: "/display/table",
         component: lazy(() => import('otaku-ui/src/lib/table/demo/README.md'))
