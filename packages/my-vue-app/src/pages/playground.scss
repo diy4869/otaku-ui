@@ -1,0 +1,40 @@
+.site-playground {
+  display: grid;
+  grid-template-areas: "header header"
+                      "editor preview";
+  grid-template-rows: 60px 1fr;
+  grid-template-columns: 1fr 1fr;
+  box-sizing: border-box;
+  height: 100%;
+
+
+  header {
+    grid-area: header;
+
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 20px;
+    box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
+    position: relative;
+    z-index: 2000;
+  }
+
+
+    .editor-container, .preview-container {
+      height: 100%;
+      box-sizing: border-box;
+    }
+    #playground {
+      // width: 500px;
+      height: 100%;
+      // border: 2px solid red;
+    }
+    .editor-container {
+      grid-area: editor;
+      height: 100%;
+    }
+    .preview-container {
+      grid-area: preview;
+      height: 100%;
+    }
+}

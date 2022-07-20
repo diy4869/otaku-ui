@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import Md from '../plugins/test.md'
-import './App.css'
+import React, { Suspense, useEffect, useState } from 'react'
+import { hot } from 'react-hot-loader/root'
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import routes from './router/index'
+import NotFound from './components/notFound/notFound'
 
-function App() {
-  const [count, setCount] = useState(0)
+import '../style/github-markdown-css/github-markdown-light.css'
+// import '../style/github-markdown-css/github-markdown-dark.css'
 
+function App () {
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-      <Md></Md>
-    </div>
+    <Suspense fallback={<>loading</>}>
+      <HashRouter>
+      <Routes>
+        {routes
+          .filter(item => !item.children)
+          .map(router => {
+            console.log(router.component)
+            return (
+              <Route
+                path={router.path}
+                key={router.path}
+                element={
+                  <React.Suspense fallback={<>...</>}>
+                    <router.component></router.component> 
+                  </React.Suspense>
+                }
+              />
+            )
+          })}
+        {/* <Route path='*' element={NotFound}></Route> */}
+      </Routes>
+    </HashRouter>
+    </Suspense>
+    
   )
 }
 

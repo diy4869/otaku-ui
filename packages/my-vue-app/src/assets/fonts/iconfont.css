@@ -1,0 +1,375 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 1132676 */
+  src: url('iconfont.woff2?t=1648125396714') format('woff2'),
+       url('iconfont.woff?t=1648125396714') format('woff'),
+       url('iconfont.ttf?t=1648125396714') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.otaku-icon-success:before {
+  content: "\e67f";
+}
+
+.otaku-icon-delete-filling:before {
+  content: "\e68f";
+}
+
+.otaku-icon-success-filling:before {
+  content: "\e690";
+}
+
+.otaku-icon-arrow-up-circle:before {
+  content: "\e665";
+}
+
+.otaku-icon-arrow-down:before {
+  content: "\e666";
+}
+
+.otaku-icon-arrow-right:before {
+  content: "\e667";
+}
+
+.otaku-icon-arrow-double-left:before {
+  content: "\e669";
+}
+
+.otaku-icon-arrow-double-right:before {
+  content: "\e66a";
+}
+
+.otaku-icon-code1:before {
+  content: "\e66b";
+}
+
+.otaku-icon-calendar:before {
+  content: "\e66c";
+}
+
+.otaku-icon-comment:before {
+  content: "\e66d";
+}
+
+.otaku-icon-download1:before {
+  content: "\e66e";
+}
+
+.otaku-icon-export:before {
+  content: "\e66f";
+}
+
+.otaku-icon-error:before {
+  content: "\e670";
+}
+
+.otaku-icon-file-delete:before {
+  content: "\e671";
+}
+
+.otaku-icon-file-add:before {
+  content: "\e672";
+}
+
+.otaku-icon-file:before {
+  content: "\e673";
+}
+
+.otaku-icon-folder-close:before {
+  content: "\e674";
+}
+
+.otaku-icon-filter:before {
+  content: "\e675";
+}
+
+.otaku-icon-home:before {
+  content: "\e676";
+}
+
+.otaku-icon-history:before {
+  content: "\e677";
+}
+
+.otaku-icon-file-open:before {
+  content: "\e678";
+}
+
+.otaku-icon-loading1:before {
+  content: "\e679";
+}
+
+.otaku-icon-upload:before {
+  content: "\e682";
+}
+
+.otaku-icon-add-bold:before {
+  content: "\e685";
+}
+
+.otaku-icon-arrow-left-bold:before {
+  content: "\e686";
+}
+
+.otaku-icon-arrow-up-bold:before {
+  content: "\e687";
+}
+
+.otaku-icon-close-bold:before {
+  content: "\e688";
+}
+
+.otaku-icon-arrow-down-bold:before {
+  content: "\e689";
+}
+
+.otaku-icon-minus-bold:before {
+  content: "\e68a";
+}
+
+.otaku-icon-arrow-right-bold:before {
+  content: "\e68b";
+}
+
+.otaku-icon-select-bold:before {
+  content: "\e68c";
+}
+
+.otaku-icon-warning:before {
+  content: "\e68d";
+}
+
+.otaku-icon-info:before {
+  content: "\e68e";
+}
+
+.otaku-icon-copy:before {
+  content: "\e744";
+}
+
+.otaku-icon-code:before {
+  content: "\e60e";
+}
+
+.otaku-icon-loading:before {
+  content: "\e668";
+}
+
+.otaku-icon-down:before {
+  content: "\e610";
+}
+
+.otaku-icon-up:before {
+  content: "\e611";
+}
+
+.otaku-icon-doubleleft:before {
+  content: "\e7ed";
+}
+
+.otaku-icon-doubleright:before {
+  content: "\e7f0";
+}
+
+.otaku-icon-more-fill:before {
+  content: "\e819";
+}
+
+.otaku-icon-more-line:before {
+  content: "\e81a";
+}
+
+.otaku-icon-close-circle-line:before {
+  content: "\e80d";
+}
+
+.otaku-icon-close-circle-fill:before {
+  content: "\e80e";
+}
+
+.otaku-icon-star-half:before {
+  content: "\e612";
+}
+
+.otaku-icon-checkbox-indeterminate-fill:before {
+  content: "\e80a";
+}
+
+.otaku-icon-checkbox-fill:before {
+  content: "\e80b";
+}
+
+.otaku-icon-checkbox:before {
+  content: "\e80c";
+}
+
+.otaku-icon-external-link-line:before {
+  content: "\e80f";
+}
+
+.otaku-icon-eye-line:before {
+  content: "\e810";
+}
+
+.otaku-icon-eye-off-line:before {
+  content: "\e811";
+}
+
+.otaku-icon-search-2-line:before {
+  content: "\e81b";
+}
+
+.otaku-icon-search-line:before {
+  content: "\e81c";
+}
+
+.otaku-icon-thumb-down-fill:before {
+  content: "\e823";
+}
+
+.otaku-icon-thumb-up-fill:before {
+  content: "\e826";
+}
+
+.otaku-icon-logout:before {
+  content: "\e742";
+}
+
+.otaku-icon-zhuanfa:before {
+  content: "\e604";
+}
+
+.otaku-icon-lishijilu:before {
+  content: "\e605";
+}
+
+.otaku-icon-dibiao:before {
+  content: "\e60a";
+}
+
+.otaku-icon-download:before {
+  content: "\e618";
+}
+
+.otaku-icon-shangchuan:before {
+  content: "\e61b";
+}
+
+.otaku-icon-shijian:before {
+  content: "\e635";
+}
+
+.otaku-icon-zuanshihuiyuan:before {
+  content: "\e63a";
+}
+
+.otaku-icon-left1:before {
+  content: "\e617";
+}
+
+.otaku-icon-right1:before {
+  content: "\e638";
+}
+
+.otaku-icon-biaoqian:before {
+  content: "\e619";
+}
+
+.otaku-icon-yaowan:before {
+  content: "\e61a";
+}
+
+.otaku-icon-shanchu:before {
+  content: "\e61d";
+}
+
+.otaku-icon-user:before {
+  content: "\e7ae";
+}
+
+.otaku-icon-mobile:before {
+  content: "\e7b2";
+}
+
+.otaku-icon-like:before {
+  content: "\e7c8";
+}
+
+.otaku-icon-unlike:before {
+  content: "\e7c9";
+}
+
+.otaku-icon-api:before {
+  content: "\e7e1";
+}
+
+.otaku-icon-share:before {
+  content: "\e7e7";
+}
+
+.otaku-icon-left:before {
+  content: "\e7ef";
+}
+
+.otaku-icon-bug-fill:before {
+  content: "\e8e8";
+}
+
+.otaku-icon-bug:before {
+  content: "\e8e9";
+}
+
+.otaku-icon-caret-right:before {
+  content: "\e8ec";
+}
+
+.otaku-icon-caret-left:before {
+  content: "\e8ed";
+}
+
+.otaku-icon-step-backward:before {
+  content: "\e8ef";
+}
+
+.otaku-icon-step-forward:before {
+  content: "\e8f0";
+}
+
+.otaku-icon-heart:before {
+  content: "\e7df";
+}
+
+.otaku-icon-star:before {
+  content: "\e7e0";
+}
+
+.otaku-icon-verticalright:before {
+  content: "\e7ea";
+}
+
+.otaku-icon-verticalleft:before {
+  content: "\e7eb";
+}
+
+.otaku-icon-right:before {
+  content: "\e7ec";
+}
+
+.otaku-icon-fullscreen-exit:before {
+  content: "\e7ee";
+}
+
+.otaku-icon-heart-fill:before {
+  content: "\e849";
+}
+
+.otaku-icon-star-fill:before {
+  content: "\e86a";
+}
+

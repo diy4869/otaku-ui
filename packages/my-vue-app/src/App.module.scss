@@ -1,0 +1,144 @@
+@import '~/style/theme.scss';
+
+.otaku-home {
+  min-width: 1000px;
+  height: 100%;
+
+  .otaku-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    background: white;
+    color: black;
+    padding: 0 20px;
+    box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
+    position: relative;
+    z-index: 2000;
+    
+    .otaku-title {
+      // width: 200px;
+      font-size: 20px;
+    }
+    .github-star {
+      font-size: 20px;
+      color: #ffb800;
+      margin-left: 5px;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    a {
+      color: black;
+      &:hover {
+          color: var(--primaryColor);
+      }
+      &:active {
+          color: var(--primaryColor);
+      }
+  }
+  }
+  .content {
+    display: grid;
+    grid-template-areas: 'aside main';
+    grid-template-columns: 250px 1fr;
+    height: calc(100% - 60px);
+  }
+  .sidebar {
+    grid-area: aside;
+    padding: 10px 0 0 0px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    height: calc(100vh - 60px);
+    h3 {
+      margin: 10px 15px;
+    }
+    .otaku-menu {
+      .otaku-menu-item {
+        box-sizing: border-box;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 15px;
+        font-size: 14px;
+        cursor: pointer;
+        display: inline-block;
+        color: black;
+        text-decoration: none;
+        &:active {
+          color: black;
+        }
+      }
+      .active {
+        color: var(--primaryColor);
+      }
+    }
+  }
+
+}
+
+// md 内的样式
+:global {
+  .main {
+    grid-area: main;
+    background: #f7f8fa;
+    position: relative;
+    box-sizing: border-box;
+    height: calc(100vh - 60px);
+    overflow-x: auto;
+    display: grid;
+    grid-template-columns: 1fr 200px;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .otaku-anchor {
+    height: fit-content;
+    padding: 12px;
+    position: sticky;
+    top: 0px;
+    border-radius: 4px;
+    // line-height: 24px;
+    // font-size: 14px;
+  }
+  .markdown-body li+li {
+    margin-top: 0 !important;
+  }
+  .markdown-body {
+    table:not([class^=".otaku-"]) {
+      display: table;
+    }
+    a {
+      color: var(--primaryColor);
+    }
+    .table-of-contents {
+      position: fixed;
+      right: 40px;
+      padding: 10px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0px 10px 50px 0 rgb(0 35 114 / 10%);
+      a {
+        color: var(--primaryColor);
+        font-size: 14px;
+      }
+    }
+    pre:not([class^=".otaku-"]) {
+      padding: 0;
+      font-size: 14px;
+    }
+    ol:not([class^=".otaku-"]), ul:not([class^=".otaku-"]) {
+      padding-left: 0;
+      margin-bottom: 0;
+      li {
+        list-style: none;
+      }
+    }
+  }
+  
+
+  @media (max-width: 767px) {
+    .markdown-body {
+      padding: 15px;
+    }
+  }
+}

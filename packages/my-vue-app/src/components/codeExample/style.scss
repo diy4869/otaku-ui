@@ -1,0 +1,37 @@
+
+.otaku-code-example-container {
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 4px;
+  
+  .otaku-desc, .otaku-example {
+    padding: 20px;
+    border-bottom: 1.5px dashed rgba(0, 0, 0, 0.1);
+    // border-radius: 4px;
+  }
+  .otaku-operation {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    li {
+      list-style: none;
+      margin-right: 20px;
+      span {
+        font-size: 20px;
+        // color: #e8e8e8;
+      }
+    }
+  }
+
+  .otaku-code-container {
+    border-top: 1.5px dashed rgba(0, 0, 0, 0.1);
+  }
+
+  .otaku-edit-container {
+    padding: 15px;
+    height: 300px;
+  }
+}

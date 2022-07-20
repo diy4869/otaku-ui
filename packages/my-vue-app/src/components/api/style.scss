@@ -1,0 +1,18 @@
+
+
+.otaku-api-container {
+    background: white;
+    padding: 10px;
+    .otaku-code-container {
+        border-top: none;
+        padding-top: 0;
+       
+    }
+    .otaku-table-row {
+        td:nth-of-type(3) div {
+            // background: red;
+            color: #a31515;
+            font-family: Consolas, Monaco, monospace;
+        }
+    }
+}

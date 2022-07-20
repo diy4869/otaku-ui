@@ -16,9 +16,6 @@ const json5 = require('json5')
 let importSynx = `
   import * as React from 'react'
   import Block from 'site-component/block/block'
-  import { Api } from 'site-component/api/api'
-  import { HighlightCode, Anchor, AnchorItem } from 'otaku-ui'
-  import { CodeExample } from 'site-component/codeExample/codeExample'
 `
 
 let str = importSynx

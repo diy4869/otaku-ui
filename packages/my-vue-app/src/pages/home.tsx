@@ -46,14 +46,15 @@ export default function Home () {
         </header>
         <aside className={style['content']}>
           <aside className={style['sidebar']}>
-            {routes.map(item => {
+            {routes.map((item, index) => {
               return (
-                <>
+                <React.Fragment key={index}>
                   <h3 className={style['title']}>{item.title}</h3>
                   <div className={style['otaku-menu']}>
-                    {item.children?.map(children => {
+                    {item.children?.map((children, childrenIndex) => {
                       return (
                         <NavLink
+                          key={`${index}-${childrenIndex}`}
                           className={({ isActive }) => {
                             const className = [style['otaku-menu-item']]
 
@@ -68,7 +69,7 @@ export default function Home () {
                       )
                     })}
                   </div>
-                </>
+                </React.Fragment>
               )
             })}
           </aside>
