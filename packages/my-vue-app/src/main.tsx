@@ -1,17 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
+import './index.css'
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 )
-
-const observer = new PerformanceObserver((entries, observer) => {
-  console.log(entries.getEntries(), observer)
-  
-})
-
-observer.observe({ entryTypes: ['largest-contentful-paint'] })

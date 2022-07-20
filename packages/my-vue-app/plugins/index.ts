@@ -1,19 +1,35 @@
-export default function mdToReact() {
+import MarkdownIt from 'markdown-it'
+import contaier from 'markdown-it-container'
+import react from '@vitejs/plugin-react'
+
+function reactCode (code: string) {
+  return `export default function MarkDown () {
+      return (
+        <section className="markdown-container">
+          ${code}
+        </section>
+      )
+  }`
+}
+
+export default (options) => {
   return {
     name: 'vite-plugin-md',
-    // options() { },
-    buildStart() { },
-    resolveId(context, source) {
-      console.log('resolveId', source)
+    // enforce: 'pre',
+    resolveId (id) {
+      console.log(id)
+      return id
     },
-    // load() { },
-    transform(context, code, id) {
-      debugger
-      console.log('transform', code)
+    transform (content, path) {
+      const reg = /\.md$/
 
-      return code
-    },
-    // buildEnd() { },
-    // closeBundle () {}
+      if (reg.test(path)) {
+        const code = new MarkdownIt().render(content)
+
+        return {
+          code: reactCode(code)
+        }
+      }
+    }
   }
 }
