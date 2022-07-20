@@ -3,9 +3,9 @@
 ::: desc
 ### 一些基本规范
 
-- stylelint
-- eslint
-- commitlint 
+- `stylelint`
+- `eslint`
+- `commitlint`
 
 基于 [angular commit 规范](https://www.jianshu.com/p/c7e40dab5b05) 实现，或者采用```git cz``` or ``` npm run commit``` 提交。
 

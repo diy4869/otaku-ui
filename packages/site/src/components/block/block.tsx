@@ -8,7 +8,7 @@ interface Props {
 export default (props: Props) => {
   console.log(props)
   return (
-    <div className="otaku-block-container">
+    <div className="site-block-container">
       {props.children}
     </div>
   )
