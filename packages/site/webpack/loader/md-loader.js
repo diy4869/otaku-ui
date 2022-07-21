@@ -8,10 +8,12 @@ const generate = require('@babel/generator').default
 const { get } = require('./utils')
 const markdownItAnchor = require('markdown-it-anchor')
 const path = require('path')
-const libPath = path.resolve(__dirname, '../../../otaku-ui')
+const libPath = path.resolve(__dirname, '../../otaku-ui')
 const entryPath = path.resolve(libPath, './src/index.ts')
 const { generator: generatorAPI } = require('./generator/core')
 const json5 = require('json5')
+
+
 
 let importSynx = `
   import * as React from 'react'

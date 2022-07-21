@@ -6,7 +6,6 @@ interface Props {
 }
 
 export default (props: Props) => {
-  console.log(props)
   return (
     <div className="site-block-container">
       {props.children}

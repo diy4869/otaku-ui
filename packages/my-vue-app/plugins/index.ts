@@ -1,22 +1,60 @@
 import MarkdownIt from 'markdown-it'
 import container from 'markdown-it-container'
 import markdownItAnchor from 'markdown-it-anchor'
+import matter from 'gray-matter'
 import {transformSync } from '@babel/core'
 import esbuild from 'esbuild'
+// import parser from './compiler'
+import traverse from '@babel/traverse'
+import generate from '@babel/generator'
+import path from 'path'
 
-function reactCode (code: string) {
+
+const libPath = path.resolve(__dirname, '../../otaku-ui')
+const entryPath = path.resolve(libPath, './src/index.ts')
+const { generator: generatorAPI } = require('../../typescript-api-generator/src/lib/core')
+const { get } = require('./utils')
+const parser = require('./compiler')
+
+
+interface Anchor {
+  tag: string
+  level: number
+  name: string
+}
+function reactCode (code: string, demoCode: string[], frontMatter, anchor: Anchor[]) {
+  const importCode = frontMatter.import?.split(';').map(str => str.trimStart()).filter((item) => item).join('\n')
+
   const sourceCode = `
     import React from 'react'
     import Block from 'site-component/block/block'
     import { Api } from 'site-component/api/api'
     import { HighlightCode, Anchor, AnchorItem } from 'otaku-ui'
     import { CodeExample } from 'site-component/codeExample/codeExample'
+    ${importCode}
 
+    ${demoCode.join('\n')}
+    
     export default function MarkDown () {
       return (
-          <section className="markdown-container">
-          ${code}
-        </section>
+          <>
+          <div className='markdown-body'>${code}</div>
+            ${
+              frontMatter.anchor ? '' :  `
+              <Anchor target=".main">
+                ${
+                  anchor.reduce((str, item) => {
+                    str += `<AnchorItem 
+                      href={\`#${item.name.toLowerCase().replace(/ /g, '-')}\`}
+                      title={\`${item.name}\`}></AnchorItem>`
+                    
+                    return str
+                  }, '')
+                }
+              </Anchor>
+            `
+            }
+        </>
       )
   }`
 
@@ -36,9 +74,14 @@ export default () => {
   return {
     name: 'vite-plugin-md',
     // enforce: 'pre' as 'pre',
-    transform (content, path) {
+    transform (mdCode, path) {
       const reg = /\.md$/
+      const { content, data } = matter(mdCode)
 
+      let demoIndex = 0
+      let demoCode = []
+      let demoName
+      
 
       if (reg.test(path)) {
         const md = new MarkdownIt({
@@ -76,7 +119,200 @@ export default () => {
               }
             }
           })
+          .use(container, 'api', {
+            render (tokens, index) {
+              if (tokens[index].nesting === 1) {
+                const apiType = generatorAPI(entryPath)
+          
+                const findExport = () => {
+                  return data.api.module.map(item => {
+                    const filePath = Object.keys(apiType).find(children => {
+                      if (apiType[children].export[item]) {
+                        return true
+                      }
+                    })
+      
+                    return {
+                      name: item,
+                      type: filePath ? apiType[filePath].export[item].reference : null
+                    }
+                  })
+                }
+                const result = findExport()
+                const interfaceCode = []
+                const type = []
+                const apiData = []
+                const property = []
+                
+                const appendType = (property) => {
+                  const find = property.find(property => property.typeReference)
+      
+                  if (find) {
+                    find.typeReference.type === 'interface' ? interfaceCode.push(find.typeReference.code) : type.push(find.typeReference.code)
+                  }
+                }
+      
+                result.forEach(item => {
+                  const type = item.type.args[0].type
+      
+                  if (type.type === 'interface') {
+                    if (type.extendProperty) {
+                      type.extendProperty.forEach(children => {
+                        appendType(children.property)
+                        interfaceCode.push(children.code)
+                      })
+                      
+                    }
+                    appendType(type.property)
+                    interfaceCode.push(type.code)
+                  }
+      
+      
+                  apiData.push({
+                    name: item.name,
+                    data: type.property
+                  })
+                })
+      
+                const header = ['属性', '是否必填', '类型', '默认值', '描述']
+      
+                const mdTableData = apiData.reduce((total, current) => {
+                  const { data } = current
+      
+                  const table = [
+                    header.join('|'),
+                    new Array(5).fill('---').join('|'),
+                    data.map(children => {
+                      return [
+                        children.name,
+                        children.required ? '是' : '否',
+                        children.type,
+                        children.defaultValue
+                      ].join('|')
+                    }).join('\n')
+                  ]
+      
+                  total.push(
+                    table.join('\n')
+                  )
+      
+                  return total
+                }, [])
+                
+      
+                // console.log(mdTableData)
+      
+                // const demoMarkdown = new MarkdownIt({})
+      
+                //   demoMarkdown.use(md => {
+                    
+                //     md.block.ruler.before('table', 'my_rule', state => {
+                //       console.log(md)
+                //     })
+                //   })
+      
+                  // demoMarkdown.render(mdTableData.join(''))
+                
+                return `<>
+                  <Api 
+                    code={\`${interfaceCode.join('\n\n')}\`}
+                    data={\`${JSON.stringify(apiData)}\`}
+                    ></Api>`
+              } else {
+                return `</>`
+              }
+            }
+          })
+          .use(container, 'demo', {
+            render (tokens, index) {
+              if (tokens[index].nesting === 1) {
+                const map = get(tokens, index)
+                const current = map.get(index)
+                const ast = parser(current.code)
+      
+                traverse(ast, {
+                  FunctionDeclaration (path) {
+                    const node = path.node
+                    const name = node.id.name
+                    demoName = name
+                    path.node.id.name = `${name}${demoIndex}`
+                  },
+                  JSXIdentifier (path) {
+                    if (path.node.name === demoName) {
+                      path.node.name = `${demoName}${demoIndex++}`
+                    }
+                  }
+                })
+      
+                // console.log(ast)
+                const { code } = generate(ast, {
+                  retainLines: true
+                })
+      
+                const generatorAST = parser(code)
+      
+                traverse(generatorAST, {
+                  FunctionDeclaration (path) {
+                    const node = path.node
+                    const injectCode = code.substring(node.start, node.end)
+                    // console.log(injectCode)
+                    demoCode.push(injectCode)
+                    // current.code = `${${current.code}`
+                  },
+                  CallExpression (path) {
+                    const callee = path.node.callee
+                    const objectName = callee?.object?.name
+                    const propertyName = callee?.property?.name
+      
+                    if (propertyName === 'render') {
+                      const args = path.node.arguments
+                      const [example, container] = args
+                      const exampleCode = code.substring(example.start, example.end)
+      
+                      current.example = `<>
+                        <style>{\`${current.style.code}\`}</style>
+                        ${exampleCode}
+                      </>`
+                    }
+                  }
+                })
+                
+                const importCode = data.import.split(';').map(str => str.trimStart()).filter((item) => item)
+      
+                return `
+                  <CodeExample
+                    desc={\`${current.desc}\`}
+                    lang={\`${current?.lang}\`}
+                    example={${current.example}}
+                    code={\`${
+                        [
+                          importCode.join('\n'),
+                          current.code
+                        ].join('\n')}\`}
+                    style={{
+                      lang: \`${current.style.lang}\`,
+                      code: \`${current.style.code}\`
+                    }}
+                  >
+                `
+              } else {
+                return '</CodeExample>'
+              }
+            }
+          })
+        
+          const ast = md.parse(content, {})
+          const anchor = ast.reduce((total, current, currentIndex) => {
+            if (current.type === 'heading_open') {
+              total.push({
+                tag: current.tag,
+                level: current.markup.length,
+                name: ast[currentIndex + 1].content
+              })
+            }
 
+            return total
+          }, [])
         const code = md
           .render(content)
           .replace(/(tabindex)/g, 'tabIndex')
@@ -85,7 +321,7 @@ export default () => {
           .replace(/class=/g, 'className=')
 
         return {
-          code: reactCode(code)
+          code: reactCode(code, demoCode, data, anchor)
         }
       }
     }
