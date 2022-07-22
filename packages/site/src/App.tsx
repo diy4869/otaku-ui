@@ -4,7 +4,7 @@ import { HashRouter, Routes, Route } from 'react-router-dom'
 import routes from './router/index'
 import NotFound from './components/notFound/notFound'
 
-import '../style/github-markdown-css/github-markdown-light.css'
+import '../style/github-markdown-css/github-markdown-dark.css'
 // import '../style/github-markdown-css/github-markdown-dark.css'
 
 function App () {
@@ -15,7 +15,6 @@ function App () {
         {routes
           .filter(item => !item.children)
           .map(router => {
-            console.log(router.component)
             return (
               <Route
                 path={router.path}

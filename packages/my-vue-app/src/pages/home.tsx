@@ -40,7 +40,7 @@ export default function Home () {
           </div>
 
           <Space>
-            <Link to='/playground'>Playground</Link>
+            <Link to='/playground' className='playground'>Playground</Link>
             <GitHubStart/>
           </Space>
         </header>

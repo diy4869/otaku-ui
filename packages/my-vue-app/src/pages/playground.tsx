@@ -12,10 +12,11 @@ interface PlaygroundProps {
 }
 
 const initialCode = `
+import { Button } from 'otaku-ui'
 
 function App () {
   return (
-    <div>hello world</div>
+    <Button type="primary"></Button>
   )
 }
 
@@ -26,24 +27,25 @@ export default function Playground (props: PlaygroundProps) {
   const [lang, setLang] = useState('typescript')
   const [loading, setLoading] = useState('loading')
   const [runtimeCode, setRuntimeCode] = useState('')
+  const [sandboxInstance, setSandboxInstance] = useState<any>()
   const compilerOptions = {
     noEmit: false,
     noEmitOnError: true,
-    module: ts.ModuleKind.ESNext, 
+    module: ts.ModuleKind.CommonJS, 
     target: ts.ScriptTarget.ES5,
     jsx: ts.JsxEmit.React,
     declration: true,
     strict: true,
     noImplicitAny: true,
     lib: ['ESNEXT', 'DOM', 'DOM.Iterable'],
-    jsxFactory: 'React.createElement',
     moduleResolution: ts.ModuleResolutionKind.NodeJs
   }
 
   useEffect(() => {
-    setCode(code)
-    setLang(lang)
-    setRuntimeCode(ts.transpile(code, compilerOptions))
+    // setCode(code)
+    // setLang(lang)
+    setRuntimeCode(ts.transpile(code, compilerOptions, 'index.tsx'))
+    console.log('meta', import.meta)
   }, [code, lang])
 
   useEffect(() => {
@@ -60,9 +62,9 @@ export default function Playground (props: PlaygroundProps) {
     })
 
     re(['vs/editor/editor.main', 'vs/language/typescript/tsWorker', 'sandbox/index'], (
-      main,
-      ts,
-      sandbox
+      main: any,
+      ts: any,
+      sandbox: any
     ) => {
 
       const isOK = main && ts && sandbox
@@ -89,11 +91,30 @@ export default function Playground (props: PlaygroundProps) {
       const sandboxEditor = sandbox.createTypeScriptSandbox(sandboxConfig, main, ts)
       sandboxEditor.editor.focus()
 
+      setSandboxInstance(sandboxEditor)
+     
+
       new ResizeObserver(() => {
         sandboxEditor.editor?.layout()
       }).observe(document.body)
     })
   }, [])
+
+  useEffect(() => {
+    if (sandboxInstance) {
+      console.log(sandboxInstance)
+      sandboxInstance.editor.onDidChangeModelContent(() => {
+        console.log(sandboxInstance.editor.getValue())
+  
+          const data = ts.transpile(sandboxInstance.editor.getValue(), compilerOptions, 'index.tsx')
+
+          console.log(data)
+          setRuntimeCode(data)
+        
+      })
+    }
+   
+  }, [sandboxInstance])
 
   return (
     <section className="site-playground">

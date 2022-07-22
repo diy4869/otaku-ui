@@ -1,4 +1,6 @@
 @import '~/style/theme.scss';
+// @import '~/style/theme/light.scss';
+@import '~/style/theme/dark.scss';
 
 .otaku-home {
   min-width: 1000px;
@@ -9,8 +11,8 @@
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    background: white;
-    color: black;
+    background: var(--header-background);
+    color: var(--font-color);
     padding: 0 20px;
     box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
     position: relative;
@@ -20,6 +22,7 @@
       // width: 200px;
       font-size: 20px;
     }
+
     .github-star {
       font-size: 20px;
       color: #ffb800;
@@ -28,7 +31,7 @@
       vertical-align: middle;
     }
     a {
-      color: black;
+      color: var(--font-color);
       &:hover {
           color: var(--primaryColor);
       }
@@ -49,8 +52,10 @@
     box-sizing: border-box;
     overflow-x: auto;
     height: calc(100vh - 60px);
+    background: var(--sidebar-background);
     h3 {
       margin: 10px 15px;
+      color: var(--font-color)
     }
     .otaku-menu {
       .otaku-menu-item {
@@ -62,10 +67,10 @@
         font-size: 14px;
         cursor: pointer;
         display: inline-block;
-        color: black;
+        color: var(--font-color);
         text-decoration: none;
         &:active {
-          color: black;
+          color: var(--font-color);
         }
       }
       .active {
@@ -80,7 +85,7 @@
 :global {
   .main {
     grid-area: main;
-    background: #f7f8fa;
+    background: var(--main-background);
     position: relative;
     box-sizing: border-box;
     height: calc(100vh - 60px);
@@ -90,6 +95,7 @@
     gap: 20px;
     padding: 20px;
   }
+
   
   .otaku-anchor {
     height: fit-content;
@@ -100,10 +106,19 @@
     // line-height: 24px;
     // font-size: 14px;
   }
-  .markdown-body li+li {
-    margin-top: 0 !important;
+  .header-anchor {
+    display: none;
   }
+
   .markdown-body {
+    h1, h2, h3 {
+      color: var(--font-color)
+    }
+    .site-block-container {
+      h3 {
+        color: black;
+      }
+    }
     table:not([class^=".otaku-"]) {
       display: table;
     }
@@ -127,14 +142,24 @@
       font-size: 14px;
     }
     ol:not([class^=".otaku-"]), ul:not([class^=".otaku-"]) {
-      padding-left: 0;
-      margin-bottom: 0;
-      li {
-        list-style: none;
-      }
+      padding: 0;
+      margin: 0;
+      line-height: 24px;
+      font-size: 13px;
     }
   }
-  
+  p {
+    font-size: 13px;
+    line-height: 24px;
+    margin: 8px 0px;
+  }
+  p code, li code {
+    background: #fff5f5;
+    color: #ff502c;
+    padding: 2px 4px;
+    font-size: 13px;
+  }
+ 
 
   @media (max-width: 767px) {
     .markdown-body {

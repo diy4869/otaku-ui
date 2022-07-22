@@ -1,4 +1,6 @@
 @import '~/style/theme.scss';
+// @import '~/style/theme/light.scss';
+@import '~/style/theme/dark.scss';
 
 .otaku-home {
   min-width: 1000px;
@@ -9,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     height: 60px;
-    background: white;
+    background: var(--header-background);
     color: black;
     padding: 0 20px;
     box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
@@ -49,6 +51,7 @@
     box-sizing: border-box;
     overflow-x: auto;
     height: calc(100vh - 60px);
+    background: var(--sidebar-background);
     h3 {
       margin: 10px 15px;
     }
@@ -80,7 +83,7 @@
 :global {
   .main {
     grid-area: main;
-    background: #f7f8fa;
+    background: var(--main-background);
     position: relative;
     box-sizing: border-box;
     height: calc(100vh - 60px);

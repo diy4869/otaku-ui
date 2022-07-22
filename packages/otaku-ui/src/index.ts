@@ -1,4 +1,4 @@
-import './style/reset.scss'
+import './style/normalize.css'
 import './fonts/iconfont.css'
 
 export * from './lib/avatar/avatar'

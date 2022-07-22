@@ -19,15 +19,8 @@ export function Sandbox(props: SandboxProps) {
   const [value, setValue] = useState(code)
   const [html, setHTML] = useState('')
 
-  const Require = (args) => {
-    const path = {
-      'react': require('react'),
-      'react-dom/client': require('react-dom/client'),
-      'otaku-ui': require('otaku-ui')
-    }
 
-    return path[args]
-  }
+  
 
   useEffect(() => {
     console.log(code)
@@ -217,6 +210,8 @@ export function Sandbox(props: SandboxProps) {
           <div id="app"></div>
         </body>
         <script>
+            console.log(window)
+            
             const container = document.getElementById('app')
             
               ${code}
