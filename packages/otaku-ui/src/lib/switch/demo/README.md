@@ -1,9 +1,9 @@
 ---
 import: 
-  import { Switch } from 'otaku-ui'
+  import { Switch,  Space } from 'otaku-ui'
 api:
   {
-    module: ['Switch']
+    module: []
   }
 ---
 
@@ -12,7 +12,14 @@ api:
 ::: demo
 
 ```tsx
-ReactDOM.createRoot(container).render(<Switch></Switch>)
+
+ReactDOM.createRoot(container).render(
+  <Space center>
+    <Switch size="small"></Switch>
+    <Switch size="middle"></Switch>
+    <Switch size="large"></Switch>
+  </Space>
+)
 ```
 :::
 

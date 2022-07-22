@@ -1,6 +1,6 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
-import classNames from 'classnames'
-import './style.scss'
+import React, { useEffect, useState } from "react"
+import classNames from "classnames"
+import "./style.scss"
 
 interface SwitchProps {
   value?: boolean
@@ -11,13 +11,12 @@ interface SwitchProps {
   activeTextColor?: string
   inactiveTextColor?: string
   disabled?: boolean
-  size?: 'small' | 'middle' | 'large'
-  onChange?: (checked?: boolean) => void
+  size?: "small" | "middle" | "large"
+  onChange?: (checked: boolean) => void
 }
 
-export function Switch (props: SwitchProps) {
+export function Switch(props: SwitchProps) {
   const {
-    value = false,
     activeText,
     inactiveText,
     activeTextColor,
@@ -25,66 +24,72 @@ export function Switch (props: SwitchProps) {
     activeColor,
     inactiveColor,
     disabled,
+    value = false,
+    size = "middle",
     onChange
   } = props
-  const [
-    checked,
-    setChecked
-  ] = useState(value)
+  const [checked, setChecked] = useState(value)
 
-  useEffect(
-    () => {
-      setChecked(value)
-    },
-    [value]
-  )
+  useEffect(() => {
+    setChecked(value)
+  }, [value])
 
-  const change = (e: ChangeEvent<HTMLInputElement>) => {
-    const { checked } = e.target
-    setChecked(checked)
+  const click = () => {
+    setChecked(!checked)
     onChange?.(checked)
   }
 
   return (
-    <div className="otaku-switch-container">
+    <div className='otaku-switch-container'>
       <label
-        htmlFor="otaku-switch"
-        className="otaku-switch-active otaku-switch-label"
+        htmlFor='otaku-switch'
+        className='otaku-switch-active otaku-switch-label'
         style={{
-          color: !checked ? inactiveTextColor : 'black'
+          color: !checked ? inactiveTextColor : "black"
         }}>
-        {inactiveText}
+        {/* {inactiveText} */}
       </label>
-      <div className="otaku-switch-inner">
-        <label htmlFor="otaku-switch">
-          <div
-            className={
-              classNames('otaku-switch-circle', {
-              'otaku-switch-checked': checked,
-              'otaku-switch-disabled': disabled
-            })}>
-          </div>
-        </label>
-        <input
-          type="checkbox"
-          name="otaku-switch"
-          id="otaku-switch"
-          onChange={change}
-          className="otaku-switch"
+      <div
+        className={classNames(
+          "otaku-switch-inner",
+          `otaku-switch-size-${size}`
+        )}>
+        <section
+          className={classNames("otaku-switch", {
+            "otaku-switch-checked": checked
+          })}
           style={{
             backgroundColor: checked ? activeColor : inactiveColor
           }}
-          disabled={disabled}>
-        </input>
+          onClick={click}>
+          { checked ? <div className={classNames("otaku-switch-content checked-content")}>
+            <span>{activeText}</span>
+            <div
+              className={classNames("otaku-switch-circle", {
+                "otaku-switch-disabled": disabled
+              })}
+              onClick={click}></div>
+          </div>
+          : 
+          <div className={classNames("otaku-switch-content unchecked-content")}>
+            <div
+              className={classNames("otaku-switch-circle", {
+                "otaku-switch-disabled": disabled
+              })}
+              onClick={click}></div>
+            <span>{inactiveText}</span>
+          </div>
+          }
+        </section>
       </div>
 
       <label
-        htmlFor="otaku-switch"
-        className="otaku-switch-active otaku-switch-label"
+        htmlFor='otaku-switch'
+        className='otaku-switch-active otaku-switch-label'
         style={{
-          color: checked ? activeTextColor : 'black'
+          color: checked ? activeTextColor : "black"
         }}>
-        {activeText}
+        {/* {activeText} */}
       </label>
     </div>
   )

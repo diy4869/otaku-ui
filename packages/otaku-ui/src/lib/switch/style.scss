@@ -5,37 +5,96 @@
 }
 .otaku-switch-inner {
   position: relative;
-  padding: 0 10px;
+  // padding:  10px;
+  // border: 2px solid #ff0000;
   .otaku-switch-circle {
-    width: 23px;
-    height: 23px;
     background-color: white;
     border-radius: 50%;
-    position: absolute;
-    top: 1px;
-    transform: translateX(1px);
+
     transition: background-color 0.1s, transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
   }
-  .otaku-switch-checked {
-    transform: translateX(25px);
-  }
+ 
   
   .otaku-switch-disabled {
     cursor: not-allowed;
   }
   .otaku-switch {
-    width: 50px;
-    height: 25px;
-    display: inline-block;
-    appearance: none;
+    // min-width: 50px;
+    // width: 120px;
+    height: 100%;
+    display: flex;
+    align-items: center;
     background: #dcdfe6;
     border-radius: 20px;
-    transition: background linear 0.2s;
-    &:checked {
-      background: $primaryColor;
-    }
+    transition: all linear 0.2s;
+    // font-size: 13px;
+    box-sizing: border-box;
+    overflow: hidden;
+    cursor: pointer;
+    color: white;
+
     &:disabled {
       cursor: not-allowed;
     }
+  }
+
+
+  .otaku-switch-checked {
+    .checked-content {
+      transition: all linear 0.2s;
+      transform: translateX(0%);
+    }
+    .unchecked-content {
+      transition: all linear 0.2s;
+      transform: translateX(-100%);
+    }
+    background: $primaryColor;
+    
+    // overflow: ;
+    
+  }
+  .otaku-switch-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 13px;
+    padding: 3px;
+
+
+    span {
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+}
+
+.otaku-switch-size-small {
+  min-width: 32px;
+  height: 16px;
+
+
+  .otaku-switch-circle {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.otaku-switch-size-middle {
+  min-width: 48px;
+  height: 24px;
+
+  .otaku-switch-circle {
+    width: 18px;
+    height: 18px;
+  }
+}
+.otaku-switch-size-large {
+  min-width: 64px;
+  height: 32px;
+
+  .otaku-switch-circle {
+    width: 24px;
+    height: 24px;
   }
 }

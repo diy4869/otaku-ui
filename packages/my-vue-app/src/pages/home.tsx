@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react'
 import { NavLink, Routes, Link, Route } from 'react-router-dom'
-import { Space } from 'otaku-ui'
+import { Space, Switch } from 'otaku-ui'
 import GitHubStart from '../components/GithubStart'
 import style from '../App.module.scss'
 import routes from '../router/index'
@@ -31,6 +31,21 @@ export default function Home () {
       return router.concat(result)
     }, [])
 
+  const switchTheme = (checked: boolean) => {
+    const theme = checked ? 'dark' : 'light'
+    document.documentElement.setAttribute('theme', theme)
+
+    const link = document.querySelector('#theme')
+
+    const src = `./src/assets/style/theme/${theme}.css`
+    console.log(link)
+
+    link?.setAttribute('href', src)
+
+    console.log(link)
+
+  }
+
   return (
     <div>
       <div className={style['otaku-home']}>
@@ -40,6 +55,7 @@ export default function Home () {
           </div>
 
           <Space>
+            <Switch onChange={switchTheme} activeText="light" inactiveText='dark' value={true}></Switch>
             <Link to='/playground' className='playground'>Playground</Link>
             <GitHubStart/>
           </Space>
