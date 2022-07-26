@@ -28,6 +28,6 @@
     justify-content: center;
   }
   .otaku-drag-upload-hover {
-    border: 1px dashed $primaryColor;
+    border: 1px dashed var(--primary-color);
   }
 }

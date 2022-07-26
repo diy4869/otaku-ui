@@ -34,7 +34,7 @@ export function Month(props: MonthProps) {
 
   return (
     <>
-      <ul className="otaku-datetime-picker-header">
+      <ul className="otaku-date-picker-header">
         <li>
           <span className={`iconfont otaku-icon-doubleleft`} onClick={() => switchMonth('year', 'left')}></span>
         </li>

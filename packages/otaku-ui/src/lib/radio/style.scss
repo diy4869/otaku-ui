@@ -9,7 +9,7 @@
     .otaku-radio {
       width: 15px;
       height: 15px;
-      border: 1px solid $primaryColor;
+      border: 1px solid var(--primary-color);
       border-radius: 50%;
       appearance: none;
       // margin: 5px;
@@ -24,7 +24,7 @@
           content: '';
           width: 8px;
           height: 8px;
-          background: $primaryColor;
+          background: var(--primary-color);
           border-radius: 50%;
         }
       }

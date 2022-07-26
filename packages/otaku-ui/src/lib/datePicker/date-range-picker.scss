@@ -1,0 +1,42 @@
+.otaku-date-range-picker-container {
+  position: relative;
+  top: 4px;
+  // display: inline-block;
+}
+
+.otaku-date-range-picker {
+  background: white;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  
+  // .otaku-date-picker-header {
+  //   margin:  20px 0;
+  // }
+
+  &-calender {
+    display: grid;
+    grid-template-columns: 1fr 1fr;    
+    border-bottom: 0.5px solid #D8DDEB;
+    
+    .otaku-calendar-container {
+      padding: 20px;
+      &:nth-of-type(1) {
+        border-right: 0.5px solid #D8DDEB;
+        .otaku-calendar-active {
+          background: var(--primary-color);
+          color: white;
+        }
+      }
+      &:nth-of-type(2) {
+        .otaku-calendar-active {
+          background: var(--primary-color);
+          color: white;
+        }
+      }
+    }
+  }
+  &-action {
+    padding: 20px 24px;
+    justify-content: flex-end;
+  }
+}

@@ -165,13 +165,13 @@ li {
 
 // ::-webkit-scrollbar-thumb:vertical {
 //     height: $browserScrollHeight;
-//     background-color: $primaryColor;
+//     background-color: var(--primary-color);
 //     border-radius: 6px;
 // }
 
 // ::-webkit-scrollbar-thumb:horizontal {
 //     width: $browserScrollWidth;
-//     background-color: $primaryColor;
+//     background-color: var(--primary-color);
 //     border-radius: 6px;
 // }
 

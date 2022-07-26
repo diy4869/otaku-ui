@@ -44,13 +44,13 @@
   align-items: center;
   cursor: pointer;
   &:hover {
-    color: $primaryColor;
+    color: var(--primary-color);
     background: rgba(44, 104, 255, 0.06);
   }
   &-active {
-    color: $primaryColor;
+    color: var(--primary-color);
   }
   &-multiple-active {
-    color: $primaryColor;
+    color: var(--primary-color);
   }
 }

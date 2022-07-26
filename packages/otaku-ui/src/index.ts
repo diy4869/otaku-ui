@@ -24,7 +24,7 @@ export * from './lib/checkbox/index'
 export * from './lib/form/form'
 export * from './lib/form/formItem'
 export * from './lib/upload/upload'
-export * from './lib/datePicker/datePicker'
+export * from './lib/datePicker/index'
 export * from './lib/search/search'
 
 export * from './lib/popover/popover'

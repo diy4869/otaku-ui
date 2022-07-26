@@ -48,7 +48,7 @@
       transition: all linear 0.2s;
       transform: translateX(-100%);
     }
-    background: $primaryColor;
+    background: var(--primary-color);
     
     // overflow: ;
     

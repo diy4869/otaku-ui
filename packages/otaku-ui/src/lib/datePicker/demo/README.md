@@ -1,13 +1,24 @@
 ---
 import:
-  import { DatePicker } from 'otaku-ui'
+  import { DatePicker, DateRangePicker } from 'otaku-ui'
 api:
   {
-    module: ['DatePicker']
+    module: []
   }
 ---
 
 
+## 
+
+::: demo
+
+一个简单的日期范围选择器
+
+```tsx
+ReactDOM.createRoot(container).render(<DateRangePicker></DateRangePicker>)
+
+```
+:::
 
 ## DatePicker
 

@@ -17,7 +17,7 @@
     justify-content: center;
     font-size: 21px;
     &:hover {
-      border-color: $primaryColor;
+      border-color: var(--primary-color);
     }
     &:disabled {
       cursor: not-allowed;
@@ -31,10 +31,10 @@
     margin-left: 5px;
   }
   .is-half {
-    color: $primaryColor;
+    color: var(--primary-color);
   }
   .is-checked {
-    color: $primaryColor;
+    color: var(--primary-color);
   }
   .otaku-checkbox-disabled {
     color: #BFBFBF;

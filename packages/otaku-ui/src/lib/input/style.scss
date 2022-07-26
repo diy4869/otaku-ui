@@ -12,7 +12,7 @@
   
 
   &:hover {
-    border-color: $primaryColor;
+    border-color: var(--primary-color);
   }
   .otaku-input {
     width: 100%;
@@ -106,7 +106,7 @@
   border: 1px solid #e8e8e8;
   border-radius: var(--radius);
   &:hover {
-    border-color: $primaryColor;
+    border-color: var(--primary-color);
   }
   .otaku-input-textarea {
     width: 100%;

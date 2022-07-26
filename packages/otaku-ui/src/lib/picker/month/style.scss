@@ -5,6 +5,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 43px 92px;
   padding-bottom: 10px;
+  background: white;
   .otaku-month-item {
     display: grid;
     justify-content: center;
@@ -14,15 +15,15 @@
     cursor: pointer;
   }
   .otaku-month-item-active {
-    background: $primaryColor;
+    background: var(--primary-color);
     color: white;
   }
   .otaku-datepicker-currentMonth {
-    border: 1.5px solid $primaryColor;
-    color: $primaryColor;
+    border: 1.5px solid var(--primary-color);
+    color: var(--primary-color);
   }
   .active {
-    background: $primaryColor;
+    background: var(--primary-color);
     color: white;
   }
   .gray {

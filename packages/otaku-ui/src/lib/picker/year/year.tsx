@@ -53,7 +53,7 @@ export function Year(props: YearProps) {
 
   return (
     <>
-      <ul className='otaku-datetime-picker-header'>
+      <ul className='otaku-date-picker-header'>
         <li>
           <span
             className={`iconfont otaku-icon-doubleleft`}

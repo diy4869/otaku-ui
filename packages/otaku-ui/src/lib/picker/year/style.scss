@@ -6,6 +6,7 @@
   // grid-template-rows: repeat(4, 24px);
   grid-gap: 43px 95px;
   padding-bottom: 10px;
+  background: white;
   li {
     display: grid;
     justify-content: center;
@@ -15,11 +16,11 @@
     cursor: pointer;
   }
   .otaku-datepicker-currentYear {
-    border: 1.5px solid $primaryColor;
-    color: $primaryColor;
+    border: 1.5px solid var(--primary-color);
+    color: var(--primary-color);
   }
   .active {
-    background: $primaryColor;
+    background: var(--primary-color);
     color: white;
   }
   .gray {
