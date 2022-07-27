@@ -3,25 +3,8 @@
 .otaku-date-picker-container {
   display: inline-block;
 }
-.otaku-date-picker {
-  // width: fit-content;
-  // height: 415px;
-  box-sizing: border-box;
-  background: white;
-  box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.15);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-top: 2px;
-  // position: absolute;
-  // display: none;
-  
-  .today {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    color: var(--primary-color);
-    cursor: pointer;
-    font-size: 13px;
+.otaku-date-picker-portal {
+  .otaku-calendar-container {
+    box-shadow: 0 12px 48px 0 rgba(0, 0, 0, 0.15);
   }
 }

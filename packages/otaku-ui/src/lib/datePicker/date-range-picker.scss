@@ -8,18 +8,41 @@
   background: white;
   box-shadow: var(--shadow);
   border-radius: var(--radius);
-  
-  // .otaku-date-picker-header {
-  //   margin:  20px 0;
-  // }
+  display: grid;
+  grid-template-areas: 
+    "shortcut calendar"
+    "shortcut action";
 
+  &-shortcut {
+    grid-area: shortcut;
+    border-right: 0.5px solid #D8DDEB;
+    box-sizing: border-box;
+    padding: 24px 16px;
+
+    li {
+      width: 128px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .active {
+      background: linear-gradient(0deg, rgba(31, 75, 255, 0.08), rgba(31, 75, 255, 0.08)), #FFFFFF;
+      border-radius: var(--radius);
+      color: #0044FF;
+    }
+  }
   &-calender {
     display: grid;
-    grid-template-columns: 1fr 1fr;    
+    grid-template-columns: 1fr 1fr;   
+    grid-area: calendar; 
     border-bottom: 0.5px solid #D8DDEB;
     
     .otaku-calendar-container {
       padding: 20px;
+      border-radius: 0;
       &:nth-of-type(1) {
         border-right: 0.5px solid #D8DDEB;
         .otaku-calendar-active {
@@ -36,6 +59,7 @@
     }
   }
   &-action {
+    grid-area: action;
     padding: 20px 24px;
     justify-content: flex-end;
   }

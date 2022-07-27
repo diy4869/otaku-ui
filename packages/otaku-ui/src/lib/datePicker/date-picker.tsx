@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import dayjs from 'dayjs'
-import { ResultDate, Calendar, Month, Year } from '../picker'
+import { ResultDate, Calendar } from '../picker'
 import { Input } from '../input/input'
 import { Portal } from '../portal/portal'
 import './style.scss'
@@ -31,14 +31,8 @@ export function DatePicker (props: DateTimePickerProps) {
   } = props
 
   const [selectDate, setSelectDate] = useState(dayjs(date))
-  const [showPicker, setShowPicker] = useState('calendar')
   const [inputVal, setInputVal] = useState('')
   const [show, setShow] = useState(false)
-
-  const changeDate = (type: 'month' | 'calendar', date: dayjs.ConfigType) => {
-    setSelectDate(dayjs(date))
-    setShowPicker(type)
-  }
 
   return (
     <div className="otaku-date-picker-container">
@@ -58,60 +52,21 @@ export function DatePicker (props: DateTimePickerProps) {
         }}></Input>
       <Portal
         visible={show}
+        className="otaku-date-picker-portal"
         clickOutSide={() => {
           setShow(false)
-          setShowPicker('calendar')
         }}>
-        <div
-          className="otaku-date-picker"
-          style={{
-            display: showPicker === 'calendar' ? 'block' : 'none'
-          }}>
-          <Calendar
-            firstWeek={firstWeek}
-            date={selectDate}
-            lunarDate={lunarDate}
-            disabled={disabledDate}
-            onChange={date => {
-              setSelectDate(date.dayjs)
-              setInputVal(dayjs(date.dayjs).format(format))
-              onChange?.(date)
-              setShow(false)
-            }}
-            switchPicker={type => {
-              setShowPicker(type)
-            }}></Calendar>
-          {/* <div className='today'>
-            <span
-              onClick={() => {
-                const d = dayjs()
-                setSelectDate(d)
-                setInputVal(dayjs(d).format(format))
-                onChange?.(getDateResult(d))
-                setShow(false)
-              }}>
-              今天
-            </span>
-          </div> */}
-        </div>
-        <div
-          className="otaku-date-picker"
-          style={{
-            display: showPicker === 'year' ? 'block' : 'none'
-          }}>
-          <Year
-            date={selectDate}
-            onChange={date => changeDate('month', date)}></Year>
-        </div>
-        <div
-          className="otaku-date-picker"
-          style={{
-            display: showPicker === 'month' ? 'block' : 'none'
-          }}>
-          <Month
-            date={selectDate}
-            onChange={date => changeDate('calendar', date)}></Month>
-        </div>
+        <Calendar
+          firstWeek={firstWeek}
+          date={selectDate}
+          lunarDate={lunarDate}
+          disabled={disabledDate}
+          onChange={date => {
+            setSelectDate(date.dayjs)
+            setInputVal(dayjs(date.dayjs).format(format))
+            onChange?.(date)
+            setShow(false)
+          }}></Calendar>
       </Portal>
     </div>
   )

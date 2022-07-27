@@ -3,8 +3,16 @@
 .otaku-calendar-container {
   --calender-size: 40px;
   --calender-gap: 0px;
-  --calender-column: repeat(7, var(--calender-size));
+  --calender-column: repeat(7, 1fr);
+  box-sizing: border-box;
+  background: white;
+  
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  margin-top: 2px;
   cursor: pointer;
+  width: 341px;
+  height: 352px;
   .otaku-date-picker-header {
     display: flex;
     align-items: center;

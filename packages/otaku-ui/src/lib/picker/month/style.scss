@@ -1,10 +1,30 @@
 @import '../../../style/var.scss';
 
+
+.otaku-month-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  font-size: 16px;
+  cursor: pointer;
+  span {
+    margin-right: 5px;
+  }
+  li:nth-of-type(2) {
+    span {
+      &:hover {
+        color: var(--primary-color);
+      }
+    }
+  }
+}
+
 .otaku-month {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 43px 92px;
-  padding-bottom: 10px;
+  grid-template-rows: repeat(4, 40px);
+  grid-gap: 35px 68px;
   background: white;
   .otaku-month-item {
     display: grid;
@@ -13,6 +33,7 @@
     color: #595959;
     border-radius: var(--radius);
     cursor: pointer;
+    padding: 2px 6px;
   }
   .otaku-month-item-active {
     background: var(--primary-color);

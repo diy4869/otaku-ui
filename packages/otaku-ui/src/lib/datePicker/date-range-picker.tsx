@@ -1,16 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import classNames from 'classnames'
 import { Calendar } from '../picker'
 import { Input } from '../input/input'
 import { Portal } from '../portal/portal'
 import { Button } from '../button/button'
-import './date-range-picker.scss'
 import { Space } from '../space/space'
+import './date-range-picker.scss'
+
+export interface PickerOptions {
+  onChange?: (date: [Dayjs, Dayjs]) => void
+}
+
+export interface shortcutOptions {
+  name: string
+  onClick: (picker: PickerOptions) => void
+}
 
 export interface DateRangePickerProps {
   value: [dayjs.ConfigType, dayjs.ConfigType]
   disabled?: boolean
   format?: string
+  shortcut?: shortcutOptions[]
   onCancel?: () => void
   onConfirm?: (date: [Dayjs, Dayjs]) => void
 }
@@ -24,8 +35,9 @@ export const DateRangePickerContext = React.createContext<DateRangePickerContext
 
 export function DateRangePicker (props: DateRangePickerProps) {
   const { 
-      value = [], 
       disabled, 
+      shortcut = [],
+      value = [],
       format = 'YYYY-MM-DD',
       onCancel,
       onConfirm
@@ -36,11 +48,15 @@ export function DateRangePicker (props: DateRangePickerProps) {
   const [endDate, setEndDate] = useState(dayjs(end).add(5, 'day'))
   const [inputVal, setInputVal] = useState('')
   const [show, setShow] = useState(false)
+  const [currentIndex, setCurrentIndex] = useState<number>()
   
 
-  // useEffect(() => {
-  //   setRangeDate(value)
-  // }, [value])
+  useEffect(() => {
+    const [start, end] = value
+
+    setStartDate(dayjs(start))
+    setEndDate(dayjs(end))
+  }, [])
 
   return (
     <section className="otaku-date-range-picker-container">
@@ -61,6 +77,35 @@ export function DateRangePicker (props: DateRangePickerProps) {
           setShow(false)
         }}>
         <section className="otaku-date-range-picker">
+          <ul className="otaku-date-range-picker-shortcut" style={{
+            display: shortcut.length === 0 ? 'none' : 'block'
+          }}>
+            {
+              shortcut.map((item, index) => {
+                return (
+                  <li 
+                    key={index}
+                    className={classNames({
+                      active: currentIndex === index
+                    })}
+                    onClick={() => {
+                      const picker: PickerOptions = {
+                        onChange (date) {
+                          const [start, end] = date
+                          onConfirm?.([dayjs(start), dayjs(end)])
+                          setInputVal(
+                            `${startDate.format(format)} --- ${endDate.format(format)}`
+                          )
+                          setShow(false)
+                        }
+                      }
+                      setCurrentIndex(index)
+                      item.onClick(picker)
+                    }}>{item.name}</li>
+                )
+              })
+            }
+          </ul>
           <section className="otaku-date-range-picker-calender">
             <DateRangePickerContext.Provider value={{
               start: startDate,
@@ -83,7 +128,6 @@ export function DateRangePicker (props: DateRangePickerProps) {
                   setEndDate(dayjs(date.dayjs))
                 }}></Calendar>
             </DateRangePickerContext.Provider>
-           
           </section>
           <Space className="otaku-date-range-picker-action">
             <Button onClick={() => {

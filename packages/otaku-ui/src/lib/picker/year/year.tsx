@@ -52,8 +52,8 @@ export function Year(props: YearProps) {
   }
 
   return (
-    <>
-      <ul className='otaku-date-picker-header'>
+    <section className="otaku-year-picker-container">
+      <ul className='otaku-year-picker-header'>
         <li>
           <span
             className={`iconfont otaku-icon-doubleleft`}
@@ -68,7 +68,7 @@ export function Year(props: YearProps) {
             onClick={() => switchYear("year", "right")}></span>
         </li>
       </ul>
-      <ul className='otaku-datepicker-year' onClick={onClick}>
+      <ul className='otaku-year' onClick={onClick}>
         {year.map(item => {
           return (
             <li
@@ -84,6 +84,6 @@ export function Year(props: YearProps) {
           )
         })}
       </ul>
-    </>
+    </section>
   )
 }

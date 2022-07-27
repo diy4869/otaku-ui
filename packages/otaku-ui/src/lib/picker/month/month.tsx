@@ -33,8 +33,8 @@ export function Month(props: MonthProps) {
   }
 
   return (
-    <>
-      <ul className="otaku-date-picker-header">
+    <div className='otaku-month-picker-container'>
+      <ul className="otaku-month-picker-header">
         <li>
           <span className={`iconfont otaku-icon-doubleleft`} onClick={() => switchMonth('year', 'left')}></span>
         </li>
@@ -63,7 +63,7 @@ export function Month(props: MonthProps) {
           })
         }
       </ul>
-    </>
+    </div>
 
   )
 }
