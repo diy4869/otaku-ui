@@ -12,11 +12,14 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-refresh": "^0.14.0",
+    "tinycolor": "^0.0.1",
+    "tinycolor2": "^1.4.2",
     "vite-plugin-inspect": "^0.6.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "@types/tinycolor": "^1.1.27",
     "@vitejs/plugin-react": "^2.0.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0"

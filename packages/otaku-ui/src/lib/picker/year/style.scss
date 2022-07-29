@@ -22,9 +22,8 @@
 
 .otaku-year {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(4, 40px);
-  grid-gap: 40px 68px;
   background: white;
   li {
     display: grid;
@@ -33,7 +32,6 @@
     color: #595959;
     border-radius: var(--radius);
     cursor: pointer;
-    padding: 2px 6px;
   }
   .otaku-datepicker-currentYear {
     border: 1.5px solid var(--primary-color);

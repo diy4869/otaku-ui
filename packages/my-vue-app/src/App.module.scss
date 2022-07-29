@@ -33,10 +33,10 @@
     a {
       color: var(--font-color);
       &:hover {
-          color: var(--primaryColor);
+          color: var(--primary-color);
       }
       &:active {
-          color: var(--primaryColor);
+          color: var(--primary-color);
       }
   }
   }
@@ -74,7 +74,7 @@
         }
       }
       .active {
-        color: var(--primaryColor);
+        color: var(--primary-color);
       }
     }
   }
@@ -123,7 +123,7 @@
       display: table;
     }
     a {
-      color: var(--primaryColor);
+      color: var(--primary-color);
     }
     .table-of-contents {
       position: fixed;
@@ -133,7 +133,7 @@
       border-radius: 10px;
       box-shadow: 0px 10px 50px 0 rgb(0 35 114 / 10%);
       a {
-        color: var(--primaryColor);
+        color: var(--primary-color);
         font-size: 14px;
       }
     }

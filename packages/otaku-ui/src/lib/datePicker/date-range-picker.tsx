@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import classNames from 'classnames'
-import { Calendar } from '../picker'
+import { CalendarRange } from '../picker'
 import { Input } from '../input/input'
 import { Portal } from '../portal/portal'
 import { Button } from '../button/button'
@@ -31,32 +31,26 @@ export interface DateRangePickerContextOptions {
   end: Dayjs
 }
 
-export const DateRangePickerContext = React.createContext<DateRangePickerContextOptions | null>(null)
-
 export function DateRangePicker (props: DateRangePickerProps) {
-  const { 
-      disabled, 
-      shortcut = [],
-      value = [],
-      format = 'YYYY-MM-DD',
-      onCancel,
-      onConfirm
+  const {
+    disabled,
+    shortcut = [],
+    value = [],
+    format = 'YYYY-MM-DD',
+    onCancel,
+    onConfirm
   } = props
 
   const [start, end] = value
+  const [selectDate, setSelectDate] = useState<[dayjs.ConfigType, dayjs.ConfigType]>([dayjs(start), dayjs(end)])
   const [startDate, setStartDate] = useState(dayjs(start))
-  const [endDate, setEndDate] = useState(dayjs(end).add(5, 'day'))
+  const [endDate, setEndDate] = useState(dayjs(end))
   const [inputVal, setInputVal] = useState('')
   const [show, setShow] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>()
+
   
 
-  useEffect(() => {
-    const [start, end] = value
-
-    setStartDate(dayjs(start))
-    setEndDate(dayjs(end))
-  }, [])
 
   return (
     <section className="otaku-date-range-picker-container">
@@ -77,72 +71,73 @@ export function DateRangePicker (props: DateRangePickerProps) {
           setShow(false)
         }}>
         <section className="otaku-date-range-picker">
-          <ul className="otaku-date-range-picker-shortcut" style={{
-            display: shortcut.length === 0 ? 'none' : 'block'
-          }}>
-            {
-              shortcut.map((item, index) => {
-                return (
-                  <li 
-                    key={index}
-                    className={classNames({
-                      active: currentIndex === index
-                    })}
-                    onClick={() => {
-                      const picker: PickerOptions = {
-                        onChange (date) {
-                          const [start, end] = date
-                          onConfirm?.([dayjs(start), dayjs(end)])
-                          setInputVal(
-                            `${startDate.format(format)} --- ${endDate.format(format)}`
-                          )
-                          setShow(false)
-                        }
+          <ul
+            className="otaku-date-range-picker-shortcut"
+            style={{
+              display: shortcut.length === 0 ? 'none' : 'block'
+            }}>
+            {shortcut.map((item, index) => {
+              return (
+                <li
+                  key={index}
+                  className={classNames({
+                    active: currentIndex === index
+                  })}
+                  onClick={() => {
+                    const picker: PickerOptions = {
+                      onChange (date) {
+                        const [start, end] = date
+                        onConfirm?.([dayjs(start), dayjs(end)])
+                        setInputVal(
+                          `${startDate.format(format)} --- ${endDate.format(
+                            format
+                          )}`
+                        )
+                        setShow(false)
                       }
-                      setCurrentIndex(index)
-                      item.onClick(picker)
-                    }}>{item.name}</li>
-                )
-              })
-            }
+                    }
+                    setCurrentIndex(index)
+                    item.onClick(picker)
+                  }}>
+                  {item.name}
+                </li>
+              )
+            })}
           </ul>
           <section className="otaku-date-range-picker-calender">
-            <DateRangePickerContext.Provider value={{
-              start: startDate,
-              end: endDate
-            }}>
-              <Calendar 
-                date={startDate} 
-                disabled={(date) => {
-                  return date.isAfter(endDate)
-                }} 
+            <CalendarRange
+              date={selectDate}
+              onChange={date => {
+                console.log(date)
+                setSelectDate([...date])
+              }}></CalendarRange>
+            <CalendarRange 
+                date={selectDate}
                 onChange={(date) => {
-                  setStartDate(dayjs(date.dayjs))
-                }}></Calendar>
-              <Calendar 
-                date={endDate} 
-                disabled={(date) => {
-                  return date.isBefore(startDate)
-                }} 
-                onChange={(date) => {
-                  setEndDate(dayjs(date.dayjs))
-                }}></Calendar>
-            </DateRangePickerContext.Provider>
+                  setSelectDate([...date])
+                }}></CalendarRange>
           </section>
           <Space className="otaku-date-range-picker-action">
-            <Button onClick={() => {
-              setShow(false)
-              onCancel?.()
-            }}>取消</Button>
-            <Button type="primary" onClick={() => {
-              setShow(false)
-              setStartDate(startDate)
-              setEndDate(endDate)
-              setInputVal(
-                `${startDate.format(format)} --- ${endDate.format(format)}`
-              )
-              onConfirm?.([startDate, endDate])
-            }}>确定</Button>
+            <Button
+              onClick={() => {
+                setShow(false)
+                onCancel?.()
+              }}>
+              取消
+            </Button>
+            <Button
+              type="primary"
+              onClick={() => {
+                setShow(false)
+                setStartDate(startDate)
+                setEndDate(endDate)
+                setInputVal(
+                  `${startDate.format(format)} --- ${endDate.format(format)}`
+                )
+                onConfirm?.([startDate, endDate])
+              }}>
+              确定
+            </Button>
           </Space>
         </section>
       </Portal>

@@ -9,7 +9,7 @@ export const styleToStr = (style: CSSProperties): string => {
     str += `${key}: ${value};`
 
     return str
-  }, '')
+}, '')
 }
 
 export const findDataset = (element: HTMLElement, key: string): HTMLElement | null => {

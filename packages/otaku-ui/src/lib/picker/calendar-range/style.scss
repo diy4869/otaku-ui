@@ -2,7 +2,7 @@
 
 .otaku-calendar-container {
   --calender-size: 40px;
-  --calender-gap: 0px;
+  --calender-gap: 4px 0px;
   --calender-column: repeat(7, 1fr);
   box-sizing: border-box;
   background: white;
@@ -67,11 +67,6 @@
     }
     
     
-    
-    // .otaku-calendar-range {
-    //   background: var(--primary-color);
-    //   color: white;
-    // }
 
     .otaku-calendar-today {
       background: var(--primary-color);
@@ -80,8 +75,19 @@
 
     .otaku-calendar-between {
       background: linear-gradient(0deg, rgba(31, 75, 255, 0.1), rgba(31, 75, 255, 0.1)), #FFFFFF;
-      color: #1B2133;
+      color: var(--primary-color);
       border-radius: 0px;
+    }
+
+    .otaku-calendar-range-start {
+      background:  var(--primary-color);
+      color: white;
+      // border-radius: var(--radius) 0 0 var(--radius);
+    }
+    .otaku-calendar-range-end {
+      background: var(--primary-color);
+      color: white;
+      // border-radius:  0;
     }
 
     .otaku-calendar-disabled {

@@ -49,6 +49,11 @@ export default [
         component: lazy(() => import('@docs/dev/roadmap.md'))
       },
       {
+        title: '色彩',
+        path: '/dev/color',
+        component: lazy(() => import('../pages/color.tsx'))
+      },
+      {
         title: "hooks",
         path: "/dev/hooks",
         component: lazy(() => import('@docs/dev/hooks.md'))

@@ -27,6 +27,7 @@
     "async-validator": "^4.0.7",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
+    "colorjs.io": "^0.3.0",
     "commitlint": "^16.1.0",
     "cropperjs": "^1.5.12",
     "dayjs": "^1.10.7",
@@ -42,6 +43,7 @@
     "recoil": "^0.6.1",
     "rxjs": "^7.4.0",
     "standard-version": "^9.3.1",
+    "tinycolor": "^0.0.1",
     "tippy.js": "^6.3.7",
     "uuid": "^8.3.2",
     "vanilla-lazyload": "^17.8.1"

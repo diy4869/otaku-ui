@@ -19,6 +19,10 @@ export default defineConfig({
       '~': path.resolve(__dirname, './src/assets')
     }
   },
+  server: {
+    open: true
+  },
+  logLevel: 'silent',
   plugins: [
     inspect(),
     react({

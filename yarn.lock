@@ -3715,6 +3715,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/tinycolor@^1.1.27":
+  version "1.1.27"
+  resolved "https://registry.yarnpkg.com/@types/tinycolor/-/tinycolor-1.1.27.tgz#d01d05a681d0ce28923b021d5f3d752ea0478089"
+  integrity sha512-DNAOEbg5kYu02NSSzGPxkkmk5gx5OrnD6JlOJuoN2st3Abnzt54jrKYpiJfOgqeWcwNWBJBcj8FMyO+++E3Pyg==
+
 "@types/unist@*", "@types/unist@^2.0.0", "@types/unist@^2.0.2":
   version "2.0.6"
   resolved "https://registry.npmjs.org/@types/unist/-/unist-2.0.6.tgz"
@@ -5177,6 +5182,11 @@ colorette@^2.0.10, colorette@^2.0.14, colorette@^2.0.16:
   version "2.0.16"
   resolved "https://registry.npmjs.org/colorette/-/colorette-2.0.16.tgz"
   integrity sha512-hUewv7oMjCp+wkBv5Rm0v87eJhq4woh5rSR+42YSQJKecCqgIqNkZ6lAlQms/BwHPJA5NKMRlpxPRv0n8HQW6g==
+
+colorjs.io@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/colorjs.io/-/colorjs.io-0.3.0.tgz#58c7dcd47b898fac9a0dd7b01ba23c021427ec7a"
+  integrity sha512-F1FD3/LWZDjd66KUAVErCLDrij/ukHntf5bWtfhrnSV2IT5ZUivuv7KKW3QbZLbjKPTsVPjmxeugQgnNYWMdrA==
 
 colors@^1.1.2:
   version "1.4.0"
@@ -12934,6 +12944,16 @@ tinycolor2@^1.4.1:
   version "1.4.2"
   resolved "https://registry.npmjs.org/tinycolor2/-/tinycolor2-1.4.2.tgz"
   integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
+
+tinycolor2@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/tinycolor2/-/tinycolor2-1.4.2.tgz#3f6a4d1071ad07676d7fa472e1fac40a719d8803"
+  integrity sha512-vJhccZPs965sV/L2sU4oRQVAos0pQXwsvTLkWYdqJ+a8Q5kPFzJTuOFwy7UniPli44NKQGAglksjvOcpo95aZA==
+
+tinycolor@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/tinycolor/-/tinycolor-0.0.1.tgz#320b5a52d83abb5978d81a3e887d4aefb15a6164"
+  integrity sha512-+CorETse1kl98xg0WAzii8DTT4ABF4R3nquhrkIbVGcw1T8JYs5Gfx9xEfGINPUZGDj9C4BmOtuKeaTtuuRolg==
 
 tippy.js@^6.3.7:
   version "6.3.7"
