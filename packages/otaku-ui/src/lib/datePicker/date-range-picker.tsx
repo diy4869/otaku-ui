@@ -49,9 +49,6 @@ export function DateRangePicker (props: DateRangePickerProps) {
   const [show, setShow] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>()
 
-  
-
-
   return (
     <section className="otaku-date-range-picker-container">
       <Input
