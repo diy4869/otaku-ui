@@ -7,7 +7,7 @@ export default () => {
   return (
     <section className='color'>
       {
-        ['#1F4BFF', 'red', 'orange', 'green', 'purple'].map(item => {
+        ['#060606', '#1F4BFF', '#f5222d', 'orange', 'green', 'purple'].map(item => {
           return (
             <ul>
               {

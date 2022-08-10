@@ -69,7 +69,6 @@ export class Notice {
     const container = document.getElementById(`notice-${id}`) as HTMLElement
         
     this.container?.removeChild(container)
-
   }
 }
 
@@ -85,19 +84,24 @@ if (!instance) {
   instance = new Notice()
 }
 
-const message: message = {}
-
-type.forEach((current) => {
-  message[current as MessageType] = (content: React.ReactNode, duration = 3000) => {
+const message = type.reduce((o: message, current) => {
+  o[current as MessageType] = (content: React.ReactNode, duration = 3000) => {
       instance?.create({
         type: current as Options['type'],
         content,
         duration: duration
       })
   }
-})
+
+  return o
+}, {})
 
 export {
   message
 }
+
+
+
+
+message.warning('ere')
 
