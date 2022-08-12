@@ -7,4 +7,3 @@ interface EventTarget {
 
 
 declare module '*.jfif'
-

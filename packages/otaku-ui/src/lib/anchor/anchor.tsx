@@ -6,7 +6,7 @@ import './style.scss'
 interface AnchorProps {
   target?: string | HTMLElement
   active?: string
-  children: React.ReactNode[]
+  children: React.ReactNode
 }
 
 interface AnchorItemProps {
@@ -33,7 +33,7 @@ export function Anchor (props: AnchorProps) {
 
   useLayoutEffect(() => {
     const container = getScroll(target)
-    const result = children?.map?.((item: React.ReactElement) => {
+    const result = React.Children.map(children, (item: React.ReactElement) => {
       const id = encodeURIComponent(item.props.href.substring(1))
 
       return {

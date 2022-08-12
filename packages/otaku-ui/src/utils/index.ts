@@ -1,6 +1,5 @@
-import { CSSProperties } from "react"
 
-export const styleToStr = (style: CSSProperties): string => {
+export const styleToStr = (style: Record<string, string | number>): string => {
   const arr = Object.entries(style) as [string, string][]
 
   return arr.reduce((str, current) => {

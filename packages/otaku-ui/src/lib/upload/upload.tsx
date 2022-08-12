@@ -48,9 +48,7 @@ export function Upload (props: UploadProps) {
     drag = false,
     autoUpload = true,
     name = 'file',
-    max = 3,
     formData = false,
-    children,
     beforeUpload,
     request,
     onChange,
@@ -108,7 +106,7 @@ export function Upload (props: UploadProps) {
           setUploadFileList(new Map(map.entries()))
         },
         signal: controlller.signal
-      }).then(res => {
+      }).then((res) => {
         // debugger
         map.set(id, {
           ...map.get(id),
@@ -157,9 +155,8 @@ export function Upload (props: UploadProps) {
     if (e.target.files) uploadFile(e.target.files)
   }
   
-  const drop = (e) => {
+  const drop = () => {
     // console.log(e.dataTransfer.items)
-    // uploadFile(e[0]?.raw)
   }
 
   return (

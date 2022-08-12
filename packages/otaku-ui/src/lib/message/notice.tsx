@@ -2,8 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { Message } from './message'
 import { styleToStr } from '../../utils'
-// import debounce from 'lodash/debounce'
-
 
 type MessageType = 'info' | 'success' | 'warning' | 'error'
 
@@ -99,9 +97,3 @@ const message = type.reduce((o: message, current) => {
 export {
   message
 }
-
-
-
-
-message.warning('ere')
-

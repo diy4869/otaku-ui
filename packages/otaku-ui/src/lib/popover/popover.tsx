@@ -56,17 +56,19 @@ export function Popover (props: PopoverProps) {
     //     },
     //   ],
     // })
-    tippy(container.current!, {
-      content,
-      placement,
-      arrow,
-      theme,
-      trigger,
-      interactive,
-      duration,
-      delay,
-      maxWidth
-    })
+    if (container.current) {
+      tippy(container.current, {
+        content,
+        placement,
+        arrow,
+        theme,
+        trigger,
+        interactive,
+        duration,
+        delay,
+        maxWidth
+      })
+    }
   })
 
   return (

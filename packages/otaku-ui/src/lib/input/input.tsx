@@ -88,7 +88,7 @@ export function Input (props: InputProps) {
         // text search password
         type !== 'textarea'
           ? (
-              <div className={`otaku-input-box otaku-input-size-${size}`}>
+              <div className={`otaku-input-box otaku-input-size-${size}`} style={style}>
                 {
                   beforeNode ? <div className="otaku-input-before">{beforeNode}</div> : ''
                 }
@@ -99,8 +99,7 @@ export function Input (props: InputProps) {
                 })}
                 style={{
                   borderWidth: border ? '1px' : '0px',
-                  background: disabled ? '#f7f7f7' : bgcolor,
-                  ...style
+                  background: disabled ? '#f7f7f7' : bgcolor
                 }}>
                   {
                     typeof beforeIcon === 'string' ? <Icon 

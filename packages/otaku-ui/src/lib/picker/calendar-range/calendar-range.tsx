@@ -73,8 +73,7 @@ export function CalendarRange (props: CalendarRangeProps) {
         setStartDate(result)
   }
 
-  const changeDate = (type: PickerPanel, date: dayjs.ConfigType) => {
-    // setSelectDate(dayjs(date))
+  const changeDate = (type: PickerPanel) => {
     setPicker(type)
   }
 
@@ -90,10 +89,6 @@ export function CalendarRange (props: CalendarRangeProps) {
         setSelectDate([...selectDate])
       }
     }
-  }
-
-  const mouseout = () => {
-
   }
 
   return (
@@ -187,7 +182,7 @@ export function CalendarRange (props: CalendarRangeProps) {
         }}>
         <Year
           date={startDate}
-          onChange={date => changeDate('month', date)}></Year>
+          onChange={() => changeDate('month')}></Year>
       </div>
       <div
         style={{
@@ -195,7 +190,7 @@ export function CalendarRange (props: CalendarRangeProps) {
         }}>
         <Month
           date={startDate}
-          onChange={date => changeDate('calendar', date)}></Month>
+          onChange={() => changeDate('calendar')}></Month>
       </div>
     </section>
   )

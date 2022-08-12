@@ -45,6 +45,7 @@ export function Rate (props: RateProps) {
 
   useEffect(() => {
       init()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
   const render = (start: number, end: number, checked: boolean, half: boolean) => {
@@ -152,7 +153,6 @@ export function Rate (props: RateProps) {
     }
   }
 
-  console.log(children)
   return (
     <div className="otaku-rate">
       <ul

@@ -71,6 +71,7 @@ export function Progress (props: ProgressProps) {
       ctx.textAlign = 'center'
       ctx?.fillText(value, w / 2, h / 2 + 10)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [percentage])
 
   return type === 'circle' ? (
