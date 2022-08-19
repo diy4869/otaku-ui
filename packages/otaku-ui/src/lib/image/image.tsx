@@ -29,7 +29,7 @@ export function Image (props: ImageProps) {
 
   return (
     <div className={classNames('otaku-image-container', className)}>
-      <img data-src={src} alt={alt}  className="otaku-image"/>
+      <img data-src={src} alt={alt} src={src} className="otaku-image"/>
     </div>
   )
 }

@@ -88,14 +88,14 @@ export function Input (props: InputProps) {
         // text search password
         type !== 'textarea'
           ? (
-              <div className={`otaku-input-box otaku-input-size-${size}`} style={style}>
+              <div className={classNames('otaku-input-box')} style={style}>
                 {
                   beforeNode ? <div className="otaku-input-before">{beforeNode}</div> : ''
                 }
               <div
-                className={classNames('otaku-input-container', className, {
+                className={classNames('otaku-input-container', `otaku-input-size-${size}`, className, {
                   'otaku-input-after-border': afterNode,
-                  'otaku-input-disabled': disabled
+                  'otaku-input-disabled': disabled,
                 })}
                 style={{
                   borderWidth: border ? '1px' : '0px',

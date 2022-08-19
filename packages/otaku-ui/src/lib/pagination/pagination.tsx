@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import classNames from 'classnames'
 import { usePagination } from '../../hooks/index'
 import type { usePaginationProps } from '../../hooks/index'
 import './style.scss'
@@ -28,6 +29,8 @@ export function Pagination (props: PaginationProps) {
   
   useEffect(() => {
     setPage(page)
+    pageChange?.(page)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
   const change = (direction?: 'left' | 'right' | 'center', current?: number) => {
@@ -40,10 +43,8 @@ export function Pagination (props: PaginationProps) {
         break
       default:
         setPage(current as number)
-        break
     }
-
-    pageChange?.(page)
+    
   }
 
   const renderPageItem = (current: number) => {
@@ -51,12 +52,12 @@ export function Pagination (props: PaginationProps) {
       <li 
         key={current}
         data-page={current}
-        className={`
-          otaku-pagination-item 
-          ${circle ? 'is-circle' : ''}
-          ${page === current ? 'otaku-pagination-item-acitve' : ''}
-        `}
-        onClick={() => change('center', current)}>
+        className={classNames('otaku-pagination-item', {
+          'is-circle': circle,
+          'otaku-pagination-item-acitve': page === current
+        })}
+        onClick={() => change('center', current)}
+        onKeyDown={() => change('center', current)}>
         {current}
       </li>
     )
