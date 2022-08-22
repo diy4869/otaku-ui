@@ -13,6 +13,7 @@ export default defineConfig({
   // assetsInclude: ['**/*.md'],
   resolve: {
     alias: {
+      'otaku-ui': path.resolve(__dirname, '../otaku-ui/'),
       'site-component': path.resolve(__dirname, './src/components'),
       '@docs': path.resolve(__dirname, './docs'),
       '@': path.resolve(__dirname, './src'),

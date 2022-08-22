@@ -1,6 +1,5 @@
 @import '../../style/var.scss';
 
-$primaryColor: #1F4BFF;
 
 .otaku-button {
   border: none;
@@ -70,19 +69,19 @@ $primaryColor: #1F4BFF;
 }
 
 .otaku-button-text {
-  color: $primaryColor;
+  color: var(--otaku-primary-color-5);
   &:hover {
-    color: mix(white, $primaryColor, 20%);
+    color: var(--otaku-primary-color-4);
   }
   &:active {
-    color: mix(black, $primaryColor, 20%);
+    color: var(--otaku-primary-color-6);
   }
   &:disabled {
-    color: mix(white, $primaryColor, 48%);
+    color: var(--otaku-primary-color-6);
   }
 }
 .otaku-button-link {
-  color: $primaryColor;
+  color: var(--otaku-primary-color-5);
 }
 
 .otaku-button-default {
@@ -91,12 +90,12 @@ $primaryColor: #1F4BFF;
   color: #595959;
   
   &:hover {
-    color: mix(white, $primaryColor, 20%);
-    border-color: mix(white, $primaryColor, 20%);
+    color:var(--otaku-primary-color-4);
+    border-color:var(--otaku-primary-color-4);
   }
   &:active {
-    color: mix(black, $primaryColor, 10%);
-    border-color: mix(black, $primaryColor, 10%);
+    color: var(--otaku-primary-color-6);
+    border-color: var(--otaku-primary-color-6);
   }
   &:disabled {
     color:#d9d9d9;
@@ -110,12 +109,12 @@ $primaryColor: #1F4BFF;
 
 
   &:hover {
-    color: mix(white, $primaryColor, 20%);
-    border-color: mix(white, $primaryColor, 20%);
+    color:var(--otaku-primary-color-4);
+    border-color:var(--otaku-primary-color-4);
   }
   &:active {
-    color: mix(black, $primaryColor, 10%);
-    border-color: mix(black, $primaryColor, 10%);
+    color: var(--otaku-primary-color-6);
+    border-color: var(--otaku-primary-color-6);
   }
 
   &:disabled {
@@ -126,34 +125,42 @@ $primaryColor: #1F4BFF;
 }
 
 $Button: (
-  (type: primary, color: $primaryColor),
+  (
+    type: primary, 
+    hover: var(--otaku-primary-color-4), 
+    color: var(--otaku-primary-color-5), 
+    active: var(--otaku-primary-color-6),
+    disabled: var(--otaku-primary-color-3)
+  ),
   (type: success, color: #08dba8),
   (type: warning, color: #ffb540),
   (type: danger, color: #f52f3e)
 );
 
-
 @for $i from 1 through length($Button) {
   $item: nth($Button, $i);
   $color: map-get($item, color);
   $type: map-get($item, type);
+  $hover:  map-get($item, hover);
+  $active: map-get($item, active);
+  $disabled: map-get($item, disabled);
 
   .otaku-button-#{$type} {
     background: $color;
     border: 1px solid $color;
     color: white;
     &:hover {
-      background: mix(white, $color, 20%);
-      border-color: mix(white, $color, 20%);
+      background: $hover;
+      border-color: $hover;
     }
     &:active {
       color: white;
-      background: mix(black, $color, 10%);
-      border-color:  mix(black, $color, 10%);
+      background: $active;
+      border-color: $active;
     }
     &:disabled {
-      background: mix(white, $color, 48%);
-      border-color:  mix(white, $color, 48%);
+      background: $disabled;
+      border-color: $disabled;
     }
   }
 
@@ -162,19 +169,17 @@ $Button: (
     background: white;
     color: $color;
     &:hover {
-      color: mix(white, $color, 20%);
-      border-color: mix(white, $color, 20%);
-      background: white;
+      background: $hover;
+      border-color: $hover;
     }
     &:active {
-      color: mix(black, $color, 10%);
-      background: white;
-      border-color: mix(black, $color, 10%);
+      color: white;
+      background: $active;
+      border-color: $active;
     }
     &:disabled {
-      background: white;
-      color: mix(white, $color, 48%);
-      border-color: mix(white, $color, 48%);
+      background: $disabled;
+      border-color: $disabled;
     }
   }
 }
