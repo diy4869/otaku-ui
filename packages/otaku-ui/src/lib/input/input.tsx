@@ -29,8 +29,6 @@ export interface InputProps {
   onFocus?:() => void
   onBlur?:() => void
   onClear?: () => void
-  leftClick?:() => void
-  rightClick?:() => void
   onEnter?:(e: React.BaseSyntheticEvent) => void
 }
 
@@ -60,9 +58,7 @@ export function Input (props: InputProps) {
     onChange,
     onInput,
     onEnter,
-    onClear,
-    leftClick,
-    rightClick
+    onClear
   } = props
 
   const [inputValue,setInputValue] = useState(value)
@@ -102,10 +98,7 @@ export function Input (props: InputProps) {
                   background: disabled ? '#f7f7f7' : bgcolor
                 }}>
                   {
-                    typeof beforeIcon === 'string' ? <Icon 
-                    className='otaku-input-icon-left'
-                    name={beforeIcon} 
-                    onClick={leftClick}></Icon> : beforeIcon
+                    beforeIcon
                   }
                   <input
                     style={{
@@ -153,10 +146,7 @@ export function Input (props: InputProps) {
                     }}></Icon>
                   </VShow>
                   {
-                     typeof afterIcon === 'string' ? <Icon 
-                      className='otaku-input-icon-right'
-                      name={afterIcon} 
-                      onClick={rightClick}></Icon> : afterIcon
+                    afterIcon
                   }
                 </div>
                 {

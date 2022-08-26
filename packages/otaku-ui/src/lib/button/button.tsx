@@ -6,7 +6,7 @@ export interface ButtonProps {
   disabled?: boolean
   loading?: boolean
   ghost?: boolean
-  icon?: string
+  icon?: React.ReactNode
   bgcolor?: string
   color?: string
   className?: string
@@ -62,12 +62,12 @@ export const Button = (props: ButtonProps) => {
   const childNode = Icon
     ? iconDirection === 'left'
       ? (<>
-        <span className={`iconfont otaku-button-icon ${Icon}`}></span>
+        {Icon}
         { children }
         </>)
       : (<>
         {children }
-        <span className={`iconfont otaku-button-icon ${Icon}`}></span>
+        {Icon}
         </>)
     : children
 
