@@ -5,15 +5,20 @@ import './style.scss'
 export interface TimeProps {
   value: number
   format?: string
+  start?: number
+  end?: number
   type?: 'up' | 'down'
-  render?: (time?: ReturnType<typeof timeFormat>) => React.ReactNode
+  render?: (time: ReturnType<typeof timeFormat>) => React.ReactNode
 }
 
 
 export function Time (props: TimeProps) {
   const {
     value,
-    type = 'down'
+    start,
+    end = Date.now(),
+    type = 'down',
+    render
   } = props
   const [time, setTime] = useState(value)
   const [formatTime, setFormatTime] = useState('')
@@ -24,23 +29,30 @@ export function Time (props: TimeProps) {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      type === 'down' ? setTime(time - 1) : setTime(time + 1)
+      if (type === 'down') {
+        setTime(time - 1)
+      } else {
+        if  (start) {
+          setTime(end - start)
+        } else {
+          setTime(time + 1)
+        }
+      }
 
       if (time <= 0) {
         clearTimeout(timeout)
       }
-
-      const obj = timeFormat(time)
       
-      setFormatTime(`${obj.day}天${obj.hour}时${obj.minute}分${obj.second}秒`)
+      const obj = timeFormat(time)
+      setFormatTime(`${obj.day}天${obj.hour}时${obj.minute}分${obj.second}秒`)      
     }, 1000)
 
     return () => {
       clearTimeout(timeout)
     }
-  }, [time, type])
+  }, [time, type, start, end])
   
   return (
-    <div>{formatTime}</div>
+    <div className='otaku-time'>{render?.(timeFormat(time)) || formatTime}</div>
   )
 }

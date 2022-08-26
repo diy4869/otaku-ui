@@ -18,17 +18,18 @@ export const findDataset = (element: HTMLElement, key: string): HTMLElement | nu
   return findDataset(element.parentElement as HTMLElement, key)
 }
 
-export const timeFormat = (time: number) => {
-  const day = time / 1000 / 86400 >> 0
-  const hour = time % 86400 / 3600 >> 0
-  const minute = time % 86400 % 3600 / 60 >> 0
-  const second = time % 86400 % 3600 % 60 >> 0
+export const timeFormat = (time: number, fillZero = true) => {
+  const t = time / 1000
+  const day = t / 86400 >> 0
+  const hour = t % 86400 / 3600 >> 0
+  const minute = t % 86400 % 3600 / 60 >> 0
+  const second = t % 86400 % 3600 % 60 >> 0
 
   return {
     day,
-    hour,
-    minute,
-    second
+    hour: fillZero ? `${hour}`.padStart(2, '0') : hour,
+    minute: fillZero ? `${minute}`.padStart(2, '0') : minute,
+    second: fillZero ? `${second}`.padStart(2, '0') : second,
   }
 }
 
