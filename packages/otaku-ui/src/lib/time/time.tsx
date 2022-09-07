@@ -42,7 +42,7 @@ export function Time (props: TimeProps) {
       if (time <= 0) {
         clearTimeout(timeout)
       }
-      
+
       const obj = timeFormat(time)
       setFormatTime(`${obj.day}天${obj.hour}时${obj.minute}分${obj.second}秒`)      
     }, 1000)

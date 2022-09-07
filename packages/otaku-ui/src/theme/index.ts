@@ -17,3 +17,5 @@ function generateColor () {
 }
 
 generateColor()
+
+export * from './generate'

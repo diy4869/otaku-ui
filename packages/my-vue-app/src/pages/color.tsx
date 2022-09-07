@@ -1,5 +1,5 @@
 import React from 'react'
-import generator from 'otaku-ui/src/theme/index'
+import { generate } from 'otaku-ui/src/theme/index'
 import './color.scss'
 
 
@@ -9,9 +9,9 @@ export default () => {
       {
         ['#060606', '#1F4BFF', '#f5222d', 'orange', 'green', 'purple'].map(item => {
           return (
-            <ul>
+            <ul className='colors'>
               {
-                generator(item).map((color, colorIndex) => {
+                generate(item).map((color, colorIndex) => {
                   return (
                     <li 
                       key={colorIndex}
