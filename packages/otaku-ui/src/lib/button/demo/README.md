@@ -1,6 +1,6 @@
 ---
 import: 
-  import { Button, Space, Grid, GridItem } from 'otaku-ui'
+  import { Button, Space, Grid, GridItem, Icon } from 'otaku-ui'
 api:
   {
     module: ['Button']
@@ -172,10 +172,10 @@ ReactDOM.createRoot(container).render(<Button type="danger" bgcolor="red">按钮
 ```tsx
 ReactDOM.createRoot(container).render(<Grid count={3}>
     <GridItem>
-      <Button type="primary" iconDirection="left" icon="otaku-icon-search-line">左边 icon 的按钮</Button>
+      <Button type="primary" iconDirection="left" icon={<Icon name="search-line"></Icon>}>左边 icon 的按钮</Button>
     </GridItem>
     <GridItem>
-      <Button type="primary" iconDirection="right" icon="otaku-icon-search-line">右边 icon 的按钮</Button>
+      <Button type="primary" iconDirection="right" icon={<Icon name="search-line"></Icon>}>右边 icon 的按钮</Button>
     </GridItem>
   </Grid>)
 ```
@@ -194,7 +194,7 @@ ReactDOM.createRoot(container).render(<Grid count={5}>
       <Button type="primary" shape="round">圆角按钮</Button>
     </GridItem>
     <GridItem>
-      <Button type="primary" shape="circle" icon="otaku-icon-search-line"></Button>
+      <Button type="primary" shape="circle" icon={<Icon name="search-line"></Icon>}></Button>
     </GridItem>
   </Grid>)
 ```

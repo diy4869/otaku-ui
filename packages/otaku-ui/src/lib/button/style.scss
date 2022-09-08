@@ -9,6 +9,10 @@
   box-sizing: border-box;
   padding: 0;
   letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   &:hover {
     cursor: pointer;
   }

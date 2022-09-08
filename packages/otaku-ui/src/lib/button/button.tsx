@@ -1,4 +1,5 @@
 import React from 'react'
+import { Icon } from '../icon/icon'
 import classNames from 'classnames'
 import './style.scss'
 
@@ -57,17 +58,17 @@ export const Button = (props: ButtonProps) => {
   
   const isDisabled = disabled || loading
 
-  const Icon = loading ? 'otaku-icon-loading' : icon
+  const loadingIcon = loading ? <Icon name="loading"></Icon> : icon
 
-  const childNode = Icon
+  const childNode = loadingIcon
     ? iconDirection === 'left'
       ? (<>
-        {Icon}
+        {loadingIcon}
         { children }
         </>)
       : (<>
         {children }
-        {Icon}
+        {loadingIcon}
         </>)
     : children
 

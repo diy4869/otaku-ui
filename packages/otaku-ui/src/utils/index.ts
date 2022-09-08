@@ -46,3 +46,5 @@ export const flattern = <T extends any[] = Record<string, any>[]>(arr: T, key = 
     return total
   }, [])
 }
+
+export * from './notice'

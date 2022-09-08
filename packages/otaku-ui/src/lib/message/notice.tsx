@@ -1,99 +1,45 @@
 import React from 'react'
-import ReactDOM from 'react-dom/client'
+import { Notice } from '../../utils/notice'
 import { Message } from './message'
-import { styleToStr } from '../../utils'
 
 type MessageType = 'info' | 'success' | 'warning' | 'error'
 
-interface Options {
-  duration?: number
-  type?: MessageType
-  content?: React.ReactNode
-}
-
-let noticeId = 1
-const noticeInstance: number[] = []
-
-export class Notice {
-  id: number
-  finish: boolean
-
-  container: HTMLDivElement | null
-  timer: unknown
-
-  constructor () {
-    this.id = noticeId
-    this.finish = false
-    this.container = null
-    this.timer = undefined
-
-    this.init()
-  }
-
-  init() {
-    const container = document.getElementById('otaku-notice-container')
-    if (!container) {
-      this.container = document.createElement('div')
-      this.container.id = `otaku-notice-container`
-      this.container.style.cssText = styleToStr({
-        position: 'fixed',
-        top: '20px',
-        left: '50%',
-        'z-index': 2000
-      })
-      document.body.appendChild(this.container)
-    }
-  }
-
-  create(options: Options) {
-    const { content, duration = 3000, type = 'info' } = options
-    const container = document.createElement('div')
-    
-    noticeInstance.push(noticeId)
-    container.id = `notice-${noticeId++}`
-    container.style.marginBottom = '10px'
-    this.container?.appendChild(container)
-    ReactDOM.createRoot(container).render(<Message type={type}>{content}</Message>)
-
-    setTimeout(() => {
-      this.destory()
-    }, duration)
-  }
-
-  destory() {
-    if (noticeInstance.length === 0) return
-
-    const id = noticeInstance.shift()
-    const container = document.getElementById(`notice-${id}`) as HTMLElement
-        
-    this.container?.removeChild(container)
-  }
-}
-
-let instance: Notice | null = null
-
-type message = {
-  [K in MessageType]?: (message: React.ReactNode, time?: number) => void
-}
-
 const type = ['info', 'success', 'warning', 'error']
 
-if (!instance) {
-  instance = new Notice()
-}
+// type message = {
+//   [K in MessageType]?: (message: React.ReactNode, time?: number) => void
+// }
 
-const message = type.reduce((o: message, current) => {
-  o[current as MessageType] = (content: React.ReactNode, duration = 3000) => {
-      instance?.create({
-        type: current as Options['type'],
-        content,
-        duration: duration
-      })
+const message = type.reduce((o: any, current) => {
+  o[current as MessageType] = function createMessage (content: string, time = 3000) {
+    const instance = new Notice({
+      rootStyle: {
+        position: 'fixed',
+        top: '10px',
+        left: '50%'
+      }
+    })
+    const timeout = setTimeout(() => {
+      instance.destory()
+    }, time)
+
+    instance.create({
+      style: {
+        'margin-top': '20px',
+        'transition': 'all 0.3s linear'
+      },
+      content: <Message type={current as MessageType} onClose={() => {
+        instance.destory()
+        clearTimeout(timeout)
+  
+      }}>{content}</Message>
+    })
   }
-
+  
   return o
 }, {})
 
 export {
-  message
+  message,
+  Notice
 }

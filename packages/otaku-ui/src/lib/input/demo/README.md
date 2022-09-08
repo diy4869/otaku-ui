@@ -1,6 +1,6 @@
 ---
 import:
-  import { Input, Grid, GridItem, Button } from 'otaku-ui'
+  import { Input, Grid, GridItem, Button, Icon } from 'otaku-ui'
 api:
   {
     module: ['Input']
@@ -80,12 +80,12 @@ ReactDOM.createRoot(container).render(<ul>
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="前面的icon" beforeIcon="search-line"></Input>
+      <Input placeholder="前面的icon" beforeIcon={<Icon name="search-line"></Icon>}></Input>
     </li>
     <li style={{
       marginBottom: '10px'
     }}>
-      <Input placeholder="后面的icon" afterIcon="search-line"></Input>
+      <Input placeholder="后面的icon" afterIcon={<Icon name="search-line"></Icon>}></Input>
     </li>
   </ul>)
 
