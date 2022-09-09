@@ -19,6 +19,8 @@ export interface ImageCropperProps {
   action?: React.ReactNode
   outputFilename?: string
   children?: React.ReactNode
+  fixed: boolean
+  fixedNumber:  number
   getInstance?: (instance: Cropper) => void
   onClose?: () => void
   onCancel?: () => void
@@ -31,6 +33,8 @@ export function ImageCropper (props: ImageCropperProps) {
     visible,
     options,
     action,
+    fixed,
+    fixedNumber,
     circle = false,
     outputFilename = 'cropper.png',
     getInstance,
@@ -46,13 +50,23 @@ export function ImageCropper (props: ImageCropperProps) {
   useLayoutEffect(() => {
     if (visible) {
       if (image.current && container.current) {
+        console.log(options)
         // eslint-disable-next-line no-new
         const cropper = new Cropper(image.current, {
+          autoCropArea: 1,
+          // 固定尺寸裁剪
+          ...fixed ? {
+            data: {
+              width: fixedNumber,
+              height: fixedNumber
+            },
+            minCropBoxWidth: fixedNumber,
+            minCropBoxHeight: fixedNumber,
+            resizeable: false,
+            cropBoxResizable: false,
+          } : {},
           ...options,
-          preview: container.current,
-          ready (e) {
-            console.log(e)
-          }
+          preview: container.current
         })
         setCropperInstance(cropper)
         setShow(visible)

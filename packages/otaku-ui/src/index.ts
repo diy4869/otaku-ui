@@ -1,5 +1,6 @@
 import './style/normalize.css'
 import './fonts/iconfont.css'
+// import './fonts/iconfont'
 import './theme/index'
 
 export * from './lib/avatar/avatar'

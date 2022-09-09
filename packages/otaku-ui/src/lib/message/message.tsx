@@ -19,7 +19,7 @@ export function Message (props: MessageProps) {
     <div className="otaku-message">
       <span className={`otaku-message-icon iconfont otaku-icon-${type}`}></span>
       <span className="otaku-message-content">{children}</span>
-      <span onClick={onClose}>测试关闭</span>
+      {/* <span onClick={onClose}>测试关闭</span> */}
     </div>
   )
 }

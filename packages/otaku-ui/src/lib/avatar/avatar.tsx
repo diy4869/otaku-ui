@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './style.scss'
 
-interface AvatarProps {
+export interface AvatarProps {
   // 图片大小
   size?: number
   /**
@@ -24,7 +24,6 @@ export function Avatar (props: AvatarProps) {
   }
 
   useEffect(() => {
-    console.log(src)
     setURL(src)
   }, [src])
 

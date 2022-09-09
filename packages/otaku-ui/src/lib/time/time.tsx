@@ -8,6 +8,7 @@ export interface TimeProps {
   start?: number
   end?: number
   type?: 'up' | 'down'
+  delay?: number
   render?: (time: ReturnType<typeof timeFormat>) => React.ReactNode
 }
 
@@ -18,6 +19,7 @@ export function Time (props: TimeProps) {
     start,
     end = Date.now(),
     type = 'down',
+    delay = 1000,
     render
   } = props
   const [time, setTime] = useState(value)
@@ -45,11 +47,12 @@ export function Time (props: TimeProps) {
 
       const obj = timeFormat(time)
       setFormatTime(`${obj.day}天${obj.hour}时${obj.minute}分${obj.second}秒`)      
-    }, 1000)
+    }, delay)
 
     return () => {
       clearTimeout(timeout)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time, type, start, end])
   
   return (
