@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import classNames from 'classnames'
-import { CalendarRange } from '../picker'
+import { CalendarSingleRange, CalendarDoubleRange } from '../picker/calendar-range'
 import { Input } from '../input/input'
 import { Portal } from '../portal/portal'
 import { Button } from '../button/button'
@@ -22,6 +22,7 @@ export interface DateRangePickerProps {
   disabled?: boolean
   format?: string
   shortcut?: shortcutOptions[]
+  panelType?: 'single' | 'double'
   onCancel?: () => void
   onConfirm?: (date: [Dayjs, Dayjs]) => void
 }
@@ -36,21 +37,22 @@ export function DateRangePicker (props: DateRangePickerProps) {
     disabled,
     shortcut = [],
     value = [],
+    panelType = 'single',
     format = 'YYYY-MM-DD',
     onCancel,
     onConfirm
   } = props
 
   const [start, end] = value
-  const [selectDate, setSelectDate] = useState<[dayjs.ConfigType, dayjs.ConfigType]>([dayjs(start), dayjs(end)])
   const [startDate, setStartDate] = useState(dayjs(start))
-  const [endDate, setEndDate] = useState(dayjs(end))
+  const [endDate, setEndDate] = useState(end ? dayjs(end) : dayjs(end).add(1, 'month'))
   const [inputVal, setInputVal] = useState('')
   const [show, setShow] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>()
 
   return (
     <section className="otaku-date-range-picker-container">
+      start: {startDate.format('YYYY-MM-DD')} ----- end: {endDate.format('YYYY-MM-DD')}
       <Input
         value={inputVal}
         readonly
@@ -101,20 +103,29 @@ export function DateRangePicker (props: DateRangePickerProps) {
               )
             })}
           </ul>
-          <section className="otaku-date-range-picker-calender">
-            <CalendarRange
-              date={selectDate}
-              onChange={date => {
-                console.log(date)
-                setSelectDate([...date])
-              }}></CalendarRange>
-            <CalendarRange 
-                date={selectDate}
-                onChange={(date) => {
-                  setSelectDate([...date])
-                }}></CalendarRange>
-          </section>
-          <Space className="otaku-date-range-picker-action">
+          {panelType === 'single' ? (
+            <section className="otaku-date-range-picker-single-panel">
+              <CalendarSingleRange
+                date={[startDate, endDate]}
+                onChange={date => {
+                  const [start, end] = date as Dayjs.ConfigType[]
+                  setStartDate(start)
+                  setEndDate(end)
+                }}></CalendarSingleRange>
+            </section>
+          ) : (
+            <section className="otaku-date-range-picker-double-panel">
+              <CalendarDoubleRange
+                date={[startDate, endDate]}
+                onChange={date => {
+                  const [start, end] = date as Dayjs.ConfigType[]
+                  setStartDate(start)
+                  setEndDate(end)
+                }}></CalendarDoubleRange>
+            </section>
+          )}
+
+          {/* <Space className="otaku-date-range-picker-action">
             <Button
               onClick={() => {
                 setShow(false)
@@ -135,7 +146,7 @@ export function DateRangePicker (props: DateRangePickerProps) {
               }}>
               确定
             </Button>
-          </Space>
+          </Space> */}
         </section>
       </Portal>
     </section>

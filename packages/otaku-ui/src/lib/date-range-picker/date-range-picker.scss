@@ -34,7 +34,7 @@
       color: #0044FF;
     }
   }
-  &-calender {
+  &-double-panel {
     display: grid;
     grid-template-columns: 1fr 1fr;   
     grid-area: calendar; 
@@ -44,7 +44,6 @@
       padding: 20px;
       border-radius: 0;
       &:nth-of-type(1) {
-        border-right: 0.5px solid #D8DDEB;
         .otaku-calendar-active {
           background: var(--otaku-primary-color);
           color: white;

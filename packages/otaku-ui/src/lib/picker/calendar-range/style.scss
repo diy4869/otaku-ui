@@ -50,13 +50,19 @@
     grid-template-rows: repeat(6, var(--calender-size));
     grid-gap: var(--calender-gap);
     li {
-      display: grid;
-      justify-items: center;
-      align-items: center;
+     
       border-radius: var(--otaku-radius);
       box-sizing: border-box;
       color: #BFBFBF;
       font-size: 16px;
+
+      span {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
     .otaku-calendar-current {
       color: #262626;
@@ -79,15 +85,24 @@
       border-radius: 0px;
     }
 
-    .otaku-calendar-range-start {
-      background:  var(--otaku-primary-color);
+    .otaku-calendar-range-start,
+    .otaku-calendar-range-end {
+      background: linear-gradient(0deg, rgba(31, 75, 255, 0.1), rgba(31, 75, 255, 0.1)), #FFFFFF;
       color: white;
-      // border-radius: var(--otaku-radius) 0 0 var(--otaku-radius);
+      border-radius: 0px;
+
+    }
+    .otaku-calendar-range-start {
+      border-radius: var(--otaku-radius) 0 0 var(--otaku-radius);
     }
     .otaku-calendar-range-end {
+      border-radius: 0 var(--otaku-radius) var(--otaku-radius) 0;
+    }
+
+    .otaku-calendar-range-start span,
+    .otaku-calendar-range-end span {
       background: var(--otaku-primary-color);
-      color: white;
-      // border-radius:  0;
+      border-radius: var(--otaku-radius);
     }
 
     .otaku-calendar-disabled {
@@ -101,3 +116,4 @@
 
   }
 }
+
