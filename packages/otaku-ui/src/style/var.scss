@@ -1,15 +1,11 @@
-// var(--primary-color): #1F4BFF;
-$small: 32px;
-$middle: 36px;
-$large: 40px;
 
 :root {
   // 全局
-  --radius: 8px;
-  --shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
-  --primary-color:  #1F4BFF;
+  --otaku-radius: 8px;
+  --otaku-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
+  --otaku-primary-color:  #1F4BFF;
 
   // 表单相关
-  --disabled-color: #f7f7f7;
-  --disabled-border-color: #e5e5e5;
+  --otaku-disabled-color: #f7f7f7;
+  --otaku-disabled-border-color: #e5e5e5;
 }

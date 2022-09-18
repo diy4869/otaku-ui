@@ -7,7 +7,7 @@
   box-sizing: border-box;
   background: white;
   
-  border-radius: var(--radius);
+  border-radius: var(--otaku-radius);
   padding: 20px 24px;
   margin-top: 2px;
   cursor: pointer;
@@ -26,7 +26,7 @@
     li:nth-of-type(2) {
       span {
         &:hover {
-          color: var(--primary-color);
+          color: var(--otaku-primary-color);
         }
       }
     }
@@ -53,7 +53,7 @@
       display: grid;
       justify-items: center;
       align-items: center;
-      border-radius: var(--radius);
+      border-radius: var(--otaku-radius);
       box-sizing: border-box;
       color: #BFBFBF;
       font-size: 16px;
@@ -62,19 +62,19 @@
       color: #262626;
     }
     .otaku-calendar-active {
-      border: 1.5px solid var(--primary-color);
+      border: 1.5px solid var(--otaku-primary-color);
       color: var(--primarycolor);
     }
     
     
     
     // .otaku-calendar-range {
-    //   background: var(--primary-color);
+    //   background: var(--otaku-primary-color);
     //   color: white;
     // }
 
     .otaku-calendar-today {
-      background: var(--primary-color);
+      background: var(--otaku-primary-color);
       color: white;
     }
 

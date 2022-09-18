@@ -6,8 +6,8 @@
 
 .otaku-date-range-picker {
   background: white;
-  box-shadow: var(--shadow);
-  border-radius: var(--radius);
+  box-shadow: var(--otaku-shadow);
+  border-radius: var(--otaku-radius);
   display: grid;
   grid-template-areas: 
     "shortcut calendar"
@@ -30,7 +30,7 @@
     }
     .active {
       background: linear-gradient(0deg, rgba(31, 75, 255, 0.08), rgba(31, 75, 255, 0.08)), #FFFFFF;
-      border-radius: var(--radius);
+      border-radius: var(--otaku-radius);
       color: #0044FF;
     }
   }
@@ -46,13 +46,13 @@
       &:nth-of-type(1) {
         border-right: 0.5px solid #D8DDEB;
         .otaku-calendar-active {
-          background: var(--primary-color);
+          background: var(--otaku-primary-color);
           color: white;
         }
       }
       &:nth-of-type(2) {
         .otaku-calendar-active {
-          background: var(--primary-color);
+          background: var(--otaku-primary-color);
           color: white;
         }
       }

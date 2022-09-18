@@ -2,9 +2,7 @@ import { generate } from './generate'
 
 function generateColor () {
   Promise.resolve().then(() => {
-    const getPrimaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--primary-color')
-    // const getPrimaryColor = '#0A8DFF'
-
+    const getPrimaryColor = window.getComputedStyle(document.documentElement).getPropertyValue('--otaku-primary-color')
 
     const result = generate(getPrimaryColor)
 

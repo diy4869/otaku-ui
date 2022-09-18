@@ -48,7 +48,7 @@ export const Button = (props: ButtonProps) => {
     `otaku-button-size-${size}`,
     `otaku-button-${type}`,
     {
-      'otaku-input-disabled': disabled,
+      'otaku-button-disabled': disabled,
       'otaku-button-loading': loading,
       [`otaku-button-${type}-ghost`]: ghost,
       [`otaku-button-shape-${shape}`]: shape,
