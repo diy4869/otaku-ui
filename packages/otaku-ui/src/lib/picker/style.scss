@@ -1,0 +1,24 @@
+.otaku-picker-box {
+  width: 100%;
+  height: 280px;
+  overflow-y: auto;
+  background-color: white;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.otaku-picker-container {
+  width: 100%;
+  .otaku-picker-item {
+    width: 100%;
+    padding: 8px 24px;
+    text-align: center;
+    box-sizing: border-box;
+    &-active {
+      background: linear-gradient(0deg, rgba(31, 75, 255, 0.08), rgba(31, 75, 255, 0.08)), #FFFFFF;
+      color: var(--otaku-primary-color);
+      border-radius: var(--otaku-radius);
+    }
+  }
+}

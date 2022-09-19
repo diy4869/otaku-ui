@@ -10,8 +10,8 @@
   border-radius: var(--otaku-radius);
   display: grid;
   grid-template-areas: 
-    "shortcut calendar"
-    "shortcut action";
+    "shortcut calendar time"
+    "shortcut action time";
 
   &-shortcut {
     grid-area: shortcut;
@@ -56,6 +56,32 @@
         }
       }
     }
+  }
+  &-time-panel {
+    width: 256px;
+    // height: 444px;
+    grid-area: time;
+  }
+  &-time {
+    width: 224px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 56px;
+    padding: 24px 16px;
+
+    li {
+      box-sizing: border-box;
+      font-size: 24px;
+      line-height: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  &-time-picker {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
   }
   &-action {
     grid-area: action;

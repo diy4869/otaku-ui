@@ -75,8 +75,8 @@
     
 
     .otaku-calendar-today {
-      background: var(--otaku-primary-color);
-      color: white;
+      background: white;
+      color: var(--otaku-primary-color);
     }
 
     .otaku-calendar-between {
@@ -97,6 +97,9 @@
     }
     .otaku-calendar-range-end {
       border-radius: 0 var(--otaku-radius) var(--otaku-radius) 0;
+      .otaku-calendar-between {
+        color: white;
+      }
     }
 
     .otaku-calendar-range-start span,

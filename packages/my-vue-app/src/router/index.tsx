@@ -147,6 +147,11 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/checkbox/demo/README.md'))
       },
       {
+        title: "time-picker 时间选择器",
+        path: "/form/time-picker",
+        component: lazy(() => import('otaku-ui/src/lib/time-picker/demo/README.md'))
+      },
+      {
         title: "date-picker 日期选择器",
         path: "/form/date-picker",
         component: lazy(() => import('otaku-ui/src/lib/datePicker/demo/README.md'))

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
 import classNames from 'classnames'
 import isBetween from 'dayjs/plugin/isBetween'
@@ -13,55 +13,56 @@ dayjs.extend(isBetween)
 
 export interface CalendarRangeProps {
   className?: string
-  date?: dayjs.ConfigType[]
+  value?: dayjs.ConfigType[]
   format?: string
   firstWeek?: '一' | '日'
+  panel?: 'start' | 'end'
   lunarDate?: boolean
   disabled?: (date: Dayjs) => boolean
-  onChange?: (date: dayjs.ConfigType[]) => void
+  onChange?: (date: Dayjs[]) => void
 }
 
 export function CalendarRange (props: CalendarRangeProps) {
-  const {
-    className,
-    date = [],
-    firstWeek = '日',
-    disabled,
-    onChange
-  } = props
-
-  const [ start, end ] = date
+  const { className, value = [], firstWeek = '日', panel = 'start', disabled, onChange } = props
+  const [start, end] = value
   const [selectDate, setSelectDate] = useState([dayjs(start), dayjs(end)])
-  const [startDate, setStartDate] = useState(dayjs(start))
+  const [resultDate, setResultDate] = useState(selectDate)
+  const [date, setDate] = useState(dayjs(panel === 'start' ? start : end))
 
   const [picker, setPicker] = useState('calendar')
-  const calendar = useCalendar(startDate, firstWeek)
+  const calendar = useCalendar(date, firstWeek)
   const week = getWeek(firstWeek)
 
   useEffect(() => {
-    const [start, end] = date
+    const [start, end] = value
     setSelectDate([dayjs(start), dayjs(end)])
-  }, [date])
+  }, [value])
 
   const click = (e: React.BaseSyntheticEvent) => {
     const el = findDataset(e.target, 'date')
-    // debugger
-    console.log(selectDate.map(item => item.format('YYYY-MM-DD')))
-    if (selectDate.length > 2) setSelectDate([])
+
     if (el) {
       const { date, type, disabled } = el.dataset
-      // debugger
       if (disabled !== 'true' && date && type === 'current') {
-       
-        if (selectDate.length < 2) {
-          // const [start] = selectDate
-          const result = [...selectDate, dayjs(date)].sort((a, b) => {
-            return a.toDate().getTime() - b.toDate().getTime()
-          }) as [Dayjs, Dayjs]
+        if (resultDate.length < 2) {
+          const sort = (arr: Dayjs[]) => {
+            return [...arr, dayjs(date)].sort((a, b) => {
+              return a.toDate().getTime() - b.toDate().getTime()
+            })
+          }
+          const set = new Set(
+            sort([...resultDate, dayjs(date)]).map(item =>
+              item.format('YYYY-MM-DD')
+            )
+          )
+          const result = [...set].map(item => dayjs(item))
+          setResultDate(result)
           setSelectDate(result)
           onChange?.(result)
         } else {
+          setResultDate([dayjs(date)])
           setSelectDate([dayjs(date)])
+          onChange?.([dayjs(date)])
         }
       }
     }
@@ -70,9 +71,9 @@ export function CalendarRange (props: CalendarRangeProps) {
   const change = (type: PickerPanel, direction: 'left' | 'right') => {
     const result =
       direction === 'left'
-        ? startDate.subtract(1, type)
-        : startDate.add(1, type)
-        setStartDate(result)
+        ? date.subtract(1, type)
+        : date.add(1, type)
+    setDate(result)
   }
 
   const changeDate = (type: PickerPanel) => {
@@ -80,23 +81,24 @@ export function CalendarRange (props: CalendarRangeProps) {
   }
 
   const mouseover = (e: React.BaseSyntheticEvent) => {
-    if (selectDate.length < 1) return
-    const el = findDataset(e.target, 'date')
+    console.log(resultDate.map(item => item.format('YYYY-MM-DD')).join(' --- '))
+    if (resultDate.length !== 2) {
+      const el = findDataset(e.target, 'date')
 
-    if (el) {
-      const { date, type, disabled } = el.dataset
+      if (el) {
+        const { date, type, disabled } = el.dataset
 
-      if (disabled !== 'true' && date && type === 'current') {
-        selectDate[1] = dayjs(date)
-        setSelectDate([...selectDate])
+        if (disabled !== 'true' && date && type === 'current') {
+          selectDate[1] = dayjs(date)
+          setSelectDate([...selectDate])
+        }
       }
     }
   }
 
   return (
     <section className={classNames('otaku-calendar-container', className)}>
-      start: {selectDate[0]?.format('YYYY-MM-DD')}
-      end: {selectDate[1]?.format('YYYY-MM-DD')}
+      {resultDate.map(item => item.format('YYYY-MM-DD')).join(' --- ')}
       <div
         style={{
           display: picker === 'calendar' ? 'block' : 'none'
@@ -111,11 +113,11 @@ export function CalendarRange (props: CalendarRangeProps) {
               onClick={() => change('month', 'left')}></span>
           </li>
           <li>
-            <span onClick={() => changeDate('year', startDate)}>
-              {startDate.year()}年
+            <span onClick={() => changeDate('year', date)}>
+              {date.year()}年
             </span>
-            <span onClick={() => changeDate('month', startDate)}>
-              {startDate.month() + 1}月
+            <span onClick={() => changeDate('month', date)}>
+              {date.month() + 1}月
             </span>
           </li>
           <li>
@@ -132,13 +134,17 @@ export function CalendarRange (props: CalendarRangeProps) {
             <li key={index}>{item}</li>
           ))}
         </ul>
-        <ul className="otaku-calendar-month" onClick={click} onMouseOver={mouseover}>
+        <ul
+          className="otaku-calendar-month"
+          onClick={click}
+          onMouseOver={mouseover}>
           {Object.values(calendar).map((item, index) => {
             if (index === 1) {
               return item.map(children => {
                 const today = dayjs().format('YYYY-MM-DD')
                 const isDisabled = disabled?.(dayjs(children))
-                const [start, end ] = selectDate
+                const [start, end] = selectDate
+                // console.log(selectDate.for)
                 const between = dayjs(children).isBetween(start, end)
 
                 return (
@@ -152,13 +158,18 @@ export function CalendarRange (props: CalendarRangeProps) {
                       {
                         'otaku-calendar-today': today === children,
                         'otaku-calendar-disabled': isDisabled,
-                        'otaku-calendar-range-start': start.format('YYYY-MM-DD') === children,
-                        'otaku-calendar-range-end': end?.format('YYYY-MM-DD') === children
+                        'otaku-calendar-range-start':
+                          start.format('YYYY-MM-DD') === children,
+                        'otaku-calendar-range-end':
+                          end?.format('YYYY-MM-DD') === children
                       }
                     )}>
-                    <span className={classNames({
-                      'otaku-calendar-between': end ? between : false,
-                    })}>{dayjs(children).date()}</span>
+                    <span
+                      className={classNames({
+                        'otaku-calendar-between': end ? between : false
+                      })}>
+                      {dayjs(children).date()}
+                    </span>
                   </li>
                 )
               })
@@ -183,17 +194,13 @@ export function CalendarRange (props: CalendarRangeProps) {
         style={{
           display: picker === 'year' ? 'block' : 'none'
         }}>
-        <Year
-          date={startDate}
-          onChange={() => changeDate('month')}></Year>
+        <Year date={date} onChange={() => changeDate('month')}></Year>
       </div>
       <div
         style={{
           display: picker === 'month' ? 'block' : 'none'
         }}>
-        <Month
-          date={startDate}
-          onChange={() => changeDate('calendar')}></Month>
+        <Month date={date} onChange={() => changeDate('calendar')}></Month>
       </div>
     </section>
   )

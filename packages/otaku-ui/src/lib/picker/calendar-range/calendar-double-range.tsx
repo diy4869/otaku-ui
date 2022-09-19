@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
-import classNames from 'classnames'
 import isBetween from 'dayjs/plugin/isBetween'
-import { useCalendar } from '../../../hooks/index'
 import { CalendarRange } from './calendar-range'
-import { findDataset, getWeek } from '../../../utils'
-import { PickerPanel } from '../types'
 import './style.scss'
 
 dayjs.extend(isBetween)
@@ -22,19 +18,25 @@ export interface CalendarDoubleRangeProps {
 
 export function CalendarDoubleRange (props: CalendarDoubleRangeProps) {
   const {
-    className,
     date = [dayjs(), dayjs()],
-    firstWeek = '日',
-    disabled,
     onChange
   } = props
   const [ start, end ] = date
   const [selectDate, setSelectDate] = useState([dayjs(start), dayjs(end)])
 
+  const change = (date: Dayjs[]) => {
+    console.log('-----', date.map(item => item.format('YYYY-MM-DD')))
+    setSelectDate([...date])
+  }
+
+  useEffect(() => {
+    console.log('watch')
+  }, [selectDate])
+
   return (
     <>
-      <CalendarRange date={selectDate}></CalendarRange>
-      <CalendarRange date={selectDate}></CalendarRange>
+      <CalendarRange value={selectDate} onChange={change}></CalendarRange>
+      <CalendarRange value={selectDate} panel="end" onChange={change}></CalendarRange>
     </>
   )
 }
