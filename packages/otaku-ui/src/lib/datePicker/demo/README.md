@@ -1,6 +1,6 @@
 ---
 import:
-  import { DatePicker, DateRangePicker } from 'otaku-ui'
+  import { DatePicker, DateRangePicker, Space } from 'otaku-ui'
 api:
   {
     module: []
@@ -15,7 +15,16 @@ api:
 一个简单的日期范围选择器
 
 ```tsx
-ReactDOM.createRoot(container).render(<DateRangePicker></DateRangePicker>)
+ReactDOM.createRoot(container).render(
+  <Space direction="column">
+    <div>
+      单面板：<DateRangePicker></DateRangePicker>
+    </div>
+    <div>
+      多面板：<DateRangePicker panelType="double"></DateRangePicker>
+    </div>
+  </Space>
+)
 
 ```
 :::

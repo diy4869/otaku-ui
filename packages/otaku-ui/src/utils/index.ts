@@ -47,4 +47,10 @@ export const flattern = <T extends any[] = Record<string, any>[]>(arr: T, key = 
   }, [])
 }
 
+export const getWeek = (firstWeek: '一' | '日') => {
+  const week = ['一', '二', '三', '四', '五', '六']
+  
+  return firstWeek === '一' ? [...week, '日'] : ['日', ...week]
+}
+
 export * from './notice'

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 import { useCalendar } from '../../../hooks/index'
 import { Month } from '../month/month'
 import { Year } from '../year/year'
-import { findDataset } from '../../../utils'
+import { findDataset, getWeek } from '../../../utils'
 import type { ResultDate, PickerPanel } from '../types'
 import './style.scss'
 
@@ -42,8 +42,7 @@ export function Calendar (props: CalendarProps) {
   const [selectDate, setSelectDate] = useState(dayjs(date))
   const [picker, setPicker] = useState('calendar')
   const calendar = useCalendar(selectDate, firstWeek)
-  const arr = ['一', '二', '三', '四', '五', '六']
-  const week = firstWeek === '一' ? [...arr, '日'] : ['日', ...arr]
+  const week = getWeek(firstWeek)
 
   useEffect(() => {
     setSelectDate(dayjs(date))
@@ -53,7 +52,8 @@ export function Calendar (props: CalendarProps) {
     const el = findDataset(e.target, 'date')
 
     if (el) {
-      const { date, type, disabled } = el.target.dataset
+      console.log(el)
+      const { date, type, disabled } = el.dataset
 
       if (disabled !== 'true' && date && type === 'current') {
         setSelectDate(dayjs(date))

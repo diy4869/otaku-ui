@@ -14,7 +14,7 @@
   li:nth-of-type(2) {
     span {
       &:hover {
-        color: var(--primary-color);
+        color: var(--otaku-primary-color);
       }
     }
   }
@@ -30,15 +30,15 @@
     justify-content: center;
     align-items: center;
     color: #595959;
-    border-radius: var(--radius);
+    border-radius: var(--otaku-radius);
     cursor: pointer;
   }
   .otaku-datepicker-currentYear {
-    border: 1.5px solid var(--primary-color);
-    color: var(--primary-color);
+    border: 1.5px solid var(--otaku-primary-color);
+    color: var(--otaku-primary-color);
   }
   .active {
-    background: var(--primary-color);
+    background: var(--otaku-primary-color);
     color: white;
   }
   .gray {

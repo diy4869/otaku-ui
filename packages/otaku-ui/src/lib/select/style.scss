@@ -8,10 +8,10 @@
 .otaku-select {
   width: 240px;
   height: 208px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--otaku-shadow);
   // border: 1px solid #d9d9d9;
   background: white;
-  border-radius: var(--radius);
+  border-radius: var(--otaku-radius);
   margin-top: 4px;
   overflow: auto;
   // position: absolute;
@@ -44,13 +44,13 @@
   align-items: center;
   cursor: pointer;
   &:hover {
-    color: var(--primary-color);
+    color: var(--otaku-primary-color);
     background: rgba(44, 104, 255, 0.06);
   }
   &-active {
-    color: var(--primary-color);
+    color: var(--otaku-primary-color);
   }
   &-multiple-active {
-    color: var(--primary-color);
+    color: var(--otaku-primary-color);
   }
 }

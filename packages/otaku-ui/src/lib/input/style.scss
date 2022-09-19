@@ -5,13 +5,13 @@
   align-items: center;
   width: 240px;
   border: 1px solid #e8e8e8;
-  border-radius: var(--radius);
+  border-radius: var(--otaku-radius);
   padding: 8px;
   box-sizing: border-box;
   gap: 5px;
   
   &:hover {
-    border-color: var(--primary-color);
+    border-color: var(--otaku-primary-color);
   }
   .otaku-input {
     width: 100%;
@@ -22,7 +22,7 @@
   }
   .otaku-input:disabled {
     cursor: not-allowed;
-    background: var(--disabled-color);
+    background: var(--otaku-disabled-color);
   }
   .iconfont {
     font-size: 13px;
@@ -60,10 +60,10 @@
 
 .otaku-input-disabled {
   cursor: not-allowed;
-  background: var(--disabled-color);
-  border: 1px solid var(--disabled-border-color);
+  background: var(--otaku-disabled-color);
+  border: 1px solid var(--otaku-disabled-border-color);
   &:hover {
-    border: 1px solid var(--disabled-border-color);
+    border: 1px solid var(--otaku-disabled-border-color);
   }
 }
 
@@ -98,9 +98,9 @@
   flex: 1;
   align-items: center;
   border: 1px solid #e8e8e8;
-  border-radius: var(--radius);
+  border-radius: var(--otaku-radius);
   &:hover {
-    border-color: var(--primary-color);
+    border-color: var(--otaku-primary-color);
   }
   .otaku-input-textarea {
     width: 100%;

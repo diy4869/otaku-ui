@@ -27,6 +27,7 @@ export * from './lib/form/form'
 export * from './lib/form/formItem'
 export * from './lib/upload/upload'
 export * from './lib/datePicker/index'
+export * from './lib/date-range-picker/date-range-picker'
 export * from './lib/search/search'
 
 export * from './lib/popover/popover'
