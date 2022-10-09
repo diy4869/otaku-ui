@@ -1,4 +1,3 @@
-
 export interface usePaginationProps {
   current?: number
   total?: number
@@ -18,50 +17,38 @@ export function usePagination (page: usePaginationProps) {
   const maxPage = Math.ceil(total / pageSize)
   const centerPage = slicePage - 1
   const average = centerPage / 2
-  const leftPage: number[] = []
-  const rightPage: number[] = []
-  const averagePage = maxPage > slicePage
-  const limit = current > slicePage
+  const pagination = []
+  
+  /**
+   * 滑动窗口
+   * 每次只需要计算开始渲染的页数，之后向后平移 slicePage 的数量，只需要处理两边的边界就可以了
+   * 如果当前的页数 减去左边的数量小于2的话，那左边边界为2，右边边界为最大的数量 - 1，如果当前页数右边不够平均值的话，说明需要把 start 变成 最大页 - 中间需要渲染的数量即可
+   */
 
-  if (limit) {
-    const leftInitVal = current > maxPage - centerPage ? maxPage - slicePage : current - average
-    const right = current > maxPage - (average + 1) ? maxPage - 1 : current + average
-
-    for (let i = leftInitVal; i < current; i++) {
-      leftPage.push(i)
-    }
-
-    for (let i = current + 1; i <= right; i++) {
-      if (i !== maxPage) {
-        rightPage.push(i)
-      }
-    }
-  }
-
-  let len = 0
-
-  if (maxPage === 1) {
-    len = 0
-  } else if (maxPage - 2 > slicePage) {
-    len = slicePage
+  let start
+  
+  if (current - average < 2) {
+    start = 2
   } else {
-    len = maxPage - 2
+    start = current + centerPage > maxPage ? maxPage - slicePage : current - average
   }
 
-  const pageList = limit
-    ? [
-        ...leftPage,
-        current === maxPage || current === 1 ? undefined : current,
-        ...rightPage
-      ]
-    : new Array(total === 0 ? 0 : len).fill(undefined)
-      .map((_, index) => index + 2)
-  const result = pageList.filter((item) => item)
+  const end = start + slicePage
+
+  if (maxPage <= slicePage + 2) {
+    for (let i = 2; i < maxPage; i++) {
+      pagination.push(i)
+    }
+  } else {
+    for (let i = start; i < end; i++) {
+      pagination.push(i)
+    }  
+  }
 
   return {
-    pagination: result,
-    showPrevMore: averagePage && result?.[0] !== 2,
-    showNextMore: averagePage && result?.[result.length - 1] !== maxPage - 1,
+    pagination: pagination,
+    showPrevMore: pagination.length > 0 ? pagination?.[0] !== 2 : false,
+    showNextMore: pagination.length > 0 ? pagination.at(-1) !== maxPage - 1 : false,
     maxPage
   }
 }
