@@ -36,7 +36,13 @@ export function CalendarRange (props: CalendarRangeProps) {
   useEffect(() => {
     const [start, end] = value
     setSelectDate([dayjs(start), dayjs(end)])
+    setResultDate([dayjs(start), dayjs(end)])
+    onChange?.([dayjs(start), dayjs(end)])
   }, [value])
+
+  useEffect(() => {
+    console.log()
+  }, [resultDate])
 
   const click = (e: React.BaseSyntheticEvent) => {
     const el = findDataset(e.target, 'date')
@@ -82,7 +88,7 @@ export function CalendarRange (props: CalendarRangeProps) {
 
   const mouseover = (e: React.BaseSyntheticEvent) => {
     console.log(resultDate.map(item => item.format('YYYY-MM-DD')).join(' --- '))
-    if (resultDate.length !== 2) {
+    // if (resultDate.length !== 2) {
       const el = findDataset(e.target, 'date')
 
       if (el) {
@@ -93,7 +99,7 @@ export function CalendarRange (props: CalendarRangeProps) {
           setSelectDate([...selectDate])
         }
       }
-    }
+    // }
   }
 
   return (
@@ -144,7 +150,7 @@ export function CalendarRange (props: CalendarRangeProps) {
                 const today = dayjs().format('YYYY-MM-DD')
                 const isDisabled = disabled?.(dayjs(children))
                 const [start, end] = selectDate
-                // console.log(selectDate.for)
+
                 const between = dayjs(children).isBetween(start, end)
 
                 return (
