@@ -2,13 +2,16 @@
 
 .otaku-pagination {
   display: flex;
+  gap: 10px;
+
   .otaku-pagination-prev-more,
   .otaku-pagination-next-more,
   .otaku-pagination-prev,
   .otaku-pagination-next,
   .otaku-pagination-item {
+    min-width: 36px;
+    height: 32px;
     padding: 5px 10px;
-    margin-right: 10px;
     background: white;
     color: #262626;
     text-align: center;
@@ -18,6 +21,7 @@
     border-radius: var(--otaku-radius);
     box-shadow: 0 2px 8px 0 rgba(0, 35, 144, 10%);
     cursor: pointer;
+    box-sizing: border-box;
     // position: relative;
   }
   .is-circle {

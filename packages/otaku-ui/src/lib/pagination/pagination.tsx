@@ -10,14 +10,17 @@ export interface PaginationProps extends usePaginationProps {
 }
 
 export function Pagination (props: PaginationProps) {
+  const defaultSlicePage = props.slicePage || 1
+  const slicePage = defaultSlicePage + 2
+  // console.log(defaultSlicePage)
   const {
     current = 1,
     total = 1,
     pageSize = 10,
-    slicePage = 5,
     circle = false,
     pageChange
   } = props
+  
 
   const [page, setPage] = useState(current)
   const { pagination, maxPage, showPrevMore, showNextMore } = usePagination({
@@ -65,39 +68,45 @@ export function Pagination (props: PaginationProps) {
 
   return (
     <ul className="otaku-pagination">
-      <li className={`otaku-pagination-prev ${circle ? 'is-circle' : ''}` } onClick={() => change('left')}>
-        <span className="iconfont otaku-icon-left"></span>
-      </li>
+      {
+        maxPage !== 1 ? <li className={`otaku-pagination-prev ${circle ? 'is-circle' : ''}` } onClick={() => change('left')}>
+          <span className="iconfont otaku-icon-left"></span>
+        </li> : null
+      }
       {
         renderPageItem(1)
       }
       {
-        showPrevMore ? (
-          <li className="otaku-pagination-prev-more">
-            <span className="iconfont otaku-icon-more-line"></span>
-            <span className="iconfont otaku-icon-doubleleft"></span>
-          </li>
-        ) : ''
+        pagination.length !== 0 ?
+          pagination?.[0] !== 2 ? (
+            <li className="otaku-pagination-prev-more">
+              <span className="iconfont otaku-icon-more-line"></span>
+              <span className="iconfont otaku-icon-doubleleft"></span>
+            </li>
+          ) : renderPageItem(2) : null
       }
       {
-       pagination?.map((item) => {
+        pagination.slice(1, -1).map((item) => {
           return renderPageItem(item as number)
        })
       }
       {
-        showNextMore ? (
+        pagination.length !== 0 ? pagination.at(-1) !== maxPage - 1 ? (
           <li className="otaku-pagination-next-more">
             <span className="iconfont otaku-icon-more-line"></span>
             <span className="iconfont otaku-icon-doubleright"></span>
           </li>
-        ) : ''
+        ) : renderPageItem(pagination.at(-1) as number) : null
       }
       {
         maxPage > 1 && renderPageItem(maxPage)
       }
-      <li className={`otaku-pagination-next ${circle ? 'is-circle' : ''}` } onClick={() => change('right')}>
-        <span className="iconfont otaku-icon-right"></span>
-      </li>
+      {
+        maxPage !== 1 ? <li className={`otaku-pagination-next ${circle ? 'is-circle' : ''}` } onClick={() => change('right')}>
+          <span className="iconfont otaku-icon-right"></span>
+        </li> : null
+      }
+    
     </ul>
   )
 }
