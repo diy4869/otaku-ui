@@ -13,7 +13,7 @@ interface Data {
  * date: string | dayjs | date
  * firstWeek 默认周日为一周的开始
 */
-function useCalendar (date?: dayjs.ConfigType, firstWeek = '日' | '一'): Data
+function useCalendar (date?: dayjs.ConfigType, firstWeek = '日' | '一', format: 'YYYY-MM-DD'): Data
 
 ```
 

@@ -10,7 +10,7 @@ export interface PaginationProps extends usePaginationProps {
 }
 
 export function Pagination (props: PaginationProps) {
-  const defaultSlicePage = props.slicePage || 1
+  const defaultSlicePage = props.slicePage || 5
   const slicePage = defaultSlicePage + 2
   // console.log(defaultSlicePage)
   const {
