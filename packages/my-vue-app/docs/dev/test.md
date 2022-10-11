@@ -1,36 +1,50 @@
 ---
 import:
-  import { Button, Space, Grid, GridItem } from 'otaku-ui'
+  import { Button, Space, Grid, GridItem, Notice, Dialog } from 'otaku-ui';
+  import { useState, useEffect } from 'react';
 api:
   {
     module: ['Button']
   }
 ---
 
+## Notice
 
 ::: demo
 
-这个是按钮的描述
-
 ```tsx
-type a = 1
+function Demo() {
+  const click = () => {
+    const instance = new Notice()
 
-const a: a = 2
+    instance.create({
+      content: (
+        <Dialog 
+          show={true} 
+          title="标题"
+          onClose={() => {
+            instance.destory()
+          }}>
+            hello world
+          </Dialog>
+        ),
+      beforeCreate () {
+      },
+      created () {
 
-function Demo () {
-  return (
-      <Space>
-      <Button>默认按钮</Button>
-      <Button type="primary">主要按钮</Button>
-      <Button type="success">成功按钮</Button>
-      <Button type="warning">警告按钮</Button>
-      <Button type="danger">错误按钮</Button>
-    </Space>
+      }
+    })
+  }
+  return  (
+    <section>
+      <Button onClick={click}>测试</Button>
+    </section>
   )
 }
 
 ReactDOM.createRoot(container).render(<Demo/>)
 ```
+
 :::
 
 ## api

@@ -11,7 +11,7 @@ export default () => {
           return (
             <ul className='colors'>
               {
-                generate(item).map((color, colorIndex) => {
+                generate(item).map((color: string, colorIndex: number) => {
                   return (
                     <li 
                       key={colorIndex}

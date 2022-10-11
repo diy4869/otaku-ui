@@ -8,6 +8,8 @@ interface noticeCreateOptions {
   content: React.ReactChild
   style?: Record<string, string>
   className?: string
+  beforeCreate?: () => void
+  created?: () => void
 }
 
 interface noticeOptions {
@@ -22,7 +24,7 @@ export class Notice {
   zIndex: number
 
   constructor (options: noticeOptions) {
-    const { rootStyle = {}, zIndex = 2000 } = options
+    const { rootStyle = {}, zIndex = 2000 } = options || {}
     this.id = noticeId
     this.container = null
     this.rootStyle = rootStyle
@@ -37,7 +39,7 @@ export class Notice {
       this.container = document.createElement('section')
       this.container.id = `otaku-notice-container`
       this.container.style.cssText = styleToStr({
-        ...this.rootStyle,
+        ...this?.rootStyle,
         'z-index': this.zIndex
       })
       document.body.appendChild(this.container)
@@ -54,7 +56,10 @@ export class Notice {
     container.className = className
     container.style.cssText = styleToStr(style)
     this.container?.appendChild(container)
+    console.log(content)
+    options.beforeCreate?.()
     ReactDOM.createRoot(container).render(content)
+    options.created?.()
   }
 
   destory() {

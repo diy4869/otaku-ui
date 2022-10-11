@@ -41,12 +41,10 @@
 
   .otaku-switch-checked {
     .checked-content {
-      transition: all linear 0.2s;
-      transform: translateX(0%);
+      transform: translateX(70%);
     }
     .unchecked-content {
-      transition: all linear 0.2s;
-      transform: translateX(-100%);
+      transform: translateX(-120%);
     }
     background: var(--otaku-primary-color);
     
@@ -59,9 +57,8 @@
     justify-content: center;
     gap: 4px;
     font-size: 13px;
-    padding: 3px;
-
-
+    padding: 5px;
+    transition: all linear 0.2s;
     span {
       vertical-align: middle;
       display: inline-block;

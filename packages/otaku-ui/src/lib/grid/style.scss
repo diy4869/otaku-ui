@@ -1,9 +1,10 @@
 .otaku-grid {
+  --border-style: 1px solid #e8e8e8;
+
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   // grid-template-rows: repeat(2, 100px);
   grid-auto-flow: row;
-  // width: fit-content;
   .otaku-grid-item {
     list-style: none;
   }
@@ -12,4 +13,13 @@
   display: grid;
   justify-content: center;
   align-items: center;
+}
+
+.otaku-grid-border {
+  border-top: var(--border-style);
+  border-left: var(--border-style);
+  .otaku-grid-item {
+    border-right: var(--border-style);
+    border-bottom: var(--border-style);
+  }
 }

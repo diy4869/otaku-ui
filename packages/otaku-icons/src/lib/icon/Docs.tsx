@@ -1,13 +1,23 @@
-import React from 'react'
+import React from "react"
 
 export function Docs () {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" className="design-iconfont">
-  <path d="M18.5483 26.9989H22.5119C23.3333 26.9989 24.0002 26.339 24.0002 25.5248V21.5298H18.5483V26.9989Z" fill="#4285F4"></path>
-  <path d="M18.547 21.5298H13.4556V26.9989H18.547V21.5298Z" fill="#34A853"></path>
-  <path d="M9.48832 5.00122C8.66692 5.00122 8 5.66114 8 6.47533V21.5298H13.4555V10.5108H18.5469V5.00122H9.48832Z" fill="#FBBC04"></path>
-  <path d="M24.0002 10.5107H18.5483V21.5298H24.0002V10.5107Z" fill="#4285F4"></path>
-  <path d="M18.5483 10.5108H23.999L18.5483 5.00122V10.5108Z" fill="#EA4335"></path>
-</svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="design-iconfont"
+      viewBox="0 0 32 32"
+    >
+      <path
+        fill="#4285F4"
+        d="M18.548 26.999h3.964c.821 0 1.488-.66 1.488-1.474V21.53h-5.452v5.469z"
+      ></path>
+      <path fill="#34A853" d="M18.547 21.53h-5.091v5.469h5.091v-5.47z"></path>
+      <path
+        fill="#FBBC04"
+        d="M9.488 5.001C8.667 5.001 8 5.661 8 6.475V21.53h5.456V10.51h5.09V5.002H9.489z"
+      ></path>
+      <path fill="#4285F4" d="M24 10.51h-5.452v11.02H24V10.51z"></path>
+      <path fill="#EA4335" d="M18.548 10.51H24l-5.45-5.509v5.51z"></path>
+    </svg>
   )
 }

@@ -1,5 +1,6 @@
 
 import React from 'react'
+import classNames from 'classnames'
 import './style.scss'
 
 interface GridProps {
@@ -7,6 +8,7 @@ interface GridProps {
   count?: number
   gap?: number | [number, number]
   center?: boolean
+  border?: boolean
   className?: string
   children: React.ReactNode[]
 }
@@ -18,12 +20,22 @@ interface GridItemProps {
 }
 
 export function Grid (props: GridProps) {
-  const { width, className, center, children, count = 3, gap = 0 } = props
+  const { 
+      width, 
+      className, 
+      center, 
+      children, 
+      border,
+      count = 3, 
+      gap = 0 
+    } = props
 
   return (
     <ul
-      className={`otaku-grid ${center ? 'otaku-grid-center' : ''} ${className ??
-        ''}`}
+      className={classNames('otaku-grid', className, {
+        'otaku-grid-center': center,
+        'otaku-grid-border': border
+      })}
       style={{
         gridTemplateColumns: `repeat(${count}, ${
           width ? `${width}px` : `1fr`
@@ -41,5 +53,5 @@ export function Grid (props: GridProps) {
 export function GridItem (props: GridItemProps) {
   const { children, className, onClick } = props
 
-  return <li className={`otaku-grid-item ${className ?? ''}`} onClick={onClick}>{children}</li>
+  return <li className={classNames('otaku-grid-item', className)} onClick={onClick}>{children}</li>
 }

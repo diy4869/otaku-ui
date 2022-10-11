@@ -6,14 +6,15 @@ interface DialogProps {
   show?: boolean
   title?: string
   width?: string
-  children: React.ReactNode
+  closeOnRemove?: boolean
   className?: string
   footer?: React.ReactNode
+  children: React.ReactNode
   onClose?: () => void
 }
 
 export function Dialog (props: DialogProps) {
-  const { show, title, width, children, className, footer, onClose } = props
+  const { show, title, closeOnRemove, width = '70vw', children, className, footer, onClose } = props
   const [visible, setVisible] = useState(show)
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export function Dialog (props: DialogProps) {
   }
 
   return (
-    <Portal visible={visible} className={className}>
+    <Portal visible={visible} className={className} closeOnRemove={closeOnRemove}>
       <div className='otaku-dialog-mask'>
         <div className='otaku-dialog' style={{
           width

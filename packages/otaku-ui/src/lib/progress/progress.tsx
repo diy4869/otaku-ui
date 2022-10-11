@@ -1,4 +1,5 @@
 import React, { useRef, useLayoutEffect, useMemo } from 'react'
+import { getCSSVar } from '../../utils'
 import './style.scss'
 
 interface ProgressProps {
@@ -18,8 +19,8 @@ export function Progress (props: ProgressProps) {
     max = 100,
     type,
     inner,
-    lineWidth = 8,
-    color
+    lineWidth = 14,
+    color = getCSSVar()
   } = props
   
   const canvas = useRef<HTMLCanvasElement>(null)

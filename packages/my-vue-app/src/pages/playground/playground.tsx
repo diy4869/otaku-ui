@@ -1,5 +1,5 @@
 import  React, { useState, useEffect } from 'react'
-import { Sandbox } from '../components/sandbox/sandbox'
+import { Sandbox } from '../../components/sandbox/sandbox'
 import twoslash from '@typescript/twoslash'
 import * as ts  from 'typescript'
 import './playground.scss'

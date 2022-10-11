@@ -3,7 +3,7 @@ import:
   import { Switch,  Space } from 'otaku-ui'
 api:
   {
-    module: []
+    module: ['Switch']
   }
 ---
 

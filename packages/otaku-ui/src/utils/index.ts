@@ -54,3 +54,7 @@ export const getWeek = (firstWeek: '一' | '日') => {
 }
 
 export * from './notice'
+
+export const getCSSVar = (str = '--otaku-primary-color', el = document.documentElement,) => {
+  return window.getComputedStyle(el).getPropertyValue(str)
+}

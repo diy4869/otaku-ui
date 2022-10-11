@@ -1,0 +1,22 @@
+.otaku-icon-example {
+  background: white;
+  padding: 20px;
+  // min-width: 600px;
+  // max-width: 800px;
+  .otaku-grid-item {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    svg {
+      width: 2em;
+      margin-bottom: 10px;
+    }
+    span {
+      &:nth-of-type(1) {
+        font-size: 12px;
+      }
+    }
+  }
+}

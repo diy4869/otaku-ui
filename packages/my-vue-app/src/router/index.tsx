@@ -8,7 +8,7 @@ export default [
   },
   {
     path: '/playground',
-    component: lazy(() => import('../pages/playground'))
+    component: lazy(() => import('../pages/playground/playground'))
   },
   {
     title: "开发指南",
@@ -51,7 +51,7 @@ export default [
       {
         title: '色彩',
         path: '/dev/color',
-        component: lazy(() => import('../pages/color.tsx'))
+        component: lazy(() => import('../pages/color/color'))
       },
       {
         title: "hooks",
@@ -63,6 +63,11 @@ export default [
   {
     title: "通用",
     children: [
+      {
+        title: 'Icon 图标',
+        path: '/dev/icon',
+        component: lazy(() => import('../pages/icon/icon'))
+      },
       {
         title: "Grid 网格",
         path: "/grid",

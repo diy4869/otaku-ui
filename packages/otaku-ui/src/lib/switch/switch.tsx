@@ -11,7 +11,7 @@ interface SwitchProps {
   activeTextColor?: string
   inactiveTextColor?: string
   disabled?: boolean
-  size?: "small" | "middle" | "large"
+  size?: 'small' | 'middle' | 'large'
   onChange?: (checked: boolean) => void
 }
 

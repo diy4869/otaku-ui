@@ -1,9 +1,16 @@
-import React from 'react'
+import React from "react"
 
 export function MultiBox_ind_fill () {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="design-iconfont">
-  <path d="M22.5 12C22.5 17.799 17.799 22.5 12 22.5C6.20101 22.5 1.5 17.799 1.5 12C1.5 6.20101 6.20101 1.5 12 1.5C17.799 1.5 22.5 6.20101 22.5 12ZM6.75 12C6.75 12.5178 7.16973 12.9375 7.6875 12.9375H16.3125C16.8303 12.9375 17.25 12.5178 17.25 12C17.25 11.4822 16.8303 11.0625 16.3125 11.0625H7.6875C7.16973 11.0625 6.75 11.4822 6.75 12Z" fill="#1B223D"></path>
-</svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="design-iconfont"
+      viewBox="0 0 24 24"
+    >
+      <path
+        fill="#1B223D"
+        d="M22.5 12c0 5.799-4.701 10.5-10.5 10.5S1.5 17.799 1.5 12 6.201 1.5 12 1.5 22.5 6.201 22.5 12zM6.75 12c0 .518.42.938.938.938h8.625a.937.937 0 100-1.876H7.688A.937.937 0 006.75 12z"
+      ></path>
+    </svg>
   )
 }

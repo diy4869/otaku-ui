@@ -10,6 +10,7 @@ interface TeleportProps {
   zIndex?: number
   mountNode?: HTMLBodyElement
   fullScreen?: boolean
+  closeOnRemove?:  boolean
   children: React.ReactNode
   visibleChange?: (show?: boolean) => void
   clickOutSide?: () => void
@@ -32,6 +33,7 @@ export function Portal (props: TeleportProps) {
     children,
     className,
     fullScreen,
+    closeOnRemove,
     mountNode = document.querySelector('body') as HTMLBodyElement,
     zIndex = 2000,
     visible = false,
@@ -97,7 +99,14 @@ export function Portal (props: TeleportProps) {
 
     if (modal) {
       const el = findNode(modal)
-      if (el) el.style.display = 'none'
+
+      if (el) {
+        if (closeOnRemove) {
+          mountNode.removeChild(el)
+        } else {
+          el.style.display = 'none'
+        }
+      }
     }
   }
 
@@ -164,6 +173,7 @@ export function Portal (props: TeleportProps) {
       doc.unsubscribe()
       observer.disconnect()
     }
+    
   }, [visible])
 
   useEffect(() => {
