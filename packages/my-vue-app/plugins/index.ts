@@ -286,7 +286,7 @@ export default () => {
                     code={\`${
                         [
                           importCode.join('\n'),
-                          current.code
+                          '\n' + current.code
                         ].join('\n')}\`}
                     style={{
                       lang: \`${current.style.lang}\`,

@@ -36,14 +36,9 @@ export default function Home () {
     document.documentElement.setAttribute('theme', theme)
 
     const link = document.querySelector('#theme')
-
     const src = `./src/assets/style/theme/${theme}.css`
-    console.log(link)
 
     link?.setAttribute('href', src)
-
-    console.log(link)
-
   }
 
   return (

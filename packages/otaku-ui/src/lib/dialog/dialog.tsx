@@ -39,7 +39,7 @@ export function Dialog (props: DialogProps) {
               onClick={close}></span>
           </header>
           <main className='otaku-dialog-content'>{children}</main>
-          <footer className='otaku-dialog-footer'>{footer}</footer>
+          {  footer ? <footer className='otaku-dialog-footer'>{footer}</footer> : null}
         </div>
       </div>
     </Portal>

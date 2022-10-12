@@ -11,7 +11,7 @@
     background-color: white;
     border-radius: 50%;
 
-    transition: background-color 0.1s, transform 0.35s cubic-bezier(0.45, 1, 0.4, 1);
+   
   }
  
   
@@ -19,8 +19,6 @@
     cursor: not-allowed;
   }
   .otaku-switch {
-    // min-width: 50px;
-    // width: 120px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -36,33 +34,34 @@
     &:disabled {
       cursor: not-allowed;
     }
+    &-disabled {
+      cursor: not-allowed;
+    }
   }
 
 
-  .otaku-switch-checked {
-    .checked-content {
-      transform: translateX(70%);
-    }
-    .unchecked-content {
-      transform: translateX(-120%);
-    }
-    background: var(--otaku-primary-color);
-    
-    // overflow: ;
-    
-  }
+
   .otaku-switch-content {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4px;
     font-size: 13px;
-    padding: 5px;
+    padding: 2px;
+    box-sizing: border-box;
     transition: all linear 0.2s;
     span {
       vertical-align: middle;
       display: inline-block;
     }
+  }
+  .otaku-switch-checked {
+    background: var(--otaku-primary-color);
+    .otaku-switch-circle {
+      transition: all 0.2s cubic-bezier(0.45, 1, 0.4, 1);
+      transform: translate(0);
+    }
+   
   }
 }
 
@@ -75,6 +74,9 @@
     width: 12px;
     height: 12px;
   }
+  .checked-content {
+    transform: translate(60%);
+  }
 }
 
 .otaku-switch-size-middle {
@@ -85,13 +87,24 @@
     width: 18px;
     height: 18px;
   }
+  .checked-content {
+    transform: translate(80%);
+  }
 }
+
 .otaku-switch-size-large {
   min-width: 64px;
   height: 32px;
+  // overflow: hidden;
 
   .otaku-switch-circle {
     width: 24px;
     height: 24px;
+  }
+  .checked-content {
+    transform: translate(95%);
+  }
+  .unchecked-content {
+    transform: translate(5%);
   }
 }
