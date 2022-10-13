@@ -119,6 +119,11 @@ export default [
     title: "表单",
     children: [
       {
+        title: "slider 滑动选择",
+        path: "/form/slider",
+        component: lazy(() => import('otaku-ui/src/lib/slider/demo/README.md'))
+      },
+      {
         title: "input 输入框",
         path: "/form/input",
         component: lazy(() => import('otaku-ui/src/lib/input/demo/README.md'))

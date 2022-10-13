@@ -1,0 +1,44 @@
+.otaku-slider-container {
+  width: 320px;
+  height: 8px;
+  position: relative;
+  .otaku-slider {
+    width: 100%;
+    height: 100%;
+    border-radius: 160px;
+    background-color: #EBEEF5;
+    overflow: hidden;
+    
+    
+    .otaku-slider-line {
+      width: 20%;
+      height: 100%;
+      background: var(--otaku-primary-color);
+      position: absolute;
+      border-radius: 160px;
+    }
+  }
+  .otaku-slider-bar-container {
+    display: flex;
+    position: absolute;
+    top: -10px;
+    gap: 20px;
+    // z-index: 100;
+    li {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      span {
+        display: inline-block;
+        &:nth-of-type(1) {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          border: 1px  solid  var(--otaku-primary-color);
+          box-shadow: var(--otaku-shadow);
+          background: white;
+        }
+      }
+    }
+  }
+}
