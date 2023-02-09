@@ -1,6 +1,5 @@
 import React, {useRef, useEffect, useState } from 'react'
 
-import {Helmet} from 'react-helmet'
 import './style.scss'
 
 interface SandboxProps {
@@ -37,10 +36,13 @@ export function Sandbox(props: SandboxProps) {
           <meta charset="UTF-8" />
           <meta http-equiv="X-UA-Compatible" content="IE=edge" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <script src="https://unpkg.com/es-modularize@latest/dist/browser.bundle.min.js"></script>
+          <!-- 
           <script
             src="https://unpkg.com/react@18/umd/react.development.js"
           ></script>
           <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+          -->
           <style>
             html,
             body,
@@ -207,11 +209,20 @@ export function Sandbox(props: SandboxProps) {
           </style>
         </head>
         <body>
+          <div>hello world</div>
           <div id="app"></div>
         </body>
         <script>
-            console.log(window)
-            
+          ESModularize.build({
+            imports: {
+              react: ESModularize.load("https://unpkg.com/react@18.2.0/umd/react.development.js").sync().umd("React"),
+              "react-dom/client": ESModularize.load("https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js")
+                .sync()
+                .umd("ReactDOM"),
+            },
+          });
+        </script>
+        <script type="module">
             const container = document.getElementById('app')
             
               ${code}
@@ -222,7 +233,14 @@ export function Sandbox(props: SandboxProps) {
       `
     )
 
-    setValue(code)
+    // setValue(code)
+    setValue(
+      `
+      const container = document.getElementById('app')
+            
+      ${code}
+      `
+    )
 
   }, [container, code])
 
@@ -245,6 +263,9 @@ export function Sandbox(props: SandboxProps) {
   return (
     <>
         <div ref={container} className='test-render'></div>
+        {/* <script type='module' dangerouslySetInnerHTML={{
+          __html: code
+        }}></script> */}
         {/* <script
           dangerouslySetInnerHTML={{
             __html: new Function(

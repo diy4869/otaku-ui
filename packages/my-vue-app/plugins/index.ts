@@ -11,7 +11,7 @@ import path from 'path'
 
 const libPath = path.resolve(__dirname, '../../otaku-ui')
 const entryPath = path.resolve(libPath, './src/index.ts')
-const { generator: generatorAPI } = require('../../typescript-api-generator/src/lib/core')
+const { generatorAPI } = require('../../typescript-api-generator/src/index')
 const { get } = require('./utils')
 const parser = require('./compiler')
 
@@ -152,7 +152,7 @@ export default () => {
                 }
       
                 result.forEach(item => {
-                  const type = item.type.args[0].type
+                  const type = item.type?.args?.[0].type
       
                   if (type.type === 'interface') {
                     if (type.extendProperty) {
@@ -174,48 +174,36 @@ export default () => {
                 })
       
                 const header = ['属性', '是否必填', '类型', '默认值', '描述']
-      
-                const mdTableData = apiData.reduce((total, current) => {
+                const html = apiData.reduce((str, current) => {
                   const { data } = current
+                  const table = `
+                    <tr>
+                      ${header.map(item => `<th>${item}</th>`).join('')}
+                    </tr>
+                    ${
+                      data?.map(children => {
+                        return `
+                          <tr>
+                            <td>${children.name}</td>
+                            <td>${children.required ? '是' : '否'}</td>
+                            <td>${children.type}</td>
+                            <td>${children.defaultValue || ''}</td>
+                            <td>这是个描述</td>
+                          </tr>
+                        `
+                      }).join('')
+                    }
+                  `
+                  
+                  str += `<h2>${current.name}</h2><table>${table}</table>` + '\n'
       
-                  const table = [
-                    header.join('|'),
-                    new Array(5).fill('---').join('|'),
-                    data.map(children => {
-                      return [
-                        children.name,
-                        children.required ? '是' : '否',
-                        children.type,
-                        children.defaultValue
-                      ].join('|')
-                    }).join('\n')
-                  ]
-      
-                  total.push(
-                    table.join('\n')
-                  )
-      
-                  return total
-                }, [])
-                
-      
-                // console.log(mdTableData)
-      
-                // const demoMarkdown = new MarkdownIt({})
-      
-                //   demoMarkdown.use(md => {
-                    
-                //     md.block.ruler.before('table', 'my_rule', state => {
-                //       console.log(md)
-                //     })
-                //   })
-      
-                  // demoMarkdown.render(mdTableData.join(''))
+                  return str
+                }, '')
                 
                 return `<>
                   <Api 
                     code={\`${interfaceCode.join('\n\n')}\`}
-                    data={\`${JSON.stringify(apiData)}\`}
+                    html={\`${html}\`}
                     ></Api>`
               } else {
                 return `</>`

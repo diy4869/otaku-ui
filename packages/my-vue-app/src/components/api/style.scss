@@ -16,3 +16,27 @@
         }
     }
 }
+
+.otaku-table-api {
+    table {
+        border-collapse: collapse;
+    }
+    table td, th {
+        border: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    tr {
+        td:nth-of-type(3) {
+            width: 300px;
+            color: #a31515;
+        }
+    }
+
+    th, td {
+        padding: 10px;
+        // color: #898989;
+        font-size: 13px;
+        line-height: 24px;
+        text-align: center;
+    }
+}

@@ -3,7 +3,7 @@ import:
   import { UploadImage, Button } from 'otaku-ui'
 api:
   {
-    module: []
+    module: ['UploadImage']
   }
 ---
 

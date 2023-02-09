@@ -14,7 +14,7 @@
     "react-refresh": "^0.14.0",
     "tinycolor": "^0.0.1",
     "tinycolor2": "^1.4.2",
-    "vite-plugin-inspect": "^0.6.0"
+    "vite-plugin-inspect": "^0.7.9"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

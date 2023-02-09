@@ -128,7 +128,7 @@ const saveExport = (node, name, currentFile, type) => {
 
 const transformArgs = (node, currentFile, fileMap) => {
   return node.parameters?.map(args => {
-    const typeName = args?.type?.kind === 177
+    const typeName = args?.type?.kind === 180
         ? getReferenceType(args, currentFile, fileMap)
         : ''
 
@@ -345,7 +345,7 @@ const generator = (filePath, fileMap = {}) => {
           typeReference: node.type?.types?.reduce((arr, current) => {
             if (current.kind === 197) {
               current.templateSpans.forEach(children => {
-                if (children.type.kind === 177) {
+                if (children.type.kind === 180) {
                   const referenceName = children.type.typeName.escapedText
 
                   if (currentFile.type[referenceName]) {
@@ -356,7 +356,7 @@ const generator = (filePath, fileMap = {}) => {
                 }
               })
             }
-            if (current.kind === 177) {
+            if (current.kind === 180) {
               // 是否已经添加过
               const find = arr.find(item => item.name === current.typeName.escapedText)
               if (find) return arr
@@ -417,7 +417,7 @@ const generator = (filePath, fileMap = {}) => {
               const type = item.type?.typeName?.escapedText ? item.type.typeName : item.type
 
               return {
-                name: item.name.escapedText,
+                name: item.name?.escapedText,
                 type: content.substring(type?.pos, type?.end)?.trimStart(),
                 typeReference: getReferenceType(item, currentFile, fileMap)
               }

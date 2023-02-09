@@ -72,3 +72,6 @@ export const Form = React.forwardRef((props: FormProps, ref) => {
 
 Form.displayName = 'Form'
 
+export {
+  FormValidate
+}

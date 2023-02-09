@@ -56,7 +56,7 @@ export function Table(props: TableProps) {
         </th>
       <tbody className="otaku-table-body">
         {
-          tableData.map((item, index) => {
+          tableData?.map((item, index) => {
             return (
               <tr className="otaku-table-row" key={index}>
                 {
@@ -97,3 +97,13 @@ export function Table(props: TableProps) {
     </table>
   )
 }
+
+const aa = [
+  {
+      a: () => ({a: 1})
+  },
+  {
+      a: () => ({b: 1})
+  }
+]
+let a: ReturnType<typeof aa[0]['a']>

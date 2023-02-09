@@ -48,7 +48,7 @@ export function DateRangePicker (props: DateRangePickerProps) {
   const [startDate, setStartDate] = useState(dayjs(start))
   const [endDate, setEndDate] = useState(end ? dayjs(end) : dayjs(end).add(1, 'month'))
   const [inputVal, setInputVal] = useState('')
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
   const [currentIndex, setCurrentIndex] = useState<number>()
 
   const generator = (count: number) => {

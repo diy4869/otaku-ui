@@ -190,7 +190,3 @@ export * from './icon/left'
 export * from './icon/right'
 export * from './icon/top'
 export * from './icon/bottom'
-
-export function class_name(class_name: any) {
-  throw new Error('Function not implemented.')
-}

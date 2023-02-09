@@ -2,6 +2,10 @@
 import: 
   import { useState, useRef, createRef } from 'react';
   import { Form, FormItem, Button, Input, DatePicker, FormValidate } from 'otaku-ui';
+api:
+  {
+    module: []
+  }
 ---
 
 ## Form 表单
@@ -74,4 +78,7 @@ function Example() {
 
 ReactDOM.createRoot(container).render(<Example/>)
 ```
+:::
+
+::: api
 :::

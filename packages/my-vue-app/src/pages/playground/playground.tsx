@@ -12,11 +12,12 @@ interface PlaygroundProps {
 }
 
 const initialCode = `
-import { Button } from 'otaku-ui'
+import React from  'react'
+import ReactDOM from 'react-dom/client'
 
 function App () {
   return (
-    <Button type="primary"></Button>
+    <div>test</div>
   )
 }
 
@@ -29,10 +30,8 @@ export default function Playground (props: PlaygroundProps) {
   const [runtimeCode, setRuntimeCode] = useState('')
   const [sandboxInstance, setSandboxInstance] = useState<any>()
   const compilerOptions = {
-    noEmit: false,
-    noEmitOnError: true,
-    module: ts.ModuleKind.CommonJS, 
-    target: ts.ScriptTarget.ES5,
+    module: ts.ModuleKind.ESNext, 
+    target: ts.ScriptTarget.ES2015,
     jsx: ts.JsxEmit.React,
     declration: true,
     strict: true,
@@ -45,12 +44,11 @@ export default function Playground (props: PlaygroundProps) {
     // setCode(code)
     // setLang(lang)
     setRuntimeCode(ts.transpile(code, compilerOptions, 'index.tsx'))
-    console.log('meta', import.meta)
   }, [code, lang])
 
   useEffect(() => {
     const re: any = window.require
-
+    console.log(window.require)
     re.config({
       paths: {
         vs: 'https://typescript.azureedge.net/cdn/4.0.5/monaco/min/vs',
