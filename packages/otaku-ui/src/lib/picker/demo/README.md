@@ -1,6 +1,10 @@
 ---
 import:
   import { Picker } from 'otaku-ui'
+api:
+  {
+    module: ['Picker']
+  }
 ---
 
 ## Picker 选择器
@@ -25,4 +29,7 @@ function Demo () {
 
 ReactDOM.createRoot(container).render(<Demo/>)
 ```
+:::
+
+::: api
 :::

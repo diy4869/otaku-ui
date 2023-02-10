@@ -65,7 +65,9 @@ const getReferenceType = (node, currentFile, fileMap) => {
 
   let typeName
 
-  if (node.type?.typeName?.escapedText) {
+  if (node.typeName?.escapedText) {
+    typeName = node.typeName?.escapedText
+  } else if (node.type?.typeName?.escapedText) {
     typeName = node.type?.typeName?.escapedText
   } else if (node.type?.elementType?.typeName?.escapedText) {
     typeName = node.type?.elementType?.typeName?.escapedText
@@ -346,7 +348,6 @@ const generator = (filePath, fileMap = {}) => {
                 }
               }
             }
-           
           }, []),
           property: node.members.map(item => {
             const type = content
@@ -378,6 +379,32 @@ const generator = (filePath, fileMap = {}) => {
           exportDefault: isExportDefault(node),
           code: content.substring(node.pos, node.end).trimStart(),
           typeReference: node.type?.types?.reduce((arr, current) => {
+            // TypeLiteral type 声明的 interface
+            if (current.kind === 184) {
+              arr.push({
+                name: node.name.escapedText,
+                type: 'typeInterface',
+                property: current.members.map(item => {
+                  const type = content
+                    .substring(item.type.pos, item.type.end)
+                    .trimStart()
+      
+                  return {
+                    name: item.name.escapedText,
+                    type: type,
+                    required: item.questionToken ? false : true,
+                    defaultValue: undefined,
+                    typeReference: getReferenceType(item, currentFile, fileMap),
+                    jsDoc: ts.getJSDocTags(item).map(children => {
+                      return {
+                        tagName: children.tagName.escapedText,
+                        content: children.comment
+                      }
+                    })
+                  }
+                })
+              })
+            }
             if (current.kind === 197) {
               current.templateSpans.forEach(children => {
                 if (children.type.kind === 180) {
@@ -394,7 +421,15 @@ const generator = (filePath, fileMap = {}) => {
             if (current.kind === 180) {
               // 是否已经添加过
               const find = arr.find(item => item.name === current.typeName.escapedText)
-              if (find) return arr
+              if (find) {
+                return arr
+              }
+              arr.push({
+                name: current.typeName.escapedText,
+                // 标记是引用生成的类型
+                type: 'reference',
+                reference: getReferenceType(current, currentFile, fileMap),
+              })
             }
 
             return arr

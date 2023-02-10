@@ -139,15 +139,14 @@ export default () => {
                 }
                 const result = findExport()
                 const interfaceCode = []
-                const type = []
+                const typeCode = []
                 const apiData = []
-                const property = []
                 
                 const appendType = (property) => {
-                  const find = property.find(property => property.typeReference)
+                  const find = property.find(item => item.typeReference)
       
                   if (find) {
-                    find.typeReference.type === 'interface' ? interfaceCode.push(find.typeReference.code) : type.push(find.typeReference.code)
+                    find.typeReference.type === 'interface' ? interfaceCode.push(find.typeReference.code) : typeCode.push(find.typeReference.code)
                   }
                 }
       
@@ -164,13 +163,27 @@ export default () => {
                     }
                     appendType(type.property)
                     interfaceCode.push(type.code)
+                    apiData.push({
+                      name: item.name,
+                      data: type.property
+                    })
                   }
-      
-      
-                  apiData.push({
-                    name: item.name,
-                    data: type.property
-                  })
+                  if (type.type === 'type') {
+                    type.typeReference.map(children => {
+                      if (children.type === 'typeInterface') {
+                        appendType(children.property)
+                        apiData.push({
+                          name: item.name,
+                          data: children.property
+                        })
+                        interfaceCode.push()
+                      }
+                      if (children.type === 'reference') {
+                        typeCode.push(children.reference.code)
+                      }
+                    })
+                    typeCode.push(type.code)
+                  }
                 })
       
                 const header = ['属性', '是否必填', '类型', '默认值', '描述']
@@ -200,9 +213,10 @@ export default () => {
                   return str
                 }, '')
                 
+                const code = typeCode.join('\n\n') + interfaceCode.join('\n\n')
                 return `<>
                   <Api 
-                    code={\`${interfaceCode.join('\n\n')}\`}
+                    code={\`${code}\`}
                     html={\`${html}\`}
                     ></Api>`
               } else {
