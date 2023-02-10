@@ -15,7 +15,8 @@ const setDefaultValue = (node, currentFile, content) => {
     const declarations = current?.declarationList?.declarations?.[0]
 
     if (declarations?.initializer) {
-      const fnName = node?.name?.escapedText || node.parent.name.escapedText
+      // 普通函数 箭头函数 forwardRef 声明的
+      const fnName = node?.name?.escapedText || node.parent?.name?.escapedText || node.parent.parent?.name?.escapedText
       const fn = currentFile?.function[fnName]
       const args = fn?.args?.[0]
       const propsName = node.parameters?.[0]?.name.escapedText
@@ -144,35 +145,69 @@ const isFunction = (node, currentFile, fileMap, content) => {
     const initializer = node?.declarationList?.declarations?.[0]?.initializer
 
     if (initializer) {
+      // 是否变量声明的箭头函数
       if (ts.isArrowFunction(initializer)) {
-        return initializer
+        return {
+          node: initializer,
+          type: 'varFunction'
+        }
       }
-
+      // 是否为 forwardRef 声明的函数
+      if (
+        initializer.expression?.expression?.escapedText === 'React' &&
+        initializer.expression?.name?.escapedText === 'forwardRef'
+      ) {
+        return {
+          node: initializer.arguments?.[0],
+          type: 'forwardRef'
+        }
+      } else {
+        return false
+      }
+    } else {
       return false
     }
-    return false
   }
 
   const isArrowFunction = ts.isArrowFunction(node)
   const isFunctionExpression = ts.isFunctionExpression(node)
   // const isFunctionLike = ts.isFunctionLike(node)
   const isVariFunctionNode = isVariableFunction(node)
+  
+  if (isVariFunctionNode !== false) {
+    const functionBody = isVariFunctionNode.node
 
-  if (isVariFunctionNode) {
-    const functionName = isVariFunctionNode.parent.name.escapedText
+    if (isVariFunctionNode.type === 'forwardRef') {
+      const functionName = isVariFunctionNode.node.parent.parent.name.escapedText
+      
+      currentFile.function[functionName] = {
+        export: isExport(node),
+        functionName: functionName,
+        arrowFunction: ts.isArrowFunction(functionBody),
+        asyncFunction: ts.isAsyncFunction(functionBody),
+        forwardRef: true,
+        args: transformArgs(functionBody, currentFile, fileMap)
+      }
 
-    currentFile.function[functionName] = {
-      export: isExport(node),
-      functionName: functionName,
-      arrowFunction: ts.isArrowFunction(isVariFunctionNode),
-      asyncFunction: ts.isAsyncFunction(isVariFunctionNode),
-      args: transformArgs(isVariFunctionNode, currentFile, fileMap)
+      setDefaultValue(functionBody, currentFile, content)
+      saveExport(node, functionName, currentFile, 'function')
+
+      return functionBody
+    } else {
+      const functionName = isVariFunctionNode.node.parent.name.escapedText
+      currentFile.function[functionName] = {
+        export: isExport(node),
+        functionName: functionName,
+        varFunction: true,
+        arrowFunction: ts.isArrowFunction(functionBody),
+        asyncFunction: ts.isAsyncFunction(functionBody),
+        args: transformArgs(functionBody, currentFile, fileMap)
+      }
+      setDefaultValue(functionBody, currentFile, content)
+      saveExport(node, functionName, currentFile, 'function')
+
+      return functionBody
     }
-
-    setDefaultValue(isVariFunctionNode, currentFile, content)
-    saveExport(node, functionName, currentFile, 'function')
-
-    return isVariFunctionNode
   } else if (ts.isFunctionDeclaration(node)) {
     // 普通函数
     return node

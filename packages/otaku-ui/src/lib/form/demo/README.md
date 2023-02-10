@@ -4,7 +4,7 @@ import:
   import { Form, FormItem, Button, Input, DatePicker, FormValidate } from 'otaku-ui';
 api:
   {
-    module: []
+    module: ['Form', 'FormItem']
   }
 ---
 

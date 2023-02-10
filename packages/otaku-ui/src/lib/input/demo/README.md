@@ -133,3 +133,6 @@ ReactDOM.createRoot(container).render(<ul>
 
 ## api
 
+::: api
+:::
+

@@ -4,7 +4,7 @@ import:
   import { useState } from 'react';
 api:
   {
-    module: []
+    module: ['Tree']
   }
 ---
 

@@ -3,7 +3,7 @@ import:
   import { DatePicker, DateRangePicker, Space } from 'otaku-ui'
 api:
   {
-    module: []
+    module: ['DatePicker']
   }
 ---
 

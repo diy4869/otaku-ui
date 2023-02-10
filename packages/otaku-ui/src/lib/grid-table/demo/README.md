@@ -3,7 +3,7 @@ import:
   import { GridTable } from 'otaku-ui';
 api:
   {
-    module: []
+    module: ['GridTable']
   }
 ---
 

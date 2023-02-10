@@ -1,0 +1,10 @@
+---
+api:
+  {
+    module: ['Comment']
+  }
+---
+
+
+::: api
+:::

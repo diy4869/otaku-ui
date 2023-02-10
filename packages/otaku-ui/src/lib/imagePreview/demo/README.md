@@ -3,7 +3,7 @@ import:
 
 api:
   {
-    module: []
+    module: ['ImagePreview']
   }
 ---
 

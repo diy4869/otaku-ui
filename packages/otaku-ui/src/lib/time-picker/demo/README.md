@@ -4,7 +4,7 @@ import:
 
 api:
   {
-    module: []
+    module: ['TimePicker']
   }
 ---
 
