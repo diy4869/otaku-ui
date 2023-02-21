@@ -7,12 +7,12 @@ const { exec } = require('child_process')
 
 module.exports = async () => {
   const basePath = path.resolve(__dirname, '../../../../')
-  const sitePath = path.resolve(basePath, './packages/site/dist')
+  const sitePath = path.resolve(basePath, './packages/my-vue-app/dist')
   const execPromise = promisify(exec)
   const spinner = ora()
   const buildCommand = [
     `cd ${sitePath}`,
-    'npm run build:dev',
+    'npm run build',
   ].join(' && ')
 
   let buildTime = 0

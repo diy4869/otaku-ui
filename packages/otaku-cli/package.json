@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "run": "otaku-cli create test"
   },
   "bin": {
     "otaku-cli": "./src/index.js"
@@ -12,11 +13,12 @@
   "author": "last order",
   "license": "ISC",
   "dependencies": {
-    "camelcase": "^7.0.0",
-    "chalk": "^5.1.2",
+    "camelcase": "6.3.0",
+    "chalk": "4.1.2",
     "commander": "^9.4.1",
-    "inquirer": "^9.1.4",
-    "ora": "^6.1.2"
+    "inquirer": "^8.0.0",
+    "ora": "5.4.1",
+    "prettier": "^2.8.4"
   },
   "devDependencies": {
     "art-template": "^4.13.2"

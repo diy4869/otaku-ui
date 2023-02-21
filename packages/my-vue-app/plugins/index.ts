@@ -81,7 +81,6 @@ export default () => {
       let demoCode = []
       let demoName
       
-
       if (reg.test(path)) {
         const md = new MarkdownIt({
           html: true,

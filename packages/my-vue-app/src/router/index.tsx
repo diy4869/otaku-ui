@@ -49,8 +49,8 @@ export default [
         component: lazy(() => import('@docs/dev/roadmap.md'))
       },
       {
-        title: '色彩',
-        path: '/dev/color',
+        title: "色彩",
+        path: "/dev/color",
         component: lazy(() => import('../pages/color/color'))
       },
       {
@@ -64,8 +64,8 @@ export default [
     title: "通用",
     children: [
       {
-        title: 'Icon 图标',
-        path: '/dev/icon',
+        title: "Icon 图标",
+        path: "/dev/icon",
         component: lazy(() => import('../pages/icon/icon'))
       },
       {
@@ -94,8 +94,8 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/timeline/demo/README.md'))
       },
       {
-        title: 'Pagination 分页',
-        path: '/nav/pagination',
+        title: "Pagination 分页",
+        path: "/nav/pagination",
         component: lazy(() => import('otaku-ui/src/lib/pagination/demo/README.md'))
       }
     ]
@@ -237,13 +237,13 @@ export default [
         component: lazy(() => import('otaku-ui/src/lib/search/demo/README.md'))
       },
       {
-        title: 'rate 评分',
-        path: '/display/rate',
+        title: "rate 评分",
+        path: "/display/rate",
         component: lazy(() => import('otaku-ui/src/lib/rate/demo/README.md'))
       },
       {
-        title: 'tooltip 提示',
-        path: '/display/tooltip',
+        title: "tooltip 提示",
+        path: "/display/tooltip",
         component: lazy(() => import('otaku-ui/src/lib/tooltip/demo/README.md'))
       }
     ]
