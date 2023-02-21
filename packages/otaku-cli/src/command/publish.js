@@ -22,6 +22,7 @@ module.exports = async () => {
     spinner.start(`buildTime: ${buildTime}s`)
   }, 1000)
 
+  console.log(sitePath)
   execPromise(buildCommand).then(async () => {
     const command = [
       `cd ${sitePath}`,
